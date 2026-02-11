@@ -9,8 +9,6 @@ O **iPet** é uma plataforma Super App projetada para centralizar a jornada de c
 - **Brunna Rosa** - CPO
 - **Leonardo Braga de Almeida** - COO
 
----
-
 ## 🚀 Visão Estratégica do Ecossistema
 
 Nossa arquitetura foca na resolução de dores burocráticas para gerar engajamento e recorrência:
@@ -27,8 +25,6 @@ A estrutura foi desenhada para suportar a escala do projeto e facilitar a colabo
 - **`/docs/architecture`**: Modelagem de domínio (**DDD**) e definição da Linguagem Ubíqua do ecossistema.
 - **`/docs/requirements`**: Especificações técnicas e User Stories detalhadas para o desenvolvimento do backend.
 - **`/prototipos`**: Módulos funcionais em desenvolvimento, começando pelo **Agente de Aeroporto** (Next.js).
-
----
 
 ## 🛠️ Como Contribuir (Time Técnico)
 
