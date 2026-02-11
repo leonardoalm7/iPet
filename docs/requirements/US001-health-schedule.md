@@ -5,7 +5,7 @@
 
 ## 1. Descrição
 
-Como um responsável de animais que gerencia pets com cronogramas distintos, eu quero um recurso na plataforma **iPet Pass** que monitore e gerencie automaticamente os cronogramas de vacinas, vermífugos e antipulgas. O objetivo é garantir o bem-estar dos filhotes de forma estruturada, com sincronização em calendários externos e alertas proativos.
+Como um responsável por animais que gerencia pets com cronogramas distintos, eu quero um recurso na plataforma **iPet Pass** que monitore e gerencie automaticamente os cronogramas de vacinas, vermífugos e antipulgas. O objetivo é garantir o bem-estar dos filhotes de forma estruturada, com sincronização em calendários externos e alertas proativos.
 
 ## 2. Critérios de Aceitação
 
