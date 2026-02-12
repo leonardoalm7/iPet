@@ -1,4 +1,4 @@
-# Modelagem Domain-Driven Design (DDD) - Ecossistema iPet 🐾
+# Modelagem Domain-Driven Design (DDD) - Ecossistema iPet - Parte 1 🐾
 
 Este documento detalha a visão técnica e estratégica de design do sistema, focando na decomposição do domínio para garantir escalabilidade e clareza nas regras de negócio.
 
