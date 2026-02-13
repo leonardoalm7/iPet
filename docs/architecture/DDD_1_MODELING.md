@@ -1,4 +1,4 @@
-# Modelagem Domain-Driven Design (DDD) - Ecossistema iPet 🐾
+# Modelagem Domain-Driven Design (DDD) - Ecossistema iPet - Parte 1 🐾
 
 Este documento detalha a visão técnica e estratégica de design do sistema, focando na decomposição do domínio para garantir escalabilidade e clareza nas regras de negócio.
 
@@ -10,14 +10,14 @@ Automatizar a validação sanitária para transporte aéreo, transformando proce
 
 Para o ecossistema **iPet**, identificamos a seguinte separação de domínios:
 
-| Subdomínio           | Categoria       | Responsabilidade Principal                                                  |
-| :------------------- | :-------------- | :-------------------------------------------------------------------------- |
-| **PET Pass**         | **Core Domain** | Gestão do passaporte virtual, consolidando status de aptidão para embarque. |
-| **Gestão de Saúde**  | **Core Domain** | Validação estruturada de vacinas, vermífugos e cronogramas médicos.         |
-| **Cadastro de Pets** | Supporting      | Manutenção dos dados biométricos e cadastrais dos animais.                  |
-| **Veterinários**     | Supporting      | Validação de profissionais e emissão de atestados digitais.                 |
-| **Cias Aéreas**      | Supporting      | Configuração de regras específicas por companhia e aeronave.                |
-| **Pagamentos**       | Generic         | Processamento de transações e assinaturas via Mercado Pago.                 |
+| Subdomínio           | Categoria   | Responsabilidade Principal                                                  |
+| :------------------- | :---------- | :-------------------------------------------------------------------------- |
+| **PET Pass**         | Core Domain | Gestão do passaporte virtual, consolidando status de aptidão para embarque. |
+| **Gestão de Saúde**  | Core Domain | Validação estruturada de vacinas, vermífugos e cronogramas médicos.         |
+| **Cadastro de Pets** | Supporting  | Manutenção dos dados biométricos e cadastrais dos animais.                  |
+| **Veterinários**     | Supporting  | Validação de profissionais e emissão de atestados digitais.                 |
+| **Cias Aéreas**      | Supporting  | Configuração de regras específicas por companhia e aeronave.                |
+| **Pagamentos**       | Generic     | Processamento de transações e assinaturas via Mercado Pago.                 |
 
 ## 🗣️ Linguagem Ubíqua (Dicionário do Ecossistema)
 
