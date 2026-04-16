@@ -14,7 +14,8 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const KB_DIR = path.resolve(__dirname, "..");
+// Execute a partir da raiz do repositório: npx ts-node compliance-kb/scripts/check-stale.ts
+const KB_DIR = path.join(process.cwd(), "compliance-kb");
 const DIRS = ["destinations", "airlines"];
 const WARN_DAYS = 30;
 
