@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "AUSTRALIA",
+  "nome": "Austrália",
+  "bandeira": "🇦🇺",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.agriculture.gov.au/biosecurity-trade/cats-dogs",
+      "title": "Australian Government — Cats and dogs",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Austrália é rabies-free — processo mais rigoroso do hemisfério sul. Quarentena obrigatória. Iniciar processo com mínimo 6 meses de antecedência."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos). Obrigatório. Implante ANTES de qualquer vacinação.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 180,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pelo DAWE australiano (lista em agriculture.gov.au). Deve ser um dos labs australianos ou internacionais reconhecidos — verificar se labs brasileiros credenciados pelo MAPA constam da lista.",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Documentação específica exigida pelo DAWE (formulários australianos). Tradução para inglês obrigatória.",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": ["PIT_BULL", "DOGO_ARGENTINO", "FILA_BRASILEIRO", "TOSA_INU", "WOLF_HYBRID"],
+    "observacoes": "Austrália é país rabies-free com um dos controles mais rigorosos do mundo. Quarentena obrigatória de 10 dias no Post Entry Quarantine (PEQ) em Melbourne. O processo completo leva MÍNIMO 6 meses: (1) Microchip → (2) Vacinação antirrábica primária + reforço → (3) Sorologia (≥180 dias antes de entrar) → (4) Tratamentos contra parasitas → (5) Importação aprovada pelo DAWE → (6) Reserva no PEQ (quarentena) → (7) CVI → (8) Chegada. Custo total estimado: R$ 15.000 a R$ 30.000.",
+    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Processo extremamente complexo. Verificar se laboratórios brasileiros credenciados pelo MAPA são aceitos pelo DAWE. Quarentena obrigatória no PEQ em Melbourne (SOMENTE local de quarentena aprovado). Recomendar fortemente o usuário contratar um despachante especializado em viagem com pets para Austrália. Custo alto pode ser um fator limitante."
+  }
+}

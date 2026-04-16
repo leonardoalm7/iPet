@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "CHILE",
+  "nome": "Chile",
+  "bandeira": "🇨🇱",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.sag.gob.cl/ambitos-de-accion/mascotas-animales-de-compania",
+      "title": "SAG Chile — Mascotas y Animales de Compañía",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. SAG (Servicio Agrícola y Ganadero) é o órgão regulador chileno."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": false,
+    "microchipPadrao": "Recomendado mas não obrigatório para entrada no Chile",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Documento deve conter dados completos do animal e responsável. Tradução em espanhol pode ser solicitada.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Chile é país rabies-free e tem controle rigoroso de entrada. Exige vacina antirrábica válida + CVI endossado pelo MAPA/SFA. O SAG inspeciona os animais na entrada — levar todos os documentos originais. Santiago, Valparaíso e o sul do Chile (Torres del Paine) são destinos populares com pets.",
+    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Chile é rabies-free, o que pode significar requisitos adicionais em momentos de maior vigilância sanitária. Verificar site do SAG para lista atualizada de requisitos — pode variar por espécie. Atenção especial na fronteira terrestre vs. aérea."
+  }
+}

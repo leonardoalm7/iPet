@@ -8,7 +8,24 @@ export type Especie = "CAO" | "GATO" | "OUTRO";
 
 export type StatusSorologia = "OK" | "PENDENTE" | "REPROVADA";
 
-export type Destino = "BRASIL" | "UNIAO_EUROPEIA" | "JAPAO" | "EUA";
+export type Destino =
+  // Destinos originais
+  | "BRASIL"
+  | "UNIAO_EUROPEIA"
+  | "JAPAO"
+  | "EUA"
+  // Europa
+  | "PORTUGAL"
+  | "REINO_UNIDO"
+  // América Latina
+  | "ARGENTINA"
+  | "CHILE"
+  | "URUGUAI"
+  | "MEXICO"
+  // América do Norte
+  | "CANADA"
+  // Oceania
+  | "AUSTRALIA";
 
 export type StatusCompliance =
   | "APTO"
@@ -175,6 +192,66 @@ export interface PassaportePet {
     statusGeral: StatusCompliance;
     dataLiberacao: string | null;
   }[];
+}
+
+// ---------- Sugestões de Destino Pet-Friendly (Travel Planner) ----------
+
+export type RegiaoBrasil =
+  | "SUL"
+  | "SUDESTE"
+  | "NORDESTE"
+  | "CENTRO_OESTE"
+  | "NORTE";
+
+export type TipoViagem =
+  | "PRAIA"
+  | "SERRA"
+  | "CIDADE"
+  | "CAMPO"
+  | "AVENTURA"
+  | "CULTURAL";
+
+export interface SugestaoDestino {
+  id: string;
+  nome: string;               // ex: "Gramado, RS"
+  pais: string;               // ex: "Brasil"
+  bandeira: string;
+  tiposViagem: TipoViagem[];
+  descricaoCurta: string;     // 1 linha para o card
+  descricaoCompleta: string;  // parágrafo para a página de detalhes
+  dicas: string[];            // lista de dicas pet-friendly
+  melhorEpoca?: string;
+  imagemEmoji: string;        // emoji representativo
+  destacado: boolean;         // aparece em destaque na home
+  destinoCompliance?: Destino; // link com o motor de compliance se internacional
+}
+
+// ---------- Hotéis Pet-Friendly (Accommodation) ----------
+
+export type TipoHotelPet =
+  | "PETHOTEL"      // hotel exclusivo para pets (dono deixa o pet)
+  | "PETFRIENDLY"   // hotel que aceita pets junto com o dono
+  | "PETHOTEL_DAY"  // creche / day care para pets
+  | "PETHOTEL_VET"; // hotel com suporte veterinário
+
+export interface HotelPet {
+  id: string;
+  nome: string;
+  tipo: TipoHotelPet;
+  cidade: string;
+  estado?: string;
+  pais: string;
+  bandeira: string;
+  descricaoCurta: string;
+  servicos: string[];         // ex: ["Passeio diário", "Câmeras 24h", "Vet on call"]
+  especiesAceitas: Especie[];
+  pesoMaxKg?: number;         // null = sem limite
+  precoApartir?: string;      // ex: "R$ 80/dia"
+  avaliacao?: number;         // 0-5
+  telefone?: string;
+  site?: string;
+  imagemEmoji: string;
+  verificado: boolean;        // parceiro verificado pelo iPet
 }
 
 // ---------- Estado do App ----------

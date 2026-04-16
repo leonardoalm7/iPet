@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tap",
+  "nome": "TAP Air Portugal",
+  "codigo": "TP",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.flytap.com/pt-pt/animais-de-estimacao",
+      "title": "TAP Air Portugal — Animais de Estimação",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. TAP é a principal cia para Brasil-Portugal. Rota estratégica para o iPet."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 43,
+      "largura": 32,
+      "altura": 22,
+      "somaDimensoes": 97
+    },
+    "especiesPermitidas": ["CAO", "GATO"],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 15,
+    "maxAnimaisPorVoo": null,
+    "reservaAntecedenciaHoras": 24,
+    "observacoes": "Peso inclui animal + caixa transportadora. Máx 8kg. Idade mínima de 15 semanas. Animais devem caber em transportadora que vai sob o assento da frente. Reserva obrigatória com antecedência. Apenas 1 animal por passageiro."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Para porão: caixa rígida IATA obrigatória. Raças braquicefálicas NÃO aceitas no porão. Limite de peso de 75kg (animal + caixa)."
+  },
+  "observacoesGerais": "⚠️ TAP é a principal conexão Brasil-Europa via Lisboa. Rota de alta demanda para responsáveis com pets. Confirmar disponibilidade de vagas para animais sempre que reservar — limite por voo."
+}

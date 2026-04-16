@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "ARGENTINA",
+  "nome": "Argentina",
+  "bandeira": "🇦🇷",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.argentina.gob.ar/senasa/programas-y-proyectos/animales-de-compania",
+      "title": "SENASA Argentina — Animales de Compañía",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Destino muito popular para brasileiros. SENASA é o órgão regulador argentino."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": false,
+    "microchipPadrao": "Recomendado ISO 11784/11785 mas não obrigatório por lei federal argentina para entrada",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Tradução para o espanhol pode ser solicitada no controle de fronteira.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Vacina antirrábica válida (máx 1 ano, mín 21 dias antes do embarque) é o requisito principal. CVI emitido pelo MAPA em até 10 dias antes do embarque. Atestado de saúde do veterinário recomendado. Argentina é destino pet-friendly com muitas opções de hospedagem e lazer para cães.",
+    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Verificar se SENASA exige CVI com endosso específico ou se o brasileiro padrão (MAPA + SFA) é aceito. Alguns postos de fronteira terrestre podem ter requisitos adicionais. Buenos Aires, Bariloche e Mendoza são tops destinos para brasileiros com cães."
+  }
+}

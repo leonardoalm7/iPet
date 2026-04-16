@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "REINO_UNIDO",
+  "nome": "Reino Unido",
+  "bandeira": "🇬🇧",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.gov.uk/bring-pet-to-great-britain",
+      "title": "UK Government — Bring your pet to Great Britain",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Confiança MEDIA — pós-Brexit as regras do UK são distintas da UE. Verificar PETS Travel Scheme e listed/unlisted country status do Brasil."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos). Implante ANTES da vacinação antirrábica.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pelo MAPA (lista gov.br/agricultura). UK aceita labs aprovados pela EU.",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA. Documento oficial de saúde animal (AHC — Animal Health Certificate) para o Reino Unido é necessário — diferente do CVI padrão UE.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": ["PIT_BULL", "TOSA_INU", "DOGO_ARGENTINO", "FILA_BRASILEIRO"],
+    "observacoes": "Pós-Brexit (2021), o UK não faz mais parte do esquema EU Pet Travel. O Brasil é um 'Part 2 listed country' para o PETS Travel Scheme, o que significa regras similares à UE mas com documentação própria do UK (AHC em vez do CVI padrão). Processo: (1) Microchip → (2) Vacina antirrábica (≥21 dias) → (3) Sorologia (≥90 dias antes de entrar no UK) → (4) AHC emitido por vet credenciado. Pit Bull Terrier, Tosa Inu, Dogo Argentino e Fila Brasileiro são PROIBIDOS no UK.",
+    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: UK saiu da UE e tem sistema próprio (PETS). Brasil é 'Part 2 listed' — verificar se mudou para 'unlisted' (quarentena obrigatória). AHC é diferente do CVI usado para EU. Confirmar se vets brasileiros podem emitir AHC válido para UK. Raças proibidas: verificar a lista completa (Dangerous Dogs Act 1991)."
+  }
+}

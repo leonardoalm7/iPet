@@ -91,8 +91,31 @@ function serialize(val: unknown, indent = 0): string {
 }
 
 function main() {
-  const destinationFiles = ["brasil", "uniao-europeia", "japao", "eua"];
-  const airlineFiles = ["latam", "gol", "azul"];
+  const destinationFiles = [
+    "brasil",
+    "uniao-europeia",
+    "japao",
+    "eua",
+    "portugal",
+    "reino-unido",
+    "argentina",
+    "chile",
+    "uruguai",
+    "canada",
+    "australia",
+    "mexico",
+  ];
+  const airlineFiles = [
+    "latam",
+    "gol",
+    "azul",
+    "tap",
+    "air-france",
+    "iberia",
+    "copa",
+    "american",
+    "emirates",
+  ];
 
   const destinations = destinationFiles.map((f) =>
     loadJson<KBDestination>(path.join(KB_DIR, "destinations", `${f}.json`))

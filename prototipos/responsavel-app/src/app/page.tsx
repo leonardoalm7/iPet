@@ -3,17 +3,16 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
-import { Pet } from "@/domain/types";
 import Link from "next/link";
-import { PlusCircle, Plane, BookOpen, Settings } from "lucide-react";
+import { PlusCircle, Settings } from "lucide-react";
 import { PetCardHome } from "@/components/PetCardHome";
 import { BottomNav } from "@/components/BottomNav";
+import { SugestoesDestinos } from "@/components/SugestoesDestinos";
+import { HoteisPetSection } from "@/components/HoteisPetSection";
 
 export default function HomePage() {
-  const router = useRouter();
   const { pets, responsavel, setResponsavel } = useAppStore();
 
-  // Bootstrap: cria um responsável local na primeira vez
   useEffect(() => {
     if (!responsavel) {
       setResponsavel({
@@ -24,6 +23,8 @@ export default function HomePage() {
       });
     }
   }, [responsavel, setResponsavel]);
+
+  const temPets = pets.length > 0;
 
   return (
     <div className="flex flex-col min-h-screen pb-24">
@@ -46,33 +47,54 @@ export default function HomePage() {
         <p className="text-gray-400 text-sm mt-1">Smart Pet Pass</p>
       </header>
 
-      {/* Conteúdo */}
-      <main className="flex-1 px-5 space-y-4">
-        {pets.length === 0 ? (
+      <main className="flex-1 px-5 space-y-8">
+        {/* ── Meus Pets ────────────────────────────────────────────── */}
+        {!temPets ? (
           <EmptyState />
         ) : (
-          <>
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-base font-semibold text-gray-200">
-                Meus Pets
-              </h2>
-              <span className="text-xs text-gray-500">{pets.length} pet{pets.length !== 1 ? "s" : ""}</span>
+          <section>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-base font-semibold text-gray-200">Meus Pets</h2>
+              <span className="text-xs text-gray-500">
+                {pets.length} pet{pets.length !== 1 ? "s" : ""}
+              </span>
             </div>
             <div className="space-y-3">
               {pets.map((pet) => (
                 <PetCardHome key={pet.id} pet={pet} />
               ))}
             </div>
-            {/* CTA adicionar mais */}
             <Link
               href="/pets/novo"
-              className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-gray-700 rounded-2xl text-gray-500 text-sm hover:border-sky-600 hover:text-sky-400 transition-colors mt-2"
+              className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-gray-700 rounded-2xl text-gray-500 text-sm hover:border-sky-600 hover:text-sky-400 transition-colors mt-3"
             >
               <PlusCircle className="w-4 h-4" />
               Adicionar outro pet
             </Link>
-          </>
+          </section>
         )}
+
+        {/* ── Banner de destaque (apenas sem pets cadastrados) ─────── */}
+        {!temPets && (
+          <div className="bg-gradient-to-r from-sky-900/60 to-indigo-900/60 border border-sky-700/30 rounded-2xl p-4">
+            <p className="text-xs text-sky-300 font-medium mb-1">✨ Smart Pet Pass</p>
+            <p className="text-white text-sm font-semibold">
+              Viaje com seu pet com segurança e zero surpresas
+            </p>
+            <p className="text-gray-400 text-xs mt-1">
+              Passaporte digital, motor de compliance e roteiro de documentos por destino.
+            </p>
+          </div>
+        )}
+
+        {/* ── Dicas rápidas ─────────────────────────────────────────── */}
+        <DicasRapidas />
+
+        {/* ── Sugestões de destinos ─────────────────────────────────── */}
+        <SugestoesDestinos />
+
+        {/* ── Hotéis pet ───────────────────────────────────────────── */}
+        <HoteisPetSection />
       </main>
 
       <BottomNav active="home" />
@@ -82,14 +104,14 @@ export default function HomePage() {
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center pt-16 pb-8 text-center px-4">
-      <div className="w-24 h-24 rounded-full bg-gray-800 flex items-center justify-center mb-6 text-5xl">
+    <div className="flex flex-col items-center justify-center pt-8 pb-4 text-center px-4">
+      <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center mb-5 text-4xl">
         🐾
       </div>
       <h2 className="text-xl font-semibold text-white mb-2">
         Cadastre seu primeiro pet
       </h2>
-      <p className="text-gray-400 text-sm leading-relaxed mb-8">
+      <p className="text-gray-400 text-sm leading-relaxed mb-6">
         Comece adicionando as informações do seu pet para gerar o passaporte
         digital e planejar sua viagem com segurança.
       </p>
@@ -101,5 +123,50 @@ function EmptyState() {
         Cadastrar pet
       </Link>
     </div>
+  );
+}
+
+const DICAS = [
+  {
+    emoji: "💉",
+    titulo: "Vacina antirrábica",
+    texto: "Obrigatória para todos os destinos. Validade de 1 ano, carência de 21 dias.",
+  },
+  {
+    emoji: "🔖",
+    titulo: "Microchip ISO",
+    texto: "Exigido pela UE, UK, Japão e Austrália. Deve ser implantado antes da vacina.",
+  },
+  {
+    emoji: "📋",
+    titulo: "CVI — Certificado Veterinário Internacional",
+    texto: "Emitir 2 a 10 dias antes do embarque com veterinário credenciado pelo MAPA.",
+  },
+  {
+    emoji: "⏱️",
+    titulo: "Sorologia — planeje com antecedência",
+    texto: "UE exige 90 dias de espera. Japão e Austrália exigem 180 dias. Comece cedo!",
+  },
+];
+
+function DicasRapidas() {
+  return (
+    <section>
+      <h2 className="text-base font-semibold text-gray-200 mb-3">
+        Dicas essenciais de viagem
+      </h2>
+      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-5 px-5">
+        {DICAS.map((d, i) => (
+          <div
+            key={i}
+            className="flex-shrink-0 w-52 bg-gray-800 rounded-2xl p-3.5 border border-gray-700/40"
+          >
+            <span className="text-2xl">{d.emoji}</span>
+            <p className="text-white text-xs font-semibold mt-2 mb-1">{d.titulo}</p>
+            <p className="text-gray-400 text-[11px] leading-relaxed">{d.texto}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }

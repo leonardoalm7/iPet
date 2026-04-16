@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "PORTUGAL",
+  "nome": "Portugal",
+  "bandeira": "🇵🇹",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://ec.europa.eu/food/animals/pet-movement/eu-rules_en",
+      "title": "European Commission — EU rules for pet movement",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.dgav.pt/animais/conteudo/animais-de-companhia/circulacao-de-animais-de-companhia/",
+      "title": "DGAV Portugal — Circulação de Animais de Companhia",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Portugal segue o Regulamento (UE) n.º 576/2013 — mesmas regras da entrada UNIAO_EUROPEIA, destaque para preferências culturais dos brasileiros."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos). Implante ANTES da vacinação antirrábica.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pelo MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório. CVI deve conter informações em inglês ou português europeu.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Portugal segue o Regulamento (UE) 576/2013. Sequência obrigatória: (1) Microchip → (2) Vacina antirrábica → (3) Sorologia em lab credenciado (≥90 dias antes do embarque) → (4) CVI (D-10 a D-2). A DGAV (Portugal) pode solicitar documentação adicional na entrada. Destino muito popular para brasileiros — alta frequência de viagens.",
+    "observacoesInternas": "Portugal é destino prioritário para brasileiros — alta demanda esperada no app. Regras seguem a UE mas vale destacar a DGAV como autoridade local de entrada. Cão Chow Chow e outras raças consideradas 'perigosas' podem ter restrições específicas em municípios portugueses — verificar legislação municipal se necessário."
+  }
+}

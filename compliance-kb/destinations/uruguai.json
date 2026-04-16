@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "URUGUAI",
+  "nome": "Uruguai",
+  "bandeira": "🇺🇾",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.mgap.gub.uy/unidad-organizativa/division-sanidad-animal/actividades-y-servicios/movimiento-animales-compania",
+      "title": "MGAP Uruguay — Movimiento de Animales de Compañía",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. MGAP é o órgão regulador uruguaio. Uruguai é destino fácil para brasileiros com pets."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": false,
+    "microchipPadrao": "Recomendado mas não exigido na fronteira",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Para fronteira terrestre, o DGSG uruguaio pode solicitar vistos sanitários adicionais.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Uruguai tem um dos processos mais simples da América do Sul. Vacina antirrábica válida + CVI são os requisitos básicos. Punta del Este, Montevidéu e Colonia del Sacramento são destinos muito pet-friendly. Muitos hotéis e restaurantes aceitam animais de estimação.",
+    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Verificar MGAP quanto a exigência de DGSG para fronteira terrestre BR-UY. Uruguai é geralmente flexível mas verificar se exige tradução ao espanhol do CVI."
+  }
+}
