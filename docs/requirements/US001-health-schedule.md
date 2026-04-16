@@ -45,4 +45,4 @@ Campos necessários para a modelagem inicial pelo CTO:
 ---
 
 **Documentação Técnica iPet** | MBA Software Engineering - FIAP
-_Responsável pela Operação: Leonardo Braga de Almeida (COO)_
+_Equipe iPet: Danielle Moreira (CEO) | Victor Hugo Telles (CTO) | Brunna Rosa (CPO) | Leonardo Braga de Almeida (COO)_

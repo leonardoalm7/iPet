@@ -1,5 +1,5 @@
 # iPet — Arquitetura do Super App
-**Versão:** 1.0 | **Autores:** Leonardo Braga de Almeida (COO), Brunna Rosa (CPO) | **Data:** 2026-04-16
+**Versão:** 1.0 | **Autores:** Danielle Moreira (CEO), Victor Hugo Telles (CTO), Brunna Rosa (CPO), Leonardo Braga de Almeida (COO) | **Data:** 2026-04-16
 
 > **Regra de ouro:** documentar é tão importante quanto desenvolver. Este arquivo é o mapa vivo da plataforma — atualizar a cada nova feature ou decisão arquitetural.
 
@@ -398,7 +398,7 @@ sequenceDiagram
 ### ADR-003 — Zustand + localStorage (protótipo) → API (produção)
 **Contexto:** Protótipo rápido sem backend.  
 **Decisão:** Zustand com persist middleware (localStorage). Abstraído: `useAppStore` — trocar implementação sem mudar componentes.  
-**Consequência:** Dados perdem em limpeza de browser. Aceitável para fase de validação com o COO.  
+**Consequência:** Dados perdem em limpeza de browser. Aceitável para fase de validação interna com o time.  
 **Status:** Aceita para protótipo ✅ | Revisão obrigatória antes do beta público
 
 ### ADR-004 — SHA-256 client-side + campos blockchain pré-moldados
@@ -436,5 +436,5 @@ sequenceDiagram
 
 ---
 
-*Documento mantido por: COO (Leonardo) + CPO (Brunna) + CTO*  
+*Documento mantido por: CEO (Danielle) + CTO (Victor) + CPO (Brunna) + COO (Leonardo)*  
 *Atualizar a cada nova feature ou decisão arquitetural relevante*

@@ -35,4 +35,4 @@ Para o ecossistema **iPet**, identificamos a seguinte separação de domínios:
 ---
 
 **Documento de Design de Sistema** | MBA Software Engineering - FIAP
-_Contribuição: Brunna Rosa (CPO) | Organização: Leonardo Braga (COO)_
+_Equipe iPet: Danielle Moreira (CEO) | Victor Hugo Telles (CTO) | Brunna Rosa (CPO) | Leonardo Braga de Almeida (COO)_

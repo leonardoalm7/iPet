@@ -24,8 +24,10 @@ Exemplos:
 **iPet** é um super app Pet com o **Smart Pet Pass** como produto principal.
 
 - **Modelo de negócio:** CSaaS (Compliance Sanitário as a Service)
-- **COO:** Leonardo Braga de Almeida
+- **CEO:** Danielle Moreira
+- **CTO:** Victor Hugo Telles
 - **CPO:** Brunna Rosa
+- **COO:** Leonardo Braga de Almeida
 
 ### 3 Fases de Release / Públicos-alvo
 

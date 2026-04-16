@@ -42,4 +42,4 @@ A arquitetura do Smart Pet Pass foi concebida para endereçar dois fluxos críti
 ---
 
 **Status da Operação**: Em desenvolvimento (Protótipo Agente de Aeroporto v1.0)
-**Responsável Operacional**: Leonardo Braga de Almeida (COO)
+**Equipe Fundadora**: Danielle Moreira (CEO) · Victor Hugo Telles (CTO) · Brunna Rosa (CPO) · Leonardo Braga de Almeida (COO)

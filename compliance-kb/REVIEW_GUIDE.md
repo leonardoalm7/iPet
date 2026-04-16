@@ -87,9 +87,10 @@ Se você ou um usuário identificar que uma regra está desatualizada:
 
 | Função | Responsabilidade |
 |--------|-----------------|
-| **COO (Leonardo)** | Coordenação geral, aprovação de mudanças |
+| **CEO (Danielle)** | Visão estratégica e aprovação final |
+| **CTO (Victor)** | Integração das regras atualizadas no app |
 | **CPO (Brunna)** | Definição de impacto no produto |
-| **CTO** | Integração das regras atualizadas no app |
+| **COO (Leonardo)** | Coordenação geral e curadoria do KB |
 
 ---
 
