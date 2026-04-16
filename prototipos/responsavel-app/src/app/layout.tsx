@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/components/AuthProvider";
 
 const geist = Geist({ subsets: ["latin"] });
 
@@ -29,9 +30,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${geist.className} bg-gray-950 text-white antialiased`}>
-        <div className="mx-auto max-w-[430px] min-h-screen relative overflow-x-hidden">
-          {children}
-        </div>
+        <AuthProvider>
+          <div className="mx-auto max-w-[430px] min-h-screen relative overflow-x-hidden">
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

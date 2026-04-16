@@ -254,6 +254,71 @@ export interface HotelPet {
   verificado: boolean;        // parceiro verificado pelo iPet
 }
 
+// ---------- Autenticação e Perfil do Usuário (KYC) ----------
+
+export type ProvedorAuth = "EMAIL" | "GOOGLE" | "APPLE";
+
+/**
+ * Perfil do responsável — dados pessoais coletados no onboarding.
+ * Base legal LGPD: execução de contrato (Art. 7º, V) para CPF;
+ * consentimento (Art. 7º, I) para marketing.
+ */
+export interface PerfilUsuario {
+  id: string;                     // UUID — mesmo ID do auth.users (Supabase)
+  nomeCompleto: string;
+  email: string;
+  telefone?: string;              // formato E.164: +55 11 99999-9999
+  dataNascimento?: string;        // ISO date: YYYY-MM-DD
+  fotoPerfil?: string;            // URL (Supabase Storage)
+  cpfHash?: string;               // SHA-256 do CPF — nunca em texto claro
+  onboardingCompleto: boolean;
+  provedorAuth: ProvedorAuth;
+  criadoEm: string;               // ISO timestamp
+  atualizadoEm: string;
+}
+
+// ---------- LGPD — Gestão de Consentimento ----------
+
+export type TipoConsentimento = "TERMOS" | "PRIVACIDADE" | "MARKETING";
+
+/**
+ * Registro imutável de consentimento — nunca deletado, apenas adicionado.
+ * Exigido pelo Art. 8º §5º da LGPD para prova de consentimento.
+ */
+export interface ConsentimentoLGPD {
+  id: string;
+  userId: string;
+  tipo: TipoConsentimento;
+  versao: string;                 // ex: "1.0.0" — versão do documento
+  aceito: boolean;                // false = revogação
+  dataDecisao: string;            // ISO timestamp
+  ipHash?: string;                // SHA-256 do IP — anonimizado
+  userAgentHash?: string;         // SHA-256 do user agent — anonimizado
+}
+
+export type TipoSolicitacaoLGPD =
+  | "EXPORTACAO"       // Art. 18, II — direito de acesso
+  | "EXCLUSAO"         // Art. 18, VI — direito de eliminação
+  | "RETIFICACAO"      // Art. 18, III — direito de correção
+  | "PORTABILIDADE"    // Art. 18, V — portabilidade de dados
+  | "REVOGACAO_CONSENTIMENTO"; // Art. 8º §5º — revogação
+
+export type StatusSolicitacaoLGPD =
+  | "PENDENTE"
+  | "EM_PROCESSAMENTO"
+  | "CONCLUIDA"
+  | "CANCELADA";
+
+export interface SolicitacaoLGPD {
+  id: string;
+  userId: string;
+  tipo: TipoSolicitacaoLGPD;
+  status: StatusSolicitacaoLGPD;
+  observacoes?: string;
+  criadoEm: string;
+  processadoEm?: string;
+}
+
 // ---------- Estado do App ----------
 
 export interface Responsavel {
