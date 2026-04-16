@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "UNIAO_EUROPEIA",
+  "nome": "União Europeia",
+  "bandeira": "🇪🇺",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://ec.europa.eu/food/animals/pet-movement/eu-rules_en",
+      "title": "European Commission — EU rules for pet movement",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.gov.br/agricultura/pt-br/assuntos/sanidade-animal-e-vegetal/saude-animal/transito-animal/exportacao/cao-e-gato",
+      "title": "MAPA — Exportação de Cães e Gatos",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.gov.br/agricultura/pt-br/assuntos/sanidade-animal-e-vegetal/saude-animal/transito-animal/exportacao/laboratorios-credenciados",
+      "title": "MAPA — Laboratórios Credenciados para Sorologia",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial com base no Regulamento (UE) n.º 576/2013 e normas MAPA vigentes"
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (transponder eletrônico 15 dígitos). Deve ser implantado ANTES da vacinação antirrábica para validade internacional.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Lista disponível em: https://www.gov.br/agricultura/pt-br/assuntos/sanidade-animal-e-vegetal/saude-animal/transito-animal/exportacao/laboratorios-credenciados",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. CVI deve ser emitido entre 10 e 2 dias antes do embarque e endossado pela Superintendência Federal de Agricultura (SFA) do estado de origem.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Sequência obrigatória: (1) Implante de microchip → (2) Vacina antirrábica (≥21 dias antes da sorologia) → (3) Sorologia em lab credenciado (≥90 dias antes do embarque) → (4) CVI (emitir entre D-10 e D-2 antes do embarque). Países como Reino Unido, Irlanda, Malta, Finlândia e Noruega exigem tratamento adicional contra Echinococcus multilocularis (verificar regras específicas por país).",
+    "observacoesInternas": "⚠️ ATENÇÃO: Reino Unido saiu da UE (Brexit). Regras do UK são diferentes — tratar como destino separado. Irlanda, Malta, Finlândia e Noruega têm requisitos adicionais para echinococose (tratamento 1-5 dias antes da entrada). Criar entrada separada para esses países. Regulamento EU 576/2013 é a base legal — verificar atualizações anuais."
+  }
+}

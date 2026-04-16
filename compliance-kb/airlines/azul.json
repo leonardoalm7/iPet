@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "azul",
+  "nome": "Azul Linhas Aéreas",
+  "codigo": "AD",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.voeazul.com.br/informacoes/animais",
+      "title": "Azul — Transporte de Animais",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Azul é a única das três que permite algumas raças braquicefálicas — confirmar regras vigentes."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 43,
+      "largura": 30,
+      "altura": 23,
+      "somaDimensoes": 96
+    },
+    "especiesPermitidas": ["CAO", "GATO"],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 8,
+    "maxAnimaisPorVoo": 5,
+    "reservaAntecedenciaHoras": 2,
+    "observacoes": "Destaque: única das grandes companhias que permite ALGUMAS raças braquicefálicas (Bulldog Francês, Pug, Shih Tzu) na cabine — confirmar lista atual com a Azul pois pode mudar. Reserva pode ser feita com menor antecedência comparado a outras cias. Dimensões da caixa são ligeiramente menores — atenção."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 45,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "No porão, raças braquicefálicas não são aceitas mesmo na Azul."
+  },
+  "observacoesGerais": "⚠️ A permissão de raças braquicefálicas é o diferencial da Azul, mas deve ser SEMPRE confirmada no momento da reserva. Lista de raças aceitas pode variar."
+}

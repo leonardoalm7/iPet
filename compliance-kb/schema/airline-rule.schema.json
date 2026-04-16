@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AirlineRule",
+  "description": "Regras de transporte de pets de uma companhia aérea",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "nome",
+    "codigo",
+    "lastVerified",
+    "verifiedBy",
+    "nextReviewDate",
+    "confidence",
+    "sources",
+    "cabine",
+    "porao"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "id": { "type": "string" },
+    "nome": { "type": "string" },
+    "codigo": { "type": "string", "description": "Código IATA" },
+    "lastVerified": { "type": "string", "format": "date" },
+    "verifiedBy": { "type": "string" },
+    "nextReviewDate": { "type": "string", "format": "date" },
+    "confidence": { "type": "string", "enum": ["ALTA", "MEDIA", "BAIXA"] },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["url", "title"],
+        "properties": {
+          "url": { "type": "string" },
+          "title": { "type": "string" },
+          "lastAccessed": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "changeLog": { "type": "array" },
+    "cabine": {
+      "type": "object",
+      "required": ["permitido", "pesoMaxKg"],
+      "properties": {
+        "permitido": { "type": "boolean" },
+        "pesoMaxKg": { "type": "number", "description": "Peso máximo animal + caixa" },
+        "dimensoesMaxCm": {
+          "type": "object",
+          "properties": {
+            "comprimento": { "type": "number" },
+            "largura": { "type": "number" },
+            "altura": { "type": "number" },
+            "somaDimensoes": { "type": "number", "description": "Limite L+W+H em cm" }
+          }
+        },
+        "especiesPermitidas": { "type": "array", "items": { "type": "string" } },
+        "racasBraquisefálicasPermitidas": { "type": "boolean" },
+        "idadeMinimaSemanas": { "type": "integer" },
+        "maxAnimaisPorVoo": { "type": "integer" },
+        "reservaAntecedenciaHoras": { "type": "integer" },
+        "observacoes": { "type": "string" }
+      }
+    },
+    "porao": {
+      "type": "object",
+      "required": ["permitido"],
+      "properties": {
+        "permitido": { "type": "boolean" },
+        "pesoMaxKg": { "type": "number" },
+        "racasBraquisefálicasPermitidas": { "type": "boolean" },
+        "observacoes": { "type": "string" }
+      }
+    },
+    "observacoesGerais": { "type": "string" }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "EUA",
+  "nome": "Estados Unidos",
+  "bandeira": "🇺🇸",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.cdc.gov/importation/dogs/index.html",
+      "title": "CDC — Bringing a Dog into the United States",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.usda.gov/topics/animals/pet-travel",
+      "title": "USDA — Pet Travel",
+      "type": "GOVERNAMENTAL",
+      "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.aphis.usda.gov/pet-travel",
+      "title": "USDA APHIS — Pet Travel",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Confiança MEDIA — regras do CDC mudaram em 2023 para cães. Verificar se o Brasil é considerado país de alto risco pelo CDC."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": false,
+    "microchipPadrao": "Recomendado, mas não obrigatório por lei federal. Alguns estados podem exigir.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA + endosso SFA. Deve estar em inglês ou acompanhado de tradução juramentada.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "CDC exige vacina antirrábica válida com certificado em inglês. CVI em até 10 dias antes. Regras para cães mudaram em 2023 — verificar classificação do Brasil como país de alto ou baixo risco para raiva no CDC. Gatos têm regras mais flexíveis. Regras estaduais (Havaí, etc.) podem adicionar requisitos.",
+    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Em 2023 o CDC atualizou as regras para importação de cães. Verificar se o Brasil está classificado como 'high-risk country' no sistema CDC — isso afeta o processo. Havaí tem quarentena obrigatória — considerar tratar como destino separado. Recomendar ao usuário checar regras estaduais específicas."
+  }
+}

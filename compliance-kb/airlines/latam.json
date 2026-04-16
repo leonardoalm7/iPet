@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "latam",
+  "nome": "LATAM Airlines",
+  "codigo": "LA",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.latamairlines.com/br/pt/central-de-ajuda/informacoes-de-voo/passageiros/viagem-com-animais",
+      "title": "LATAM — Viagem com Animais de Estimação",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. MEDIA — página da LATAM deve ser verificada diretamente pois regras variam por rota."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 45,
+      "largura": 35,
+      "altura": 25,
+      "somaDimensoes": 115
+    },
+    "especiesPermitidas": ["CAO", "GATO"],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 8,
+    "maxAnimaisPorVoo": 5,
+    "reservaAntecedenciaHoras": 24,
+    "observacoes": "Animal + caixa transportadora = máx 10kg. A caixa deve caber sob o assento da frente. Apenas 1 animal por passageiro. Raças braquicefálicas (Bulldog, Pug, etc.) não permitidas na cabine — apenas no porão com restrições. Reserva obrigatória pelo SAC ou site."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 45,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Raças braquicefálicas aceitas apenas em rotas e condições específicas. Verificar com a LATAM no momento da reserva. Caixa rígida homologada IATA obrigatória para porão."
+  },
+  "observacoesGerais": "⚠️ Regras variam por rota (doméstica/internacional) e aeronave. Sempre confirmar com a LATAM na reserva. Taxa cobrada por trecho."
+}
