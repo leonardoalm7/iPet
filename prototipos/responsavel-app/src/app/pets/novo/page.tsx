@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { Especie, Pet } from "@/domain/types";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { DateInput } from "@/components/DateInput";
 
 // --------------------------------------------------------
 // Tipos do formulário
@@ -80,12 +81,14 @@ export default function NovoPetPage() {
   }
 
   function salvar() {
+    // Normaliza vírgula → ponto antes de parsear o peso
+    const pesoNormalizado = form.peso.replace(",", ".");
     const novoPet = adicionarPet({
       nome: form.nome.trim(),
       especie: form.especie,
       raca: form.raca.trim(),
       dataNascimento: form.dataNascimento,
-      peso: parseFloat(form.peso) || 0,
+      peso: parseFloat(pesoNormalizado) || 0,
       microchip: form.microchip.trim() || undefined,
       vacina: form.temVacina
         ? { data: form.vacinaData, valida: true, nomeComercial: form.vacinaNome }
@@ -217,8 +220,22 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
       <Field label="Raça *" value={form.raca} onChange={(v) => update("raca", v)} placeholder="Ex: Chihuahua" />
 
       <div className="grid grid-cols-2 gap-3">
-        <Field label="Data de nascimento *" value={form.dataNascimento} onChange={(v) => update("dataNascimento", v)} placeholder="DD/MM/AAAA" type="text" inputMode="numeric" />
-        <Field label="Peso (kg) *" value={form.peso} onChange={(v) => update("peso", v)} placeholder="Ex: 3,5" type="text" inputMode="decimal" />
+        <DateInput label="Data de nascimento *" value={form.dataNascimento} onChange={(v) => update("dataNascimento", v)} />
+        <div>
+          <label className="block text-sm text-gray-300 mb-1.5">Peso (kg) *</label>
+          <input
+            type="number"
+            inputMode="decimal"
+            min="0"
+            max="100"
+            step="0.1"
+            value={form.peso}
+            onChange={(e) => update("peso", e.target.value)}
+            placeholder="3.5"
+            className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-3 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+          />
+          <p className="text-xs text-gray-600 mt-1">Usar ponto: ex. 3.5</p>
+        </div>
       </div>
 
       <div>
@@ -261,7 +278,7 @@ function StepVacina({ form, update }: { form: FormData; update: (k: keyof FormDa
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <Field label="Data da vacinação *" value={form.vacinaData} onChange={(v) => update("vacinaData", v)} placeholder="DD/MM/AAAA" />
+          <DateInput label="Data da vacinação *" value={form.vacinaData} onChange={(v) => update("vacinaData", v)} />
           <Field label="Nome comercial (opcional)" value={form.vacinaNome} onChange={(v) => update("vacinaNome", v)} placeholder="Ex: Rabisin, Defensor" />
           <InfoBox>
             A carência mínima da vacina é <strong>21 dias</strong> antes do embarque para qualquer destino.
@@ -282,6 +299,9 @@ function StepVacina({ form, update }: { form: FormData; update: (k: keyof FormDa
 // Step 3 — Sorologia
 // --------------------------------------------------------
 function StepSorologia({ form, update }: { form: FormData; update: (k: keyof FormData, v: string | boolean) => void }) {
+  // REGRA: sorologia só é possível após a vacina
+  const vacinaPreRequisito = !form.temVacina;
+
   return (
     <div className="space-y-5">
       <div>
@@ -290,26 +310,41 @@ function StepSorologia({ form, update }: { form: FormData; update: (k: keyof For
       </div>
 
       <InfoBox>
-        A sorologia é o exame de titulação antirrábica. Deve ser feita em laboratório credenciado pelo MAPA.
+        A sorologia é o exame de titulação antirrábica. Deve ser feita em laboratório credenciado pelo MAPA, <strong>após a vacinação</strong>.
         <br />
         <strong>Europa:</strong> carência de 90 dias · <strong>Japão:</strong> carência de 180 dias
       </InfoBox>
 
-      <Toggle
-        label="Seu pet já tem sorologia?"
-        value={form.temSorologia}
-        onChange={(v) => update("temSorologia", v)}
-      />
+      {vacinaPreRequisito ? (
+        /* Vacina não registrada — bloquear sorologia */
+        <div className="flex items-start gap-3 bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-4">
+          <Lock className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-medium text-gray-400">Sorologia bloqueada</p>
+            <p className="text-xs text-gray-500 mt-0.5">
+              A sorologia antirrábica só pode ser realizada após a vacinação. Volte ao passo anterior e registre a vacina primeiro.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <Toggle
+            label="Seu pet já tem sorologia?"
+            value={form.temSorologia}
+            onChange={(v) => update("temSorologia", v)}
+          />
 
-      {form.temSorologia && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-4"
-        >
-          <Field label="Data da coleta *" value={form.sorologiaData} onChange={(v) => update("sorologiaData", v)} placeholder="DD/MM/AAAA" />
-          <Field label="Resultado (opcional)" value={form.sorologiaValor} onChange={(v) => update("sorologiaValor", v)} placeholder="Ex: 1,0 UI/mL" />
-        </motion.div>
+          {form.temSorologia && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-4"
+            >
+              <DateInput label="Data da coleta *" value={form.sorologiaData} onChange={(v) => update("sorologiaData", v)} />
+              <Field label="Resultado (opcional)" value={form.sorologiaValor} onChange={(v) => update("sorologiaValor", v)} placeholder="Ex: 1.0 UI/mL" />
+            </motion.div>
+          )}
+        </>
       )}
     </div>
   );

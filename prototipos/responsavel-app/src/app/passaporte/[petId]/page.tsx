@@ -71,8 +71,12 @@ export default function PassaportePage({
 }) {
   const { petId } = use(params);
   const router = useRouter();
-  const pet = useAppStore((s) => s.getPet(petId));
-  const documentos = useAppStore((s) => s.getDocumentosPorPet(petId));
+  // Seletores estáveis: selecionar arrays primitivos do store e filtrar FORA do seletor.
+  // Usar métodos como getPet/getDocumentosPorPet dentro do selector causa loop infinito
+  // porque filter/find retorna novo array a cada render, quebrando a comparação Object.is do Zustand.
+  const pet = useAppStore((s) => s.pets.find((p) => p.id === petId));
+  const todosDocumentos = useAppStore((s) => s.documentos);
+  const documentos = todosDocumentos.filter((d) => d.petId === petId);
   const adicionarDocumento = useAppStore((s) => s.adicionarDocumento);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
