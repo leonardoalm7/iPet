@@ -7,9 +7,10 @@ import { Destino } from "@/domain/types";
 import { DESTINOS_LISTA } from "@/data/destinations";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { calcularRoadmap } from "@/services/travel-roadmap";
-import { ArrowLeft, Plane, Calendar, ChevronRight } from "lucide-react";
+import { ArrowLeft, Plane, Calendar, ChevronRight, BookmarkPlus, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { RoadmapView } from "@/components/RoadmapView";
+import { DateInput } from "@/components/DateInput";
 
 export default function ViagemPage({
   params,
@@ -18,13 +19,15 @@ export default function ViagemPage({
 }) {
   const { petId } = use(params);
   const router = useRouter();
-  const pet = useAppStore((s) => s.getPet(petId));
+  const pet = useAppStore((s) => s.pets.find((p) => p.id === petId));
   const criarPlano = useAppStore((s) => s.criarPlanoViagem);
+  const planosExistentes = useAppStore((s) => s.planosViagem);
 
   const [destino, setDestino] = useState<Destino>("BRASIL");
   const [dataEmbarque, setDataEmbarque] = useState("");
   const [companhiaId, setCompanhiaId] = useState("");
   const [roadmap, setRoadmap] = useState<ReturnType<typeof calcularRoadmap> | null>(null);
+  const [salvo, setSalvo] = useState(false);
 
   if (!pet) {
     return (
@@ -36,14 +39,23 @@ export default function ViagemPage({
 
   function gerarRoadmap() {
     if (!dataEmbarque) return;
-    const plano = criarPlano({
-      petId: pet!.id,
-      destino,
-      dataEmbarque,
-      companhiaAereaId: companhiaId || undefined,
-    });
-    const result = calcularRoadmap(pet!, destino, dataEmbarque, plano.id);
+    // Roadmap é só cálculo — não persiste automaticamente.
+    // Usa ID temporário; o plano só vai para o store se o usuário clicar em "Salvar".
+    const result = calcularRoadmap(pet!, destino, dataEmbarque, "preview");
     setRoadmap(result);
+    setSalvo(false);
+  }
+
+  function salvarViagem() {
+    if (!roadmap || salvo) return;
+    // Evita duplicata: verifica se já existe plano igual
+    const duplicado = planosExistentes.some(
+      (p) => p.petId === pet!.id && p.destino === destino && p.dataEmbarque === dataEmbarque
+    );
+    if (!duplicado) {
+      criarPlano({ petId: pet!.id, destino, dataEmbarque, companhiaAereaId: companhiaId || undefined });
+    }
+    setSalvo(true);
   }
 
   const destinoInfo = DESTINOS_LISTA.find((d) => d.destino === destino);
@@ -95,9 +107,26 @@ export default function ViagemPage({
 
             <RoadmapView roadmap={roadmap} pet={pet} />
 
+            {/* Salvar viagem — só persiste quando o usuário decide */}
             <button
-              onClick={() => setRoadmap(null)}
-              className="mt-4 w-full py-3 border border-gray-700 rounded-2xl text-gray-400 text-sm hover:border-gray-600 transition-colors"
+              onClick={salvarViagem}
+              disabled={salvo}
+              className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-semibold text-sm transition-colors ${
+                salvo
+                  ? "bg-emerald-900/30 border border-emerald-800/40 text-emerald-400"
+                  : "bg-sky-500 hover:bg-sky-400 text-white"
+              }`}
+            >
+              {salvo ? (
+                <><Check className="w-4 h-4" /> Viagem salva</>
+              ) : (
+                <><BookmarkPlus className="w-4 h-4" /> Salvar esta viagem</>
+              )}
+            </button>
+
+            <button
+              onClick={() => { setRoadmap(null); setSalvo(false); }}
+              className="w-full py-3 border border-gray-700 rounded-2xl text-gray-400 text-sm hover:border-gray-600 transition-colors"
             >
               Alterar destino / data
             </button>
@@ -156,20 +185,11 @@ function FormViagem({
       </div>
 
       {/* Data de embarque */}
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-1.5">
-          <Calendar className="inline w-4 h-4 mr-1.5 align-middle" />
-          Data prevista de embarque
-        </label>
-        <input
-          type="text"
-          inputMode="numeric"
-          placeholder="DD/MM/AAAA"
-          value={dataEmbarque}
-          onChange={(e) => setDataEmbarque(e.target.value)}
-          className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-3 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500"
-        />
-      </div>
+      <DateInput
+        label="📅 Data prevista de embarque"
+        value={dataEmbarque}
+        onChange={setDataEmbarque}
+      />
 
       {/* Companhia aérea (opcional) */}
       <div>
