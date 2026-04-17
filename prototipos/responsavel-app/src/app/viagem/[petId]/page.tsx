@@ -7,9 +7,10 @@ import { Destino } from "@/domain/types";
 import { DESTINOS_LISTA } from "@/data/destinations";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { calcularRoadmap } from "@/services/travel-roadmap";
-import { ArrowLeft, Plane, Calendar, ChevronRight, BookmarkPlus, Check } from "lucide-react";
+import { ArrowLeft, Plane, Calendar, ChevronRight, BookmarkPlus, Check, List, GitCommitHorizontal } from "lucide-react";
 import { motion } from "framer-motion";
 import { RoadmapView } from "@/components/RoadmapView";
+import { RoadmapTimeline } from "@/components/RoadmapTimeline";
 import { DateInput } from "@/components/DateInput";
 
 export default function ViagemPage({
@@ -28,6 +29,7 @@ export default function ViagemPage({
   const [companhiaId, setCompanhiaId] = useState("");
   const [roadmap, setRoadmap] = useState<ReturnType<typeof calcularRoadmap> | null>(null);
   const [salvo, setSalvo] = useState(false);
+  const [viewMode, setViewMode] = useState<"lista" | "timeline">("lista");
 
   if (!pet) {
     return (
@@ -105,7 +107,44 @@ export default function ViagemPage({
               </div>
             </div>
 
-            <RoadmapView roadmap={roadmap} pet={pet} />
+            {/* Toggle de visualização */}
+            <div className="flex items-center gap-1 bg-gray-900 border border-gray-800 rounded-2xl p-1 mb-4">
+              <button
+                onClick={() => setViewMode("lista")}
+                className={`flex items-center justify-center gap-2 flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  viewMode === "lista"
+                    ? "bg-gray-800 text-white shadow"
+                    : "text-gray-500 hover:text-gray-400"
+                }`}
+              >
+                <List className="w-4 h-4" />
+                Lista
+              </button>
+              <button
+                onClick={() => setViewMode("timeline")}
+                className={`flex items-center justify-center gap-2 flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  viewMode === "timeline"
+                    ? "bg-gray-800 text-white shadow"
+                    : "text-gray-500 hover:text-gray-400"
+                }`}
+              >
+                <GitCommitHorizontal className="w-4 h-4" />
+                Linha do Tempo
+              </button>
+            </div>
+
+            <motion.div
+              key={viewMode}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {viewMode === "lista" ? (
+                <RoadmapView roadmap={roadmap} pet={pet} />
+              ) : (
+                <RoadmapTimeline roadmap={roadmap} />
+              )}
+            </motion.div>
 
             {/* Salvar viagem — só persiste quando o usuário decide */}
             <button
