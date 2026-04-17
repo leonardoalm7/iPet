@@ -1,12 +1,13 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Mail, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-export default function VerificarEmailPage() {
+function VerificarEmailContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email") ?? "";
   const [reenviado, setReenviado] = useState(false);
@@ -56,5 +57,19 @@ export default function VerificarEmailPage() {
         Voltar para o login
       </Link>
     </div>
+  );
+}
+
+export default function VerificarEmailPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-gray-500 text-sm">Carregando...</p>
+        </div>
+      }
+    >
+      <VerificarEmailContent />
+    </Suspense>
   );
 }

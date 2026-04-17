@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Mail, Lock, AlertCircle, PawPrint } from "lucide-react";
@@ -11,7 +11,7 @@ import {
   signInWithApple,
 } from "@/services/auth-service";
 
-export default function EntrarPage() {
+function EntrarContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/";
@@ -229,6 +229,20 @@ function AppleIcon() {
     <svg width="18" height="18" viewBox="0 0 814 1000" fill="white">
       <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 389.6 0 228.4 0 168.1c0-20.7 3.9-41.4 10.4-60.7l8.4-32.3C35.1 36 77.7 0 131.3 0c32.3 0 75.5 30.5 107.6 30.5 28 0 81.2-30.5 122-30.5 8.4 0 186.3 8.4 186.3 177.1 0 107.8-60.5 197.5-60.5 197.5 17.5 14.9 77.1 42.8 77.1 42.8C615.7 427.4 788.1 357.1 788.1 340.9z"/>
     </svg>
+  );
+}
+
+export default function EntrarPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-gray-500 text-sm">Carregando...</p>
+        </div>
+      }
+    >
+      <EntrarContent />
+    </Suspense>
   );
 }
 

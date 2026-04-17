@@ -1,17 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import Link from "next/link";
-import { PlusCircle, Settings } from "lucide-react";
+import { PlusCircle, Settings, ChevronRight, AlertTriangle } from "lucide-react";
 import { PetCardHome } from "@/components/PetCardHome";
 import { BottomNav } from "@/components/BottomNav";
 import { SugestoesDestinos } from "@/components/SugestoesDestinos";
 import { HoteisPetSection } from "@/components/HoteisPetSection";
+import { calcularRoadmap, parseBR } from "@/services/travel-roadmap";
+import { REGRAS_DESTINO } from "@/data/destinations";
+import { differenceInDays } from "date-fns";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
-  const { pets, responsavel, setResponsavel } = useAppStore();
+  const { pets, responsavel, planosViagem, setResponsavel } = useAppStore();
 
   useEffect(() => {
     if (!responsavel) {
@@ -25,6 +28,19 @@ export default function HomePage() {
   }, [responsavel, setResponsavel]);
 
   const temPets = pets.length > 0;
+
+  // Viagem mais próxima para o banner do Journey Hub
+  const proximaViagem = planosViagem
+    .map((plano) => {
+      const pet = pets.find((p) => p.id === plano.petId);
+      if (!pet) return null;
+      const hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
+      const diasRestantes = differenceInDays(parseBR(plano.dataEmbarque), hoje);
+      return { plano, pet, diasRestantes };
+    })
+    .filter((v) => v !== null && v.diasRestantes >= 0)
+    .sort((a, b) => a!.diasRestantes - b!.diasRestantes)[0] ?? null;
 
   return (
     <div className="flex flex-col min-h-screen pb-24">
@@ -48,6 +64,22 @@ export default function HomePage() {
       </header>
 
       <main className="flex-1 px-5 space-y-8">
+        {/* ── Journey Hub Banner (viagem ativa) ─────────────────── */}
+        {proximaViagem && (
+          <JourneyHubBanner
+            planoId={proximaViagem.plano.id}
+            petNome={proximaViagem.pet.nome}
+            destino={REGRAS_DESTINO[proximaViagem.plano.destino]}
+            diasRestantes={proximaViagem.diasRestantes}
+            dataEmbarque={proximaViagem.plano.dataEmbarque}
+            roadmap={calcularRoadmap(
+              proximaViagem.pet,
+              proximaViagem.plano.destino,
+              proximaViagem.plano.dataEmbarque,
+              proximaViagem.plano.id
+            )}
+          />
+        )}
         {/* ── Meus Pets ────────────────────────────────────────────── */}
         {!temPets ? (
           <EmptyState />
@@ -148,6 +180,94 @@ const DICAS = [
     texto: "UE exige 90 dias de espera. Japão e Austrália exigem 180 dias. Comece cedo!",
   },
 ];
+
+// ─── Journey Hub Banner ────────────────────────────────────────
+
+interface JourneyHubBannerProps {
+  planoId: string;
+  petNome: string;
+  destino: { bandeira: string; nome: string };
+  diasRestantes: number;
+  dataEmbarque: string;
+  roadmap: ReturnType<typeof calcularRoadmap>;
+}
+
+function JourneyHubBanner({
+  planoId,
+  petNome,
+  destino,
+  diasRestantes,
+  dataEmbarque,
+  roadmap,
+}: JourneyHubBannerProps) {
+  const tarefasDocs = roadmap.tarefas.filter((t) => t.id !== "cvi");
+  const concluidas = tarefasDocs.filter((t) => t.concluida).length;
+  const total = tarefasDocs.length;
+  const temUrgente = tarefasDocs.some(
+    (t) => t.status === "CRITICO" || t.status === "URGENTE" || t.status === "VENCIDA"
+  );
+  const progresso = total > 0 ? Math.round((concluidas / total) * 100) : 0;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <Link
+        href={`/viagens/${planoId}`}
+        className={`block rounded-2xl border p-4 ${
+          temUrgente
+            ? "bg-orange-950/40 border-orange-800/50"
+            : "bg-gradient-to-br from-sky-950/60 to-indigo-950/60 border-sky-800/40"
+        }`}
+      >
+        <div className="flex items-start justify-between mb-3">
+          <div>
+            <p className="text-xs text-gray-400 mb-0.5">Viagem ativa</p>
+            <p className="text-sm font-semibold text-white">
+              {petNome.split(" ")[0]} → {destino.bandeira} {destino.nome}
+            </p>
+            <p className="text-xs text-gray-500">
+              ✈️ Embarque{" "}
+              {diasRestantes === 0
+                ? "hoje!"
+                : `em ${diasRestantes} dia${diasRestantes !== 1 ? "s" : ""}`}{" "}
+              · {dataEmbarque}
+            </p>
+          </div>
+          <div className="flex items-center gap-1">
+            {temUrgente && <AlertTriangle className="w-4 h-4 text-orange-400" />}
+            <ChevronRight className="w-4 h-4 text-gray-500" />
+          </div>
+        </div>
+
+        {/* Mini barra de progresso */}
+        <div>
+          <div className="flex items-center justify-between mb-1.5">
+            <p className="text-[11px] text-gray-500">
+              Documentação: {concluidas}/{total}
+            </p>
+            <p className="text-[11px] font-semibold text-gray-400">{progresso}%</p>
+          </div>
+          <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${progresso}%` }}
+              transition={{ duration: 0.6 }}
+              className={`h-full rounded-full ${temUrgente ? "bg-orange-500" : "bg-sky-500"}`}
+            />
+          </div>
+        </div>
+
+        {temUrgente && (
+          <p className="text-xs text-orange-300 mt-2">
+            ⚠️ Há tarefas urgentes — toque para ver a jornada
+          </p>
+        )}
+      </Link>
+    </motion.div>
+  );
+}
 
 function DicasRapidas() {
   return (
