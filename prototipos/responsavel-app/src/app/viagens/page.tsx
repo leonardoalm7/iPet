@@ -193,7 +193,7 @@ export default function ViagensPage() {
             {/* Planejar nova viagem */}
             {pets.length > 0 && (
               <Link
-                href={`/viagem/${pets[0].id}`}
+                href="/planejar"
                 className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-gray-700 rounded-2xl text-gray-500 text-sm hover:border-sky-600 hover:text-sky-400 transition-colors"
               >
                 <PlusCircle className="w-4 h-4" />
@@ -224,7 +224,7 @@ function EmptyState({ petId }: { petId?: string }) {
       </p>
       {petId && (
         <Link
-          href={`/viagem/${petId}`}
+          href="/planejar"
           className="flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-semibold px-6 py-3 rounded-2xl transition-colors"
         >
           <PlusCircle className="w-5 h-5" />

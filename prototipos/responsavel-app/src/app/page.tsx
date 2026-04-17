@@ -106,6 +106,25 @@ export default function HomePage() {
           </section>
         )}
 
+        {/* ── CTA Planejar viagem (tem pets mas sem viagem ativa) ─── */}
+        {temPets && !proximaViagem && (
+          <Link
+            href="/planejar"
+            className="flex items-center gap-4 bg-gradient-to-r from-sky-900/50 to-indigo-900/50 border border-sky-700/30 rounded-2xl p-4 hover:border-sky-600/50 transition-colors"
+          >
+            <div className="w-11 h-11 rounded-xl bg-sky-500/20 flex items-center justify-center flex-shrink-0">
+              <span className="text-2xl">✈️</span>
+            </div>
+            <div className="flex-1">
+              <p className="text-white font-semibold text-sm">Planejar uma viagem</p>
+              <p className="text-gray-400 text-xs mt-0.5">
+                Por onde começo? Descubra em 3 passos.
+              </p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-gray-500" />
+          </Link>
+        )}
+
         {/* ── Banner de destaque (apenas sem pets cadastrados) ─────── */}
         {!temPets && (
           <div className="bg-gradient-to-r from-sky-900/60 to-indigo-900/60 border border-sky-700/30 rounded-2xl p-4">
