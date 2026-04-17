@@ -6,6 +6,7 @@ import { useAppStore } from "@/store/app-store";
 import { calcularRoadmap, parseBR, formatBR } from "@/services/travel-roadmap";
 import { DESTINOS_LISTA, REGRAS_DESTINO } from "@/data/destinations";
 import { Destino, Pet } from "@/domain/types";
+import { CustoEstimado } from "@/components/CustoEstimado";
 import {
   addDays,
   addMonths,
@@ -661,6 +662,9 @@ function PassoResultado({
           <p className="text-xs text-gray-500 mt-0.5">dias mínimos necessários</p>
         </div>
       </div>
+
+      {/* Estimativa de custo */}
+      <CustoEstimado pet={pet} destino={destino} compacto />
 
       {/* CTAs */}
       <div className="space-y-3 pt-2">

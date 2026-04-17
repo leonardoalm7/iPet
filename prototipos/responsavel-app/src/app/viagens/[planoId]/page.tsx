@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { calcularRoadmap, parseBR } from "@/services/travel-roadmap";
 import { REGRAS_DESTINO } from "@/data/destinations";
+import { CustoEstimado } from "@/components/CustoEstimado";
 import { differenceInDays, format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { motion } from "framer-motion";
@@ -431,6 +432,9 @@ export default function JourneyHubPage({
             ))}
           </div>
         </section>
+
+        {/* ── Estimativa de custo ────────────────────────────────── */}
+        <CustoEstimado pet={pet} destino={plano.destino} compacto />
 
         {/* ── Link para o passaporte ─────────────────────────────── */}
         <Link
