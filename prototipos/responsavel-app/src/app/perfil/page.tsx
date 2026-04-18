@@ -43,7 +43,7 @@ export default function PerfilPage() {
   if (!user || !perfil) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-sky-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-teal border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -54,36 +54,36 @@ export default function PerfilPage() {
       <div className="px-5 pt-12 pb-6">
         <Link
           href="/"
-          className="flex items-center gap-2 text-gray-400 hover:text-gray-300 text-sm mb-6"
+          className="flex items-center gap-2 text-gray-500 hover:text-gray-600 text-sm mb-6"
         >
           <ChevronLeft className="w-4 h-4" />
           Início
         </Link>
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 bg-sky-500/20 rounded-full flex items-center justify-center border-2 border-sky-500/30 relative">
+          <div className="w-16 h-16 bg-teal/10 rounded-full flex items-center justify-center border-2 border-teal/20 relative">
             {perfil.fotoPerfil ? (
               <img src={perfil.fotoPerfil} alt="Foto de perfil" className="w-full h-full rounded-full object-cover" />
             ) : (
-              <User className="w-7 h-7 text-sky-400" />
+              <User className="w-7 h-7 text-teal" />
             )}
           </div>
           <div>
-            <h1 className="text-lg font-bold text-white">{perfil.nomeCompleto}</h1>
-            <p className="text-gray-400 text-sm">{perfil.email}</p>
+            <h1 className="text-lg font-bold text-navy">{perfil.nomeCompleto}</h1>
+            <p className="text-gray-500 text-sm">{perfil.email}</p>
           </div>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-800 px-5 mb-6">
+      <div className="flex border-b border-gray-200 px-5 mb-6">
         {(["dados", "privacidade"] as Tab[]).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`pb-3 pr-6 text-sm font-medium transition-colors border-b-2 -mb-px ${
               tab === t
-                ? "text-sky-400 border-sky-400"
-                : "text-gray-500 border-transparent hover:text-gray-300"
+                ? "text-teal border-teal"
+                : "text-gray-400 border-transparent hover:text-gray-600"
             }`}
           >
             {t === "dados" ? "Meus Dados" : "Privacidade"}
@@ -159,17 +159,17 @@ function TabDados({
           }`}
         >
           {feedback.tipo === "sucesso" ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
           ) : (
-            <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+            <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
           )}
-          <p className={`text-sm ${feedback.tipo === "sucesso" ? "text-emerald-300" : "text-red-300"}`}>
+          <p className={`text-sm ${feedback.tipo === "sucesso" ? "text-emerald-300" : "text-red-500"}`}>
             {feedback.msg}
           </p>
         </div>
       )}
 
-      <div className="bg-gray-900 rounded-2xl divide-y divide-gray-800">
+      <div className="bg-white rounded-2xl divide-y divide-gray-200">
         <CampoTexto
           icon={<User className="w-4 h-4" />}
           label="Nome completo"
@@ -211,14 +211,14 @@ function TabDados({
         <div className="flex gap-3">
           <button
             onClick={() => { setEditando(false); setFeedback(null); }}
-            className="flex-1 border border-gray-700 text-gray-300 py-3 rounded-2xl text-sm"
+            className="flex-1 border border-gray-200 text-gray-600 py-3 rounded-2xl text-sm"
           >
             Cancelar
           </button>
           <button
             onClick={salvar}
             disabled={loading}
-            className="flex-1 bg-sky-500 hover:bg-sky-400 disabled:bg-gray-700 disabled:text-gray-500 text-white font-semibold py-3 rounded-2xl text-sm transition-colors"
+            className="flex-1 bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3 rounded-2xl text-sm transition-colors"
           >
             {loading ? "Salvando..." : "Salvar"}
           </button>
@@ -226,7 +226,7 @@ function TabDados({
       ) : (
         <button
           onClick={() => setEditando(true)}
-          className="w-full border border-gray-700 text-gray-300 hover:text-white py-3 rounded-2xl text-sm transition-colors"
+          className="w-full border border-gray-200 text-gray-600 hover:text-navy py-3 rounded-2xl text-sm transition-colors"
         >
           Editar dados
         </button>
@@ -234,7 +234,7 @@ function TabDados({
 
       <button
         onClick={handleLogout}
-        className="flex items-center justify-center gap-2 w-full text-red-400 hover:text-red-300 py-3 text-sm"
+        className="flex items-center justify-center gap-2 w-full text-red-500 hover:text-red-500 py-3 text-sm"
       >
         <LogOut className="w-4 h-4" />
         Sair da conta
@@ -264,24 +264,24 @@ function CampoTexto({
 }) {
   return (
     <div className="flex items-center gap-3 p-4">
-      <div className="text-gray-500 flex-shrink-0">{icon}</div>
+      <div className="text-gray-400 flex-shrink-0">{icon}</div>
       <div className="flex-1 min-w-0">
-        <p className="text-gray-500 text-xs mb-0.5">{label}</p>
+        <p className="text-gray-400 text-xs mb-0.5">{label}</p>
         {editando && !somenteLeitura ? (
           <input
             type={type}
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-transparent text-white text-sm focus:outline-none placeholder-gray-600"
+            className="w-full bg-transparent text-navy text-sm focus:outline-none placeholder-gray-600"
           />
         ) : (
-          <p className={`text-sm truncate ${value ? "text-white" : "text-gray-600"}`}>
+          <p className={`text-sm truncate ${value ? "text-navy" : "text-gray-400"}`}>
             {value || (somenteLeitura ? "—" : "Não informado")}
           </p>
         )}
       </div>
-      {somenteLeitura && <span className="text-gray-600 text-xs">fixo</span>}
+      {somenteLeitura && <span className="text-gray-400 text-xs">fixo</span>}
     </div>
   );
 }
@@ -352,15 +352,15 @@ function TabPrivacidade({
   return (
     <div className="space-y-6">
       {feedback && (
-        <div className="bg-sky-900/20 border border-sky-800/40 rounded-xl p-3">
-          <p className="text-sky-300 text-sm">{feedback}</p>
+        <div className="bg-teal/5 border border-teal/20 rounded-xl p-3">
+          <p className="text-teal text-sm">{feedback}</p>
         </div>
       )}
 
       {/* Consentimentos */}
       <div>
-        <h2 className="text-white font-semibold mb-3">Consentimentos</h2>
-        <div className="bg-gray-900 rounded-2xl divide-y divide-gray-800">
+        <h2 className="text-navy font-semibold mb-3">Consentimentos</h2>
+        <div className="bg-white rounded-2xl divide-y divide-gray-200">
           <ItemConsent
             label="Termos de Uso"
             descricao="Obrigatório para uso da plataforma"
@@ -385,8 +385,8 @@ function TabPrivacidade({
 
       {/* Direitos LGPD */}
       <div>
-        <h2 className="text-white font-semibold mb-1">Seus direitos (Art. 18 LGPD)</h2>
-        <p className="text-gray-500 text-xs mb-3">
+        <h2 className="text-navy font-semibold mb-1">Seus direitos (Art. 18 LGPD)</h2>
+        <p className="text-gray-400 text-xs mb-3">
           Respondemos em até 15 dias corridos.
         </p>
         <div className="space-y-3">
@@ -396,7 +396,7 @@ function TabPrivacidade({
             descricao="Baixe todos os seus dados em JSON (Art. 18, II e V)"
             loading={loadingExport}
             onClick={exportar}
-            cor="sky"
+            cor="teal"
           />
           <AcaoLGPD
             icon={<RefreshCw className="w-4 h-4" />}
@@ -406,13 +406,13 @@ function TabPrivacidade({
             cor="amber"
           />
           <Link href="/lgpd/privacidade">
-            <div className="flex items-center gap-3 bg-gray-900 rounded-2xl p-4 hover:bg-gray-800 transition-colors">
-              <Shield className="w-4 h-4 text-gray-400" />
+            <div className="flex items-center gap-3 bg-white rounded-2xl p-4 hover:bg-gray-100 transition-colors">
+              <Shield className="w-4 h-4 text-gray-500" />
               <div className="flex-1">
-                <p className="text-white text-sm">Ver Política de Privacidade</p>
-                <p className="text-gray-500 text-xs">Como tratamos seus dados</p>
+                <p className="text-navy text-sm">Ver Política de Privacidade</p>
+                <p className="text-gray-400 text-xs">Como tratamos seus dados</p>
               </div>
-              <ChevronRight className="w-4 h-4 text-gray-600" />
+              <ChevronRight className="w-4 h-4 text-gray-400" />
             </div>
           </Link>
         </div>
@@ -420,23 +420,23 @@ function TabPrivacidade({
 
       {/* Zona de perigo */}
       <div>
-        <h2 className="text-red-400 font-semibold mb-3">Zona de perigo</h2>
+        <h2 className="text-red-500 font-semibold mb-3">Zona de perigo</h2>
 
         {!confirmarExclusao ? (
           <button
             onClick={() => setConfirmarExclusao(true)}
-            className="flex items-center gap-2 w-full border border-red-800/50 bg-red-900/20 hover:bg-red-900/30 text-red-400 rounded-2xl p-4 text-sm transition-colors"
+            className="flex items-center gap-2 w-full border border-red-200 bg-red-900/20 hover:bg-red-900/30 text-red-500 rounded-2xl p-4 text-sm transition-colors"
           >
             <Trash2 className="w-4 h-4" />
             Excluir minha conta e dados (Art. 18, VI)
           </button>
         ) : (
-          <div className="bg-red-900/20 border border-red-800/50 rounded-2xl p-4 space-y-4">
+          <div className="bg-red-900/20 border border-red-200 rounded-2xl p-4 space-y-4">
             <div className="flex items-start gap-2">
-              <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-red-300 text-sm font-medium">Ação irreversível</p>
-                <p className="text-red-400/80 text-xs mt-1 leading-relaxed">
+                <p className="text-red-500 text-sm font-medium">Ação irreversível</p>
+                <p className="text-red-500/80 text-xs mt-1 leading-relaxed">
                   Todos os seus dados (perfil, pets, documentos, viagens) serão excluídos permanentemente.
                   Registros de consentimento são mantidos por 5 anos por obrigação legal (Art. 16, I LGPD).
                 </p>
@@ -445,7 +445,7 @@ function TabPrivacidade({
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirmarExclusao(false)}
-                className="flex-1 border border-gray-700 text-gray-300 py-2.5 rounded-xl text-sm"
+                className="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-xl text-sm"
               >
                 Cancelar
               </button>
@@ -482,18 +482,18 @@ function ItemConsent({
   return (
     <div className="flex items-center gap-3 p-4">
       <div className="flex-1">
-        <p className="text-white text-sm">{label}</p>
-        <p className="text-gray-500 text-xs">{descricao}</p>
+        <p className="text-navy text-sm">{label}</p>
+        <p className="text-gray-400 text-xs">{descricao}</p>
       </div>
       {readonly ? (
-        <span className="text-emerald-400 text-xs">Aceito</span>
+        <span className="text-emerald-600 text-xs">Aceito</span>
       ) : loading ? (
-        <div className="w-4 h-4 border-2 border-gray-600 border-t-sky-400 rounded-full animate-spin" />
+        <div className="w-4 h-4 border-2 border-gray-600 border-t-teal rounded-full animate-spin" />
       ) : (
         <button
           onClick={onChange}
           className={`w-11 h-6 rounded-full transition-colors relative ${
-            ativo ? "bg-sky-500" : "bg-gray-700"
+            ativo ? "bg-teal" : "bg-gray-200"
           }`}
         >
           <div
@@ -513,35 +513,35 @@ function AcaoLGPD({
   descricao,
   loading = false,
   onClick,
-  cor = "sky",
+  cor = "teal",
 }: {
   icon: React.ReactNode;
   titulo: string;
   descricao: string;
   loading?: boolean;
   onClick: () => void;
-  cor?: "sky" | "amber";
+  cor?: "teal" | "amber";
 }) {
-  const corClass = cor === "sky" ? "text-sky-400" : "text-amber-400";
+  const corClass = cor === "teal" ? "text-teal" : "text-amber-600";
 
   return (
     <button
       onClick={onClick}
       disabled={loading}
-      className="flex items-center gap-3 w-full bg-gray-900 hover:bg-gray-800 disabled:opacity-60 rounded-2xl p-4 text-left transition-colors"
+      className="flex items-center gap-3 w-full bg-white hover:bg-gray-100 disabled:opacity-60 rounded-2xl p-4 text-left transition-colors"
     >
       <span className={corClass}>
         {loading ? (
-          <div className="w-4 h-4 border-2 border-gray-600 border-t-sky-400 rounded-full animate-spin" />
+          <div className="w-4 h-4 border-2 border-gray-600 border-t-teal rounded-full animate-spin" />
         ) : (
           icon
         )}
       </span>
       <div className="flex-1">
         <p className={`text-sm font-medium ${corClass}`}>{titulo}</p>
-        <p className="text-gray-500 text-xs mt-0.5">{descricao}</p>
+        <p className="text-gray-400 text-xs mt-0.5">{descricao}</p>
       </div>
-      <ChevronRight className="w-4 h-4 text-gray-600" />
+      <ChevronRight className="w-4 h-4 text-gray-400" />
     </button>
   );
 }

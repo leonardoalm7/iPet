@@ -48,19 +48,19 @@ export default function HomePage() {
       <header className="px-5 pt-14 pb-6">
         <div className="flex items-center justify-between mb-1">
           <div>
-            <p className="text-sm text-gray-400">Bem-vindo ao</p>
-            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-              ✈️ <span className="text-sky-400">iPet</span>
+            <p className="text-sm text-gray-500">Bem-vindo ao</p>
+            <h1 className="text-2xl font-bold text-navy flex items-center gap-2">
+              ✈️ <span className="text-teal">iPet</span>
             </h1>
           </div>
           <Link
             href="/configuracoes"
-            className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center"
+            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"
           >
-            <Settings className="w-5 h-5 text-gray-400" />
+            <Settings className="w-5 h-5 text-gray-500" />
           </Link>
         </div>
-        <p className="text-gray-400 text-sm mt-1">Pet Pass</p>
+        <p className="text-gray-500 text-sm mt-1">Pet Pass</p>
       </header>
 
       <main className="flex-1 px-5 space-y-8">
@@ -86,8 +86,8 @@ export default function HomePage() {
         ) : (
           <section>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-base font-semibold text-gray-200">Meus Pets</h2>
-              <span className="text-xs text-gray-500">
+              <h2 className="text-base font-semibold text-navy">Meus Pets</h2>
+              <span className="text-xs text-gray-400">
                 {pets.length} pet{pets.length !== 1 ? "s" : ""}
               </span>
             </div>
@@ -98,7 +98,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/pets/novo"
-              className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-gray-700 rounded-2xl text-gray-500 text-sm hover:border-sky-600 hover:text-sky-400 transition-colors mt-3"
+              className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-gray-200 rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors mt-3"
             >
               <PlusCircle className="w-4 h-4" />
               Adicionar outro pet
@@ -110,29 +110,29 @@ export default function HomePage() {
         {temPets && !proximaViagem && (
           <Link
             href="/planejar"
-            className="flex items-center gap-4 bg-gradient-to-r from-sky-900/50 to-indigo-900/50 border border-sky-700/30 rounded-2xl p-4 hover:border-sky-600/50 transition-colors"
+            className="flex items-center gap-4 bg-gradient-to-r from-teal/10 to-navy/5 border border-teal/20 rounded-2xl p-4 hover:border-teal/50 transition-colors"
           >
-            <div className="w-11 h-11 rounded-xl bg-sky-500/20 flex items-center justify-center flex-shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0">
               <span className="text-2xl">✈️</span>
             </div>
             <div className="flex-1">
-              <p className="text-white font-semibold text-sm">Planejar uma viagem</p>
-              <p className="text-gray-400 text-xs mt-0.5">
+              <p className="text-navy font-semibold text-sm">Planejar uma viagem</p>
+              <p className="text-gray-500 text-xs mt-0.5">
                 Por onde começo? Descubra em 3 passos.
               </p>
             </div>
-            <ChevronRight className="w-4 h-4 text-gray-500" />
+            <ChevronRight className="w-4 h-4 text-gray-400" />
           </Link>
         )}
 
         {/* ── Banner de destaque (apenas sem pets cadastrados) ─────── */}
         {!temPets && (
-          <div className="bg-gradient-to-r from-sky-900/60 to-indigo-900/60 border border-sky-700/30 rounded-2xl p-4">
-            <p className="text-xs text-sky-300 font-medium mb-1">✨ Pet Pass</p>
-            <p className="text-white text-sm font-semibold">
+          <div className="bg-gradient-to-r from-teal/10 to-navy/5 border border-teal/20 rounded-2xl p-4">
+            <p className="text-xs text-teal font-medium mb-1">✨ Pet Pass</p>
+            <p className="text-navy text-sm font-semibold">
               Viaje com seu pet com segurança e zero surpresas
             </p>
-            <p className="text-gray-400 text-xs mt-1">
+            <p className="text-gray-500 text-xs mt-1">
               Passaporte digital, motor de compliance e roteiro de documentos por destino.
             </p>
           </div>
@@ -156,19 +156,19 @@ export default function HomePage() {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center pt-8 pb-4 text-center px-4">
-      <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center mb-5 text-4xl">
+      <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-5 text-4xl">
         🐾
       </div>
-      <h2 className="text-xl font-semibold text-white mb-2">
+      <h2 className="text-xl font-semibold text-navy mb-2">
         Cadastre seu primeiro pet
       </h2>
-      <p className="text-gray-400 text-sm leading-relaxed mb-6">
+      <p className="text-gray-500 text-sm leading-relaxed mb-6">
         Comece adicionando as informações do seu pet para gerar o passaporte
         digital e planejar sua viagem com segurança.
       </p>
       <Link
         href="/pets/novo"
-        className="flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-semibold px-6 py-3 rounded-2xl transition-colors"
+        className="flex items-center gap-2 bg-teal hover:bg-teal-dark text-white font-semibold px-6 py-3 rounded-2xl transition-colors"
       >
         <PlusCircle className="w-5 h-5" />
         Cadastrar pet
@@ -236,17 +236,17 @@ function JourneyHubBanner({
         href={`/viagens/${planoId}`}
         className={`block rounded-2xl border p-4 ${
           temUrgente
-            ? "bg-orange-950/40 border-orange-800/50"
-            : "bg-gradient-to-br from-sky-950/60 to-indigo-950/60 border-sky-800/40"
+            ? "bg-orange-50 border-orange-200"
+            : "bg-gradient-to-br from-teal/10 to-navy/5 border-teal/20"
         }`}
       >
         <div className="flex items-start justify-between mb-3">
           <div>
-            <p className="text-xs text-gray-400 mb-0.5">Viagem ativa</p>
-            <p className="text-sm font-semibold text-white">
+            <p className="text-xs text-gray-500 mb-0.5">Viagem ativa</p>
+            <p className="text-sm font-semibold text-navy">
               {petNome.split(" ")[0]} → {destino.bandeira} {destino.nome}
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-400">
               ✈️ Embarque{" "}
               {diasRestantes === 0
                 ? "hoje!"
@@ -255,31 +255,31 @@ function JourneyHubBanner({
             </p>
           </div>
           <div className="flex items-center gap-1">
-            {temUrgente && <AlertTriangle className="w-4 h-4 text-orange-400" />}
-            <ChevronRight className="w-4 h-4 text-gray-500" />
+            {temUrgente && <AlertTriangle className="w-4 h-4 text-ipet-orange" />}
+            <ChevronRight className="w-4 h-4 text-gray-400" />
           </div>
         </div>
 
         {/* Mini barra de progresso */}
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <p className="text-[11px] text-gray-500">
+            <p className="text-[11px] text-gray-400">
               Documentação: {concluidas}/{total}
             </p>
-            <p className="text-[11px] font-semibold text-gray-400">{progresso}%</p>
+            <p className="text-[11px] font-semibold text-gray-500">{progresso}%</p>
           </div>
-          <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+          <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${progresso}%` }}
               transition={{ duration: 0.6 }}
-              className={`h-full rounded-full ${temUrgente ? "bg-orange-500" : "bg-sky-500"}`}
+              className={`h-full rounded-full ${temUrgente ? "bg-ipet-orange" : "bg-teal"}`}
             />
           </div>
         </div>
 
         {temUrgente && (
-          <p className="text-xs text-orange-300 mt-2">
+          <p className="text-xs text-ipet-orange mt-2">
             ⚠️ Há tarefas urgentes — toque para ver a jornada
           </p>
         )}
@@ -291,18 +291,18 @@ function JourneyHubBanner({
 function DicasRapidas() {
   return (
     <section>
-      <h2 className="text-base font-semibold text-gray-200 mb-3">
+      <h2 className="text-base font-semibold text-navy mb-3">
         Dicas essenciais de viagem
       </h2>
       <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-5 px-5">
         {DICAS.map((d, i) => (
           <div
             key={i}
-            className="flex-shrink-0 w-52 bg-gray-800 rounded-2xl p-3.5 border border-gray-700/40"
+            className="flex-shrink-0 w-52 bg-gray-100 rounded-2xl p-3.5 border border-gray-200"
           >
             <span className="text-2xl">{d.emoji}</span>
-            <p className="text-white text-xs font-semibold mt-2 mb-1">{d.titulo}</p>
-            <p className="text-gray-400 text-[11px] leading-relaxed">{d.texto}</p>
+            <p className="text-navy text-xs font-semibold mt-2 mb-1">{d.titulo}</p>
+            <p className="text-gray-500 text-[11px] leading-relaxed">{d.texto}</p>
           </div>
         ))}
       </div>

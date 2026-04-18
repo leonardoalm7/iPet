@@ -101,10 +101,10 @@ export default function ViagensPage() {
     <div className="flex flex-col min-h-screen pb-24">
       <header className="px-5 pt-14 pb-6">
         <div className="flex items-center gap-2 mb-1">
-          <Plane className="w-6 h-6 text-sky-400" />
-          <h1 className="text-2xl font-bold text-white">Viagens</h1>
+          <Plane className="w-6 h-6 text-teal" />
+          <h1 className="text-2xl font-bold text-navy">Viagens</h1>
         </div>
-        <p className="text-gray-400 text-sm">
+        <p className="text-gray-500 text-sm">
           {planosComPet.length > 0
             ? `${planosComPet.length} ${planosComPet.length === 1 ? "viagem planejada" : "viagens planejadas"}`
             : "Seus planos de viagem com pets"}
@@ -127,18 +127,18 @@ export default function ViagensPage() {
                 estado === "ok"
                   ? "bg-emerald-500"
                   : estado === "urgente"
-                  ? "bg-orange-500"
+                  ? "bg-ipet-orange"
                   : estado === "atencao"
                   ? "bg-amber-500"
-                  : "bg-sky-500";
+                  : "bg-teal";
 
               const badgeEstado =
                 estado === "ok" ? (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 ) : estado === "urgente" ? (
-                  <AlertTriangle className="w-4 h-4 text-orange-400" />
+                  <AlertTriangle className="w-4 h-4 text-ipet-orange" />
                 ) : (
-                  <Clock className="w-4 h-4 text-sky-400" />
+                  <Clock className="w-4 h-4 text-teal" />
                 );
 
               const confirmando = confirmandoId === plano.id;
@@ -151,25 +151,25 @@ export default function ViagensPage() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <div className="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+                  <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
                     {/* Card clicável */}
                     <div
                       onClick={() => !confirmando && router.push(`/viagens/${plano.id}`)}
-                      className="p-4 cursor-pointer hover:bg-gray-800/30 transition-colors"
+                      className="p-4 cursor-pointer hover:bg-gray-50 transition-colors"
                     >
                       {/* Top row */}
                       <div className="flex items-start gap-3 mb-3">
-                        <div className="w-12 h-12 rounded-xl bg-gray-800 flex items-center justify-center text-2xl flex-shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-2xl flex-shrink-0">
                           {regras.bandeira}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-white text-sm leading-snug">
+                          <p className="font-semibold text-navy text-sm leading-snug">
                             {regras.nome}
                           </p>
-                          <p className="text-xs text-gray-400 mt-0.5">
+                          <p className="text-xs text-gray-500 mt-0.5">
                             {pet.nome.split(" ")[0]} · Embarque: {plano.dataEmbarque}
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-gray-400">
                             {diasRestantes > 0
                               ? `${diasRestantes} dias restantes`
                               : diasRestantes === 0
@@ -179,19 +179,19 @@ export default function ViagensPage() {
                         </div>
                         <div className="flex items-center gap-2">
                           {badgeEstado}
-                          <ChevronRight className="w-4 h-4 text-gray-600" />
+                          <ChevronRight className="w-4 h-4 text-gray-400" />
                         </div>
                       </div>
 
                       {/* Progress bar */}
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
-                          <p className="text-[11px] text-gray-500">Progresso</p>
-                          <p className="text-[11px] font-semibold text-gray-400">
+                          <p className="text-[11px] text-gray-400">Progresso</p>
+                          <p className="text-[11px] font-semibold text-gray-500">
                             {porcentagem}%
                           </p>
                         </div>
-                        <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${porcentagem}%` }}
@@ -210,9 +210,9 @@ export default function ViagensPage() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="border-t border-gray-800 px-4 py-3 flex items-center gap-2"
+                          className="border-t border-gray-200 px-4 py-3 flex items-center gap-2"
                         >
-                          <p className="text-xs text-red-400 flex-1">
+                          <p className="text-xs text-red-500 flex-1">
                             Excluir esta viagem?
                           </p>
                           <button
@@ -223,7 +223,7 @@ export default function ViagensPage() {
                           </button>
                           <button
                             onClick={() => setConfirmandoId(null)}
-                            className="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-semibold rounded-xl transition-colors"
+                            className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-semibold rounded-xl transition-colors"
                           >
                             Cancelar
                           </button>
@@ -234,14 +234,14 @@ export default function ViagensPage() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="border-t border-gray-800/60 px-4 py-2 flex justify-end"
+                          className="border-t border-gray-200 px-4 py-2 flex justify-end"
                         >
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               setConfirmandoId(plano.id);
                             }}
-                            className="flex items-center gap-1.5 text-gray-600 hover:text-red-400 text-xs py-1 transition-colors"
+                            className="flex items-center gap-1.5 text-gray-400 hover:text-red-500 text-xs py-1 transition-colors"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                             Excluir viagem
@@ -258,7 +258,7 @@ export default function ViagensPage() {
             {pets.length > 0 && (
               <Link
                 href="/planejar"
-                className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-gray-700 rounded-2xl text-gray-500 text-sm hover:border-sky-600 hover:text-sky-400 transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-gray-200 rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors"
               >
                 <PlusCircle className="w-4 h-4" />
                 Planejar nova viagem
@@ -276,20 +276,20 @@ export default function ViagensPage() {
 function EmptyState({ petId }: { petId?: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center px-4">
-      <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center mb-5 text-4xl">
+      <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-5 text-4xl">
         ✈️
       </div>
-      <h2 className="text-lg font-semibold text-white mb-2">
+      <h2 className="text-lg font-semibold text-navy mb-2">
         Nenhuma viagem planejada
       </h2>
-      <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-[260px]">
+      <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-[260px]">
         Planeje a viagem do seu pet e receba um roadmap completo de documentação
         com prazos.
       </p>
       {petId && (
         <Link
           href="/planejar"
-          className="flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-semibold px-6 py-3 rounded-2xl transition-colors"
+          className="flex items-center gap-2 bg-teal hover:bg-teal-dark text-white font-semibold px-6 py-3 rounded-2xl transition-colors"
         >
           <PlusCircle className="w-5 h-5" />
           Planejar viagem

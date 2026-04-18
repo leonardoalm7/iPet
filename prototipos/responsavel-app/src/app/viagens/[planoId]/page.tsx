@@ -377,7 +377,7 @@ export default function JourneyHubPage({
   if (!plano || !pet) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-400 text-sm">Viagem não encontrada.</p>
+        <p className="text-gray-500 text-sm">Viagem não encontrada.</p>
       </div>
     );
   }
@@ -393,7 +393,7 @@ export default function JourneyHubPage({
       <header className="px-5 pt-14 pb-5">
         <button
           onClick={() => router.back()}
-          className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mb-4"
+          className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-4"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
@@ -401,20 +401,20 @@ export default function JourneyHubPage({
         {/* Identidade da viagem */}
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-500">
               {pet.nome.split(" ")[0]} → {regras.bandeira} {regras.nome}
             </p>
-            <h1 className="text-xl font-bold text-white mt-0.5">Jornada da Viagem</h1>
+            <h1 className="text-xl font-bold text-navy mt-0.5">Jornada da Viagem</h1>
           </div>
-          <div className="bg-gray-800 rounded-2xl px-3 py-2 text-right">
-            <p className="text-xs text-gray-500">Embarque</p>
-            <p className="text-sm font-semibold text-sky-400">
+          <div className="bg-gray-100 rounded-2xl px-3 py-2 text-right">
+            <p className="text-xs text-gray-400">Embarque</p>
+            <p className="text-sm font-semibold text-teal">
               {diasRestantes > 0 ? `em ${diasRestantes}d` : diasRestantes === 0 ? "hoje!" : "passou"}
             </p>
           </div>
         </div>
 
-        <p className="text-xs text-gray-500 mt-1">✈️ {dataFormatada}</p>
+        <p className="text-xs text-gray-400 mt-1">✈️ {dataFormatada}</p>
       </header>
 
       <main className="px-5 space-y-5 flex-1">
@@ -426,7 +426,7 @@ export default function JourneyHubPage({
 
         {/* ── Estágios ───────────────────────────────────────────── */}
         <section>
-          <h2 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">
+          <h2 className="text-sm font-semibold text-gray-600 mb-3 uppercase tracking-wider">
             Sua Jornada
           </h2>
           <div className="space-y-2">
@@ -447,33 +447,33 @@ export default function JourneyHubPage({
         {/* ── Link para o passaporte ─────────────────────────────── */}
         <Link
           href={`/passaporte/${pet.id}`}
-          className="flex items-center gap-3 bg-gray-900 border border-gray-800 rounded-2xl p-4"
+          className="flex items-center gap-3 bg-white border border-gray-200 rounded-2xl p-4"
         >
-          <div className="w-10 h-10 rounded-xl bg-indigo-900/40 flex items-center justify-center">
-            <Stethoscope className="w-5 h-5 text-indigo-400" />
+          <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
+            <Stethoscope className="w-5 h-5 text-indigo-600" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-white">Passaporte do Pet</p>
-            <p className="text-xs text-gray-400">Documentos, vacinas e histórico de saúde</p>
+            <p className="text-sm font-semibold text-navy">Passaporte do Pet</p>
+            <p className="text-xs text-gray-500">Documentos, vacinas e histórico de saúde</p>
           </div>
-          <ChevronRight className="w-4 h-4 text-gray-600" />
+          <ChevronRight className="w-4 h-4 text-gray-400" />
         </Link>
 
         {/* ── Excluir viagem ─────────────────────────────────────── */}
         {!confirmandoExclusao ? (
           <button
             onClick={() => setConfirmandoExclusao(true)}
-            className="flex items-center justify-center gap-2 w-full py-3 text-gray-600 hover:text-red-400 text-sm transition-colors"
+            className="flex items-center justify-center gap-2 w-full py-3 text-gray-400 hover:text-red-500 text-sm transition-colors"
           >
             <Trash2 className="w-4 h-4" />
             Excluir esta viagem
           </button>
         ) : (
-          <div className="bg-red-950/40 border border-red-800/50 rounded-2xl p-4 space-y-3">
-            <p className="text-sm text-red-300 font-medium text-center">
+          <div className="bg-red-50 border border-red-200 rounded-2xl p-4 space-y-3">
+            <p className="text-sm text-red-500 font-medium text-center">
               Excluir viagem para {regras.bandeira} {regras.nome}?
             </p>
-            <p className="text-xs text-gray-500 text-center">
+            <p className="text-xs text-gray-400 text-center">
               Esta ação não pode ser desfeita.
             </p>
             <div className="flex gap-2">
@@ -485,7 +485,7 @@ export default function JourneyHubPage({
               </button>
               <button
                 onClick={() => setConfirmandoExclusao(false)}
-                className="flex-1 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-sm font-semibold rounded-xl transition-colors"
+                className="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-semibold rounded-xl transition-colors"
               >
                 Cancelar
               </button>
@@ -502,22 +502,22 @@ export default function JourneyHubPage({
 function ProgressCard({ progresso }: { progresso: number }) {
   const cor =
     progresso >= 80 ? "from-emerald-500 to-teal-400" :
-    progresso >= 40 ? "from-sky-500 to-blue-400" :
+    progresso >= 40 ? "from-teal-dark to-teal-dark" :
     "from-orange-500 to-amber-400";
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gray-900 border border-gray-800 rounded-2xl p-4"
+      className="bg-white border border-gray-200 rounded-2xl p-4"
     >
       <div className="flex items-center justify-between mb-3">
-        <p className="text-sm font-medium text-gray-300">Progresso da jornada</p>
+        <p className="text-sm font-medium text-gray-600">Progresso da jornada</p>
         <p className={`text-sm font-bold bg-gradient-to-r ${cor} bg-clip-text text-transparent`}>
           {progresso}%
         </p>
       </div>
-      <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${progresso}%` }}
@@ -525,7 +525,7 @@ function ProgressCard({ progresso }: { progresso: number }) {
           className={`h-full rounded-full bg-gradient-to-r ${cor}`}
         />
       </div>
-      <p className="text-xs text-gray-500 mt-2">
+      <p className="text-xs text-gray-400 mt-2">
         {progresso < 100
           ? `${100 - progresso}% restante para estar pronto para embarcar`
           : "Pronto para o embarque! 🎉"}
@@ -542,34 +542,34 @@ function ProximaAcaoCard({ acao }: { acao: ProximaAcao }) {
       transition={{ delay: 0.1 }}
       className={`rounded-2xl p-4 border ${
         acao.urgente
-          ? "bg-orange-950/40 border-orange-800/50"
-          : "bg-sky-950/40 border-sky-800/40"
+          ? "bg-orange-50 border-orange-200"
+          : "bg-teal/5 border-teal/20"
       }`}
     >
       <div className="flex items-center gap-2 mb-1">
         <CalendarCheck
-          className={`w-4 h-4 ${acao.urgente ? "text-orange-400" : "text-sky-400"}`}
+          className={`w-4 h-4 ${acao.urgente ? "text-ipet-orange" : "text-teal"}`}
         />
         <p className={`text-xs font-semibold uppercase tracking-wider ${
-          acao.urgente ? "text-orange-400" : "text-sky-400"
+          acao.urgente ? "text-ipet-orange" : "text-teal"
         }`}>
           {acao.urgente ? "Ação urgente" : "Próxima ação"}
         </p>
         {acao.prazo && (
-          <span className="ml-auto text-xs text-gray-500">{acao.prazo}</span>
+          <span className="ml-auto text-xs text-gray-400">{acao.prazo}</span>
         )}
       </div>
 
-      <p className="text-white font-semibold text-sm mb-0.5">{acao.titulo}</p>
-      <p className="text-gray-400 text-xs leading-relaxed mb-3">{acao.subtitulo}</p>
+      <p className="text-navy font-semibold text-sm mb-0.5">{acao.titulo}</p>
+      <p className="text-gray-500 text-xs leading-relaxed mb-3">{acao.subtitulo}</p>
 
       <div className="flex gap-2">
         <Link
           href={acao.ctaPrimario.href}
           className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
             acao.urgente
-              ? "bg-orange-500 hover:bg-orange-400 text-white"
-              : "bg-sky-500 hover:bg-sky-400 text-white"
+              ? "bg-ipet-orange hover:bg-orange-400 text-white"
+              : "bg-teal hover:bg-teal-dark text-white"
           }`}
         >
           {acao.ctaPrimario.label}
@@ -578,7 +578,7 @@ function ProximaAcaoCard({ acao }: { acao: ProximaAcao }) {
         {acao.ctaSecundario && (
           <Link
             href={acao.ctaSecundario.href}
-            className="flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-700 text-gray-300 hover:border-gray-600 transition-colors"
+            className="flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200 text-gray-600 hover:border-gray-600 transition-colors"
           >
             {acao.ctaSecundario.label}
           </Link>
@@ -601,37 +601,37 @@ function EstagioCard({
     CONCLUIDO: {
       bg: "bg-emerald-950/30 border-emerald-800/40",
       iconBg: "bg-emerald-900/50",
-      iconColor: "text-emerald-400",
+      iconColor: "text-emerald-600",
       titleColor: "text-emerald-300",
-      badge: <CheckCircle2 className="w-5 h-5 text-emerald-400" />,
+      badge: <CheckCircle2 className="w-5 h-5 text-emerald-600" />,
     },
     EM_ANDAMENTO: {
-      bg: "bg-sky-950/30 border-sky-800/40",
-      iconBg: "bg-sky-900/50",
-      iconColor: "text-sky-400",
-      titleColor: "text-white",
-      badge: <Loader2 className="w-5 h-5 text-sky-400 animate-spin" />,
+      bg: "bg-teal/5 border-teal/20",
+      iconBg: "bg-teal/10",
+      iconColor: "text-teal",
+      titleColor: "text-navy",
+      badge: <Loader2 className="w-5 h-5 text-teal animate-spin" />,
     },
     NAO_INICIADO: {
-      bg: "bg-gray-900 border-gray-800",
-      iconBg: "bg-gray-800",
-      iconColor: "text-gray-500",
-      titleColor: "text-gray-400",
-      badge: <Circle className="w-5 h-5 text-gray-700" />,
+      bg: "bg-white border-gray-200",
+      iconBg: "bg-gray-100",
+      iconColor: "text-gray-400",
+      titleColor: "text-gray-500",
+      badge: <Circle className="w-5 h-5 text-gray-300" />,
     },
     BLOQUEADO: {
-      bg: "bg-gray-900/60 border-gray-800/60",
-      iconBg: "bg-gray-800/60",
-      iconColor: "text-gray-600",
-      titleColor: "text-gray-500",
-      badge: <Lock className="w-5 h-5 text-gray-600" />,
+      bg: "bg-white/60 border-gray-200",
+      iconBg: "bg-gray-100/60",
+      iconColor: "text-gray-400",
+      titleColor: "text-gray-400",
+      badge: <Lock className="w-5 h-5 text-gray-400" />,
     },
     ATENCAO: {
       bg: "bg-orange-950/30 border-orange-800/40",
       iconBg: "bg-orange-900/40",
-      iconColor: "text-orange-400",
-      titleColor: "text-white",
-      badge: <AlertTriangle className="w-5 h-5 text-orange-400" />,
+      iconColor: "text-ipet-orange",
+      titleColor: "text-navy",
+      badge: <AlertTriangle className="w-5 h-5 text-ipet-orange" />,
     },
   } as const;
 
@@ -651,7 +651,7 @@ function EstagioCard({
         {/* Conteúdo */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
-            <p className="text-[10px] text-gray-600 uppercase tracking-wider">
+            <p className="text-[10px] text-gray-400 uppercase tracking-wider">
               Etapa {estagio.numero}
             </p>
           </div>
@@ -661,13 +661,13 @@ function EstagioCard({
           {estagio.progresso && estagio.progresso.total > 0 && estagio.estado !== "CONCLUIDO" && (
             <div className="mt-2 mb-1">
               <div className="flex items-center justify-between mb-1">
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   {estagio.progresso.feito} / {estagio.progresso.total}
                 </p>
               </div>
-              <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-sky-500 transition-all duration-500"
+                  className="h-full rounded-full bg-teal transition-all duration-500"
                   style={{
                     width: `${(estagio.progresso.feito / estagio.progresso.total) * 100}%`,
                   }}
@@ -676,18 +676,18 @@ function EstagioCard({
             </div>
           )}
 
-          <p className="text-xs text-gray-500 leading-relaxed mt-1">{estagio.descricao}</p>
+          <p className="text-xs text-gray-400 leading-relaxed mt-1">{estagio.descricao}</p>
 
           {/* Motivo do bloqueio */}
           {estagio.bloqueioMotivo && (
-            <p className="text-xs text-gray-600 mt-1">🔒 {estagio.bloqueioMotivo}</p>
+            <p className="text-xs text-gray-400 mt-1">🔒 {estagio.bloqueioMotivo}</p>
           )}
 
           {/* Serviço iPet contextual */}
           {estagio.servicoiPet && (
-            <div className="mt-2 inline-flex items-center gap-1.5 bg-indigo-950/60 border border-indigo-800/40 rounded-xl px-3 py-1.5">
+            <div className="mt-2 inline-flex items-center gap-1.5 bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-1.5">
               <span className="text-sm">{estagio.servicoiPet.icon}</span>
-              <span className="text-xs text-indigo-300 font-medium">
+              <span className="text-xs text-indigo-600 font-medium">
                 {estagio.servicoiPet.label}
               </span>
             </div>
@@ -700,11 +700,11 @@ function EstagioCard({
 
       {/* CTA inline */}
       {isInteractive && estagio.ctaHref && (
-        <div className="mt-3 pt-3 border-t border-gray-800/60">
+        <div className="mt-3 pt-3 border-t border-gray-200">
           <Link
             href={estagio.ctaHref}
             onClick={(e) => e.stopPropagation()}
-            className="flex items-center justify-between text-xs font-medium text-sky-400 hover:text-sky-300 transition-colors"
+            className="flex items-center justify-between text-xs font-medium text-teal hover:text-teal transition-colors"
           >
             {estagio.ctaLabel ?? "Ver detalhes"}
             <ChevronRight className="w-3.5 h-3.5" />

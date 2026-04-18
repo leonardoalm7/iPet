@@ -111,12 +111,12 @@ export default function NovoPetPage() {
     <div className="flex flex-col min-h-screen">
       {/* Header */}
       <header className="flex items-center gap-3 px-5 pt-14 pb-4">
-        <button onClick={voltar} className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0">
+        <button onClick={voltar} className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div className="flex-1">
           <h1 className="text-lg font-semibold">Cadastrar Pet</h1>
-          <p className="text-xs text-gray-400">Passo {step} de {STEPS.length}</p>
+          <p className="text-xs text-gray-500">Passo {step} de {STEPS.length}</p>
         </div>
       </header>
 
@@ -127,14 +127,14 @@ export default function NovoPetPage() {
             <div
               key={s.id}
               className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
-                s.id <= step ? "bg-sky-500" : "bg-gray-800"
+                s.id <= step ? "bg-teal" : "bg-gray-100"
               }`}
             />
           ))}
         </div>
         <div className="flex justify-between mt-1.5">
           {STEPS.map((s) => (
-            <span key={s.id} className={`text-[10px] ${s.id === step ? "text-sky-400" : "text-gray-600"}`}>
+            <span key={s.id} className={`text-[10px] ${s.id === step ? "text-teal" : "text-gray-400"}`}>
               {s.label}
             </span>
           ))}
@@ -165,7 +165,7 @@ export default function NovoPetPage() {
           <button
             onClick={avancar}
             disabled={!stepValid[step]}
-            className="flex items-center justify-center gap-2 w-full bg-sky-500 hover:bg-sky-400 disabled:bg-gray-700 disabled:text-gray-500 text-white font-semibold py-4 rounded-2xl transition-colors"
+            className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-4 rounded-2xl transition-colors"
           >
             Continuar
             <ArrowRight className="w-5 h-5" />
@@ -192,12 +192,12 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
     <div className="space-y-5">
       <div>
         <h2 className="text-xl font-bold mb-1">Identificação</h2>
-        <p className="text-sm text-gray-400">Dados básicos do seu pet</p>
+        <p className="text-sm text-gray-500">Dados básicos do seu pet</p>
       </div>
 
       {/* Espécie */}
       <div>
-        <label className="block text-sm text-gray-300 mb-2">Espécie *</label>
+        <label className="block text-sm text-gray-600 mb-2">Espécie *</label>
         <div className="grid grid-cols-3 gap-2">
           {ESPECIES.map((e) => (
             <button
@@ -205,8 +205,8 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
               onClick={() => update("especie", e.value)}
               className={`py-3 rounded-xl border text-center transition-colors ${
                 form.especie === e.value
-                  ? "border-sky-500 bg-sky-500/10 text-sky-400"
-                  : "border-gray-700 text-gray-400"
+                  ? "border-teal bg-teal/10 text-teal"
+                  : "border-gray-200 text-gray-500"
               }`}
             >
               <div className="text-2xl mb-1">{e.emoji}</div>
@@ -222,7 +222,7 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
       <div className="grid grid-cols-2 gap-3">
         <DateInput label="Data de nascimento *" value={form.dataNascimento} onChange={(v) => update("dataNascimento", v)} />
         <div>
-          <label className="block text-sm text-gray-300 mb-1.5">Peso (kg) *</label>
+          <label className="block text-sm text-gray-600 mb-1.5">Peso (kg) *</label>
           <input
             type="number"
             inputMode="decimal"
@@ -232,9 +232,9 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
             value={form.peso}
             onChange={(e) => update("peso", e.target.value)}
             placeholder="3.5"
-            className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-3 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+            className="w-full bg-gray-100 border border-gray-200 text-navy rounded-xl px-4 py-3 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent"
           />
-          <p className="text-xs text-gray-600 mt-1">Usar ponto: ex. 3.5</p>
+          <p className="text-xs text-gray-400 mt-1">Usar ponto: ex. 3.5</p>
         </div>
       </div>
 
@@ -247,7 +247,7 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
           type="text"
           inputMode="numeric"
         />
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-gray-400 mt-1">
           Obrigatório para viagens internacionais. Deixe vazio se ainda não implantou.
         </p>
       </div>
@@ -263,7 +263,7 @@ function StepVacina({ form, update }: { form: FormData; update: (k: keyof FormDa
     <div className="space-y-5">
       <div>
         <h2 className="text-xl font-bold mb-1">Vacina Antirrábica</h2>
-        <p className="text-sm text-gray-400">Obrigatória para todos os destinos</p>
+        <p className="text-sm text-gray-500">Obrigatória para todos os destinos</p>
       </div>
 
       <Toggle
@@ -306,7 +306,7 @@ function StepSorologia({ form, update }: { form: FormData; update: (k: keyof For
     <div className="space-y-5">
       <div>
         <h2 className="text-xl font-bold mb-1">Sorologia Antirrábica</h2>
-        <p className="text-sm text-gray-400">Obrigatória para Europa e Japão</p>
+        <p className="text-sm text-gray-500">Obrigatória para Europa e Japão</p>
       </div>
 
       <InfoBox>
@@ -317,11 +317,11 @@ function StepSorologia({ form, update }: { form: FormData; update: (k: keyof For
 
       {vacinaPreRequisito ? (
         /* Vacina não registrada — bloquear sorologia */
-        <div className="flex items-start gap-3 bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-4">
-          <Lock className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5" />
+        <div className="flex items-start gap-3 bg-gray-100/50 border border-gray-200 rounded-xl px-4 py-4">
+          <Lock className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-sm font-medium text-gray-400">Sorologia bloqueada</p>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <p className="text-sm font-medium text-gray-500">Sorologia bloqueada</p>
+            <p className="text-xs text-gray-400 mt-0.5">
               A sorologia antirrábica só pode ser realizada após a vacinação. Volte ao passo anterior e registre a vacina primeiro.
             </p>
           </div>
@@ -370,14 +370,14 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm text-gray-300 mb-1.5">{label}</label>
+      <label className="block text-sm text-gray-600 mb-1.5">{label}</label>
       <input
         type={type}
         inputMode={inputMode}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-3 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+        className="w-full bg-gray-100 border border-gray-200 text-navy rounded-xl px-4 py-3 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent"
       />
     </div>
   );
@@ -393,11 +393,11 @@ function Toggle({
   onChange: (v: boolean) => void;
 }) {
   return (
-    <div className="flex items-center justify-between bg-gray-800/60 rounded-xl px-4 py-3.5 border border-gray-700">
-      <span className="text-sm text-gray-200">{label}</span>
+    <div className="flex items-center justify-between bg-gray-100/60 rounded-xl px-4 py-3.5 border border-gray-200">
+      <span className="text-sm text-navy">{label}</span>
       <button
         onClick={() => onChange(!value)}
-        className={`w-12 h-6 rounded-full transition-colors relative flex-shrink-0 overflow-hidden ${value ? "bg-sky-500" : "bg-gray-600"}`}
+        className={`w-12 h-6 rounded-full transition-colors relative flex-shrink-0 overflow-hidden ${value ? "bg-teal" : "bg-gray-600"}`}
       >
         <span
           className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${value ? "translate-x-7" : "translate-x-1"}`}
@@ -409,7 +409,7 @@ function Toggle({
 
 function InfoBox({ children, warning }: { children: React.ReactNode; warning?: boolean }) {
   return (
-    <div className={`rounded-xl px-4 py-3 text-sm leading-relaxed ${warning ? "bg-amber-900/20 border border-amber-800/40 text-amber-300" : "bg-sky-900/20 border border-sky-800/40 text-sky-300"}`}>
+    <div className={`rounded-xl px-4 py-3 text-sm leading-relaxed ${warning ? "bg-amber-50 border border-amber-200 text-amber-600" : "bg-teal/5 border border-teal/20 text-teal"}`}>
       {children}
     </div>
   );

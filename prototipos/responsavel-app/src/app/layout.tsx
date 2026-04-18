@@ -19,7 +19,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#0ea5e9",
+  themeColor: "#2E8B9A",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`${geist.className} bg-gray-950 text-white antialiased`}>
+      <body className={`${geist.className} bg-cream text-navy antialiased`}>
         <AuthProvider>
           <div className="mx-auto max-w-[430px] min-h-screen relative overflow-x-hidden">
             {children}

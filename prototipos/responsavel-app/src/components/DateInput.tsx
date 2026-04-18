@@ -31,7 +31,7 @@ export function DateInput({ label, value, onChange, placeholder = "DD/MM/AAAA", 
 
   return (
     <div>
-      <label className="block text-sm text-gray-300 mb-1.5">{label}</label>
+      <label className="block text-sm text-gray-600 mb-1.5">{label}</label>
       <input
         type="text"
         inputMode="numeric"
@@ -41,7 +41,7 @@ export function DateInput({ label, value, onChange, placeholder = "DD/MM/AAAA", 
         maxLength={10}
         className={
           className ??
-          "w-full bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-3 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+          "w-full bg-gray-100 border border-gray-200 text-navy rounded-xl px-4 py-3 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent"
         }
       />
     </div>

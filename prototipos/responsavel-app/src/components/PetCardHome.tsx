@@ -19,10 +19,10 @@ export function PetCardHome({ pet }: Props) {
   return (
     <Link
       href={`/passaporte/${pet.id}`}
-      className="flex items-center gap-4 bg-gray-900 border border-gray-800 rounded-2xl p-4 active:scale-[0.98] transition-transform"
+      className="flex items-center gap-4 bg-white border border-gray-200 rounded-2xl p-4 active:scale-[0.98] transition-transform"
     >
       {/* Avatar */}
-      <div className="w-14 h-14 rounded-full overflow-hidden bg-gray-800 flex-shrink-0 border-2 border-gray-700">
+      <div className="w-14 h-14 rounded-full overflow-hidden bg-gray-100 flex-shrink-0 border-2 border-gray-200">
         {pet.foto ? (
           <img src={pet.foto} alt={pet.nome} className="w-full h-full object-cover" />
         ) : (
@@ -35,14 +35,14 @@ export function PetCardHome({ pet }: Props) {
       {/* Info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
-          <span className="font-semibold text-white truncate">{pet.nome}</span>
+          <span className="font-semibold text-navy truncate">{pet.nome}</span>
           {status === "ok" ? (
-            <Shield className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+            <Shield className="w-4 h-4 text-emerald-600 flex-shrink-0" />
           ) : (
-            <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0" />
+            <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0" />
           )}
         </div>
-        <p className="text-xs text-gray-400 truncate">
+        <p className="text-xs text-gray-500 truncate">
           {pet.raca} · {pet.peso}kg
         </p>
         <div className="flex gap-2 mt-2">
@@ -52,7 +52,7 @@ export function PetCardHome({ pet }: Props) {
         </div>
       </div>
 
-      <ChevronRight className="w-4 h-4 text-gray-600 flex-shrink-0" />
+      <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
     </Link>
   );
 }
@@ -62,8 +62,8 @@ function Badge({ ok, label }: { ok: boolean; label: string }) {
     <span
       className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
         ok
-          ? "bg-emerald-900/50 text-emerald-400"
-          : "bg-gray-800 text-gray-500"
+          ? "bg-emerald-900/50 text-emerald-600"
+          : "bg-gray-100 text-gray-400"
       }`}
     >
       {label}

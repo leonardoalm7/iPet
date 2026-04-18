@@ -39,28 +39,28 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
         {/* Ícone de status */}
         <div className="flex-shrink-0 mt-0.5">
           {isPago ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
           ) : (
-            <Clock className="w-4 h-4 text-gray-500" />
+            <Clock className="w-4 h-4 text-gray-400" />
           )}
         </div>
 
         {/* Título + categoria */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5">
-            <p className={`text-sm ${isPago ? "text-gray-400 line-through" : "text-gray-200"}`}>
+            <p className={`text-sm ${isPago ? "text-gray-500 line-through" : "text-navy"}`}>
               {item.titulo}
             </p>
             {item.porViagem && (
-              <span className="text-[9px] text-gray-600 bg-gray-800 px-1.5 py-0.5 rounded-full">
+              <span className="text-[9px] text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">
                 por viagem
               </span>
             )}
             {item.nota && (
-              <Info className="w-3 h-3 text-gray-600 flex-shrink-0" />
+              <Info className="w-3 h-3 text-gray-400 flex-shrink-0" />
             )}
           </div>
-          <p className="text-[10px] text-gray-600 capitalize">
+          <p className="text-[10px] text-gray-400 capitalize">
             {LABELS_CATEGORIA[item.categoria]}
           </p>
         </div>
@@ -70,10 +70,10 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
           {isPago ? (
             <p className="text-xs text-emerald-600">✓ pago</p>
           ) : (
-            <p className="text-xs font-medium text-gray-300">
+            <p className="text-xs font-medium text-gray-600">
               {formatBRL(item.minBRL)}
               {item.minBRL !== item.maxBRL && (
-                <span className="text-gray-500"> – {formatBRL(item.maxBRL)}</span>
+                <span className="text-gray-400"> – {formatBRL(item.maxBRL)}</span>
               )}
             </p>
           )}
@@ -89,7 +89,7 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <p className="text-xs text-gray-500 leading-relaxed pb-2 pl-7 pr-2">
+            <p className="text-xs text-gray-400 leading-relaxed pb-2 pl-7 pr-2">
               {item.nota}
             </p>
           </motion.div>
@@ -116,7 +116,7 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
       : `${formatBRL(estimativa.totalPendenteMin)} – ${formatBRL(estimativa.totalPendenteMax)}`;
 
   return (
-    <div className="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
       {/* Header sempre visível */}
       <button
         onClick={() => compacto && setExpandido(!expandido)}
@@ -128,15 +128,15 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
           <span className="text-lg">💰</span>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-white">Estimativa de custo</p>
-          <p className="text-xs text-gray-400">
+          <p className="text-sm font-semibold text-navy">Estimativa de custo</p>
+          <p className="text-xs text-gray-500">
             {pet.nome.split(" ")[0]} → {regras.bandeira} {regras.nome}
           </p>
         </div>
         <div className="text-right">
-          <p className="text-sm font-bold text-white">{faixaTotal}</p>
+          <p className="text-sm font-bold text-navy">{faixaTotal}</p>
           {estimativa.totalPendenteMin > 0 && (
-            <p className="text-[10px] text-orange-400">
+            <p className="text-[10px] text-ipet-orange">
               {faixaPendente} pendente
             </p>
           )}
@@ -146,7 +146,7 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
             animate={{ rotate: expandido ? 180 : 0 }}
             transition={{ duration: 0.2 }}
           >
-            <ChevronDown className="w-4 h-4 text-gray-500 ml-2 flex-shrink-0" />
+            <ChevronDown className="w-4 h-4 text-gray-400 ml-2 flex-shrink-0" />
           </motion.div>
         )}
       </button>
@@ -161,15 +161,15 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="px-4 pb-4 space-y-1 border-t border-gray-800 pt-3">
+            <div className="px-4 pb-4 space-y-1 border-t border-gray-200 pt-3">
 
               {/* Já pago */}
               {temPagos && (
                 <div className="mb-3">
-                  <p className="text-[10px] text-gray-600 uppercase tracking-wider mb-1">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-1">
                     Já pago
                   </p>
-                  <div className="divide-y divide-gray-800/50">
+                  <div className="divide-y divide-gray-200/50">
                     {estimativa.itensPagos.map((item) => (
                       <ItemLinha key={item.id + "_pago"} item={item} />
                     ))}
@@ -180,10 +180,10 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
               {/* Obrigatórios pendentes */}
               {estimativa.itensPendentes.filter((i) => i.categoria === "obrigatorio").length > 0 && (
                 <div className="mb-3">
-                  <p className="text-[10px] text-gray-600 uppercase tracking-wider mb-1">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-1">
                     A pagar (obrigatório)
                   </p>
-                  <div className="divide-y divide-gray-800/50">
+                  <div className="divide-y divide-gray-200/50">
                     {estimativa.itensPendentes
                       .filter((i) => i.categoria === "obrigatorio")
                       .map((item) => (
@@ -196,10 +196,10 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
               {/* Recomendados / opcionais */}
               {estimativa.itensPendentes.filter((i) => i.categoria !== "obrigatorio").length > 0 && (
                 <div>
-                  <p className="text-[10px] text-gray-600 uppercase tracking-wider mb-1">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-1">
                     A pagar (recomendado)
                   </p>
-                  <div className="divide-y divide-gray-800/50">
+                  <div className="divide-y divide-gray-200/50">
                     {estimativa.itensPendentes
                       .filter((i) => i.categoria !== "obrigatorio")
                       .map((item) => (
@@ -210,10 +210,10 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
               )}
 
               {/* Totalizadores */}
-              <div className="pt-3 mt-2 border-t border-gray-800 space-y-1.5">
+              <div className="pt-3 mt-2 border-t border-gray-200 space-y-1.5">
                 {temPagos && (
                   <div className="flex items-center justify-between">
-                    <p className="text-xs text-gray-500">Já investido</p>
+                    <p className="text-xs text-gray-400">Já investido</p>
                     <p className="text-xs text-emerald-500 font-medium">
                       {formatBRL(estimativa.totalPagoMin)}
                       {estimativa.totalPagoMin !== estimativa.totalPagoMax && (
@@ -224,17 +224,17 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
                 )}
                 {estimativa.totalPendenteMin > 0 && (
                   <div className="flex items-center justify-between">
-                    <p className="text-xs text-gray-500">Ainda a pagar</p>
-                    <p className="text-xs text-orange-400 font-medium">{faixaPendente}</p>
+                    <p className="text-xs text-gray-400">Ainda a pagar</p>
+                    <p className="text-xs text-ipet-orange font-medium">{faixaPendente}</p>
                   </div>
                 )}
-                <div className="flex items-center justify-between pt-1 border-t border-gray-800">
-                  <p className="text-sm font-semibold text-gray-200">Total estimado</p>
-                  <p className="text-sm font-bold text-white">{faixaTotal}</p>
+                <div className="flex items-center justify-between pt-1 border-t border-gray-200">
+                  <p className="text-sm font-semibold text-navy">Total estimado</p>
+                  <p className="text-sm font-bold text-navy">{faixaTotal}</p>
                 </div>
               </div>
 
-              <p className="text-[10px] text-gray-600 leading-relaxed pt-1">
+              <p className="text-[10px] text-gray-400 leading-relaxed pt-1">
                 * Estimativas de mercado. Valores reais variam por clínica, cia aérea e
                 câmbio. Toque nos itens para mais detalhes.
               </p>

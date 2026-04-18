@@ -77,12 +77,12 @@ export default function CadastroPage() {
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col items-center gap-3"
       >
-        <div className="w-14 h-14 bg-sky-500/10 rounded-2xl flex items-center justify-center border border-sky-500/20">
-          <PawPrint className="w-7 h-7 text-sky-400" />
+        <div className="w-14 h-14 bg-teal/10 rounded-2xl flex items-center justify-center border border-teal/20">
+          <PawPrint className="w-7 h-7 text-teal" />
         </div>
         <div className="text-center">
-          <h1 className="text-xl font-bold text-white">Criar conta no iPet</h1>
-          <p className="text-gray-400 text-sm mt-0.5">Gratuito. Para sempre.</p>
+          <h1 className="text-xl font-bold text-navy">Criar conta no iPet</h1>
+          <p className="text-gray-500 text-sm mt-0.5">Gratuito. Para sempre.</p>
         </div>
       </motion.div>
 
@@ -95,8 +95,8 @@ export default function CadastroPage() {
       >
         {erro && (
           <div className="flex items-start gap-2.5 bg-red-900/30 border border-red-700/50 rounded-xl p-3">
-            <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-            <p className="text-red-300 text-sm">{erro}</p>
+            <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+            <p className="text-red-500 text-sm">{erro}</p>
           </div>
         )}
 
@@ -105,7 +105,7 @@ export default function CadastroPage() {
           <button
             onClick={handleGoogle}
             disabled={!!loadingProvider || loading}
-            className="flex items-center justify-center gap-3 w-full bg-white hover:bg-gray-50 disabled:opacity-60 text-gray-900 font-medium py-3.5 rounded-2xl transition-colors"
+            className="flex items-center justify-center gap-3 w-full bg-white hover:bg-gray-50 disabled:opacity-60 text-navy font-medium py-3.5 rounded-2xl transition-colors"
           >
             {loadingProvider === "google" ? <Spinner dark /> : <GoogleIcon />}
             Cadastrar com Google
@@ -113,7 +113,7 @@ export default function CadastroPage() {
           <button
             onClick={handleApple}
             disabled={!!loadingProvider || loading}
-            className="flex items-center justify-center gap-3 w-full bg-black hover:bg-gray-900 disabled:opacity-60 text-white font-medium py-3.5 rounded-2xl border border-gray-700 transition-colors"
+            className="flex items-center justify-center gap-3 w-full bg-black hover:bg-white disabled:opacity-60 text-navy font-medium py-3.5 rounded-2xl border border-gray-200 transition-colors"
           >
             {loadingProvider === "apple" ? <Spinner /> : <AppleIcon />}
             Cadastrar com Apple
@@ -121,15 +121,15 @@ export default function CadastroPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex-1 h-px bg-gray-800" />
-          <span className="text-gray-500 text-xs">ou com e-mail</span>
-          <div className="flex-1 h-px bg-gray-800" />
+          <div className="flex-1 h-px bg-gray-100" />
+          <span className="text-gray-400 text-xs">ou com e-mail</span>
+          <div className="flex-1 h-px bg-gray-100" />
         </div>
 
         <form onSubmit={handleCadastro} className="space-y-3">
           {/* Nome */}
           <div className="relative">
-            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
               placeholder="Seu nome completo"
@@ -137,13 +137,13 @@ export default function CadastroPage() {
               onChange={(e) => setNome(e.target.value)}
               required
               autoComplete="name"
-              className="w-full bg-gray-800 border border-gray-700 focus:border-sky-500 text-white rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
           </div>
 
           {/* Email */}
           <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="email"
               placeholder="seu@email.com"
@@ -151,14 +151,14 @@ export default function CadastroPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="w-full bg-gray-800 border border-gray-700 focus:border-sky-500 text-white rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
           </div>
 
           {/* Senha */}
           <div>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type={mostrarSenha ? "text" : "password"}
                 placeholder="Crie uma senha forte"
@@ -166,12 +166,12 @@ export default function CadastroPage() {
                 onChange={(e) => { setSenha(e.target.value); setMostrarRequisitos(true); }}
                 required
                 autoComplete="new-password"
-                className="w-full bg-gray-800 border border-gray-700 focus:border-sky-500 text-white rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+                className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
               />
               <button
                 type="button"
                 onClick={() => setMostrarSenha(!mostrarSenha)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
               >
                 {mostrarSenha ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -183,9 +183,9 @@ export default function CadastroPage() {
                 {REQUISITOS_SENHA.map((r) => (
                   <div key={r.label} className="flex items-center gap-2">
                     <CheckCircle2
-                      className={`w-3.5 h-3.5 ${r.test(senha) ? "text-emerald-400" : "text-gray-600"}`}
+                      className={`w-3.5 h-3.5 ${r.test(senha) ? "text-emerald-600" : "text-gray-400"}`}
                     />
-                    <span className={`text-xs ${r.test(senha) ? "text-emerald-400" : "text-gray-500"}`}>
+                    <span className={`text-xs ${r.test(senha) ? "text-emerald-600" : "text-gray-400"}`}>
                       {r.label}
                     </span>
                   </div>
@@ -197,26 +197,26 @@ export default function CadastroPage() {
           <button
             type="submit"
             disabled={loading || !!loadingProvider || !senhaValida || !nome || !email}
-            className="flex items-center justify-center gap-2 w-full bg-sky-500 hover:bg-sky-400 disabled:bg-gray-700 disabled:text-gray-500 text-white font-semibold py-3.5 rounded-2xl transition-colors"
+            className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
           >
             {loading ? <Spinner /> : "Criar conta"}
           </button>
         </form>
 
         {/* LGPD — aviso de tratamento de dados */}
-        <p className="text-center text-gray-500 text-[11px] leading-relaxed px-2">
+        <p className="text-center text-gray-400 text-[11px] leading-relaxed px-2">
           Ao criar sua conta, você concorda com nossos{" "}
-          <Link href="/lgpd/termos" className="text-sky-500 underline">Termos de Uso</Link>
+          <Link href="/lgpd/termos" className="text-teal underline">Termos de Uso</Link>
           {" "}e{" "}
-          <Link href="/lgpd/privacidade" className="text-sky-500 underline">Política de Privacidade</Link>
+          <Link href="/lgpd/privacidade" className="text-teal underline">Política de Privacidade</Link>
           . Seus dados são protegidos conforme a LGPD (Lei nº 13.709/2018).
         </p>
       </motion.div>
 
       {/* Rodapé */}
-      <p className="text-center text-gray-400 text-sm">
+      <p className="text-center text-gray-500 text-sm">
         Já tem conta?{" "}
-        <Link href="/auth/entrar" className="text-sky-400 hover:text-sky-300 font-medium">
+        <Link href="/auth/entrar" className="text-teal hover:text-teal font-medium">
           Entrar
         </Link>
       </p>
@@ -226,7 +226,7 @@ export default function CadastroPage() {
 
 function Spinner({ dark = false }: { dark?: boolean }) {
   return (
-    <div className={`w-4 h-4 border-2 rounded-full animate-spin ${dark ? "border-gray-300 border-t-gray-900" : "border-gray-500 border-t-white"}`} />
+    <div className={`w-4 h-4 border-2 rounded-full animate-spin ${dark ? "border-gray-300 border-t-navy" : "border-gray-500 border-t-white"}`} />
   );
 }
 function GoogleIcon() {

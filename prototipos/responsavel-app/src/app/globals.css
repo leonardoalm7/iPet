@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-cream: #FAF9F6;
+  --color-navy: #1B3A5C;
+  --color-teal: #2E8B9A;
+  --color-teal-dark: #258A97;
+  --color-teal-darker: #1B7A87;
+  --color-mint: #7BC8A4;
+  --color-ipet-orange: #E8792B;
+}
+
 :root {
-  --background: #030712;
-  --foreground: #f9fafb;
+  --background: #FAF9F6;
+  --foreground: #1B3A5C;
 }
 
 * {
@@ -23,7 +33,7 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #374151;
+  background: #cbd5e1;
   border-radius: 2px;
 }
 

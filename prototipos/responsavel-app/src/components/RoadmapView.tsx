@@ -31,59 +31,59 @@ const STATUS_CONFIG: Record<
 > = {
   CONCLUIDA: {
     icon: CheckCircle2,
-    iconColor: "text-emerald-400",
+    iconColor: "text-emerald-600",
     borderColor: "border-emerald-800/40",
     bgColor: "bg-emerald-900/10",
     badge: "Concluída",
-    badgeColor: "bg-emerald-900/40 text-emerald-400",
+    badgeColor: "bg-emerald-900/40 text-emerald-600",
   },
   PENDENTE: {
     icon: Clock,
-    iconColor: "text-sky-400",
-    borderColor: "border-sky-800/40",
-    bgColor: "bg-sky-900/10",
+    iconColor: "text-teal",
+    borderColor: "border-teal/20",
+    bgColor: "bg-teal/5",
     badge: "Pendente",
-    badgeColor: "bg-sky-900/40 text-sky-400",
+    badgeColor: "bg-teal/10 text-teal",
   },
   URGENTE: {
     icon: AlertTriangle,
-    iconColor: "text-amber-400",
+    iconColor: "text-amber-600",
     borderColor: "border-amber-600/50",
     bgColor: "bg-amber-900/15",
     badge: "Urgente",
-    badgeColor: "bg-amber-900/50 text-amber-300",
+    badgeColor: "bg-amber-900/50 text-amber-600",
   },
   CRITICO: {
     icon: Zap,
-    iconColor: "text-orange-400",
+    iconColor: "text-ipet-orange",
     borderColor: "border-orange-600/50",
     bgColor: "bg-orange-900/15",
     badge: "Crítico",
-    badgeColor: "bg-orange-900/50 text-orange-300",
+    badgeColor: "bg-orange-900/50 text-ipet-orange",
   },
   VENCIDA: {
     icon: XCircle,
-    iconColor: "text-red-400",
+    iconColor: "text-red-500",
     borderColor: "border-red-800/40",
     bgColor: "bg-red-900/10",
     badge: "Vencida",
-    badgeColor: "bg-red-900/40 text-red-400",
+    badgeColor: "bg-red-900/40 text-red-500",
   },
   BLOQUEADA: {
     icon: Lock,
-    iconColor: "text-gray-500",
-    borderColor: "border-gray-700",
-    bgColor: "bg-gray-900/30",
+    iconColor: "text-gray-400",
+    borderColor: "border-gray-200",
+    bgColor: "bg-white/30",
     badge: "Bloqueada",
-    badgeColor: "bg-gray-800 text-gray-500",
+    badgeColor: "bg-gray-100 text-gray-400",
   },
   NAO_APLICAVEL: {
     icon: CheckCircle2,
-    iconColor: "text-gray-600",
-    borderColor: "border-gray-800",
+    iconColor: "text-gray-400",
+    borderColor: "border-gray-200",
     bgColor: "bg-transparent",
     badge: "N/A",
-    badgeColor: "bg-gray-800 text-gray-600",
+    badgeColor: "bg-gray-100 text-gray-400",
   },
 };
 
@@ -96,35 +96,35 @@ const OVERALL_CONFIG: Record<
     subLabel: "Todos os requisitos estão completos.",
     bg: "bg-emerald-900/20",
     border: "border-emerald-700/40",
-    text: "text-emerald-400",
+    text: "text-emerald-600",
   },
   PENDENTE: {
     label: "⏳ Em andamento",
     subLabel: "Há tarefas a concluir, mas você está no prazo.",
-    bg: "bg-sky-900/20",
-    border: "border-sky-700/40",
-    text: "text-sky-400",
+    bg: "bg-teal/5",
+    border: "border-teal/20",
+    text: "text-teal",
   },
   URGENTE: {
     label: "⚠️ Atenção necessária",
     subLabel: "Algumas tarefas estão com prazo curto.",
-    bg: "bg-amber-900/20",
+    bg: "bg-amber-50",
     border: "border-amber-700/40",
-    text: "text-amber-400",
+    text: "text-amber-600",
   },
   CRITICO: {
     label: "🚨 Situação crítica",
     subLabel: "Prazos se encerrando. Ação imediata necessária.",
     bg: "bg-orange-900/20",
     border: "border-orange-700/40",
-    text: "text-orange-400",
+    text: "text-ipet-orange",
   },
   INAPTO: {
     label: "❌ Inapto para esta data",
     subLabel: "Não é possível embarcar nesta data com a documentação atual.",
     bg: "bg-red-900/20",
     border: "border-red-700/40",
-    text: "text-red-400",
+    text: "text-red-500",
   },
 };
 
@@ -149,11 +149,11 @@ export function RoadmapView({
         className={`rounded-2xl border px-4 py-4 ${overall.bg} ${overall.border}`}
       >
         <p className={`font-bold text-base ${overall.text}`}>{overall.label}</p>
-        <p className="text-sm text-gray-400 mt-0.5">{overall.subLabel}</p>
+        <p className="text-sm text-gray-500 mt-0.5">{overall.subLabel}</p>
         {roadmap.dataLiberacao && roadmap.statusGeral !== "APTO" && (
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-gray-400 mt-2">
             Data mais cedo possível para embarcar:{" "}
-            <span className="text-gray-300 font-medium">{roadmap.dataLiberacao}</span>
+            <span className="text-gray-600 font-medium">{roadmap.dataLiberacao}</span>
           </p>
         )}
       </motion.div>
@@ -207,10 +207,10 @@ function TarefaCard({
             </span>
           </div>
           {tarefa.prazo && tarefa.status !== "CONCLUIDA" && (
-            <p className="text-xs text-gray-500 mt-0.5">
+            <p className="text-xs text-gray-400 mt-0.5">
               Prazo: {tarefa.prazo}
               {tarefa.diasParaPrazo !== null && tarefa.diasParaPrazo >= 0 && (
-                <span className={`ml-1 ${tarefa.diasParaPrazo <= 7 ? "text-amber-400" : ""}`}>
+                <span className={`ml-1 ${tarefa.diasParaPrazo <= 7 ? "text-amber-600" : ""}`}>
                   ({tarefa.diasParaPrazo} {tarefa.diasParaPrazo === 1 ? "dia" : "dias"})
                 </span>
               )}
@@ -218,9 +218,9 @@ function TarefaCard({
           )}
         </div>
         {expanded ? (
-          <ChevronUp className="w-4 h-4 text-gray-600 flex-shrink-0" />
+          <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0" />
         ) : (
-          <ChevronDown className="w-4 h-4 text-gray-600 flex-shrink-0" />
+          <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
         )}
       </button>
 
@@ -234,24 +234,24 @@ function TarefaCard({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="px-4 pb-4 space-y-3 border-t border-gray-800/50 pt-3">
-              <p className="text-xs text-gray-400 leading-relaxed">{tarefa.descricao}</p>
+            <div className="px-4 pb-4 space-y-3 border-t border-gray-200 pt-3">
+              <p className="text-xs text-gray-500 leading-relaxed">{tarefa.descricao}</p>
               {tarefa.nota && (
-                <p className="text-xs text-gray-300 leading-relaxed bg-gray-800/40 rounded-xl px-3 py-2.5">
+                <p className="text-xs text-gray-600 leading-relaxed bg-gray-100/40 rounded-xl px-3 py-2.5">
                   {tarefa.nota}
                 </p>
               )}
               {tarefa.precisaClinica && tarefa.status !== "CONCLUIDA" && (
-                <button className="flex items-center gap-2 text-xs text-sky-400 py-2">
+                <button className="flex items-center gap-2 text-xs text-teal py-2">
                   <MapPin className="w-4 h-4" />
                   Ver clínicas credenciadas próximas
                 </button>
               )}
               {tarefa.bloqueadaPor.length > 0 && (
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   Aguardando:{" "}
                   {tarefa.bloqueadaPor.map((id) => (
-                    <span key={id} className="text-gray-400 font-medium">{id} </span>
+                    <span key={id} className="text-gray-500 font-medium">{id} </span>
                   ))}
                 </p>
               )}

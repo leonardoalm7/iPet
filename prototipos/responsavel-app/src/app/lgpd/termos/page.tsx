@@ -8,16 +8,16 @@ export default function TermosDeUsoPage() {
     <div className="min-h-screen flex flex-col px-5 pt-12 pb-12 max-w-2xl mx-auto">
       <Link
         href="javascript:history.back()"
-        className="flex items-center gap-2 text-gray-400 hover:text-gray-300 text-sm mb-8"
+        className="flex items-center gap-2 text-gray-500 hover:text-gray-600 text-sm mb-8"
       >
         <ChevronLeft className="w-4 h-4" />
         Voltar
       </Link>
 
-      <h1 className="text-2xl font-bold text-white mb-1">Termos de Uso</h1>
-      <p className="text-gray-500 text-xs mb-8">Versão 1.0.0 — vigente desde 1º de abril de 2026</p>
+      <h1 className="text-2xl font-bold text-navy mb-1">Termos de Uso</h1>
+      <p className="text-gray-400 text-xs mb-8">Versão 1.0.0 — vigente desde 1º de abril de 2026</p>
 
-      <div className="space-y-8 text-gray-300 text-sm leading-relaxed">
+      <div className="space-y-8 text-gray-600 text-sm leading-relaxed">
         <Section titulo="1. Aceitação">
           <p>
             Ao criar uma conta no iPet, você concorda com estes Termos de Uso. Se não concordar
@@ -73,7 +73,7 @@ export default function TermosDeUsoPage() {
         <Section titulo="7. Privacidade e LGPD">
           <p>
             O tratamento de dados pessoais é regido pela nossa{" "}
-            <Link href="/lgpd/privacidade" className="text-sky-400 underline">
+            <Link href="/lgpd/privacidade" className="text-teal underline">
               Política de Privacidade
             </Link>
             , em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).
@@ -105,7 +105,7 @@ export default function TermosDeUsoPage() {
           <p>
             Para dúvidas sobre estes Termos, entre em contato:
             <br />
-            <span className="text-sky-400">legal@ipet.app</span>
+            <span className="text-teal">legal@ipet.app</span>
             <br />
             iPet Tecnologia LTDA — São Paulo, SP
           </p>
@@ -118,7 +118,7 @@ export default function TermosDeUsoPage() {
 function Section({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="text-white font-semibold mb-2">{titulo}</h2>
+      <h2 className="text-navy font-semibold mb-2">{titulo}</h2>
       {children}
     </div>
   );

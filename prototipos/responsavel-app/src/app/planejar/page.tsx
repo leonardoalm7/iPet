@@ -249,36 +249,36 @@ export default function PlanejarPage() {
   const progresso = ((passoAtual + (pets.length > 1 ? 0 : 1)) / totalPassos) * 100;
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-950">
+    <div className="flex flex-col min-h-screen bg-cream">
       {/* ── Header ─────────────────────────────────────────────── */}
       <header className="px-5 pt-14 pb-4">
         <div className="flex items-center gap-3 mb-5">
           <button
             onClick={voltar}
-            className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0"
+            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="flex-1">
-            <h1 className="text-base font-semibold text-white">Por onde começo?</h1>
-            <p className="text-xs text-gray-500">
+            <h1 className="text-base font-semibold text-navy">Por onde começo?</h1>
+            <p className="text-xs text-gray-400">
               {passo === "pet" && "Selecione o pet"}
               {passo === "destino" && "Escolha o destino"}
               {passo === "quando" && "Quando você quer viajar?"}
               {passo === "resultado" && "Seu diagnóstico"}
             </p>
           </div>
-          <span className="text-xs text-gray-600">
+          <span className="text-xs text-gray-400">
             {passoAtual + (pets.length > 1 ? 0 : 1)}/{totalPassos}
           </span>
         </div>
 
         {/* Barra de progresso dos passos */}
-        <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
+        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
           <motion.div
             animate={{ width: `${progresso}%` }}
             transition={{ duration: 0.3 }}
-            className="h-full bg-sky-500 rounded-full"
+            className="h-full bg-teal rounded-full"
           />
         </div>
       </header>
@@ -348,8 +348,8 @@ function PassoPet({
       className="pt-4 space-y-4"
     >
       <div>
-        <h2 className="text-xl font-bold text-white mb-1">Qual pet vai viajar?</h2>
-        <p className="text-gray-400 text-sm">
+        <h2 className="text-xl font-bold text-navy mb-1">Qual pet vai viajar?</h2>
+        <p className="text-gray-500 text-sm">
           O diagnóstico usa os dados de saúde do pet.
         </p>
       </div>
@@ -361,27 +361,27 @@ function PassoPet({
             onClick={() => onSelecionar(pet.id)}
             className={`w-full flex items-center gap-3 rounded-2xl border p-4 text-left transition-colors ${
               petIdAtual === pet.id
-                ? "border-sky-500 bg-sky-500/10"
-                : "border-gray-800 bg-gray-900 hover:border-gray-700"
+                ? "border-teal bg-teal/10"
+                : "border-gray-200 bg-white hover:border-gray-200"
             }`}
           >
-            <div className="w-11 h-11 rounded-xl bg-gray-800 flex items-center justify-center text-2xl flex-shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center text-2xl flex-shrink-0">
               {pet.especie === "CAO" ? "🐶" : pet.especie === "GATO" ? "🐱" : "🐾"}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-semibold text-white text-sm">{pet.nome}</p>
-              <p className="text-xs text-gray-400">
+              <p className="font-semibold text-navy text-sm">{pet.nome}</p>
+              <p className="text-xs text-gray-500">
                 {pet.raca} · {pet.peso}kg
               </p>
             </div>
             <div className="flex flex-col gap-1 items-end">
               {pet.vacina?.valida && (
-                <span className="text-[10px] text-emerald-400 bg-emerald-900/30 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] text-emerald-600 bg-emerald-900/30 px-2 py-0.5 rounded-full">
                   Vacina ✓
                 </span>
               )}
               {pet.microchip && pet.microchip.length === 15 && (
-                <span className="text-[10px] text-sky-400 bg-sky-900/30 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] text-teal bg-teal/10 px-2 py-0.5 rounded-full">
                   Chip ✓
                 </span>
               )}
@@ -392,7 +392,7 @@ function PassoPet({
 
       <button
         onClick={() => router.push("/pets/novo")}
-        className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-gray-700 rounded-2xl text-gray-500 text-sm hover:border-sky-600 hover:text-sky-400 transition-colors"
+        className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-gray-200 rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors"
       >
         <PlusCircle className="w-4 h-4" />
         Adicionar novo pet
@@ -420,8 +420,8 @@ function PassoDestino({
       className="pt-4 space-y-4"
     >
       <div>
-        <h2 className="text-xl font-bold text-white mb-1">Para onde você quer ir?</h2>
-        <p className="text-gray-400 text-sm">
+        <h2 className="text-xl font-bold text-navy mb-1">Para onde você quer ir?</h2>
+        <p className="text-gray-500 text-sm">
           As regras de documentação variam por destino.
         </p>
       </div>
@@ -437,23 +437,23 @@ function PassoDestino({
             }}
             className={`py-4 px-3 rounded-2xl border text-left transition-all ${
               selecionado === d.destino
-                ? "border-sky-500 bg-sky-500/10 scale-[0.98]"
-                : "border-gray-700 bg-gray-900/50 hover:border-gray-600"
+                ? "border-teal bg-teal/10 scale-[0.98]"
+                : "border-gray-200 bg-white/50 hover:border-gray-600"
             }`}
           >
             <div className="text-3xl mb-2">{d.bandeira}</div>
-            <div className={`text-sm font-semibold ${selecionado === d.destino ? "text-sky-300" : "text-gray-200"}`}>
+            <div className={`text-sm font-semibold ${selecionado === d.destino ? "text-teal" : "text-navy"}`}>
               {d.nome}
             </div>
             {/* Indicador de complexidade */}
             <div className="flex gap-1 mt-1.5">
               {d.exigeSorologia && (
-                <span className="text-[9px] bg-orange-900/40 text-orange-400 px-1.5 py-0.5 rounded-full">
+                <span className="text-[9px] bg-orange-900/40 text-ipet-orange px-1.5 py-0.5 rounded-full">
                   Sorologia
                 </span>
               )}
               {d.exigeMicrochip && (
-                <span className="text-[9px] bg-sky-900/40 text-sky-400 px-1.5 py-0.5 rounded-full">
+                <span className="text-[9px] bg-teal/10 text-teal px-1.5 py-0.5 rounded-full">
                   Chip
                 </span>
               )}
@@ -488,8 +488,8 @@ function PassoQuando({
       className="pt-4 space-y-4"
     >
       <div>
-        <h2 className="text-xl font-bold text-white mb-1">Quando você quer viajar?</h2>
-        <p className="text-gray-400 text-sm">
+        <h2 className="text-xl font-bold text-navy mb-1">Quando você quer viajar?</h2>
+        <p className="text-gray-500 text-sm">
           Vamos calcular se a data é viável e o que você precisa fazer.
         </p>
       </div>
@@ -506,16 +506,16 @@ function PassoQuando({
             }}
             className={`py-3 px-2 rounded-2xl border text-center transition-all ${
               selecionado === mes.key
-                ? "border-sky-500 bg-sky-500/10 scale-[0.97]"
-                : "border-gray-800 bg-gray-900/60 hover:border-gray-700"
+                ? "border-teal bg-teal/10 scale-[0.97]"
+                : "border-gray-200 bg-white/60 hover:border-gray-200"
             }`}
           >
             <p className={`text-sm font-semibold capitalize ${
-              selecionado === mes.key ? "text-sky-300" : "text-gray-300"
+              selecionado === mes.key ? "text-teal" : "text-gray-600"
             }`}>
               {mes.label.split(" ")[0]}
             </p>
-            <p className="text-[11px] text-gray-600">{mes.label.split(" ")[1]}</p>
+            <p className="text-[11px] text-gray-400">{mes.label.split(" ")[1]}</p>
           </button>
         ))}
       </div>
@@ -552,9 +552,9 @@ function PassoResultado({
 
   const tom =
     !diagnostico.podeViajar
-      ? { cor: "orange", bg: "bg-orange-950/40", border: "border-orange-800/50" }
+      ? { cor: "orange", bg: "bg-orange-50", border: "border-orange-200" }
       : diagnostico.tarefasCriticas.length > 0
-      ? { cor: "sky", bg: "bg-sky-950/40", border: "border-sky-800/40" }
+      ? { cor: "teal", bg: "bg-teal/5", border: "border-teal/20" }
       : { cor: "emerald", bg: "bg-emerald-950/40", border: "border-emerald-800/40" };
 
   return (
@@ -569,8 +569,8 @@ function PassoResultado({
         <div className="flex items-center gap-2 mb-3">
           <span className="text-2xl">{regras.bandeira}</span>
           <div>
-            <p className="text-xs text-gray-500 capitalize">{mesLabel}</p>
-            <p className="text-base font-bold text-white">
+            <p className="text-xs text-gray-400 capitalize">{mesLabel}</p>
+            <p className="text-base font-bold text-navy">
               {pet.nome.split(" ")[0]} → {regras.nome}
             </p>
           </div>
@@ -579,14 +579,14 @@ function PassoResultado({
         {/* Veredicto */}
         {diagnostico.podeViajar ? (
           <div className="flex items-start gap-2.5 mb-4">
-            <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-emerald-300 font-semibold text-sm">
                 {diagnostico.tarefasCriticas.length === 0
                   ? "Tudo pronto! Você pode embarcar."
                   : "Viável — mas você precisa agir já."}
               </p>
-              <p className="text-gray-400 text-xs mt-0.5">
+              <p className="text-gray-500 text-xs mt-0.5">
                 Você tem {diagnostico.diasAteMeta} dias.
                 Data mínima de embarque: {dataLiberacaoLabel}.
               </p>
@@ -594,13 +594,13 @@ function PassoResultado({
           </div>
         ) : (
           <div className="flex items-start gap-2.5 mb-4">
-            <AlertTriangle className="w-5 h-5 text-orange-400 flex-shrink-0 mt-0.5" />
+            <AlertTriangle className="w-5 h-5 text-ipet-orange flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-orange-300 font-semibold text-sm">
+              <p className="text-ipet-orange font-semibold text-sm">
                 Data inviável — adie ~{diagnostico.atrasoMeses}{" "}
                 {diagnostico.atrasoMeses === 1 ? "mês" : "meses"}
               </p>
-              <p className="text-gray-400 text-xs mt-0.5">
+              <p className="text-gray-500 text-xs mt-0.5">
                 Embarque mais cedo possível: {dataLiberacaoLabel}.
               </p>
             </div>
@@ -609,12 +609,12 @@ function PassoResultado({
 
         {/* Linha do tempo compacta */}
         <div className="space-y-2">
-          <p className="text-[11px] text-gray-500 uppercase tracking-wider mb-1">
+          <p className="text-[11px] text-gray-400 uppercase tracking-wider mb-1">
             O que fazer primeiro
           </p>
           {diagnostico.tarefasCriticas.length === 0 ? (
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               <p className="text-sm text-emerald-300">
                 {diagnostico.progresso.feito}/{diagnostico.progresso.total} documentos já em ordem
               </p>
@@ -622,10 +622,10 @@ function PassoResultado({
           ) : (
             diagnostico.tarefasCriticas.map((t, i) => (
               <div key={i} className="flex items-start gap-2">
-                <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-[10px] font-bold text-gray-400 flex-shrink-0 mt-0.5">
+                <span className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <p className="text-sm text-gray-300 leading-snug">{t}</p>
+                <p className="text-sm text-gray-600 leading-snug">{t}</p>
               </div>
             ))
           )}
@@ -645,9 +645,9 @@ function PassoResultado({
 
       {/* Contador de dias */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4 text-center">
-          <p className="text-2xl font-bold text-white">{diagnostico.diasAteMeta}</p>
-          <p className="text-xs text-gray-500 mt-0.5">dias até sua meta</p>
+        <div className="bg-white border border-gray-200 rounded-2xl p-4 text-center">
+          <p className="text-2xl font-bold text-navy">{diagnostico.diasAteMeta}</p>
+          <p className="text-xs text-gray-400 mt-0.5">dias até sua meta</p>
         </div>
         <div className={`rounded-2xl p-4 text-center border ${
           diagnostico.podeViajar
@@ -655,11 +655,11 @@ function PassoResultado({
             : "bg-orange-950/30 border-orange-800/40"
         }`}>
           <p className={`text-2xl font-bold ${
-            diagnostico.podeViajar ? "text-emerald-400" : "text-orange-400"
+            diagnostico.podeViajar ? "text-emerald-600" : "text-ipet-orange"
           }`}>
             {diagnostico.diasAteLibera}
           </p>
-          <p className="text-xs text-gray-500 mt-0.5">dias mínimos necessários</p>
+          <p className="text-xs text-gray-400 mt-0.5">dias mínimos necessários</p>
         </div>
       </div>
 
@@ -671,7 +671,7 @@ function PassoResultado({
         <button
           onClick={onSalvar}
           disabled={salvando}
-          className="flex items-center justify-center gap-2 w-full bg-sky-500 hover:bg-sky-400 disabled:bg-gray-700 disabled:text-gray-500 text-white font-semibold py-4 rounded-2xl transition-colors"
+          className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-4 rounded-2xl transition-colors"
         >
           {salvando ? (
             <>
@@ -688,7 +688,7 @@ function PassoResultado({
 
         <button
           onClick={onVoltar}
-          className="w-full py-3 border border-gray-700 rounded-2xl text-gray-400 text-sm hover:border-gray-600 transition-colors"
+          className="w-full py-3 border border-gray-200 rounded-2xl text-gray-500 text-sm hover:border-gray-600 transition-colors"
         >
           Tentar outra data
         </button>

@@ -70,14 +70,14 @@ function EntrarContent() {
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col items-center gap-3 pt-4"
       >
-        <div className="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center border border-sky-500/20">
-          <PawPrint className="w-8 h-8 text-sky-400" />
+        <div className="w-16 h-16 bg-teal/10 rounded-2xl flex items-center justify-center border border-teal/20">
+          <PawPrint className="w-8 h-8 text-teal" />
         </div>
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-white">
-            ✈️ <span className="text-sky-400">iPet</span>
+          <h1 className="text-2xl font-bold text-navy">
+            ✈️ <span className="text-teal">iPet</span>
           </h1>
-          <p className="text-gray-400 text-sm mt-1">Pet Pass</p>
+          <p className="text-gray-500 text-sm mt-1">Pet Pass</p>
         </div>
       </motion.div>
 
@@ -88,15 +88,15 @@ function EntrarContent() {
         transition={{ delay: 0.1 }}
         className="flex flex-col gap-4"
       >
-        <h2 className="text-xl font-semibold text-white text-center">
+        <h2 className="text-xl font-semibold text-navy text-center">
           Bem-vindo de volta
         </h2>
 
         {/* Erro */}
         {erro && (
           <div className="flex items-start gap-2.5 bg-red-900/30 border border-red-700/50 rounded-xl p-3">
-            <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-            <p className="text-red-300 text-sm">{erro}</p>
+            <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+            <p className="text-red-500 text-sm">{erro}</p>
           </div>
         )}
 
@@ -105,7 +105,7 @@ function EntrarContent() {
           <button
             onClick={handleGoogle}
             disabled={!!loadingProvider || loading}
-            className="flex items-center justify-center gap-3 w-full bg-white hover:bg-gray-50 disabled:opacity-60 text-gray-900 font-medium py-3.5 rounded-2xl transition-colors"
+            className="flex items-center justify-center gap-3 w-full bg-white hover:bg-gray-50 disabled:opacity-60 text-navy font-medium py-3.5 rounded-2xl transition-colors"
           >
             {loadingProvider === "google" ? (
               <Spinner dark />
@@ -118,7 +118,7 @@ function EntrarContent() {
           <button
             onClick={handleApple}
             disabled={!!loadingProvider || loading}
-            className="flex items-center justify-center gap-3 w-full bg-black hover:bg-gray-900 disabled:opacity-60 text-white font-medium py-3.5 rounded-2xl border border-gray-700 transition-colors"
+            className="flex items-center justify-center gap-3 w-full bg-black hover:bg-white disabled:opacity-60 text-navy font-medium py-3.5 rounded-2xl border border-gray-200 transition-colors"
           >
             {loadingProvider === "apple" ? (
               <Spinner />
@@ -131,15 +131,15 @@ function EntrarContent() {
 
         {/* Separador */}
         <div className="flex items-center gap-3">
-          <div className="flex-1 h-px bg-gray-800" />
-          <span className="text-gray-500 text-xs">ou use seu e-mail</span>
-          <div className="flex-1 h-px bg-gray-800" />
+          <div className="flex-1 h-px bg-gray-100" />
+          <span className="text-gray-400 text-xs">ou use seu e-mail</span>
+          <div className="flex-1 h-px bg-gray-100" />
         </div>
 
         {/* Form email */}
         <form onSubmit={handleEmailLogin} className="space-y-3">
           <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="email"
               placeholder="seu@email.com"
@@ -147,12 +147,12 @@ function EntrarContent() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="w-full bg-gray-800 border border-gray-700 focus:border-sky-500 text-white rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
           </div>
 
           <div className="relative">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type={mostrarSenha ? "text" : "password"}
               placeholder="Senha"
@@ -160,12 +160,12 @@ function EntrarContent() {
               onChange={(e) => setSenha(e.target.value)}
               required
               autoComplete="current-password"
-              className="w-full bg-gray-800 border border-gray-700 focus:border-sky-500 text-white rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
             <button
               type="button"
               onClick={() => setMostrarSenha(!mostrarSenha)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
             >
               {mostrarSenha ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -174,7 +174,7 @@ function EntrarContent() {
           <div className="flex justify-end">
             <Link
               href="/auth/esqueci-senha"
-              className="text-xs text-sky-400 hover:text-sky-300"
+              className="text-xs text-teal hover:text-teal"
             >
               Esqueci minha senha
             </Link>
@@ -183,7 +183,7 @@ function EntrarContent() {
           <button
             type="submit"
             disabled={loading || !!loadingProvider}
-            className="flex items-center justify-center gap-2 w-full bg-sky-500 hover:bg-sky-400 disabled:bg-gray-700 disabled:text-gray-500 text-white font-semibold py-3.5 rounded-2xl transition-colors"
+            className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
           >
             {loading ? <Spinner /> : "Entrar"}
           </button>
@@ -191,9 +191,9 @@ function EntrarContent() {
       </motion.div>
 
       {/* Rodapé */}
-      <p className="text-center text-gray-400 text-sm">
+      <p className="text-center text-gray-500 text-sm">
         Não tem conta?{" "}
-        <Link href="/auth/cadastro" className="text-sky-400 hover:text-sky-300 font-medium">
+        <Link href="/auth/cadastro" className="text-teal hover:text-teal font-medium">
           Criar conta gratuita
         </Link>
       </p>
@@ -207,7 +207,7 @@ function Spinner({ dark = false }: { dark?: boolean }) {
   return (
     <div
       className={`w-4 h-4 border-2 rounded-full animate-spin ${
-        dark ? "border-gray-300 border-t-gray-900" : "border-gray-500 border-t-white"
+        dark ? "border-gray-300 border-t-navy" : "border-gray-500 border-t-white"
       }`}
     />
   );
@@ -237,7 +237,7 @@ export default function EntrarPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <p className="text-gray-500 text-sm">Carregando...</p>
+          <p className="text-gray-400 text-sm">Carregando...</p>
         </div>
       }
     >

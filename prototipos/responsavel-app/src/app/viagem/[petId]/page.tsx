@@ -34,7 +34,7 @@ export default function ViagemPage({
   if (!pet) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-400">Pet não encontrado.</p>
+        <p className="text-gray-500">Pet não encontrado.</p>
       </div>
     );
   }
@@ -67,15 +67,15 @@ export default function ViagemPage({
       <header className="flex items-center gap-3 px-5 pt-14 pb-4">
         <button
           onClick={() => router.back()}
-          className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0"
+          className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div className="flex-1">
           <h1 className="text-lg font-semibold">Planejar Viagem</h1>
-          <p className="text-sm text-gray-400">{pet.nome.split(" ")[0]}</p>
+          <p className="text-sm text-gray-500">{pet.nome.split(" ")[0]}</p>
         </div>
-        <Plane className="w-5 h-5 text-sky-400" />
+        <Plane className="w-5 h-5 text-teal" />
       </header>
 
       <main className="px-5 space-y-5">
@@ -96,25 +96,25 @@ export default function ViagemPage({
           >
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-xs text-gray-500 uppercase tracking-wider">Destino</p>
+                <p className="text-xs text-gray-400 uppercase tracking-wider">Destino</p>
                 <p className="text-base font-semibold">
                   {destinoInfo?.bandeira} {destinoInfo?.nome}
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-xs text-gray-500 uppercase tracking-wider">Embarque</p>
+                <p className="text-xs text-gray-400 uppercase tracking-wider">Embarque</p>
                 <p className="text-base font-semibold">{dataEmbarque}</p>
               </div>
             </div>
 
             {/* Toggle de visualização */}
-            <div className="flex items-center gap-1 bg-gray-900 border border-gray-800 rounded-2xl p-1 mb-4">
+            <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-2xl p-1 mb-4">
               <button
                 onClick={() => setViewMode("lista")}
                 className={`flex items-center justify-center gap-2 flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   viewMode === "lista"
-                    ? "bg-gray-800 text-white shadow"
-                    : "text-gray-500 hover:text-gray-400"
+                    ? "bg-gray-100 text-navy shadow"
+                    : "text-gray-400 hover:text-gray-500"
                 }`}
               >
                 <List className="w-4 h-4" />
@@ -124,8 +124,8 @@ export default function ViagemPage({
                 onClick={() => setViewMode("timeline")}
                 className={`flex items-center justify-center gap-2 flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   viewMode === "timeline"
-                    ? "bg-gray-800 text-white shadow"
-                    : "text-gray-500 hover:text-gray-400"
+                    ? "bg-gray-100 text-navy shadow"
+                    : "text-gray-400 hover:text-gray-500"
                 }`}
               >
                 <GitCommitHorizontal className="w-4 h-4" />
@@ -152,8 +152,8 @@ export default function ViagemPage({
               disabled={salvo}
               className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-semibold text-sm transition-colors ${
                 salvo
-                  ? "bg-emerald-900/30 border border-emerald-800/40 text-emerald-400"
-                  : "bg-sky-500 hover:bg-sky-400 text-white"
+                  ? "bg-emerald-900/30 border border-emerald-800/40 text-emerald-600"
+                  : "bg-teal hover:bg-teal-dark text-white"
               }`}
             >
               {salvo ? (
@@ -165,7 +165,7 @@ export default function ViagemPage({
 
             <button
               onClick={() => { setRoadmap(null); setSalvo(false); }}
-              className="w-full py-3 border border-gray-700 rounded-2xl text-gray-400 text-sm hover:border-gray-600 transition-colors"
+              className="w-full py-3 border border-gray-200 rounded-2xl text-gray-500 text-sm hover:border-gray-600 transition-colors"
             >
               Alterar destino / data
             </button>
@@ -200,7 +200,7 @@ function FormViagem({
     <div className="space-y-5">
       {/* Destino */}
       <div>
-        <label className="block text-sm font-medium text-gray-300 mb-3">
+        <label className="block text-sm font-medium text-gray-600 mb-3">
           Para onde você vai viajar?
         </label>
         <div className="grid grid-cols-2 gap-2">
@@ -210,12 +210,12 @@ function FormViagem({
               onClick={() => setDestino(d.destino)}
               className={`py-3 px-3 rounded-2xl border text-left transition-colors ${
                 destino === d.destino
-                  ? "border-sky-500 bg-sky-500/10"
-                  : "border-gray-700 bg-gray-900/50"
+                  ? "border-teal bg-teal/10"
+                  : "border-gray-200 bg-white/50"
               }`}
             >
               <div className="text-2xl mb-1">{d.bandeira}</div>
-              <div className={`text-sm font-medium ${destino === d.destino ? "text-sky-300" : "text-gray-300"}`}>
+              <div className={`text-sm font-medium ${destino === d.destino ? "text-teal" : "text-gray-600"}`}>
                 {d.nome}
               </div>
             </button>
@@ -232,13 +232,13 @@ function FormViagem({
 
       {/* Companhia aérea (opcional) */}
       <div>
-        <label className="block text-sm font-medium text-gray-300 mb-1.5">
+        <label className="block text-sm font-medium text-gray-600 mb-1.5">
           Companhia aérea (opcional)
         </label>
         <select
           value={companhiaId}
           onChange={(e) => setCompanhiaId(e.target.value)}
-          className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+          className="w-full bg-gray-100 border border-gray-200 text-navy rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal"
         >
           <option value="">Não sei ainda</option>
           {COMPANHIAS_AEREAS.map((c) => (
@@ -255,7 +255,7 @@ function FormViagem({
       <button
         onClick={onGerar}
         disabled={!dataEmbarque}
-        className="flex items-center justify-center gap-2 w-full bg-sky-500 hover:bg-sky-400 disabled:bg-gray-700 disabled:text-gray-500 text-white font-semibold py-4 rounded-2xl transition-colors"
+        className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-4 rounded-2xl transition-colors"
       >
         Ver o que preciso fazer
         <ChevronRight className="w-5 h-5" />
@@ -268,15 +268,15 @@ function AirlineInfo({ id }: { id: string }) {
   const cia = COMPANHIAS_AEREAS.find((c) => c.id === id);
   if (!cia) return null;
   return (
-    <div className="mt-2 bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs space-y-1.5">
-      <p className="font-medium text-gray-200">{cia.nome}</p>
-      <div className="grid grid-cols-2 gap-1 text-gray-400">
+    <div className="mt-2 bg-white border border-gray-200 rounded-xl p-3 text-xs space-y-1.5">
+      <p className="font-medium text-navy">{cia.nome}</p>
+      <div className="grid grid-cols-2 gap-1 text-gray-500">
         <span>Cabine: até {cia.pesoMaxCabine}kg</span>
         <span>Porão: até {cia.pesoMaxPorао}kg</span>
         <span>Caixa: {cia.dimensoesMaxCabine.comprimento}×{cia.dimensoesMaxCabine.largura}×{cia.dimensoesMaxCabine.altura}cm</span>
         <span>Braquicefálicos: {cia.racasBraquisefálicasPermitidas ? "✅" : "❌"}</span>
       </div>
-      <p className="text-gray-500 leading-relaxed">{cia.anotacoes}</p>
+      <p className="text-gray-400 leading-relaxed">{cia.anotacoes}</p>
     </div>
   );
 }
