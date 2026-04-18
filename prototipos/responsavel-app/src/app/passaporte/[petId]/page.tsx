@@ -31,6 +31,7 @@ import {
 import { formatBR } from "@/services/travel-roadmap";
 import { differenceInYears, differenceInMonths } from "date-fns";
 import { parseBR } from "@/services/travel-roadmap";
+import { PassaporteQRMini } from "@/components/PassaporteQR";
 
 // --------------------------------------------------------
 // Cores por status de autenticação
@@ -212,17 +213,27 @@ export default function PassaportePage({
           </div>
 
           {/* Linha de separação estilo passaporte */}
-          <div className="mt-4 pt-4 border-t border-teal/20 grid grid-cols-2 gap-3 text-xs">
-            <div>
-              <p className="text-gray-400 uppercase tracking-wider text-[9px] mb-0.5">Nascimento</p>
-              <p className="text-navy">{pet.dataNascimento}</p>
+          <div className="mt-4 pt-4 border-t border-teal/20 flex items-end justify-between">
+            <div className="grid grid-cols-2 gap-3 text-xs flex-1">
+              <div>
+                <p className="text-gray-400 uppercase tracking-wider text-[9px] mb-0.5">Nascimento</p>
+                <p className="text-navy">{pet.dataNascimento}</p>
+              </div>
+              <div>
+                <p className="text-gray-400 uppercase tracking-wider text-[9px] mb-0.5">Espécie</p>
+                <p className="text-navy">
+                  {pet.especie === "CAO" ? "Cão" : pet.especie === "GATO" ? "Gato" : "Outro"}
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-gray-400 uppercase tracking-wider text-[9px] mb-0.5">Espécie</p>
-              <p className="text-navy">
-                {pet.especie === "CAO" ? "Cão" : pet.especie === "GATO" ? "Gato" : "Outro"}
-              </p>
-            </div>
+
+            {/* QR Code mini */}
+            <PassaporteQRMini
+              pet={pet}
+              temVacina={temVacina}
+              temSorologia={temSorologia}
+              temMicrochip={temMicrochip}
+            />
           </div>
         </motion.div>
 
