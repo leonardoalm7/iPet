@@ -22,7 +22,7 @@ export const RACAS_BRAQUICEFALICAS: string[] = [
   "Griffon de Bruxelas",
   "Affenpinscher",
   "Japanese Chin",
-  "Chihuahua Cabeça de Maçã",
+  "Chihuahua Apple Head",
   // Gatos
   "Persa",
   "Himalaia",
@@ -32,17 +32,19 @@ export const RACAS_BRAQUICEFALICAS: string[] = [
   "Burmês",
 ];
 
-export function isBraquicefalico(raca: string): boolean {
-  const normalizada = raca
+function normalizar(s: string): string {
+  return s
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
+export function isBraquicefalico(raca: string): boolean {
+  const normalizada = normalizar(raca);
 
   return RACAS_BRAQUICEFALICAS.some((r) => {
-    const rNorm = r
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-    return normalizada.includes(rNorm) || rNorm.includes(normalizada);
+    const rNorm = normalizar(r);
+    return normalizada === rNorm;
   });
 }
