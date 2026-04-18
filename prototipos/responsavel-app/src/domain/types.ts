@@ -67,6 +67,7 @@ export interface Pet {
   raca: string;
   dataNascimento: string; // DD/MM/YYYY
   peso: number; // kg
+  tipoPet: TipoPet;
   microchip?: string; // 15 dígitos ISO 11784/11785
   foto?: string;
   // Saúde
@@ -114,6 +115,8 @@ export interface RoadmapCompliance {
 
 // ---------- Companhias Aéreas ----------
 
+export type TipoPet = "ESTIMACAO" | "CAO_GUIA";
+
 export interface RegrasCompanhiaAerea {
   id: string;
   nome: string;
@@ -122,7 +125,9 @@ export interface RegrasCompanhiaAerea {
   pesoMaxPorао: number;
   dimensoesMaxCabine: { comprimento: number; largura: number; altura: number }; // cm
   idadeMinimaAnimal: number; // semanas
-  racasBraquisefálicasPermitidas: boolean;
+  braquicefalicoCabine: boolean;
+  braquicefalicoPorao: boolean;
+  racasPerigosasBanidas: boolean;
   anotacoes: string;
 }
 

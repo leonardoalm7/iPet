@@ -1,5 +1,6 @@
 import { Pet, RegrasCompanhiaAerea } from "@/domain/types";
 import { isBraquicefalico } from "@/data/braquicefalicos";
+import { isRacaPerigosa } from "@/data/racas-perigosas";
 
 export type VeredictoCia =
   | "PODE_CABINE"
@@ -14,6 +15,7 @@ export interface ResultadoVerificacao {
   porao: boolean;
   alertas: string[];
   motivos: string[];
+  caoGuia: boolean;
 }
 
 export function verificarCompanhia(
@@ -24,21 +26,56 @@ export function verificarCompanhia(
   const motivos: string[] = [];
   let cabine = false;
   let porao = false;
+  const caoGuia = pet.tipoPet === "CAO_GUIA";
+
+  // Lei 11.126/2005: cão-guia embarca obrigatoriamente, gratuito, sem restrições
+  if (caoGuia) {
+    cabine = true;
+    alertas.push(
+      "Cão-guia: embarque obrigatório em cabine, gratuito, sem caixa (Lei 11.126/2005)"
+    );
+    return {
+      companhia: cia,
+      veredicto: "PODE_CABINE",
+      cabine,
+      porao: true,
+      alertas,
+      motivos,
+      caoGuia,
+    };
+  }
 
   const braqui = isBraquicefalico(pet.raca);
+  const perigosa = isRacaPerigosa(pet.raca);
 
-  // Braquicefálico + cia não aceita
-  if (braqui && !cia.racasBraquisefálicasPermitidas) {
+  // Raça perigosa + cia bane completamente
+  if (perigosa && cia.racasPerigosasBanidas) {
     motivos.push(
-      `${pet.raca} é considerada raça braquicefálica e não é aceita pela ${cia.nome}`
+      `${pet.raca} é considerada raça perigosa e é banida pela ${cia.nome} em qualquer modalidade`
     );
+    if (cia.anotacoes) {
+      alertas.push(cia.anotacoes.replace(/^⚠️\s*/, ""));
+    }
+    return {
+      companhia: cia,
+      veredicto: "NAO_ACEITO",
+      cabine: false,
+      porao: false,
+      alertas,
+      motivos,
+      caoGuia,
+    };
   }
 
   // Cabine
   if (cia.pesoMaxCabine > 0) {
     if (pet.peso <= cia.pesoMaxCabine) {
-      if (!braqui || cia.racasBraquisefálicasPermitidas) {
+      if (!braqui || cia.braquicefalicoCabine) {
         cabine = true;
+      } else {
+        motivos.push(
+          `${pet.raca} é braquicefálica e não é aceita na cabine pela ${cia.nome}`
+        );
       }
     } else {
       motivos.push(
@@ -52,8 +89,12 @@ export function verificarCompanhia(
   // Porão
   if (cia.pesoMaxPorао > 0) {
     if (pet.peso <= cia.pesoMaxPorао) {
-      if (!braqui || cia.racasBraquisefálicasPermitidas) {
+      if (!braqui || cia.braquicefalicoPorao) {
         porao = true;
+      } else {
+        motivos.push(
+          `${pet.raca} é braquicefálica e não é aceita no porão pela ${cia.nome} (risco respiratório)`
+        );
       }
     } else {
       motivos.push(
@@ -65,9 +106,20 @@ export function verificarCompanhia(
   }
 
   // Alertas informativos
-  if (braqui && cia.racasBraquisefálicasPermitidas) {
+  if (braqui && (cia.braquicefalicoCabine || cia.braquicefalicoPorao)) {
+    const onde = cia.braquicefalicoCabine && cia.braquicefalicoPorao
+      ? "cabine e porão"
+      : cia.braquicefalicoCabine
+      ? "cabine (porão não)"
+      : "porão (cabine não)";
     alertas.push(
-      "Raça braquicefálica aceita por esta companhia — confirme na reserva"
+      `Raça braquicefálica aceita em ${onde} — confirme na reserva`
+    );
+  }
+
+  if (perigosa && !cia.racasPerigosasBanidas) {
+    alertas.push(
+      "Raça classificada como perigosa — confirme aceitação diretamente com a companhia"
     );
   }
 
@@ -91,7 +143,7 @@ export function verificarCompanhia(
     veredicto = "NAO_ACEITO";
   }
 
-  return { companhia: cia, veredicto, cabine, porao, alertas, motivos };
+  return { companhia: cia, veredicto, cabine, porao, alertas, motivos, caoGuia };
 }
 
 export function verificarTodasCompanhias(

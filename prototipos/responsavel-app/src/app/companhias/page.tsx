@@ -21,6 +21,7 @@ import {
   Info,
   Armchair,
   Package,
+  ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -188,6 +189,22 @@ export default function CompanhiasPage() {
               </div>
             </div>
 
+            {/* Cão-guia banner */}
+            {pet.tipoPet === "CAO_GUIA" && (
+              <div className="flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5">
+                <ShieldCheck className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-semibold text-emerald-700">
+                    Cão-guia — embarque garantido
+                  </p>
+                  <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+                    Lei 11.126/2005: embarque obrigatório em cabine, gratuito, sem
+                    caixa e sem limite de peso. A companhia não pode recusar.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Lista de companhias */}
             <div className="space-y-2">
               {resultados.map((resultado, i) => (
@@ -216,6 +233,21 @@ export default function CompanhiasPage() {
                 confirme diretamente com a cia aérea no momento da reserva —
                 regras podem variar por rota e aeronave.
               </p>
+            </div>
+
+            {/* ESA info */}
+            <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-2xl p-3.5">
+              <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs font-semibold text-amber-700">
+                  Animal de suporte emocional (ESA)
+                </p>
+                <p className="text-xs text-gray-500 leading-relaxed mt-0.5">
+                  No Brasil, animais de suporte emocional são tratados como pets
+                  comuns para fins de transporte aéreo (STJ, 2023). Apenas
+                  cães-guia têm direito legal a embarque especial.
+                </p>
+              </div>
             </div>
           </>
         )}
@@ -356,20 +388,28 @@ function CiaCard({
                 )}
 
                 {/* Braquicefálico */}
-                <div className="flex items-center gap-2 text-xs">
+                <div className="text-xs space-y-1">
                   <span className="text-gray-600 font-medium">
                     Braquicefálicos:
                   </span>
-                  {cia.racasBraquisefálicasPermitidas ? (
-                    <span className="text-emerald-600 font-medium">
-                      ✅ Aceitos
+                  <div className="flex items-center gap-3 ml-1">
+                    <span className={cia.braquicefalicoCabine ? "text-emerald-600" : "text-red-500"}>
+                      {cia.braquicefalicoCabine ? "✅" : "❌"} Cabine
                     </span>
-                  ) : (
-                    <span className="text-red-500 font-medium">
-                      ❌ Não aceitos
-                    </span>
-                  )}
+                    {cia.pesoMaxPorао > 0 && (
+                      <span className={cia.braquicefalicoPorao ? "text-emerald-600" : "text-red-500"}>
+                        {cia.braquicefalicoPorao ? "✅" : "❌"} Porão
+                      </span>
+                    )}
+                  </div>
                 </div>
+
+                {/* Raças perigosas */}
+                {cia.racasPerigosasBanidas && (
+                  <div className="flex items-center gap-2 text-xs text-red-500 font-medium">
+                    🚫 Raças perigosas banidas (Pit Bull, Rottweiler, Fila, etc.)
+                  </div>
+                )}
 
                 {/* Idade mínima */}
                 {cia.idadeMinimaAnimal > 0 && (

@@ -274,7 +274,7 @@ function AirlineInfo({ id }: { id: string }) {
         <span>Cabine: até {cia.pesoMaxCabine}kg</span>
         <span>Porão: até {cia.pesoMaxPorао}kg</span>
         <span>Caixa: {cia.dimensoesMaxCabine.comprimento}×{cia.dimensoesMaxCabine.largura}×{cia.dimensoesMaxCabine.altura}cm</span>
-        <span>Braquicefálicos: {cia.racasBraquisefálicasPermitidas ? "✅" : "❌"}</span>
+        <span>Braqui cabine: {cia.braquicefalicoCabine ? "✅" : "❌"} · porão: {cia.braquicefalicoPorao ? "✅" : "❌"}</span>
       </div>
       <p className="text-gray-400 leading-relaxed">{cia.anotacoes}</p>
     </div>

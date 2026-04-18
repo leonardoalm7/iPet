@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
-import { Especie, Pet } from "@/domain/types";
+import { Especie, TipoPet } from "@/domain/types";
 import { ArrowLeft, ArrowRight, Check, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DateInput } from "@/components/DateInput";
@@ -19,6 +19,7 @@ interface FormData {
   dataNascimento: string;
   peso: string;
   microchip: string;
+  tipoPet: TipoPet;
   // Step 2: Saúde — Vacina
   temVacina: boolean;
   vacinaData: string;
@@ -57,6 +58,7 @@ export default function NovoPetPage() {
     dataNascimento: "",
     peso: "",
     microchip: "",
+    tipoPet: "ESTIMACAO",
     temVacina: false,
     vacinaData: "",
     vacinaNome: "",
@@ -89,6 +91,7 @@ export default function NovoPetPage() {
       raca: form.raca.trim(),
       dataNascimento: form.dataNascimento,
       peso: parseFloat(pesoNormalizado) || 0,
+      tipoPet: form.tipoPet,
       microchip: form.microchip.trim() || undefined,
       vacina: form.temVacina
         ? { data: form.vacinaData, valida: true, nomeComercial: form.vacinaNome }
@@ -251,6 +254,22 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
           Obrigatório para viagens internacionais. Deixe vazio se ainda não implantou.
         </p>
       </div>
+
+      {/* Cão-guia */}
+      {form.especie === "CAO" && (
+        <div>
+          <Toggle
+            label="É cão-guia / animal de serviço?"
+            value={form.tipoPet === "CAO_GUIA"}
+            onChange={(v) => update("tipoPet", v ? "CAO_GUIA" : "ESTIMACAO")}
+          />
+          {form.tipoPet === "CAO_GUIA" && (
+            <p className="text-xs text-emerald-600 mt-1.5 ml-1">
+              🦮 Cão-guia embarca obrigatoriamente em cabine, gratuito (Lei 11.126/2005)
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }

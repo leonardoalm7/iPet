@@ -109,9 +109,21 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "ipet-storage",
+      version: 1,
       storage: createJSONStorage(() =>
         typeof window !== "undefined" ? localStorage : ({} as Storage)
       ),
+      migrate: (persisted: unknown, version: number) => {
+        const state = persisted as Record<string, unknown>;
+        if (version === 0) {
+          const pets = (state.pets as Pet[]) ?? [];
+          state.pets = pets.map((p) => ({
+            ...p,
+            tipoPet: p.tipoPet ?? "ESTIMACAO",
+          }));
+        }
+        return state as unknown as AppState;
+      },
     }
   )
 );
