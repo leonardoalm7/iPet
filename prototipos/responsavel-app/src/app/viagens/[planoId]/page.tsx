@@ -262,9 +262,11 @@ function calcularEstagios(
       titulo: "Pronto para embarcar!",
       descricao:
         estado7 === "CONCLUIDO"
-          ? "Tudo certo — aproveite a viagem! 🎉"
+          ? "Tudo certo! Confira o checklist do dia do voo."
           : "Complete todos os estágios anteriores.",
       estado: estado7,
+      ctaLabel: estado7 === "CONCLUIDO" ? "Abrir checklist de embarque" : undefined,
+      ctaHref: estado7 === "CONCLUIDO" ? `/embarque/${plano.id}` : undefined,
     },
   ];
 
@@ -274,8 +276,8 @@ function calcularEstagios(
   if (estado7 === "CONCLUIDO") {
     proximaAcao = {
       titulo: "Tudo pronto para o embarque!",
-      subtitulo: `${pet.nome.split(" ")[0]} está com toda a documentação em ordem. Boa viagem! 🎉`,
-      ctaPrimario: { label: "Ver checklist de embarque", href: `/passaporte/${pet.id}` },
+      subtitulo: `${pet.nome.split(" ")[0]} está com toda a documentação em ordem. Confira o checklist do dia do voo!`,
+      ctaPrimario: { label: "Ver checklist de embarque", href: `/embarque/${plano.id}` },
     };
   } else if (!estagio1Concluido) {
     proximaAcao = {
