@@ -207,13 +207,13 @@ function calcularEstagios(
       titulo: "Passagem aérea",
       descricao: temCompanhia
         ? "Companhia selecionada. Adicione o número do voo quando comprar."
-        : "Compre a passagem ou registre a companhia aérea.",
+        : "Veja quais companhias aceitam seu pet.",
       estado: estado4,
-      ctaLabel: "Buscar voos",
-      ctaHref: `/viagem/${pet.id}`,
+      ctaLabel: temCompanhia ? "Trocar companhia" : "Ver companhias",
+      ctaHref: "/companhias",
       servicoiPet: {
-        label: "Buscar voos que aceitam pets",
-        href: `/viagem/${pet.id}`,
+        label: "Quais cias aceitam meu pet?",
+        href: "/companhias",
         icon: "✈️",
       },
     },

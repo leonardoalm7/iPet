@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useAppStore } from "@/store/app-store";
 import Link from "next/link";
-import { PlusCircle, Settings, ChevronRight, AlertTriangle } from "lucide-react";
+import { PlusCircle, Settings, ChevronRight, AlertTriangle, Plane } from "lucide-react";
 import { PetCardHome } from "@/components/PetCardHome";
 import { BottomNav } from "@/components/BottomNav";
 import { SugestoesDestinos } from "@/components/SugestoesDestinos";
@@ -119,6 +119,25 @@ export default function HomePage() {
               <p className="text-navy font-semibold text-sm">Planejar uma viagem</p>
               <p className="text-gray-500 text-xs mt-0.5">
                 Por onde começo? Descubra em 3 passos.
+              </p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+          </Link>
+        )}
+
+        {/* ── CTA Companhias aéreas ──────────────────────────────── */}
+        {temPets && (
+          <Link
+            href="/companhias"
+            className="flex items-center gap-4 bg-white border border-gray-200 rounded-2xl p-4 hover:border-teal/40 transition-colors"
+          >
+            <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
+              <Plane className="w-5 h-5 text-teal" />
+            </div>
+            <div className="flex-1">
+              <p className="text-navy font-semibold text-sm">Companhias aéreas</p>
+              <p className="text-gray-500 text-xs mt-0.5">
+                Quais aceitam meu pet na cabine ou porão?
               </p>
             </div>
             <ChevronRight className="w-4 h-4 text-gray-400" />
