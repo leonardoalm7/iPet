@@ -40,6 +40,10 @@ interface AppState {
   adicionarDocumento: (doc: DocumentoSanitario) => void;
   removerDocumento: (id: string) => void;
   getDocumentosPorPet: (petId: string) => DocumentoSanitario[];
+
+  // Lead Gen — engajamento com clínicas
+  clinicaEngajamento: Record<string, { buscas: number; cliques: number; ligacoes: number; navegacoes: number }>;
+  registrarEngajamento: (clinicaId: string, tipo: "busca" | "clique" | "ligacao" | "navegacao") => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -106,6 +110,19 @@ export const useAppStore = create<AppState>()(
 
       getDocumentosPorPet: (petId) =>
         get().documentos.filter((d) => d.petId === petId),
+
+      clinicaEngajamento: {},
+      registrarEngajamento: (clinicaId, tipo) =>
+        set((s) => {
+          const atual = s.clinicaEngajamento[clinicaId] ?? { buscas: 0, cliques: 0, ligacoes: 0, navegacoes: 0 };
+          const campo = tipo === "busca" ? "buscas" : tipo === "clique" ? "cliques" : tipo === "ligacao" ? "ligacoes" : "navegacoes";
+          return {
+            clinicaEngajamento: {
+              ...s.clinicaEngajamento,
+              [clinicaId]: { ...atual, [campo]: atual[campo] + 1 },
+            },
+          };
+        }),
     }),
     {
       name: "ipet-storage",

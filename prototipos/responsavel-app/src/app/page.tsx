@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useAppStore } from "@/store/app-store";
 import Link from "next/link";
-import { PlusCircle, Settings, ChevronRight, AlertTriangle, Plane } from "lucide-react";
+import { PlusCircle, Settings, ChevronRight, AlertTriangle, Plane, Stethoscope } from "lucide-react";
 import { PetCardHome } from "@/components/PetCardHome";
 import { BottomNav } from "@/components/BottomNav";
 import { SugestoesDestinos } from "@/components/SugestoesDestinos";
@@ -143,6 +143,23 @@ export default function HomePage() {
             <ChevronRight className="w-4 h-4 text-gray-400" />
           </Link>
         )}
+
+        {/* ── CTA Clínicas veterinárias ────────────────────────────── */}
+        <Link
+          href="/clinicas"
+          className="flex items-center gap-4 bg-white border border-gray-200 rounded-2xl p-4 hover:border-teal/40 transition-colors"
+        >
+          <div className="w-11 h-11 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
+            <Stethoscope className="w-5 h-5 text-emerald-600" />
+          </div>
+          <div className="flex-1">
+            <p className="text-navy font-semibold text-sm">Clínicas veterinárias</p>
+            <p className="text-gray-500 text-xs mt-0.5">
+              Vets habilitados MAPA, labs de sorologia e mais
+            </p>
+          </div>
+          <ChevronRight className="w-4 h-4 text-gray-400" />
+        </Link>
 
         {/* ── Banner de destaque (apenas sem pets cadastrados) ─────── */}
         {!temPets && (
