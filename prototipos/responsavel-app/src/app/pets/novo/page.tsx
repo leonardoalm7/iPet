@@ -397,7 +397,7 @@ function Toggle({
       <span className="text-sm text-navy">{label}</span>
       <button
         onClick={() => onChange(!value)}
-        className={`w-12 h-6 rounded-full transition-colors relative flex-shrink-0 overflow-hidden ${value ? "bg-teal" : "bg-gray-600"}`}
+        className={`w-12 h-6 rounded-full transition-colors relative flex-shrink-0 overflow-hidden ${value ? "bg-teal" : "bg-gray-300"}`}
       >
         <span
           className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${value ? "translate-x-7" : "translate-x-1"}`}

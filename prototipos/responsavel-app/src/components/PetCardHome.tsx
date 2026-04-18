@@ -62,8 +62,8 @@ function Badge({ ok, label }: { ok: boolean; label: string }) {
     <span
       className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
         ok
-          ? "bg-emerald-900/50 text-emerald-600"
-          : "bg-gray-100 text-gray-400"
+          ? "bg-emerald-600 text-white"
+          : "bg-gray-100 text-gray-500"
       }`}
     >
       {label}

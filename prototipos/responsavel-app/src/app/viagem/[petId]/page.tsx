@@ -152,7 +152,7 @@ export default function ViagemPage({
               disabled={salvo}
               className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-semibold text-sm transition-colors ${
                 salvo
-                  ? "bg-emerald-900/30 border border-emerald-800/40 text-emerald-600"
+                  ? "bg-emerald-100 border border-emerald-200 text-emerald-600"
                   : "bg-teal hover:bg-teal-dark text-white"
               }`}
             >

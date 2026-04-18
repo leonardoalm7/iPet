@@ -77,7 +77,7 @@ export default function RedefinirSenhaPage() {
       </p>
 
       {erro && (
-        <div className="flex items-start gap-2.5 bg-red-900/30 border border-red-700/50 rounded-xl p-3 mb-4">
+        <div className="flex items-start gap-2.5 bg-red-100 border border-red-700/50 rounded-xl p-3 mb-4">
           <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
           <p className="text-red-500 text-sm">{erro}</p>
         </div>

@@ -154,8 +154,8 @@ function TabDados({
         <div
           className={`flex items-start gap-2.5 rounded-xl p-3 ${
             feedback.tipo === "sucesso"
-              ? "bg-emerald-900/30 border border-emerald-700/50"
-              : "bg-red-900/30 border border-red-700/50"
+              ? "bg-emerald-100 border border-emerald-700/50"
+              : "bg-red-100 border border-red-700/50"
           }`}
         >
           {feedback.tipo === "sucesso" ? (
@@ -425,13 +425,13 @@ function TabPrivacidade({
         {!confirmarExclusao ? (
           <button
             onClick={() => setConfirmarExclusao(true)}
-            className="flex items-center gap-2 w-full border border-red-200 bg-red-900/20 hover:bg-red-900/30 text-red-500 rounded-2xl p-4 text-sm transition-colors"
+            className="flex items-center gap-2 w-full border border-red-200 bg-red-50 hover:bg-red-100 text-red-500 rounded-2xl p-4 text-sm transition-colors"
           >
             <Trash2 className="w-4 h-4" />
             Excluir minha conta e dados (Art. 18, VI)
           </button>
         ) : (
-          <div className="bg-red-900/20 border border-red-200 rounded-2xl p-4 space-y-4">
+          <div className="bg-red-50 border border-red-200 rounded-2xl p-4 space-y-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
               <div>

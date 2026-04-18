@@ -148,7 +148,7 @@ function DestinoCard({ sugestao: s }: { sugestao: SugestaoDestino }) {
               <p className="text-gray-500 text-xs">{s.pais}</p>
             </div>
             {s.destacado && (
-              <span className="text-[10px] bg-amber-500/20 text-amber-600 border border-amber-700/30 px-1.5 py-0.5 rounded-full flex-shrink-0">
+              <span className="text-[10px] bg-amber-500/20 text-amber-600 border border-amber-200 px-1.5 py-0.5 rounded-full flex-shrink-0">
                 ⭐ TOP
               </span>
             )}

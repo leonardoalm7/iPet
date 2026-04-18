@@ -17,10 +17,10 @@ const TIPO_LABEL: Record<TipoHotelPet, string> = {
 };
 
 const TIPO_COLOR: Record<TipoHotelPet, string> = {
-  PETHOTEL: "bg-purple-500/20 text-purple-300 border-purple-700/30",
-  PETHOTEL_DAY: "bg-blue-500/20 text-blue-300 border-blue-700/30",
-  PETHOTEL_VET: "bg-green-500/20 text-green-300 border-green-700/30",
-  PETFRIENDLY: "bg-amber-500/20 text-amber-600 border-amber-700/30",
+  PETHOTEL: "bg-purple-600 text-white",
+  PETHOTEL_DAY: "bg-blue-600 text-white",
+  PETHOTEL_VET: "bg-green-600 text-white",
+  PETFRIENDLY: "bg-amber-500 text-white",
 };
 
 const TIPO_ICON: Record<TipoHotelPet, string> = {

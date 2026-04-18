@@ -599,10 +599,10 @@ function EstagioCard({
 }) {
   const config = {
     CONCLUIDO: {
-      bg: "bg-emerald-950/30 border-emerald-800/40",
-      iconBg: "bg-emerald-900/50",
-      iconColor: "text-emerald-600",
-      titleColor: "text-emerald-300",
+      bg: "bg-emerald-600/15 border-emerald-300",
+      iconBg: "bg-emerald-600/20",
+      iconColor: "text-emerald-700",
+      titleColor: "text-emerald-800",
       badge: <CheckCircle2 className="w-5 h-5 text-emerald-600" />,
     },
     EM_ANDAMENTO: {
@@ -627,8 +627,8 @@ function EstagioCard({
       badge: <Lock className="w-5 h-5 text-gray-400" />,
     },
     ATENCAO: {
-      bg: "bg-orange-950/30 border-orange-800/40",
-      iconBg: "bg-orange-900/40",
+      bg: "bg-orange-50 border-orange-200",
+      iconBg: "bg-orange-100",
       iconColor: "text-ipet-orange",
       titleColor: "text-navy",
       badge: <AlertTriangle className="w-5 h-5 text-ipet-orange" />,

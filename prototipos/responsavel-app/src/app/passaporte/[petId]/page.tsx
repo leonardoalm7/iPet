@@ -41,12 +41,12 @@ const AUTH_BADGE: Record<
 > = {
   PENDENTE: {
     label: "Pendente",
-    classes: "bg-amber-900/30 text-amber-600 border-amber-200",
+    classes: "bg-amber-100 text-amber-600 border-amber-200",
     icon: AlertCircle,
   },
   VERIFICADO: {
     label: "Verificado",
-    classes: "bg-emerald-900/30 text-emerald-600 border-emerald-800/40",
+    classes: "bg-emerald-100 text-emerald-600 border-emerald-200",
     icon: CheckCircle2,
   },
   BLOCKCHAIN: {
@@ -56,7 +56,7 @@ const AUTH_BADGE: Record<
   },
   REJEITADO: {
     label: "Rejeitado",
-    classes: "bg-red-900/30 text-red-500 border-red-800/40",
+    classes: "bg-red-100 text-red-500 border-red-200",
     icon: XCircle,
   },
 };

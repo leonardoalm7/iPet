@@ -54,12 +54,12 @@ const STATUS_STYLE: Record<
   CONCLUIDA: {
     dot: "bg-emerald-500",
     ring: "ring-emerald-500/30",
-    badge: "bg-emerald-900/40 border border-emerald-700/40",
-    badgeText: "text-emerald-600",
+    badge: "bg-emerald-100 border border-emerald-200",
+    badgeText: "text-emerald-700",
     icon: CheckCircle2,
     iconColor: "text-emerald-600",
-    cardBorder: "border-emerald-800/30",
-    cardBg: "bg-emerald-900/10",
+    cardBorder: "border-emerald-200",
+    cardBg: "bg-emerald-50",
   },
   PENDENTE: {
     dot: "bg-teal",
@@ -74,36 +74,36 @@ const STATUS_STYLE: Record<
   URGENTE: {
     dot: "bg-amber-500",
     ring: "ring-amber-500/40",
-    badge: "bg-amber-900/40 border border-amber-700/40",
-    badgeText: "text-amber-600",
+    badge: "bg-amber-100 border border-amber-200",
+    badgeText: "text-amber-700",
     icon: AlertTriangle,
     iconColor: "text-amber-600",
-    cardBorder: "border-amber-700/40",
-    cardBg: "bg-amber-900/15",
+    cardBorder: "border-amber-200",
+    cardBg: "bg-amber-50",
   },
   CRITICO: {
     dot: "bg-ipet-orange",
     ring: "ring-orange-500/50",
-    badge: "bg-orange-900/40 border border-orange-700/40",
+    badge: "bg-orange-100 border border-orange-200",
     badgeText: "text-ipet-orange",
     icon: Zap,
     iconColor: "text-ipet-orange",
-    cardBorder: "border-orange-700/40",
-    cardBg: "bg-orange-900/15",
+    cardBorder: "border-orange-200",
+    cardBg: "bg-orange-50",
   },
   VENCIDA: {
     dot: "bg-red-500",
     ring: "ring-red-500/40",
-    badge: "bg-red-900/40 border border-red-700/40",
-    badgeText: "text-red-500",
+    badge: "bg-red-100 border border-red-200",
+    badgeText: "text-red-600",
     icon: XCircle,
     iconColor: "text-red-500",
-    cardBorder: "border-red-800/40",
-    cardBg: "bg-red-900/10",
+    cardBorder: "border-red-200",
+    cardBg: "bg-red-50",
   },
   BLOQUEADA: {
-    dot: "bg-gray-600",
-    ring: "ring-gray-600/20",
+    dot: "bg-gray-300",
+    ring: "ring-gray-300/20",
     badge: "bg-gray-100 border border-gray-200",
     badgeText: "text-gray-400",
     icon: Lock,
@@ -113,7 +113,7 @@ const STATUS_STYLE: Record<
   },
   NAO_APLICAVEL: {
     dot: "bg-gray-200",
-    ring: "ring-gray-700/20",
+    ring: "ring-gray-300/20",
     badge: "bg-gray-100 border border-gray-200",
     badgeText: "text-gray-400",
     icon: CheckCircle2,
@@ -536,7 +536,7 @@ function MarcadorLiberacao({ label }: { label: string }) {
         <div className="w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-500/30 z-10" />
       </div>
       <div className="flex-1">
-        <div className="bg-emerald-900/20 border border-emerald-800/40 rounded-xl px-3 py-2">
+        <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
             <p className="text-emerald-600 text-xs font-medium">{label}</p>

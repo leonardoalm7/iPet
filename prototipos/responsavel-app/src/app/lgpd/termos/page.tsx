@@ -31,7 +31,7 @@ export default function TermosDeUsoPage() {
             Oferece orientação sobre documentação, exames e prazos para viagens nacionais e
             internacionais com animais de estimação.
           </p>
-          <p className="mt-2 text-yellow-300/80 text-xs bg-yellow-900/20 border border-yellow-800/30 rounded-xl p-3">
+          <p className="mt-2 text-yellow-700 text-xs bg-yellow-50 border border-yellow-200 rounded-xl p-3">
             As informações de compliance fornecidas pelo iPet são de caráter orientativo. O
             responsável pelo pet deve sempre confirmar os requisitos oficiais junto às autoridades
             competentes (MAPA, VIGIAGRO, autoridades veterinárias do país de destino).

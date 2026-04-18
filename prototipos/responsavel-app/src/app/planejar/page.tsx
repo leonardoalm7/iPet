@@ -376,7 +376,7 @@ function PassoPet({
             </div>
             <div className="flex flex-col gap-1 items-end">
               {pet.vacina?.valida && (
-                <span className="text-[10px] text-emerald-600 bg-emerald-900/30 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">
                   Vacina ✓
                 </span>
               )}
@@ -448,7 +448,7 @@ function PassoDestino({
             {/* Indicador de complexidade */}
             <div className="flex gap-1 mt-1.5">
               {d.exigeSorologia && (
-                <span className="text-[9px] bg-orange-900/40 text-ipet-orange px-1.5 py-0.5 rounded-full">
+                <span className="text-[9px] bg-orange-100 text-ipet-orange px-1.5 py-0.5 rounded-full">
                   Sorologia
                 </span>
               )}
@@ -555,7 +555,7 @@ function PassoResultado({
       ? { cor: "orange", bg: "bg-orange-50", border: "border-orange-200" }
       : diagnostico.tarefasCriticas.length > 0
       ? { cor: "teal", bg: "bg-teal/5", border: "border-teal/20" }
-      : { cor: "emerald", bg: "bg-emerald-950/40", border: "border-emerald-800/40" };
+      : { cor: "emerald", bg: "bg-emerald-50", border: "border-emerald-200" };
 
   return (
     <motion.div
@@ -636,7 +636,7 @@ function PassoResultado({
       {diagnostico.alertas.map((a, i) => (
         <div
           key={i}
-          className="flex items-start gap-2.5 bg-yellow-950/30 border border-yellow-800/40 rounded-2xl p-3.5"
+          className="flex items-start gap-2.5 bg-yellow-50 border border-yellow-200 rounded-2xl p-3.5"
         >
           <AlertTriangle className="w-4 h-4 text-yellow-500 flex-shrink-0 mt-0.5" />
           <p className="text-yellow-300 text-xs leading-relaxed">{a}</p>
@@ -651,8 +651,8 @@ function PassoResultado({
         </div>
         <div className={`rounded-2xl p-4 text-center border ${
           diagnostico.podeViajar
-            ? "bg-emerald-950/30 border-emerald-800/40"
-            : "bg-orange-950/30 border-orange-800/40"
+            ? "bg-emerald-50 border-emerald-200"
+            : "bg-orange-50 border-orange-200"
         }`}>
           <p className={`text-2xl font-bold ${
             diagnostico.podeViajar ? "text-emerald-600" : "text-ipet-orange"

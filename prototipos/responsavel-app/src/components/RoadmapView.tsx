@@ -32,10 +32,10 @@ const STATUS_CONFIG: Record<
   CONCLUIDA: {
     icon: CheckCircle2,
     iconColor: "text-emerald-600",
-    borderColor: "border-emerald-800/40",
-    bgColor: "bg-emerald-900/10",
+    borderColor: "border-emerald-200",
+    bgColor: "bg-emerald-50",
     badge: "Concluída",
-    badgeColor: "bg-emerald-900/40 text-emerald-600",
+    badgeColor: "bg-emerald-100 text-emerald-600",
   },
   PENDENTE: {
     icon: Clock,
@@ -49,25 +49,25 @@ const STATUS_CONFIG: Record<
     icon: AlertTriangle,
     iconColor: "text-amber-600",
     borderColor: "border-amber-600/50",
-    bgColor: "bg-amber-900/15",
+    bgColor: "bg-amber-50",
     badge: "Urgente",
-    badgeColor: "bg-amber-900/50 text-amber-600",
+    badgeColor: "bg-amber-100 text-amber-600",
   },
   CRITICO: {
     icon: Zap,
     iconColor: "text-ipet-orange",
     borderColor: "border-orange-600/50",
-    bgColor: "bg-orange-900/15",
+    bgColor: "bg-orange-50",
     badge: "Crítico",
-    badgeColor: "bg-orange-900/50 text-ipet-orange",
+    badgeColor: "bg-orange-100 text-ipet-orange",
   },
   VENCIDA: {
     icon: XCircle,
     iconColor: "text-red-500",
-    borderColor: "border-red-800/40",
-    bgColor: "bg-red-900/10",
+    borderColor: "border-red-200",
+    bgColor: "bg-red-50",
     badge: "Vencida",
-    badgeColor: "bg-red-900/40 text-red-500",
+    badgeColor: "bg-red-100 text-red-500",
   },
   BLOQUEADA: {
     icon: Lock,
@@ -94,8 +94,8 @@ const OVERALL_CONFIG: Record<
   APTO: {
     label: "✅ Apto para embarcar!",
     subLabel: "Todos os requisitos estão completos.",
-    bg: "bg-emerald-900/20",
-    border: "border-emerald-700/40",
+    bg: "bg-emerald-50",
+    border: "border-emerald-200",
     text: "text-emerald-600",
   },
   PENDENTE: {
@@ -109,21 +109,21 @@ const OVERALL_CONFIG: Record<
     label: "⚠️ Atenção necessária",
     subLabel: "Algumas tarefas estão com prazo curto.",
     bg: "bg-amber-50",
-    border: "border-amber-700/40",
+    border: "border-amber-200",
     text: "text-amber-600",
   },
   CRITICO: {
     label: "🚨 Situação crítica",
     subLabel: "Prazos se encerrando. Ação imediata necessária.",
-    bg: "bg-orange-900/20",
-    border: "border-orange-700/40",
+    bg: "bg-orange-50",
+    border: "border-orange-200",
     text: "text-ipet-orange",
   },
   INAPTO: {
     label: "❌ Inapto para esta data",
     subLabel: "Não é possível embarcar nesta data com a documentação atual.",
-    bg: "bg-red-900/20",
-    border: "border-red-700/40",
+    bg: "bg-red-50",
+    border: "border-red-200",
     text: "text-red-500",
   },
 };
@@ -201,7 +201,7 @@ function TarefaCard({
         <Icon className={`w-5 h-5 flex-shrink-0 ${cfg.iconColor}`} />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-medium text-sm text-gray-100">{tarefa.titulo}</span>
+            <span className="font-medium text-sm text-navy">{tarefa.titulo}</span>
             <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${cfg.badgeColor}`}>
               {STATUS_CONFIG[tarefa.status].badge}
             </span>
