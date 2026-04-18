@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useMemo } from "react";
+import { use, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { calcularRoadmap, parseBR } from "@/services/travel-roadmap";
@@ -28,6 +28,7 @@ import {
   Syringe,
   ScanLine,
   Building2,
+  Trash2,
 } from "lucide-react";
 
 // ─── Tipos internos ───────────────────────────────────────────
@@ -360,6 +361,13 @@ export default function JourneyHubPage({
   const router = useRouter();
   const plano = useAppStore((s) => s.planosViagem.find((p) => p.id === planoId));
   const pet = useAppStore((s) => s.pets.find((p) => p.id === plano?.petId));
+  const removerPlanoViagem = useAppStore((s) => s.removerPlanoViagem);
+  const [confirmandoExclusao, setConfirmandoExclusao] = useState(false);
+
+  function excluirViagem() {
+    removerPlanoViagem(planoId);
+    router.replace("/viagens");
+  }
 
   const { estagios, progresso, proximaAcao } = useMemo(() => {
     if (!pet || !plano) return { estagios: [], progresso: 0, proximaAcao: null as unknown as ProximaAcao };
@@ -450,6 +458,40 @@ export default function JourneyHubPage({
           </div>
           <ChevronRight className="w-4 h-4 text-gray-600" />
         </Link>
+
+        {/* ── Excluir viagem ─────────────────────────────────────── */}
+        {!confirmandoExclusao ? (
+          <button
+            onClick={() => setConfirmandoExclusao(true)}
+            className="flex items-center justify-center gap-2 w-full py-3 text-gray-600 hover:text-red-400 text-sm transition-colors"
+          >
+            <Trash2 className="w-4 h-4" />
+            Excluir esta viagem
+          </button>
+        ) : (
+          <div className="bg-red-950/40 border border-red-800/50 rounded-2xl p-4 space-y-3">
+            <p className="text-sm text-red-300 font-medium text-center">
+              Excluir viagem para {regras.bandeira} {regras.nome}?
+            </p>
+            <p className="text-xs text-gray-500 text-center">
+              Esta ação não pode ser desfeita.
+            </p>
+            <div className="flex gap-2">
+              <button
+                onClick={excluirViagem}
+                className="flex-1 py-2.5 bg-red-500 hover:bg-red-400 text-white text-sm font-semibold rounded-xl transition-colors"
+              >
+                Sim, excluir
+              </button>
+              <button
+                onClick={() => setConfirmandoExclusao(false)}
+                className="flex-1 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-sm font-semibold rounded-xl transition-colors"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

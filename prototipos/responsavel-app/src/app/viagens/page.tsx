@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { calcularRoadmap, parseBR } from "@/services/travel-roadmap";
 import { REGRAS_DESTINO } from "@/data/destinations";
@@ -13,9 +14,11 @@ import {
   CheckCircle2,
   AlertTriangle,
   Clock,
+  Trash2,
+  X,
 } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // ─── Cálculo do progresso resumido ────────────────────────────
 
@@ -67,7 +70,14 @@ function calcularProgressoPlano(
 // ─── Página principal ─────────────────────────────────────────
 
 export default function ViagensPage() {
-  const { planosViagem, pets } = useAppStore();
+  const { planosViagem, pets, removerPlanoViagem } = useAppStore();
+  const router = useRouter();
+  const [confirmandoId, setConfirmandoId] = useState<string | null>(null);
+
+  function excluirViagem(id: string) {
+    removerPlanoViagem(id);
+    setConfirmandoId(null);
+  }
 
   const planosComPet = useMemo(
     () =>
@@ -96,7 +106,7 @@ export default function ViagensPage() {
         </div>
         <p className="text-gray-400 text-sm">
           {planosComPet.length > 0
-            ? `${planosComPet.length} viagem${planosComPet.length !== 1 ? " planejada" : " planejada"}`
+            ? `${planosComPet.length} ${planosComPet.length === 1 ? "viagem planejada" : "viagens planejadas"}`
             : "Seus planos de viagem com pets"}
         </p>
       </header>
@@ -131,61 +141,115 @@ export default function ViagensPage() {
                   <Clock className="w-4 h-4 text-sky-400" />
                 );
 
+              const confirmando = confirmandoId === plano.id;
+
               return (
                 <motion.div
                   key={plano.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <Link
-                    href={`/viagens/${plano.id}`}
-                    className="block bg-gray-900 border border-gray-800 rounded-2xl p-4 hover:border-gray-700 transition-colors"
-                  >
-                    {/* Top row */}
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="w-12 h-12 rounded-xl bg-gray-800 flex items-center justify-center text-2xl flex-shrink-0">
-                        {regras.bandeira}
+                  <div className="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+                    {/* Card clicável */}
+                    <div
+                      onClick={() => !confirmando && router.push(`/viagens/${plano.id}`)}
+                      className="p-4 cursor-pointer hover:bg-gray-800/30 transition-colors"
+                    >
+                      {/* Top row */}
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gray-800 flex items-center justify-center text-2xl flex-shrink-0">
+                          {regras.bandeira}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-white text-sm leading-snug">
+                            {regras.nome}
+                          </p>
+                          <p className="text-xs text-gray-400 mt-0.5">
+                            {pet.nome.split(" ")[0]} · Embarque: {plano.dataEmbarque}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {diasRestantes > 0
+                              ? `${diasRestantes} dias restantes`
+                              : diasRestantes === 0
+                              ? "Embarque hoje!"
+                              : "Viagem encerrada"}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {badgeEstado}
+                          <ChevronRight className="w-4 h-4 text-gray-600" />
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-white text-sm leading-snug">
-                          {regras.nome}
-                        </p>
-                        <p className="text-xs text-gray-400 mt-0.5">
-                          {pet.nome.split(" ")[0]} · Embarque: {plano.dataEmbarque}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          {diasRestantes > 0
-                            ? `${diasRestantes} dias restantes`
-                            : diasRestantes === 0
-                            ? "Embarque hoje!"
-                            : "Viagem encerrada"}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {badgeEstado}
-                        <ChevronRight className="w-4 h-4 text-gray-600" />
+
+                      {/* Progress bar */}
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <p className="text-[11px] text-gray-500">Progresso</p>
+                          <p className="text-[11px] font-semibold text-gray-400">
+                            {porcentagem}%
+                          </p>
+                        </div>
+                        <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${porcentagem}%` }}
+                            transition={{ duration: 0.6, delay: i * 0.05 + 0.2 }}
+                            className={`h-full rounded-full ${corBarra}`}
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Progress bar */}
-                    <div>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <p className="text-[11px] text-gray-500">Progresso</p>
-                        <p className="text-[11px] font-semibold text-gray-400">
-                          {porcentagem}%
-                        </p>
-                      </div>
-                      <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                    {/* Confirmação de exclusão / botão trash */}
+                    <AnimatePresence mode="wait">
+                      {confirmando ? (
                         <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${porcentagem}%` }}
-                          transition={{ duration: 0.6, delay: i * 0.05 + 0.2 }}
-                          className={`h-full rounded-full ${corBarra}`}
-                        />
-                      </div>
-                    </div>
-                  </Link>
+                          key="confirm"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="border-t border-gray-800 px-4 py-3 flex items-center gap-2"
+                        >
+                          <p className="text-xs text-red-400 flex-1">
+                            Excluir esta viagem?
+                          </p>
+                          <button
+                            onClick={() => excluirViagem(plano.id)}
+                            className="px-3 py-1.5 bg-red-500 hover:bg-red-400 text-white text-xs font-semibold rounded-xl transition-colors"
+                          >
+                            Excluir
+                          </button>
+                          <button
+                            onClick={() => setConfirmandoId(null)}
+                            className="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-semibold rounded-xl transition-colors"
+                          >
+                            Cancelar
+                          </button>
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="trash"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="border-t border-gray-800/60 px-4 py-2 flex justify-end"
+                        >
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setConfirmandoId(plano.id);
+                            }}
+                            className="flex items-center gap-1.5 text-gray-600 hover:text-red-400 text-xs py-1 transition-colors"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                            Excluir viagem
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </motion.div>
               );
             })}
