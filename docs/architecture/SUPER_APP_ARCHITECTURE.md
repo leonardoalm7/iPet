@@ -24,7 +24,7 @@ O **iPet** é um Super App Pet organizado em 3 fases de release:
 
 | Fase | Público | Produto | Status |
 |------|---------|---------|--------|
-| **1** | Responsável pelo pet | Smart Pet Pass — jornada pré-embarque | **Em desenvolvimento** |
+| **1** | Responsável pelo pet | Pet Pass — jornada pré-embarque | **Em desenvolvimento** |
 | **2** | Clínicas veterinárias | ERP Vet + habilitação como parceira de negócio | Planejado |
 | **3** | Companhias aéreas | Smart Gate RFID + motor de compliance no aeroporto | Futuro (hardware) |
 
@@ -123,7 +123,7 @@ mindmap
 ```mermaid
 graph TB
   subgraph CORE["⭐ Core Domain"]
-    PP["🐾 Pet Pass\n(Smart Pet Pass)\n—\nPassaporte Digital\nDocumentos\nAutenticação"]
+    PP["🐾 Pet Pass\n(Pet Pass)\n—\nPassaporte Digital\nDocumentos\nAutenticação"]
     CE["🔬 Compliance Engine\n—\nKnowledge Base\nMotor de Roadmap\nRegras por Destino"]
   end
 

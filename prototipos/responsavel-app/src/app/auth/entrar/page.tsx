@@ -77,7 +77,7 @@ function EntrarContent() {
           <h1 className="text-2xl font-bold text-white">
             ✈️ <span className="text-sky-400">iPet</span>
           </h1>
-          <p className="text-gray-400 text-sm mt-1">Smart Pet Pass</p>
+          <p className="text-gray-400 text-sm mt-1">Pet Pass</p>
         </div>
       </motion.div>
 

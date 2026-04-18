@@ -21,7 +21,7 @@ Exemplos:
 
 ## Sobre o Projeto
 
-**iPet** é um super app Pet com o **Smart Pet Pass** como produto principal.
+**iPet** é um super app Pet com o **Pet Pass** como produto principal.
 
 - **Modelo de negócio:** CSaaS (Compliance Sanitário as a Service)
 - **CEO:** Danielle Moreira

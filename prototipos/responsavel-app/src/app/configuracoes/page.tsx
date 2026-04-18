@@ -42,7 +42,7 @@ export default function ConfiguracoesPage() {
         <div className="bg-sky-900/20 border border-sky-800/30 rounded-2xl p-4 flex gap-3">
           <Info className="w-5 h-5 text-sky-400 flex-shrink-0 mt-0.5" />
           <div className="text-xs text-sky-300 leading-relaxed space-y-1">
-            <p className="font-medium text-sky-200">Versão Beta — iPet Smart Pet Pass</p>
+            <p className="font-medium text-sky-200">Versão Beta — iPet Pet Pass</p>
             <p>Os dados são armazenados localmente neste dispositivo.</p>
             <p>Autenticação por blockchain Polygon será ativada em breve.</p>
           </div>

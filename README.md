@@ -21,7 +21,7 @@ Nossa arquitetura foca na resolução de dores burocráticas para gerar engajame
 
 A estrutura foi desenhada para suportar a escala do projeto e facilitar a colaboração técnica:
 
-- **`/docs/business`**: Documentação estratégica, incluindo o Business Case completo do Smart Pet Pass e metas operacionais (como a redução no tempo de check-in).
+- **`/docs/business`**: Documentação estratégica, incluindo o Business Case completo do Pet Pass e metas operacionais (como a redução no tempo de check-in).
 - **`/docs/architecture`**: Modelagem de domínio (**DDD**) e definição da Linguagem Ubíqua do ecossistema.
 - **`/docs/requirements`**: Especificações técnicas e User Stories detalhadas para o desenvolvimento do backend.
 - **`/prototipos`**: Módulos funcionais em desenvolvimento, começando pelo **Agente de Aeroporto** (Next.js).

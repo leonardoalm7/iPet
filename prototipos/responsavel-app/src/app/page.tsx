@@ -60,7 +60,7 @@ export default function HomePage() {
             <Settings className="w-5 h-5 text-gray-400" />
           </Link>
         </div>
-        <p className="text-gray-400 text-sm mt-1">Smart Pet Pass</p>
+        <p className="text-gray-400 text-sm mt-1">Pet Pass</p>
       </header>
 
       <main className="flex-1 px-5 space-y-8">
@@ -128,7 +128,7 @@ export default function HomePage() {
         {/* ── Banner de destaque (apenas sem pets cadastrados) ─────── */}
         {!temPets && (
           <div className="bg-gradient-to-r from-sky-900/60 to-indigo-900/60 border border-sky-700/30 rounded-2xl p-4">
-            <p className="text-xs text-sky-300 font-medium mb-1">✨ Smart Pet Pass</p>
+            <p className="text-xs text-sky-300 font-medium mb-1">✨ Pet Pass</p>
             <p className="text-white text-sm font-semibold">
               Viaje com seu pet com segurança e zero surpresas
             </p>

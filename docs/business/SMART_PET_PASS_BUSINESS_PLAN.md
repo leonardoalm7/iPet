@@ -1,12 +1,12 @@
-# Business Case: Smart Pet Pass 🐾
+# Business Case: Pet Pass 🐾
 
 ## 1. Visão do Produto
 
-O **Smart Pet Pass** é uma plataforma de **Compliance Sanitário as a Service (CSaaS)** desenvolvida para transformar a aviação comercial e de carga no ecossistema de transporte de animais de estimação. Nosso objetivo fundamental é fornecer às companhias aéreas e autoridades regulatórias (como o VIGIAGRO) um motor de regras preditivo e validado, garantindo conformidade sanitária automatizada em tempo real.
+O **Pet Pass** é uma plataforma de **Compliance Sanitário as a Service (CSaaS)** desenvolvida para transformar a aviação comercial e de carga no ecossistema de transporte de animais de estimação. Nosso objetivo fundamental é fornecer às companhias aéreas e autoridades regulatórias (como o VIGIAGRO) um motor de regras preditivo e validado, garantindo conformidade sanitária automatizada em tempo real.
 
 ## 2. Solução Híbrida e Diferencial Estratégico
 
-A arquitetura do Smart Pet Pass foi concebida para endereçar dois fluxos críticos de mercado:
+A arquitetura do Pet Pass foi concebida para endereçar dois fluxos críticos de mercado:
 
 | Tipo de Voo             | Estratégia de Compliance                                                                 | Benefício Principal                                                                                                |
 | :---------------------- | :--------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
