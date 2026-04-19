@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "singapore",
+  "nome": "Singapore Airlines",
+  "codigo": "SQ",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.singaporeair.com/en_UK/us/travel-info/special-assistance/travelling-with-pets/",
+      "title": "Singapore Airlines — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "dimensoesMaxCm": {
+      "comprimento": 0,
+      "largura": 0,
+      "altura": 0,
+      "somaDimensoes": 0
+    },
+    "especiesPermitidas": [],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 0,
+    "maxAnimaisPorVoo": 0,
+    "reservaAntecedenciaHoras": 0,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 32,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Singapore Airlines NÃO aceita pets na cabine (exceção: cães de assistência médica certificada). Apenas porão como bagagem despachada, máx 32kg."
+}

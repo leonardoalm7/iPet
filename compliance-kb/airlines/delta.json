@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "delta",
+  "nome": "Delta Air Lines",
+  "codigo": "DL",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.delta.com/us/en/pet-travel/overview",
+      "title": "Delta Air Lines — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 46,
+      "largura": 28,
+      "altura": 24,
+      "somaDimensoes": 98
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO",
+      "AVE"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 10,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 0,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Delta SUSPENDEU o serviço de bagagem despachada (porão) para pets — exceção para militares dos EUA. Apenas cabine. Idade mínima: 16 semanas em voos internacionais. Sem limite de peso fixo se couber sob o assento.",
+  "observacoesInternas": "Peso máximo na cabine NÃO CONFIRMADO — sem limite fixo declarado, deve caber sob o assento"
+}

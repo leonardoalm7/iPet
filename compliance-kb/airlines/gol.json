@@ -31,7 +31,10 @@
       "altura": 25,
       "somaDimensoes": 115
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": false,
     "idadeMinimaSemanas": 8,
     "maxAnimaisPorVoo": 3,
@@ -44,5 +47,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "Consultar GOL para raças restritas no porão. Caixa rígida IATA obrigatória."
   },
-  "observacoesGerais": "⚠️ Verificar disponibilidade de vagas para animais no momento da reserva — é limitado por voo."
+  "observacoesGerais": "⚠️ Verificar disponibilidade de vagas para animais no momento da reserva — é limitado por voo.",
+  "racasPerigosasBanidas": true
 }

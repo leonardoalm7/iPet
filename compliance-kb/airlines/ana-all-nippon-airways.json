@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "ana-all-nippon-airways",
+  "nome": "ANA - All Nippon Airways",
+  "codigo": "NH",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.ana.co.jp/en/jp/guide/boarding-procedures/baggage/pet/",
+      "title": "ANA - All Nippon Airways — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "dimensoesMaxCm": {
+      "comprimento": 0,
+      "largura": 0,
+      "altura": 0,
+      "somaDimensoes": 0
+    },
+    "especiesPermitidas": [],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 0,
+    "maxAnimaisPorVoo": 0,
+    "reservaAntecedenciaHoras": 0,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ ANA NÃO permite pets na cabine. Apenas porão. Braquicefálicos banidos terminantemente. NÃO CONFIRMADO limite de peso — verificar no site oficial.",
+  "observacoesInternas": "Peso máximo no porão NÃO CONFIRMADO — verificar no site oficial"
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "qantas",
+  "nome": "Qantas",
+  "codigo": "QF",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.qantas.com/gb/en/travel-info/baggage/traveling-with-pets.html",
+      "title": "Qantas — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "dimensoesMaxCm": {
+      "comprimento": 0,
+      "largura": 0,
+      "altura": 0,
+      "somaDimensoes": 0
+    },
+    "especiesPermitidas": [],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 0,
+    "maxAnimaisPorVoo": 0,
+    "reservaAntecedenciaHoras": 0,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Qantas NÃO aceita pets na cabine nem como bagagem despachada. Transporte exclusivamente via Qantas Freight (carga manifestada)."
+}

@@ -31,7 +31,10 @@
       "altura": 25,
       "somaDimensoes": 115
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": false,
     "idadeMinimaSemanas": 8,
     "maxAnimaisPorVoo": 5,
@@ -44,5 +47,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "Raças braquicefálicas aceitas apenas em rotas e condições específicas. Verificar com a LATAM no momento da reserva. Caixa rígida homologada IATA obrigatória para porão."
   },
-  "observacoesGerais": "⚠️ Regras variam por rota (doméstica/internacional) e aeronave. Sempre confirmar com a LATAM na reserva. Taxa cobrada por trecho."
+  "observacoesGerais": "⚠️ Regras variam por rota (doméstica/internacional) e aeronave. Sempre confirmar com a LATAM na reserva. Taxa cobrada por trecho.",
+  "racasPerigosasBanidas": true
 }

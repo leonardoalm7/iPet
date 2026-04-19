@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "klm",
+  "nome": "KLM",
+  "codigo": "KL",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.klm.com/information/pets",
+      "title": "KLM — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 46,
+      "largura": 28,
+      "altura": 24,
+      "somaDimensoes": 98
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 15,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Idade mínima de 15 semanas (regulamentação europeia). Braquicefálicos banidos do porão em qualquer circunstância."
+}

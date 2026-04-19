@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "qatar",
+  "nome": "Qatar Airways",
+  "codigo": "QR",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.qatarairways.com/en-us/baggage/animals.html",
+      "title": "Qatar Airways — Travelling with pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    },
+    {
+      "url": "https://petabroad.eu/qatar-airways-pet-policy/",
+      "title": "Qatar Airways Pet Policy — PetAbroad (guia 2026)",
+      "type": "AGREGADOR",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Qatar NÃO permite pets na cabine (apenas falcões e cães-guia). Todos os pets viajam como bagagem despachada ou carga. Braquicefálicos banidos."
+    }
+  ],
+  "cabine": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "dimensoesMaxCm": {
+      "comprimento": 0,
+      "largura": 0,
+      "altura": 0,
+      "somaDimensoes": 0
+    },
+    "especiesPermitidas": [],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 12,
+    "maxAnimaisPorVoo": 0,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": "Qatar Airways NÃO permite pets na cabine. Exceções: cães-guia/serviço em rotas selecionadas (EUA, UE, Canadá, Austrália) e falcões (1 por passageiro, máx 6 por aeronave, apenas Economy). Todos os demais pets viajam exclusivamente como bagagem despachada no porão pressurizado."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Pet + caixa + comida = máx 75kg como bagagem despachada. Acima disso, via carga. Caixa rígida IATA obrigatória. Raças braquicefálicas (Pug, Bulldog, Persa) são banidas. Custo: ~$350 (até 32kg) ou ~$450 (32-75kg). Atenção: conexões em Doha no verão podem ser recusadas por calor extremo — preferir voos noturnos."
+  },
+  "observacoesGerais": "⚠️ Qatar Airways não aceita pets na cabine (apenas porão). Braquicefálicos banidos. Idade mínima 12 semanas (7 meses para entrada no Qatar). Reservar com mínimo 48h de antecedência. Conexões em Doha no verão: risco de recusa por temperatura."
+}

@@ -31,7 +31,10 @@
       "altura": 26,
       "somaDimensoes": 105
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": false,
     "idadeMinimaSemanas": 8,
     "maxAnimaisPorVoo": 2,
@@ -44,5 +47,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "Caixa IATA obrigatória para porão. Verificar restrições por rota e tipo de aeronave."
   },
-  "observacoesGerais": "⚠️ Copa é o principal hub para América Central e Caribe. Verificar regras específicas de cada destino final — a Copa opera em países com políticas de importação de animais muito distintas."
+  "observacoesGerais": "⚠️ Copa é o principal hub para América Central e Caribe. Verificar regras específicas de cada destino final — a Copa opera em países com políticas de importação de animais muito distintas.",
+  "racasPerigosasBanidas": true
 }

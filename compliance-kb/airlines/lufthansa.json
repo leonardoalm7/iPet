@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "lufthansa",
+  "nome": "Lufthansa",
+  "codigo": "LH",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.lufthansa.com/de/en/traveling-with-animals",
+      "title": "Lufthansa — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 55,
+      "largura": 40,
+      "altura": 23,
+      "somaDimensoes": 118
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 12,
+    "maxAnimaisPorVoo": 2,
+    "reservaAntecedenciaHoras": 72,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Idade mínima passa a ser 16 semanas para voos para os EUA. No porão, peso/tamanho dependem da aeronave — NÃO CONFIRMADO limite exato. Até 2 pets por passageiro na cabine.",
+  "observacoesInternas": "Peso máximo no porão NÃO CONFIRMADO — verificar no site oficial"
+}

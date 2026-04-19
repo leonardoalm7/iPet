@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "united",
+  "nome": "United Airlines",
+  "codigo": "UA",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.united.com/en/us/fly/travel/traveling-with-pets.html",
+      "title": "United Airlines — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 43,
+      "largura": 25,
+      "altura": 22,
+      "somaDimensoes": 90
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 16,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 0,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ PetSafe (porão) SUSPENSO. Apenas cabine. Caixa rígida: 43x30x19cm; maleável: 43x25x22cm. Sem limite de peso se couber confortavelmente.",
+  "observacoesInternas": "Peso máximo na cabine NÃO CONFIRMADO — sem limite fixo declarado, deve caber sob o assento"
+}

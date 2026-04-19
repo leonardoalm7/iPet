@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "avianca",
+  "nome": "Avianca",
+  "codigo": "AV",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.avianca.com/br/pt/antes-da-sua-viagem/servicos-especiais/viajar-com-animais/",
+      "title": "Avianca — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 41,
+      "largura": 30,
+      "altura": 20,
+      "somaDimensoes": 91
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO",
+      "AVE"
+    ],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 16,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 20,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Braquicefálicos e raças perigosas banidos em qualquer modalidade. Peso no porão pode variar por rota — 20kg é o padrão."
+}

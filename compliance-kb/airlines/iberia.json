@@ -31,7 +31,10 @@
       "altura": 25,
       "somaDimensoes": 105
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": false,
     "idadeMinimaSemanas": 15,
     "maxAnimaisPorVoo": null,
@@ -44,5 +47,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "Porão climatizado. Caixa IATA obrigatória. Raças braquicefálicas proibidas. Confirmar disponibilidade."
   },
-  "observacoesGerais": "⚠️ Iberia conecta Brasil com Madrid e demais destinos europeus via conexão. Verificar política para voos de conexão — regras podem variar entre trechos."
+  "observacoesGerais": "⚠️ Iberia conecta Brasil com Madrid e demais destinos europeus via conexão. Verificar política para voos de conexão — regras podem variar entre trechos.",
+  "racasPerigosasBanidas": true
 }

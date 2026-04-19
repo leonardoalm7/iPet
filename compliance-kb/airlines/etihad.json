@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "etihad",
+  "nome": "Etihad Airways",
+  "codigo": "EY",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.etihad.com/en/help/faq/travel-companions",
+      "title": "Etihad Airways — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 40,
+      "largura": 40,
+      "altura": 22,
+      "somaDimensoes": 102
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO",
+      "AVE"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 16,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 168,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Cabine permitida apenas em voos operados pela Etihad de/para Abu Dhabi. Documentos exigem submissão com 72h a 7 dias (168h) de antecedência. Porão NÃO disponível — apenas carga manifestada via Etihad Cargo."
+}

@@ -55,14 +55,20 @@ interface KBAirline {
   confidence: string;
   lastVerified: string;
   nextReviewDate: string;
+  racasPerigosasBanidas?: boolean;
   cabine: {
+    permitido: boolean;
     pesoMaxKg: number;
     dimensoesMaxCm: { comprimento: number; largura: number; altura: number };
     idadeMinimaSemanas: number;
     racasBraquisefálicasPermitidas: boolean;
     observacoes: string;
   };
-  porao: { pesoMaxKg: number };
+  porao: {
+    permitido: boolean;
+    pesoMaxKg: number;
+    racasBraquisefálicasPermitidas: boolean;
+  };
   observacoesGerais: string;
 }
 
@@ -109,12 +115,33 @@ function main() {
     "latam",
     "gol",
     "azul",
+    "voepass",
     "tap",
     "air-france",
     "iberia",
+    "lufthansa",
+    "klm",
+    "swiss",
+    "british-airways",
     "copa",
+    "avianca",
+    "aerolineas-argentinas",
+    "aeromexico",
     "american",
+    "delta",
+    "united",
+    "jetblue",
+    "air-canada",
     "emirates",
+    "qatar",
+    "etihad",
+    "turkish",
+    "singapore",
+    "qantas",
+    "japan-airlines",
+    "ana-all-nippon-airways",
+    "korean-air",
+    "south-african",
   ];
 
   const destinations = destinationFiles.map((f) =>
@@ -155,11 +182,13 @@ function main() {
     id: ${JSON.stringify(a.id)},
     nome: ${JSON.stringify(a.nome)},
     codigo: ${JSON.stringify(a.codigo)},
-    pesoMaxCabine: ${a.cabine.pesoMaxKg},
-    pesoMaxPorао: ${a.porao.pesoMaxKg},
+    pesoMaxCabine: ${a.cabine.permitido ? a.cabine.pesoMaxKg : 0},
+    pesoMaxPorао: ${a.porao.permitido ? a.porao.pesoMaxKg : 0},
     dimensoesMaxCabine: { comprimento: ${a.cabine.dimensoesMaxCm.comprimento}, largura: ${a.cabine.dimensoesMaxCm.largura}, altura: ${a.cabine.dimensoesMaxCm.altura} },
     idadeMinimaAnimal: ${a.cabine.idadeMinimaSemanas},
-    racasBraquisefálicasPermitidas: ${a.cabine.racasBraquisefálicasPermitidas},
+    braquicefalicoCabine: ${a.cabine.racasBraquisefálicasPermitidas},
+    braquicefalicoPorao: ${a.porao.racasBraquisefálicasPermitidas},
+    racasPerigosasBanidas: ${a.racasPerigosasBanidas ?? true},
     anotacoes: ${JSON.stringify(a.observacoesGerais)},
     // KB metadata
     _kbConfidence: ${JSON.stringify(a.confidence)} as const,

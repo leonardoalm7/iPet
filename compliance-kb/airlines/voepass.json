@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "voepass",
+  "nome": "VOEPASS",
+  "codigo": "2Z",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.voepass.com.br/empresa/site/regras-de-bagagem",
+      "title": "VOEPASS — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 36,
+      "largura": 33,
+      "altura": 23,
+      "somaDimensoes": 92
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 16,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 0,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Apenas 3 animais por voo na cabine. Porão NÃO disponível para passageiros. Dimensões menores que as grandes cias — atenção ao tamanho do kennel. NÃO CONFIRMADO — verificar restrições de raças no site oficial."
+}

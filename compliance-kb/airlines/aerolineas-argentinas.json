@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "aerolineas-argentinas",
+  "nome": "Aerolíneas Argentinas",
+  "codigo": "AR",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.aerolineas.com.ar/en-us/servicios-opcionales/mascotas",
+      "title": "Aerolíneas Argentinas — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 9,
+    "dimensoesMaxCm": {
+      "comprimento": 44,
+      "largura": 30,
+      "altura": 20,
+      "somaDimensoes": 94
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 12,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "NÃO CONFIRMADO — verificar no site oficial o limite de peso exato para o porão, pois pode sofrer variações por equipamento.",
+  "observacoesInternas": "Peso máximo no porão NÃO CONFIRMADO — verificar no site oficial"
+}

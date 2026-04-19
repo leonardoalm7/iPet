@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "korean-air",
+  "nome": "Korean Air",
+  "codigo": "KE",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.koreanair.com/br/pt/airport/assistance/travel-with-pet/guidelines",
+      "title": "Korean Air — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 7,
+    "dimensoesMaxCm": {
+      "comprimento": 40,
+      "largura": 30,
+      "altura": 20,
+      "somaDimensoes": 90
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO",
+      "AVE"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 8,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 32,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ Dimensões da cabine podem variar por aeronave — 20cm de altura é estimativa conservadora. Confirmar na reserva."
+}

@@ -31,7 +31,10 @@
       "altura": 22,
       "somaDimensoes": 97
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": false,
     "idadeMinimaSemanas": 15,
     "maxAnimaisPorVoo": null,
@@ -44,5 +47,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "Para porão: caixa rígida IATA obrigatória. Raças braquicefálicas NÃO aceitas no porão. Limite de peso de 75kg (animal + caixa)."
   },
-  "observacoesGerais": "⚠️ TAP é a principal conexão Brasil-Europa via Lisboa. Rota de alta demanda para responsáveis com pets. Confirmar disponibilidade de vagas para animais sempre que reservar — limite por voo."
+  "observacoesGerais": "⚠️ TAP é a principal conexão Brasil-Europa via Lisboa. Rota de alta demanda para responsáveis com pets. Confirmar disponibilidade de vagas para animais sempre que reservar — limite por voo.",
+  "racasPerigosasBanidas": true
 }

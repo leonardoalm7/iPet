@@ -31,7 +31,10 @@
       "altura": 23,
       "somaDimensoes": 96
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": true,
     "idadeMinimaSemanas": 8,
     "maxAnimaisPorVoo": 5,
@@ -44,5 +47,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "No porão, raças braquicefálicas não são aceitas mesmo na Azul."
   },
-  "observacoesGerais": "⚠️ A permissão de raças braquicefálicas é o diferencial da Azul, mas deve ser SEMPRE confirmada no momento da reserva. Lista de raças aceitas pode variar."
+  "observacoesGerais": "⚠️ A permissão de raças braquicefálicas é o diferencial da Azul, mas deve ser SEMPRE confirmada no momento da reserva. Lista de raças aceitas pode variar.",
+  "racasPerigosasBanidas": true
 }

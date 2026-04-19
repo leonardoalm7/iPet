@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "turkish",
+  "nome": "Turkish Airlines",
+  "codigo": "TK",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": true,
+  "sources": [
+    {
+      "url": "https://www.turkishairlines.com/en-int/any-questions/traveling-with-pets/",
+      "title": "Turkish Airlines — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 40,
+      "largura": 30,
+      "altura": 23,
+      "somaDimensoes": 93
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO",
+      "AVE"
+    ],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 10,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 6,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "No porão, o peso máximo varia conforme o tipo de aeronave e rota. NÃO CONFIRMADO — verificar no site oficial (peso máximo exato no porão).",
+  "observacoesInternas": "Peso máximo no porão NÃO CONFIRMADO — verificar no site oficial"
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "jetblue",
+  "nome": "JetBlue",
+  "codigo": "B6",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "racasPerigosasBanidas": false,
+  "sources": [
+    {
+      "url": "https://www.jetblue.com/traveling-together/traveling-with-pets",
+      "title": "JetBlue — Transporte de Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 9,
+    "dimensoesMaxCm": {
+      "comprimento": 43,
+      "largura": 31,
+      "altura": 21,
+      "somaDimensoes": 95
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 8,
+    "maxAnimaisPorVoo": 1,
+    "reservaAntecedenciaHoras": 0,
+    "observacoes": ""
+  },
+  "porao": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": ""
+  },
+  "observacoesGerais": "⚠️ JetBlue NÃO transporta animais no porão. Apenas cabine. Opera principalmente rotas domésticas EUA e Caribe."
+}
