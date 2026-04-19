@@ -23,7 +23,13 @@ import { ptBR } from "date-fns/locale";
 // ============================================================
 
 export function parseBR(dateStr: string): Date {
+  if (!dateStr) return new Date(NaN);
   return parse(dateStr, "dd/MM/yyyy", new Date());
+}
+
+export function parseBRSafe(dateStr: string): Date | null {
+  const d = parseBR(dateStr);
+  return isValid(d) ? d : null;
 }
 
 export function formatBR(date: Date): string {
@@ -54,7 +60,33 @@ export function calcularRoadmap(
   hoje.setHours(0, 0, 0, 0);
 
   const dataEmbarque = parseBR(dataEmbarqueStr);
+  if (!isValid(dataEmbarque)) {
+    return {
+      petId: pet.id,
+      planoViagemId,
+      destino,
+      dataEmbarque: dataEmbarqueStr,
+      statusGeral: "INAPTO",
+      dataLiberacao: null,
+      tarefas: [],
+      geradoEm: new Date().toISOString(),
+    };
+  }
+
   const regras = REGRAS_DESTINO[destino];
+  if (!regras) {
+    return {
+      petId: pet.id,
+      planoViagemId,
+      destino,
+      dataEmbarque: dataEmbarqueStr,
+      statusGeral: "PENDENTE",
+      dataLiberacao: null,
+      tarefas: [],
+      geradoEm: new Date().toISOString(),
+    };
+  }
+
   const tarefas: TarefaRoadmap[] = [];
 
   // ----------------------------------------------------------------
@@ -264,6 +296,7 @@ function calcularStatusGeral(
   hoje: Date
 ): { statusGeral: StatusCompliance; dataLiberacao: string | null } {
   const regras = REGRAS_DESTINO[destino];
+  if (!regras) return { statusGeral: "PENDENTE", dataLiberacao: null };
 
   const temVencida = tarefas.some((t) => t.status === "VENCIDA");
   const temCritico = tarefas.some((t) => t.status === "CRITICO");

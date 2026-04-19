@@ -18,6 +18,7 @@ import {
   PlusCircle,
   ChevronRight,
   Cpu,
+  Pencil,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -30,7 +31,7 @@ import {
 } from "@/services/document-service";
 import { formatBR } from "@/services/travel-roadmap";
 import { differenceInYears, differenceInMonths } from "date-fns";
-import { parseBR } from "@/services/travel-roadmap";
+import { parseBRSafe } from "@/services/travel-roadmap";
 import { PassaporteQRMini } from "@/components/PassaporteQR";
 
 // --------------------------------------------------------
@@ -99,7 +100,8 @@ export default function PassaportePage({
   }
 
   const idadePet = (() => {
-    const nascimento = parseBR(pet.dataNascimento);
+    const nascimento = parseBRSafe(pet.dataNascimento);
+    if (!nascimento) return "Idade desconhecida";
     const anos = differenceInYears(new Date(), nascimento);
     if (anos > 0) return `${anos} ano${anos > 1 ? "s" : ""}`;
     const meses = differenceInMonths(new Date(), nascimento);
@@ -152,6 +154,13 @@ export default function PassaportePage({
           <ArrowLeft className="w-5 h-5" />
         </button>
         <h1 className="text-lg font-semibold flex-1">Passaporte Pet</h1>
+        <Link
+          href={`/pets/${pet.id}/editar`}
+          aria-label="Editar pet"
+          className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"
+        >
+          <Pencil className="w-4 h-4 text-gray-500" />
+        </Link>
         <ShieldCheck className="w-5 h-5 text-teal" />
       </header>
 

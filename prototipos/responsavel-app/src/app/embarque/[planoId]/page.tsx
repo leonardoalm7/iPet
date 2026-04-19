@@ -5,7 +5,7 @@ import { useAppStore } from "@/store/app-store";
 import { REGRAS_DESTINO } from "@/data/destinations";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { isBraquicefalico } from "@/data/braquicefalicos";
-import { parseBR } from "@/services/travel-roadmap";
+import { parseBR, parseBRSafe } from "@/services/travel-roadmap";
 import { differenceInDays, format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { motion, AnimatePresence } from "framer-motion";
@@ -294,7 +294,16 @@ export default function EmbarquePage({
   }
 
   const regras = REGRAS_DESTINO[plano.destino];
-  const dataEmbarque = parseBR(plano.dataEmbarque);
+  const dataEmbarque = parseBRSafe(plano.dataEmbarque);
+
+  if (!regras || !dataEmbarque) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500 text-sm">Dados de viagem inválidos.</p>
+      </div>
+    );
+  }
+
   const diasRestantes = differenceInDays(dataEmbarque, new Date());
   const dataFormatada = format(dataEmbarque, "d 'de' MMMM", { locale: ptBR });
 

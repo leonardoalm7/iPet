@@ -14,7 +14,8 @@ import {
 function EntrarContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") ?? "/";
+  const rawRedirect = searchParams.get("redirect") ?? "/";
+  const redirect = rawRedirect.startsWith("/") && !rawRedirect.startsWith("//") ? rawRedirect : "/";
   const oauthError = searchParams.get("error") === "oauth";
 
   const [email, setEmail] = useState("");

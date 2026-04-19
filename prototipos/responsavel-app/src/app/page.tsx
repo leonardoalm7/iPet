@@ -8,7 +8,7 @@ import { PetCardHome } from "@/components/PetCardHome";
 import { BottomNav } from "@/components/BottomNav";
 import { SugestoesDestinos } from "@/components/SugestoesDestinos";
 import { HoteisPetSection } from "@/components/HoteisPetSection";
-import { calcularRoadmap, parseBR } from "@/services/travel-roadmap";
+import { calcularRoadmap, parseBRSafe } from "@/services/travel-roadmap";
 import { REGRAS_DESTINO } from "@/data/destinations";
 import { differenceInDays } from "date-fns";
 import { motion } from "framer-motion";
@@ -36,7 +36,9 @@ export default function HomePage() {
       if (!pet) return null;
       const hoje = new Date();
       hoje.setHours(0, 0, 0, 0);
-      const diasRestantes = differenceInDays(parseBR(plano.dataEmbarque), hoje);
+      const dataEmbarque = parseBRSafe(plano.dataEmbarque);
+      if (!dataEmbarque) return null;
+      const diasRestantes = differenceInDays(dataEmbarque, hoje);
       return { plano, pet, diasRestantes };
     })
     .filter((v) => v !== null && v.diasRestantes >= 0)
@@ -65,7 +67,7 @@ export default function HomePage() {
 
       <main className="flex-1 px-5 space-y-8">
         {/* ── Journey Hub Banner (viagem ativa) ─────────────────── */}
-        {proximaViagem && (
+        {proximaViagem && REGRAS_DESTINO[proximaViagem.plano.destino] && (
           <JourneyHubBanner
             planoId={proximaViagem.plano.id}
             petNome={proximaViagem.pet.nome}

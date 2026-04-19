@@ -22,12 +22,13 @@ const PUBLIC_PATHS = [
 ];
 
 export async function middleware(request: NextRequest) {
-  // ── Modo dev sem Supabase configurado ─────────────────────────
-  // Se as env vars não estiverem presentes, passa tudo direto sem auth.
-  // Remove este bloco quando ativar o Supabase em produção.
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
   if (!supabaseUrl || !supabaseKey) {
+    if (process.env.NODE_ENV === "production") {
+      return new NextResponse("Service Unavailable", { status: 503 });
+    }
     return NextResponse.next({ request });
   }
 

@@ -2,7 +2,7 @@
 
 import { use } from "react";
 import { useAppStore } from "@/store/app-store";
-import { parseBR } from "@/services/travel-roadmap";
+import { parseBRSafe } from "@/services/travel-roadmap";
 import { differenceInYears, differenceInMonths } from "date-fns";
 import { isBraquicefalico } from "@/data/braquicefalicos";
 import {
@@ -56,7 +56,8 @@ export default function VerificarPage({
   const braqui = isBraquicefalico(pet.raca);
 
   const idadePet = (() => {
-    const nascimento = parseBR(pet.dataNascimento);
+    const nascimento = parseBRSafe(pet.dataNascimento);
+    if (!nascimento) return "Idade desconhecida";
     const anos = differenceInYears(new Date(), nascimento);
     if (anos > 0) return `${anos} ano${anos > 1 ? "s" : ""}`;
     const meses = differenceInMonths(new Date(), nascimento);
