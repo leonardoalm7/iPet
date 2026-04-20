@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "PANAMA",
+  "nome": "Panamá",
+  "bandeira": "🇵🇦",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://mida.gob.pa/cuarentena-agropecuaria/",
+      "title": "MIDA — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "exigePermissaoImportacao": true,
+    "observacoes": "É obrigatório preencher o formulário de Solicitação de Quarentena Domiciliar (import permit). Se cumprir todos os requisitos e pagar a taxa, o pet faz quarentena em casa; caso contrário, ficará retido 40 dias na instalação do aeroporto."
+  }
+}

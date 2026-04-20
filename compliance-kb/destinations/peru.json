@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "PERU",
+  "nome": "Peru",
+  "bandeira": "🇵🇪",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.gob.pe/senasa",
+      "title": "SENASA — Servicio Nacional de Sanidad Agraria — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "exigeCVI": true,
+    "diasAntesCVI": 14,
+    "exigePermissaoImportacao": false,
+    "observacoes": "O CVI é válido por 14 dias após a emissão. Requer tratamento contra parasitas internos e externos realizado nos 15 dias anteriores à viagem."
+  }
+}

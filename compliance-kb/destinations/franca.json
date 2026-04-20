@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "FRANCA",
+  "nome": "França",
+  "bandeira": "🇫🇷",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://agriculture.gouv.fr/voyager-avec-son-animal-de-compagnie",
+      "title": "DGAL — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "exigePermissaoImportacao": false,
+    "observacoes": "Segue Regulamento EU 576/2013. Cães classificados como categoria 1 (cães de ataque, como pitbulls sem pedigree FCI) são totalmente proibidos de entrar na França."
+  }
+}

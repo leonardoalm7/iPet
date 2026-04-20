@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "AFRICA_DO_SUL",
+  "nome": "África do Sul",
+  "bandeira": "🇿🇦",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.dalrrd.gov.za/index.php/services/import-dogs-and-cats",
+      "title": "DALRRD — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 30,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 0,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "exigePermissaoImportacao": true,
+    "observacoes": "Animais OBRIGATORIAMENTE devem chegar como Carga Manifestada. Quarentena 14 dias obrigatória. Exige testagem de Dirofilariose, Leishmaniose e Brucelose além da raiva."
+  }
+}

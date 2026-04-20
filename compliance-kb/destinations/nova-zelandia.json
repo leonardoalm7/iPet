@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "NOVA_ZELANDIA",
+  "nome": "Nova Zelândia",
+  "bandeira": "🇳🇿",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.mpi.govt.nz/bring-send-to-nz/pets-travelling-to-nz/bringing-cats-and-dogs-to-nz/",
+      "title": "MPI — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "exigePermissaoImportacao": true,
+    "observacoes": "Brasil NÃO é aprovado para exportação direta — animal deve morar 6 meses em país aprovado. Quarentena de 10 dias OBRIGATÓRIA. Reserva de vaga meses antes."
+  }
+}

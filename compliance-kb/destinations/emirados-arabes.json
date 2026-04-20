@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "EMIRADOS_ARABES",
+  "nome": "Emirados Árabes Unidos",
+  "bandeira": "🇦🇪",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.moccae.gov.ae/en/services/export-import-services/import-permit-pets.aspx",
+      "title": "MOCCAE — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 0,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "exigePermissaoImportacao": true,
+    "observacoes": "Permissão de importação via MOCCAE é estritamente obrigatória antes do embarque. Animais não podem viajar na cabine na maioria das rotas."
+  }
+}

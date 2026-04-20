@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "COLOMBIA",
+  "nome": "Colômbia",
+  "bandeira": "🇨🇴",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.ica.gov.co/importacion-y-exportacion/mascotas",
+      "title": "ICA — Instituto Colombiano Agropecuario — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "exigePermissaoImportacao": false,
+    "observacoes": "O CVI deve ser emitido com no máximo 10 dias de antecedência. Não é exigida Permissão de Importação prévia (CIS) para cães e gatos de companhia se acompanhados do tutor."
+  }
+}

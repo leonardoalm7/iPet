@@ -17,15 +17,38 @@ export type Destino =
   // Europa
   | "PORTUGAL"
   | "REINO_UNIDO"
+  | "ALEMANHA"
+  | "FRANCA"
+  | "ESPANHA"
+  | "ITALIA"
+  | "HOLANDA"
+  | "SUICA"
+  | "NORUEGA"
   // América Latina
   | "ARGENTINA"
   | "CHILE"
   | "URUGUAI"
   | "MEXICO"
+  | "COLOMBIA"
+  | "PERU"
+  | "PARAGUAI"
+  | "BOLIVIA"
+  | "EQUADOR"
+  | "PANAMA"
+  | "COSTA_RICA"
   // América do Norte
   | "CANADA"
   // Oceania
-  | "AUSTRALIA";
+  | "AUSTRALIA"
+  | "NOVA_ZELANDIA"
+  // Oriente Médio
+  | "EMIRADOS_ARABES"
+  | "ISRAEL"
+  // Ásia
+  | "COREIA_DO_SUL"
+  | "SINGAPURA"
+  // África
+  | "AFRICA_DO_SUL";
 
 export type StatusCompliance =
   | "APTO"

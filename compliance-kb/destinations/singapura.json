@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "SINGAPURA",
+  "nome": "Singapura",
+  "bandeira": "🇸🇬",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.nparks.gov.sg/avs/pets/bringing-animals-into-singapore-and-exporting/bringing-in-and-transshipping-dogs-and-cats/preparing-to-bring-dogs-and-cats-into-singapore",
+      "title": "AVS — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 30,
+    "exigeCVI": true,
+    "diasAntesCVI": 7,
+    "exigePermissaoImportacao": true,
+    "observacoes": "Brasil é Categoria D: quarentena de 30 dias mandatória. Vacinas (raiva + polivalentes) têm cronogramas estritos. Import permit via AVS obrigatório."
+  }
+}

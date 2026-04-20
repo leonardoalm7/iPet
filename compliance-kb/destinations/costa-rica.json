@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "COSTA_RICA",
+  "nome": "Costa Rica",
+  "bandeira": "🇨🇷",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.senasa.go.cr/informacion/centro-de-informacion/informacion/sgc/dca/dca-pg-01-importacion/dca-pg-01-re-03",
+      "title": "SENASA Costa Rica — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 14,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "exigeCVI": true,
+    "diasAntesCVI": 14,
+    "exigePermissaoImportacao": false,
+    "observacoes": "A vacina antirrábica e o atestado de saúde (CVI) possuem carência/validade de 14 dias para este destino."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "ALEMANHA",
+  "nome": "Alemanha",
+  "bandeira": "🇩🇪",
+  "lastVerified": "2026-04-19",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-19",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.bmel.de/EN/topics/animals/pets-and-zoo-animals/pets-entry-regulation.html",
+      "title": "BMEL — Importação de pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-19"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-19",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial via levantamento de produto."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "exigePermissaoImportacao": false,
+    "observacoes": "Segue Regulamento EU 576/2013. Exige sorologia para países não listados (ex: Brasil) com carência de 90 dias."
+  }
+}
