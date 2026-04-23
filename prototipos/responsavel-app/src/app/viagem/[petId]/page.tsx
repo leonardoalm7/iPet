@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { RoadmapView } from "@/components/RoadmapView";
 import { RoadmapTimeline } from "@/components/RoadmapTimeline";
 import { DateInput } from "@/components/DateInput";
+import { track } from "@/services/analytics";
 
 export default function ViagemPage({
   params,
@@ -46,6 +47,8 @@ export default function ViagemPage({
     const result = calcularRoadmap(pet!, destino, dataEmbarque, "preview");
     setRoadmap(result);
     setSalvo(false);
+    track("destino_selecionado", { destino });
+    track("roadmap_gerado", { destino, qtdTarefas: result.tarefas.length });
   }
 
   function salvarViagem() {

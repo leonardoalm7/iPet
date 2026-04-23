@@ -32,6 +32,7 @@ import { formatBR } from "@/services/travel-roadmap";
 import { differenceInYears, differenceInMonths } from "date-fns";
 import { parseBR } from "@/services/travel-roadmap";
 import { PassaporteQRMini } from "@/components/PassaporteQR";
+import { track } from "@/services/analytics";
 
 // --------------------------------------------------------
 // Cores por status de autenticação
@@ -124,6 +125,7 @@ export default function PassaportePage({
         hash,
       });
       adicionarDocumento(doc);
+      track("documento_uploaded", { tipo: uploadTipo });
       setShowUploadForm(false);
       setUploadTitulo("");
       setUploadData("");

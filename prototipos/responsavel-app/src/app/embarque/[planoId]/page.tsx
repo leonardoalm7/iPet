@@ -6,6 +6,7 @@ import { REGRAS_DESTINO } from "@/data/destinations";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { isBraquicefalico } from "@/data/braquicefalicos";
 import { parseBR } from "@/services/travel-roadmap";
+import { track } from "@/services/analytics";
 import { differenceInDays, format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { motion, AnimatePresence } from "framer-motion";
@@ -257,8 +258,14 @@ export default function EmbarquePage({
   const [marcados, setMarcados] = useState<Record<string, boolean>>({});
 
   const toggleItem = useCallback((id: string) => {
-    setMarcados((prev) => ({ ...prev, [id]: !prev[id] }));
-  }, []);
+    setMarcados((prev) => {
+      const wasChecked = prev[id];
+      if (!wasChecked && plano) {
+        track("tarefa_concluida", { tarefaId: id, destino: plano.destino });
+      }
+      return { ...prev, [id]: !wasChecked };
+    });
+  }, [plano]);
 
   const checklist = useMemo(() => {
     if (!pet || !plano) return [];

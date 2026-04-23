@@ -9,6 +9,7 @@ import {
   ResultadoVerificacao,
 } from "@/services/airline-checker";
 import { BottomNav } from "@/components/BottomNav";
+import { track } from "@/services/analytics";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Plane,
@@ -213,13 +214,16 @@ export default function CompanhiasPage() {
                   resultado={resultado}
                   index={i}
                   expandido={expandidoId === resultado.companhia.id}
-                  onToggle={() =>
-                    setExpandidoId(
-                      expandidoId === resultado.companhia.id
-                        ? null
-                        : resultado.companhia.id
-                    )
-                  }
+                  onToggle={() => {
+                    const isExpanding = expandidoId !== resultado.companhia.id;
+                    setExpandidoId(isExpanding ? resultado.companhia.id : null);
+                    if (isExpanding) {
+                      track("companhia_verificada", {
+                        companhiaId: resultado.companhia.id,
+                        veredicto: resultado.veredicto,
+                      });
+                    }
+                  }}
                   pet={pet}
                 />
               ))}

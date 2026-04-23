@@ -7,6 +7,7 @@ import { calcularRoadmap, parseBR, formatBR } from "@/services/travel-roadmap";
 import { DESTINOS_LISTA, REGRAS_DESTINO } from "@/data/destinations";
 import { Destino, Pet } from "@/domain/types";
 import { CustoEstimado } from "@/components/CustoEstimado";
+import { track } from "@/services/analytics";
 import {
   addDays,
   addMonths,
@@ -237,6 +238,9 @@ export default function PlanejarPage() {
       planoId = novoPlano.id;
     }
 
+    track("destino_selecionado", { destino });
+    const preview = calcularRoadmap(pet, destino, dataEmbarqueStr, "preview");
+    track("roadmap_gerado", { destino, qtdTarefas: preview.tarefas.length });
     router.push(`/viagens/${planoId}`);
   }
 

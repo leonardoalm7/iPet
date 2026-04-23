@@ -7,6 +7,7 @@ import { Especie, TipoPet } from "@/domain/types";
 import { ArrowLeft, ArrowRight, Check, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DateInput } from "@/components/DateInput";
+import { track } from "@/services/analytics";
 
 // --------------------------------------------------------
 // Tipos do formulário
@@ -101,6 +102,7 @@ export default function NovoPetPage() {
           ? { data: form.sorologiaData, valor: form.sorologiaValor || "≥0,5 UI/mL", status: "OK" }
           : undefined,
     });
+    track("pet_cadastrado", { especie: novoPet.especie, temMicrochip: !!novoPet.microchip });
     router.replace(`/passaporte/${novoPet.id}`);
   }
 
