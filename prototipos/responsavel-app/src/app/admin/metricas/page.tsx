@@ -1,0 +1,300 @@
+"use client";
+
+import { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import {
+  getAll,
+  getContagemPorEvento,
+  getFunil,
+  getSessoes,
+  getByEvento,
+  limparEventos,
+} from "@/services/analytics";
+import {
+  ArrowLeft,
+  BarChart3,
+  Users,
+  Trash2,
+  TrendingDown,
+  Plane,
+  MapPin,
+} from "lucide-react";
+
+const ETAPA_LABELS: Record<string, string> = {
+  pet_cadastrado: "Pet cadastrado",
+  destino_selecionado: "Destino selecionado",
+  roadmap_gerado: "Roadmap gerado",
+  companhia_verificada: "Cia aérea verificada",
+  tarefa_concluida: "Tarefa concluída",
+  documento_uploaded: "Documento enviado",
+};
+
+export default function MetricasPage() {
+  const router = useRouter();
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const dados = useMemo(() => {
+    const _key = refreshKey;
+    const todos = getAll();
+    const contagem = getContagemPorEvento();
+    const funil = getFunil();
+    const sessoes = getSessoes();
+
+    const destinos = getByEvento("destino_selecionado");
+    const rankingDestinos = rankear(destinos.map((e) => e.props.destino));
+
+    const cias = getByEvento("companhia_verificada");
+    const rankingCias = rankear(cias.map((e) => e.props.companhiaId));
+
+    const veredictos = getByEvento("companhia_verificada");
+    const contagemVeredictos = rankear(veredictos.map((e) => e.props.veredicto));
+
+    const primeiro = todos.length > 0 ? todos[0].timestamp : null;
+    const ultimo = todos.length > 0 ? todos[todos.length - 1].timestamp : null;
+
+    return {
+      totalEventos: todos.length,
+      totalSessoes: sessoes.length,
+      contagem,
+      funil,
+      rankingDestinos,
+      rankingCias,
+      contagemVeredictos,
+      primeiro,
+      ultimo,
+    };
+  }, [refreshKey]);
+
+  useEffect(() => {
+    const interval = setInterval(() => setRefreshKey((k) => k + 1), 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  function handleLimpar() {
+    if (confirm("Limpar todos os eventos de analytics? Esta ação não pode ser desfeita.")) {
+      limparEventos();
+      setRefreshKey((k) => k + 1);
+    }
+  }
+
+  const maxFunil = Math.max(...dados.funil.map((f) => f.total), 1);
+
+  return (
+    <div className="flex flex-col min-h-screen bg-[#FAF9F6]">
+      <header className="flex items-center gap-3 px-5 pt-14 pb-4">
+        <button
+          onClick={() => router.back()}
+          className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <div className="flex-1">
+          <h1 className="text-lg font-semibold text-navy">Métricas BML</h1>
+          <p className="text-xs text-gray-400">Build-Measure-Learn</p>
+        </div>
+        <button
+          onClick={handleLimpar}
+          className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center"
+          title="Limpar eventos"
+        >
+          <Trash2 className="w-4 h-4 text-red-400" />
+        </button>
+      </header>
+
+      <main className="flex-1 px-5 pb-10 space-y-4">
+        {/* Resumo */}
+        <div className="grid grid-cols-3 gap-3">
+          <StatCard icon={<BarChart3 className="w-4 h-4" />} valor={dados.totalEventos} label="Eventos" />
+          <StatCard icon={<Users className="w-4 h-4" />} valor={dados.totalSessoes} label="Sessões" />
+          <StatCard
+            icon={<TrendingDown className="w-4 h-4" />}
+            valor={dados.funil.length > 0 && dados.funil[0].total > 0
+              ? `${Math.round((dados.funil[dados.funil.length - 1].total / dados.funil[0].total) * 100)}%`
+              : "—"}
+            label="Conversão"
+          />
+        </div>
+
+        {/* Período */}
+        {dados.primeiro && (
+          <p className="text-xs text-gray-400 text-center">
+            {formatDate(dados.primeiro)} → {formatDate(dados.ultimo!)}
+          </p>
+        )}
+
+        {/* Funil */}
+        <section className="bg-white border border-gray-200 rounded-2xl p-4">
+          <h2 className="text-sm font-semibold text-navy mb-3 flex items-center gap-2">
+            <TrendingDown className="w-4 h-4 text-teal" />
+            Funil de conversão
+          </h2>
+          {dados.funil.every((f) => f.total === 0) ? (
+            <p className="text-sm text-gray-400 text-center py-4">
+              Nenhum evento registrado ainda. Use o app para gerar dados.
+            </p>
+          ) : (
+            <div className="space-y-2">
+              {dados.funil.map((etapa, i) => {
+                const pct = maxFunil > 0 ? (etapa.total / maxFunil) * 100 : 0;
+                const dropoff =
+                  i > 0 && dados.funil[i - 1].total > 0
+                    ? Math.round((1 - etapa.total / dados.funil[i - 1].total) * 100)
+                    : null;
+
+                return (
+                  <div key={etapa.etapa}>
+                    <div className="flex justify-between text-xs mb-0.5">
+                      <span className="text-gray-600">
+                        {ETAPA_LABELS[etapa.etapa] || etapa.etapa}
+                      </span>
+                      <span className="font-medium text-navy">
+                        {etapa.total}
+                        {dropoff !== null && dropoff > 0 && (
+                          <span className="text-red-400 ml-1 text-[10px]">
+                            -{dropoff}%
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                    <div className="h-5 bg-gray-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-teal rounded-full transition-all duration-500"
+                        style={{ width: `${Math.max(pct, 2)}%` }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+
+        {/* Rankings lado a lado */}
+        <div className="grid grid-cols-2 gap-3">
+          <RankingCard
+            icon={<MapPin className="w-4 h-4 text-teal" />}
+            titulo="Top destinos"
+            items={dados.rankingDestinos.slice(0, 5)}
+          />
+          <RankingCard
+            icon={<Plane className="w-4 h-4 text-teal" />}
+            titulo="Top cias aéreas"
+            items={dados.rankingCias.slice(0, 5)}
+          />
+        </div>
+
+        {/* Veredictos */}
+        {dados.contagemVeredictos.length > 0 && (
+          <section className="bg-white border border-gray-200 rounded-2xl p-4">
+            <h2 className="text-sm font-semibold text-navy mb-3">Veredictos cias aéreas</h2>
+            <div className="flex gap-2 flex-wrap">
+              {dados.contagemVeredictos.map(({ item, count }) => (
+                <span
+                  key={item}
+                  className={`text-xs px-3 py-1.5 rounded-full font-medium ${
+                    item === "PODE_CABINE"
+                      ? "bg-emerald-50 text-emerald-700"
+                      : item === "PODE_PORAO"
+                        ? "bg-amber-50 text-amber-700"
+                        : item === "NAO_ACEITO"
+                          ? "bg-red-50 text-red-600"
+                          : "bg-gray-100 text-gray-600"
+                  }`}
+                >
+                  {item}: {count}
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Todos os eventos (debug) */}
+        <section className="bg-white border border-gray-200 rounded-2xl p-4">
+          <h2 className="text-sm font-semibold text-navy mb-3">Contagem por evento</h2>
+          <div className="space-y-1">
+            {Object.entries(dados.contagem)
+              .sort(([, a], [, b]) => b - a)
+              .map(([evento, count]) => (
+                <div key={evento} className="flex justify-between text-xs">
+                  <span className="text-gray-600">{evento}</span>
+                  <span className="font-mono text-navy">{count}</span>
+                </div>
+              ))}
+            {Object.keys(dados.contagem).length === 0 && (
+              <p className="text-xs text-gray-400 text-center py-2">Sem dados</p>
+            )}
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+// ── Componentes auxiliares ──────────────────────────────────
+
+function StatCard({
+  icon,
+  valor,
+  label,
+}: {
+  icon: React.ReactNode;
+  valor: number | string;
+  label: string;
+}) {
+  return (
+    <div className="bg-white border border-gray-200 rounded-2xl p-3 text-center">
+      <div className="flex justify-center text-teal mb-1">{icon}</div>
+      <p className="text-xl font-bold text-navy">{valor}</p>
+      <p className="text-[10px] text-gray-400 uppercase tracking-wide">{label}</p>
+    </div>
+  );
+}
+
+function RankingCard({
+  icon,
+  titulo,
+  items,
+}: {
+  icon: React.ReactNode;
+  titulo: string;
+  items: { item: string; count: number }[];
+}) {
+  return (
+    <div className="bg-white border border-gray-200 rounded-2xl p-4">
+      <h2 className="text-sm font-semibold text-navy mb-2 flex items-center gap-1.5">
+        {icon}
+        {titulo}
+      </h2>
+      {items.length === 0 ? (
+        <p className="text-xs text-gray-400">Sem dados</p>
+      ) : (
+        <div className="space-y-1">
+          {items.map(({ item, count }, i) => (
+            <div key={item} className="flex justify-between text-xs">
+              <span className="text-gray-600 truncate">
+                <span className="text-gray-300 mr-1">{i + 1}.</span>
+                {item}
+              </span>
+              <span className="font-mono text-navy ml-1">{count}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Helpers ─────────────────────────────────────────────────
+
+function rankear(values: string[]): { item: string; count: number }[] {
+  const map: Record<string, number> = {};
+  for (const v of values) map[v] = (map[v] || 0) + 1;
+  return Object.entries(map)
+    .map(([item, count]) => ({ item, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+function formatDate(iso: string): string {
+  const d = new Date(iso);
+  return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+}
