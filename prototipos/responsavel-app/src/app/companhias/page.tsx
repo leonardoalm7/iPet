@@ -81,12 +81,17 @@ const VEREDICTO_CONFIG: Record<
   },
 };
 
+type ModoView = "lista" | "comparar";
+
 export default function CompanhiasPage() {
   const { pets, planosViagem } = useAppStore();
   const [petSelecionadoId, setPetSelecionadoId] = useState<string>(
     pets[0]?.id ?? ""
   );
   const [expandidoId, setExpandidoId] = useState<string | null>(null);
+  const [modo, setModo] = useState<ModoView>("lista");
+  const [comparando, setComparando] = useState<Set<string>>(new Set());
+  const [filtroVeredicto, setFiltroVeredicto] = useState<VeredictoCia | "TODOS">("TODOS");
 
   const pet = pets.find((p) => p.id === petSelecionadoId);
 
@@ -94,6 +99,11 @@ export default function CompanhiasPage() {
     if (!pet) return [];
     return verificarTodasCompanhias(pet, COMPANHIAS_AEREAS);
   }, [pet]);
+
+  const resultadosFiltrados = useMemo(() => {
+    if (filtroVeredicto === "TODOS") return resultados;
+    return resultados.filter((r) => r.veredicto === filtroVeredicto);
+  }, [resultados, filtroVeredicto]);
 
   const resumo = useMemo(() => {
     const cabine = resultados.filter((r) => r.veredicto === "PODE_CABINE").length;
@@ -103,6 +113,23 @@ export default function CompanhiasPage() {
     const nao = resultados.filter((r) => r.veredicto === "NAO_ACEITO").length;
     return { cabine, porao, nao };
   }, [resultados]);
+
+  const selecionadosParaComparar = useMemo(
+    () => resultados.filter((r) => comparando.has(r.companhia.id)),
+    [resultados, comparando]
+  );
+
+  function toggleComparar(id: string) {
+    setComparando((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else if (next.size < 4) {
+        next.add(id);
+      }
+      return next;
+    });
+  }
 
   return (
     <div className="flex flex-col min-h-screen pb-24">
@@ -120,7 +147,7 @@ export default function CompanhiasPage() {
           <h1 className="text-2xl font-bold text-navy">Companhias Aéreas</h1>
         </div>
         <p className="text-gray-500 text-sm">
-          Quais companhias aceitam seu pet?
+          {COMPANHIAS_AEREAS.length} companhias mapeadas
         </p>
       </header>
 
@@ -190,6 +217,43 @@ export default function CompanhiasPage() {
               </div>
             </div>
 
+            {/* Toggle Lista / Comparar + Filtros */}
+            <div className="flex items-center gap-2">
+              <div className="flex bg-gray-100 rounded-xl p-0.5 flex-shrink-0">
+                <button
+                  onClick={() => setModo("lista")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                    modo === "lista" ? "bg-white text-navy shadow-sm" : "text-gray-500"
+                  }`}
+                >
+                  Lista
+                </button>
+                <button
+                  onClick={() => setModo("comparar")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                    modo === "comparar" ? "bg-white text-navy shadow-sm" : "text-gray-500"
+                  }`}
+                >
+                  Comparar
+                </button>
+              </div>
+              <div className="flex gap-1.5 overflow-x-auto scrollbar-hide flex-1">
+                {(["TODOS", "PODE_CABINE", "PODE_PORAO", "NAO_ACEITO"] as const).map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setFiltroVeredicto(f)}
+                    className={`px-2.5 py-1.5 rounded-lg text-[10px] font-medium whitespace-nowrap transition-colors ${
+                      filtroVeredicto === f
+                        ? "bg-teal text-white"
+                        : "bg-gray-100 text-gray-500"
+                    }`}
+                  >
+                    {f === "TODOS" ? "Todas" : f === "PODE_CABINE" ? "Cabine" : f === "PODE_PORAO" ? "Porão" : "Recusadas"}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Cão-guia banner */}
             {pet.tipoPet === "CAO_GUIA" && (
               <div className="flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5">
@@ -206,26 +270,63 @@ export default function CompanhiasPage() {
               </div>
             )}
 
+            {/* Modo comparação: tabela side-by-side */}
+            {modo === "comparar" && (
+              <>
+                {comparando.size === 0 && (
+                  <div className="bg-teal/5 border border-teal/20 rounded-2xl p-4 text-center">
+                    <p className="text-sm text-teal font-medium">Selecione até 4 companhias para comparar</p>
+                    <p className="text-xs text-gray-400 mt-1">Toque nas companhias abaixo</p>
+                  </div>
+                )}
+
+                {selecionadosParaComparar.length >= 2 && (
+                  <ComparacaoTable resultados={selecionadosParaComparar} pet={pet} />
+                )}
+              </>
+            )}
+
             {/* Lista de companhias */}
             <div className="space-y-2">
-              {resultados.map((resultado, i) => (
-                <CiaCard
-                  key={resultado.companhia.id}
-                  resultado={resultado}
-                  index={i}
-                  expandido={expandidoId === resultado.companhia.id}
-                  onToggle={() => {
-                    const isExpanding = expandidoId !== resultado.companhia.id;
-                    setExpandidoId(isExpanding ? resultado.companhia.id : null);
-                    if (isExpanding) {
-                      track("companhia_verificada", {
-                        companhiaId: resultado.companhia.id,
-                        veredicto: resultado.veredicto,
-                      });
-                    }
-                  }}
-                  pet={pet}
-                />
+              {resultadosFiltrados.map((resultado, i) => (
+                <div key={resultado.companhia.id} className="relative">
+                  {modo === "comparar" && (
+                    <button
+                      onClick={() => toggleComparar(resultado.companhia.id)}
+                      className={`absolute -left-1 top-4 z-10 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
+                        comparando.has(resultado.companhia.id)
+                          ? "bg-teal border-teal text-white"
+                          : "bg-white border-gray-300"
+                      }`}
+                    >
+                      {comparando.has(resultado.companhia.id) && (
+                        <CheckCircle2 className="w-4 h-4" />
+                      )}
+                    </button>
+                  )}
+                  <div className={modo === "comparar" ? "ml-7" : ""}>
+                    <CiaCard
+                      resultado={resultado}
+                      index={i}
+                      expandido={expandidoId === resultado.companhia.id}
+                      onToggle={() => {
+                        if (modo === "comparar") {
+                          toggleComparar(resultado.companhia.id);
+                          return;
+                        }
+                        const isExpanding = expandidoId !== resultado.companhia.id;
+                        setExpandidoId(isExpanding ? resultado.companhia.id : null);
+                        if (isExpanding) {
+                          track("companhia_verificada", {
+                            companhiaId: resultado.companhia.id,
+                            veredicto: resultado.veredicto,
+                          });
+                        }
+                      }}
+                      pet={pet}
+                    />
+                  </div>
+                </div>
               ))}
             </div>
 
@@ -509,5 +610,140 @@ function SpecItem({
         )}
       </div>
     </div>
+  );
+}
+
+// ── Tabela de comparação side-by-side ───────────────────────
+
+function ComparacaoTable({
+  resultados,
+  pet,
+}: {
+  resultados: ResultadoVerificacao[];
+  pet: { peso: number; raca: string };
+}) {
+  const rows: {
+    label: string;
+    render: (r: ResultadoVerificacao) => React.ReactNode;
+  }[] = [
+    {
+      label: "Veredicto",
+      render: (r) => {
+        const cfg = VEREDICTO_CONFIG[r.veredicto];
+        return (
+          <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${cfg.badgeBg} ${cfg.badgeText}`}>
+            {cfg.label}
+          </span>
+        );
+      },
+    },
+    {
+      label: "Cabine",
+      render: (r) => (
+        <span className={r.cabine ? "text-emerald-600 font-medium" : "text-red-500"}>
+          {r.companhia.pesoMaxCabine > 0
+            ? `${r.cabine ? "OK" : "Não"} — ${r.companhia.pesoMaxCabine}kg`
+            : "Não aceita"}
+        </span>
+      ),
+    },
+    {
+      label: "Porão",
+      render: (r) => (
+        <span className={r.porao ? "text-emerald-600 font-medium" : "text-red-500"}>
+          {r.companhia.pesoMaxPorао > 0
+            ? `${r.porao ? "OK" : "Não"} — ${r.companhia.pesoMaxPorао}kg`
+            : "Não aceita"}
+        </span>
+      ),
+    },
+    {
+      label: "Caixa cabine",
+      render: (r) => {
+        const d = r.companhia.dimensoesMaxCabine;
+        return d.comprimento > 0
+          ? <span>{d.comprimento}x{d.largura}x{d.altura}cm</span>
+          : <span className="text-gray-400">—</span>;
+      },
+    },
+    {
+      label: "Braquicef. cabine",
+      render: (r) => (
+        <span className={r.companhia.braquicefalicoCabine ? "text-emerald-600" : "text-red-500"}>
+          {r.companhia.braquicefalicoCabine ? "Aceita" : "Bane"}
+        </span>
+      ),
+    },
+    {
+      label: "Braquicef. porão",
+      render: (r) => (
+        <span className={r.companhia.braquicefalicoPorao ? "text-emerald-600" : "text-red-500"}>
+          {r.companhia.braquicefalicoPorao ? "Aceita" : "Bane"}
+        </span>
+      ),
+    },
+    {
+      label: "Raças perigosas",
+      render: (r) => (
+        <span className={r.companhia.racasPerigosasBanidas ? "text-red-500" : "text-emerald-600"}>
+          {r.companhia.racasPerigosasBanidas ? "Banidas" : "Aceita"}
+        </span>
+      ),
+    },
+    {
+      label: "Idade mínima",
+      render: (r) => <span>{r.companhia.idadeMinimaAnimal} sem.</span>,
+    },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white border border-gray-200 rounded-2xl overflow-hidden"
+    >
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b border-gray-100">
+              <th className="text-left py-3 px-3 text-gray-400 font-medium sticky left-0 bg-white min-w-[100px]">
+                {pet.peso}kg · {pet.raca}
+              </th>
+              {resultados.map((r) => {
+                const cfg = VEREDICTO_CONFIG[r.veredicto];
+                return (
+                  <th
+                    key={r.companhia.id}
+                    className={`text-center py-3 px-3 min-w-[100px] ${cfg.cardBg}`}
+                  >
+                    <div className="font-bold text-navy text-sm">{r.companhia.codigo}</div>
+                    <div className="text-[10px] text-gray-500 font-normal truncate max-w-[90px]">
+                      {r.companhia.nome}
+                    </div>
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr
+                key={row.label}
+                className={i % 2 === 0 ? "bg-gray-50/50" : "bg-white"}
+              >
+                <td className="py-2.5 px-3 text-gray-500 font-medium sticky left-0 bg-inherit">
+                  {row.label}
+                </td>
+                {resultados.map((r) => (
+                  <td key={r.companhia.id} className="py-2.5 px-3 text-center">
+                    {row.render(r)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </motion.div>
   );
 }
