@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { calcularRoadmap, parseBR, formatBR } from "@/services/travel-roadmap";
-import { DESTINOS_LISTA, REGRAS_DESTINO } from "@/data/destinations";
+import { DESTINOS_LISTA, REGRAS_DESTINO, getDestinosAgrupados } from "@/data/destinations";
 import { Destino, Pet } from "@/domain/types";
 import { CustoEstimado } from "@/components/CustoEstimado";
 import { track } from "@/services/analytics";
@@ -415,6 +415,21 @@ function PassoDestino({
   onSelecionar: (d: Destino) => void;
 }) {
   const [selecionado, setSelecionado] = useState<Destino | null>(destinoAtual);
+  const [busca, setBusca] = useState("");
+  const grupos = useMemo(() => getDestinosAgrupados(), []);
+
+  const buscaLower = busca.toLowerCase().trim();
+  const gruposFiltrados = useMemo(() => {
+    if (!buscaLower) return grupos;
+    return grupos
+      .map((g) => ({
+        ...g,
+        destinos: g.destinos.filter((d) =>
+          d.nome.toLowerCase().includes(buscaLower),
+        ),
+      }))
+      .filter((g) => g.destinos.length > 0);
+  }, [grupos, buscaLower]);
 
   return (
     <motion.div
@@ -426,44 +441,64 @@ function PassoDestino({
       <div>
         <h2 className="text-xl font-bold text-navy mb-1">Para onde você quer ir?</h2>
         <p className="text-gray-500 text-sm">
-          As regras de documentação variam por destino.
+          {DESTINOS_LISTA.length} destinos com regras mapeadas.
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
-        {DESTINOS_LISTA.map((d) => (
-          <button
-            key={d.destino}
-            onClick={() => {
-              setSelecionado(d.destino as Destino);
-              // Pequeno delay para feedback visual antes de avançar
-              setTimeout(() => onSelecionar(d.destino as Destino), 200);
-            }}
-            className={`py-4 px-3 rounded-2xl border text-left transition-all ${
-              selecionado === d.destino
-                ? "border-teal bg-teal/10 scale-[0.98]"
-                : "border-gray-200 bg-white/50 hover:border-gray-600"
-            }`}
-          >
-            <div className="text-3xl mb-2">{d.bandeira}</div>
-            <div className={`text-sm font-semibold ${selecionado === d.destino ? "text-teal" : "text-navy"}`}>
-              {d.nome}
+      <input
+        type="text"
+        placeholder="Buscar destino..."
+        value={busca}
+        onChange={(e) => setBusca(e.target.value)}
+        className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal"
+      />
+
+      <div className="space-y-5">
+        {gruposFiltrados.map((grupo) => (
+          <div key={grupo.regiao}>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+              {grupo.regiao}
+            </p>
+            <div className="grid grid-cols-3 gap-2">
+              {grupo.destinos.map((d) => (
+                <button
+                  key={d.destino}
+                  onClick={() => {
+                    setSelecionado(d.destino as Destino);
+                    setTimeout(() => onSelecionar(d.destino as Destino), 200);
+                  }}
+                  className={`py-3 px-2 rounded-2xl border text-center transition-all ${
+                    selecionado === d.destino
+                      ? "border-teal bg-teal/10 scale-[0.97]"
+                      : "border-gray-200 bg-white/50 hover:border-gray-300"
+                  }`}
+                >
+                  <div className="text-2xl mb-1">{d.bandeira}</div>
+                  <div className={`text-xs font-medium leading-tight ${selecionado === d.destino ? "text-teal" : "text-navy"}`}>
+                    {d.nome}
+                  </div>
+                  <div className="flex gap-0.5 mt-1 justify-center flex-wrap">
+                    {d.exigeSorologia && (
+                      <span className="text-[8px] bg-orange-100 text-ipet-orange px-1 py-0.5 rounded-full">
+                        Soro
+                      </span>
+                    )}
+                    {d.exigePermissaoImportacao && (
+                      <span className="text-[8px] bg-purple-100 text-purple-600 px-1 py-0.5 rounded-full">
+                        Perm
+                      </span>
+                    )}
+                  </div>
+                </button>
+              ))}
             </div>
-            {/* Indicador de complexidade */}
-            <div className="flex gap-1 mt-1.5">
-              {d.exigeSorologia && (
-                <span className="text-[9px] bg-orange-100 text-ipet-orange px-1.5 py-0.5 rounded-full">
-                  Sorologia
-                </span>
-              )}
-              {d.exigeMicrochip && (
-                <span className="text-[9px] bg-teal/10 text-teal px-1.5 py-0.5 rounded-full">
-                  Chip
-                </span>
-              )}
-            </div>
-          </button>
+          </div>
         ))}
+        {gruposFiltrados.length === 0 && (
+          <p className="text-sm text-gray-400 text-center py-4">
+            Nenhum destino encontrado para &ldquo;{busca}&rdquo;
+          </p>
+        )}
       </div>
     </motion.div>
   );

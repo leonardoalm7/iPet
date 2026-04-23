@@ -1,10 +1,10 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { Destino } from "@/domain/types";
-import { DESTINOS_LISTA } from "@/data/destinations";
+import { DESTINOS_LISTA, getDestinosAgrupados } from "@/data/destinations";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { calcularRoadmap } from "@/services/travel-roadmap";
 import { ArrowLeft, Plane, Calendar, ChevronRight, BookmarkPlus, Check, List, GitCommitHorizontal } from "lucide-react";
@@ -199,30 +199,59 @@ function FormViagem({
   setCompanhiaId: (s: string) => void;
   onGerar: () => void;
 }) {
+  const [busca, setBusca] = useState("");
+  const grupos = useMemo(() => getDestinosAgrupados(), []);
+  const buscaLower = busca.toLowerCase().trim();
+  const gruposFiltrados = useMemo(() => {
+    if (!buscaLower) return grupos;
+    return grupos
+      .map((g) => ({ ...g, destinos: g.destinos.filter((d) => d.nome.toLowerCase().includes(buscaLower)) }))
+      .filter((g) => g.destinos.length > 0);
+  }, [grupos, buscaLower]);
+
   return (
     <div className="space-y-5">
       {/* Destino */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-3">
+        <label className="block text-sm font-medium text-gray-600 mb-2">
           Para onde você vai viajar?
         </label>
-        <div className="grid grid-cols-2 gap-2">
-          {DESTINOS_LISTA.map((d) => (
-            <button
-              key={d.destino}
-              onClick={() => setDestino(d.destino)}
-              className={`py-3 px-3 rounded-2xl border text-left transition-colors ${
-                destino === d.destino
-                  ? "border-teal bg-teal/10"
-                  : "border-gray-200 bg-white/50"
-              }`}
-            >
-              <div className="text-2xl mb-1">{d.bandeira}</div>
-              <div className={`text-sm font-medium ${destino === d.destino ? "text-teal" : "text-gray-600"}`}>
-                {d.nome}
+        <input
+          type="text"
+          placeholder="Buscar destino..."
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal mb-3"
+        />
+        <div className="space-y-4">
+          {gruposFiltrados.map((grupo) => (
+            <div key={grupo.regiao}>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                {grupo.regiao}
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {grupo.destinos.map((d) => (
+                  <button
+                    key={d.destino}
+                    onClick={() => setDestino(d.destino)}
+                    className={`py-2.5 px-2 rounded-2xl border text-center transition-colors ${
+                      destino === d.destino
+                        ? "border-teal bg-teal/10"
+                        : "border-gray-200 bg-white/50"
+                    }`}
+                  >
+                    <div className="text-xl mb-0.5">{d.bandeira}</div>
+                    <div className={`text-xs font-medium leading-tight ${destino === d.destino ? "text-teal" : "text-gray-600"}`}>
+                      {d.nome}
+                    </div>
+                  </button>
+                ))}
               </div>
-            </button>
+            </div>
           ))}
+          {gruposFiltrados.length === 0 && (
+            <p className="text-sm text-gray-400 text-center py-3">Nenhum destino encontrado</p>
+          )}
         </div>
       </div>
 
