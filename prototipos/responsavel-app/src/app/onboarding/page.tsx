@@ -203,7 +203,7 @@ function StepDadosPessoais({
               value={dados.nomeCompleto}
               onChange={(e) => onChange({ ...dados, nomeCompleto: e.target.value })}
               autoComplete="name"
-              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
           </div>
         </div>
@@ -219,7 +219,7 @@ function StepDadosPessoais({
               value={dados.telefone}
               onChange={(e) => onChange({ ...dados, telefone: e.target.value })}
               autoComplete="tel"
-              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
           </div>
         </div>
@@ -233,7 +233,7 @@ function StepDadosPessoais({
               type="date"
               value={dados.dataNascimento}
               onChange={(e) => onChange({ ...dados, dataNascimento: e.target.value })}
-              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors"
+              className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors"
             />
           </div>
         </div>
@@ -243,7 +243,7 @@ function StepDadosPessoais({
         <button
           onClick={onNext}
           disabled={!podeAvancar}
-          className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
+          className="flex items-center justify-center gap-2 w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
         >
           Continuar
           <ChevronRight className="w-4 h-4" />
@@ -303,7 +303,7 @@ function StepDocumento({
             onChange={(e) => onChange({ ...dados, cpf: e.target.value })}
             maxLength={14}
             autoComplete="off"
-            className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+            className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
           />
         </div>
         <p className="text-gray-400 text-xs mt-1.5 ml-1">
@@ -420,7 +420,7 @@ function StepConsentimento({
       <p className="text-gray-400 text-[11px] leading-relaxed">
         Ao concluir, registramos sua decisão com data, hora e identificador de sessão para fins de
         comprovação conforme{" "}
-        <span className="text-gray-500">LGPD Art. 8º §5º</span>. Você pode consultar e revogar
+        <span className="text-gray-400">LGPD Art. 8º §5º</span>. Você pode consultar e revogar
         seus consentimentos a qualquer momento no seu perfil.
       </p>
 
@@ -428,7 +428,7 @@ function StepConsentimento({
         <button
           onClick={onConcluir}
           disabled={!podeAvancar || loading}
-          className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
+          className="flex items-center justify-center gap-2 w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
         >
           {loading ? <Spinner /> : "Criar minha conta"}
         </button>

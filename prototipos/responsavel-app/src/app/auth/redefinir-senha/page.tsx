@@ -97,12 +97,12 @@ export default function RedefinirSenhaPage() {
               }}
               required
               autoComplete="new-password"
-              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
             <button
               type="button"
               onClick={() => setMostrarSenha(!mostrarSenha)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-400"
             >
               {mostrarSenha ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -127,7 +127,7 @@ export default function RedefinirSenhaPage() {
         <button
           type="submit"
           disabled={loading || !senhaValida}
-          className="w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
+          className="w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
         >
           {loading ? "Salvando..." : "Salvar nova senha"}
         </button>

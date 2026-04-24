@@ -395,7 +395,7 @@ export default function JourneyHubPage({
       <header className="px-5 pt-14 pb-5">
         <button
           onClick={() => router.back()}
-          className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-4"
+          className="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-border mb-4"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
@@ -403,12 +403,12 @@ export default function JourneyHubPage({
         {/* Identidade da viagem */}
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-400">
               {pet.nome.split(" ")[0]} → {regras.bandeira} {regras.nome}
             </p>
             <h1 className="text-xl font-bold text-navy mt-0.5">Jornada da Viagem</h1>
           </div>
-          <div className="bg-gray-100 rounded-2xl px-3 py-2 text-right">
+          <div className="bg-surface rounded-2xl px-3 py-2 text-right">
             <p className="text-xs text-gray-400">Embarque</p>
             <p className="text-sm font-semibold text-teal">
               {diasRestantes > 0 ? `em ${diasRestantes}d` : diasRestantes === 0 ? "hoje!" : "passou"}
@@ -449,14 +449,14 @@ export default function JourneyHubPage({
         {/* ── Link para o passaporte ─────────────────────────────── */}
         <Link
           href={`/passaporte/${pet.id}`}
-          className="flex items-center gap-3 bg-white border border-gray-200 rounded-2xl p-4"
+          className="flex items-center gap-3 bg-white border border-border rounded-2xl p-4"
         >
           <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
             <Stethoscope className="w-5 h-5 text-indigo-600" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-navy">Passaporte do Pet</p>
-            <p className="text-xs text-gray-500">Documentos, vacinas e histórico de saúde</p>
+            <p className="text-xs text-gray-400">Documentos, vacinas e histórico de saúde</p>
           </div>
           <ChevronRight className="w-4 h-4 text-gray-400" />
         </Link>
@@ -511,15 +511,15 @@ function ProgressCard({ progresso }: { progresso: number }) {
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white border border-gray-200 rounded-2xl p-4"
+      className="bg-white border border-border rounded-2xl p-4"
     >
       <div className="flex items-center justify-between mb-3">
-        <p className="text-sm font-medium text-gray-600">Progresso da jornada</p>
+        <p className="text-sm font-medium text-gray-400">Progresso da jornada</p>
         <p className={`text-sm font-bold bg-gradient-to-r ${cor} bg-clip-text text-transparent`}>
           {progresso}%
         </p>
       </div>
-      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+      <div className="h-2 bg-surface rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${progresso}%` }}
@@ -580,7 +580,7 @@ function ProximaAcaoCard({ acao }: { acao: ProximaAcao }) {
         {acao.ctaSecundario && (
           <Link
             href={acao.ctaSecundario.href}
-            className="flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200 text-gray-600 hover:border-gray-600 transition-colors"
+            className="flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-medium border border-border text-gray-600 hover:border-gray-600 transition-colors"
           >
             {acao.ctaSecundario.label}
           </Link>
@@ -615,15 +615,15 @@ function EstagioCard({
       badge: <Loader2 className="w-5 h-5 text-teal animate-spin" />,
     },
     NAO_INICIADO: {
-      bg: "bg-white border-gray-200",
+      bg: "bg-white border-border",
       iconBg: "bg-gray-100",
       iconColor: "text-gray-400",
-      titleColor: "text-gray-500",
+      titleColor: "text-gray-400",
       badge: <Circle className="w-5 h-5 text-gray-300" />,
     },
     BLOQUEADO: {
-      bg: "bg-white/60 border-gray-200",
-      iconBg: "bg-gray-100/60",
+      bg: "bg-white/60 border-border",
+      iconBg: "bg-surface",
       iconColor: "text-gray-400",
       titleColor: "text-gray-400",
       badge: <Lock className="w-5 h-5 text-gray-400" />,
@@ -667,7 +667,7 @@ function EstagioCard({
                   {estagio.progresso.feito} / {estagio.progresso.total}
                 </p>
               </div>
-              <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-surface rounded-full overflow-hidden">
                 <div
                   className="h-full rounded-full bg-teal transition-all duration-500"
                   style={{
@@ -702,7 +702,7 @@ function EstagioCard({
 
       {/* CTA inline */}
       {isInteractive && estagio.ctaHref && (
-        <div className="mt-3 pt-3 border-t border-gray-200">
+        <div className="mt-3 pt-3 border-t border-border">
           <Link
             href={estagio.ctaHref}
             onClick={(e) => e.stopPropagation()}

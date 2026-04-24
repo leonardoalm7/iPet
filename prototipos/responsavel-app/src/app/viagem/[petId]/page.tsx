@@ -7,7 +7,7 @@ import { Destino } from "@/domain/types";
 import { DESTINOS_LISTA, getDestinosAgrupados } from "@/data/destinations";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { calcularRoadmap } from "@/services/travel-roadmap";
-import { ArrowLeft, Plane, Calendar, ChevronRight, BookmarkPlus, Check, List, GitCommitHorizontal } from "lucide-react";
+import { ArrowLeft, Plane, ChevronRight, BookmarkPlus, Check, List, GitCommitHorizontal, Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { RoadmapView } from "@/components/RoadmapView";
 import { RoadmapTimeline } from "@/components/RoadmapTimeline";
@@ -35,15 +35,13 @@ export default function ViagemPage({
   if (!pet) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500">Pet não encontrado.</p>
+        <p className="text-gray-400">Pet não encontrado.</p>
       </div>
     );
   }
 
   function gerarRoadmap() {
     if (!dataEmbarque) return;
-    // Roadmap é só cálculo — não persiste automaticamente.
-    // Usa ID temporário; o plano só vai para o store se o usuário clicar em "Salvar".
     const result = calcularRoadmap(pet!, destino, dataEmbarque, "preview");
     setRoadmap(result);
     setSalvo(false);
@@ -53,7 +51,6 @@ export default function ViagemPage({
 
   function salvarViagem() {
     if (!roadmap || salvo) return;
-    // Evita duplicata: verifica se já existe plano igual
     const duplicado = planosExistentes.some(
       (p) => p.petId === pet!.id && p.destino === destino && p.dataEmbarque === dataEmbarque
     );
@@ -66,19 +63,20 @@ export default function ViagemPage({
   const destinoInfo = DESTINOS_LISTA.find((d) => d.destino === destino);
 
   return (
-    <div className="flex flex-col min-h-screen pb-8">
+    <div className="flex flex-col min-h-screen pb-8 bg-white">
       <header className="flex items-center gap-3 px-5 pt-14 pb-4">
         <button
           onClick={() => router.back()}
-          className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0"
+          className="w-10 h-10 rounded-full bg-surface flex items-center justify-center flex-shrink-0 border border-border"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-5 h-5 text-navy" />
         </button>
         <div className="flex-1">
-          <h1 className="text-lg font-semibold">Planejar Viagem</h1>
-          <p className="text-sm text-gray-500">{pet.nome.split(" ")[0]}</p>
+          <h1 className="text-lg font-semibold text-navy">
+            {roadmap ? "Roadmap de Compliance" : "Selecione o Destino"}
+          </h1>
+          <p className="text-xs text-gray-400">{pet.nome.split(" ")[0]}</p>
         </div>
-        <Plane className="w-5 h-5 text-teal" />
       </header>
 
       <main className="px-5 space-y-5">
@@ -97,27 +95,20 @@ export default function ViagemPage({
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-xs text-gray-400 uppercase tracking-wider">Destino</p>
-                <p className="text-base font-semibold">
-                  {destinoInfo?.bandeira} {destinoInfo?.nome}
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="text-xs text-gray-400 uppercase tracking-wider">Embarque</p>
-                <p className="text-base font-semibold">{dataEmbarque}</p>
-              </div>
+            <div className="bg-white border border-border rounded-2xl p-4 mb-4">
+              <p className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-1">Roadmap de Compliance</p>
+              <p className="text-navy font-semibold">
+                Viagem para {destinoInfo?.bandeira} {destinoInfo?.nome} em {dataEmbarque}
+              </p>
             </div>
 
-            {/* Toggle de visualização */}
-            <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-2xl p-1 mb-4">
+            <div className="flex items-center gap-1 bg-surface border border-border rounded-2xl p-1 mb-4">
               <button
                 onClick={() => setViewMode("lista")}
                 className={`flex items-center justify-center gap-2 flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   viewMode === "lista"
-                    ? "bg-gray-100 text-navy shadow"
-                    : "text-gray-400 hover:text-gray-500"
+                    ? "bg-white text-navy shadow-sm"
+                    : "text-gray-400 hover:text-gray-400"
                 }`}
               >
                 <List className="w-4 h-4" />
@@ -127,8 +118,8 @@ export default function ViagemPage({
                 onClick={() => setViewMode("timeline")}
                 className={`flex items-center justify-center gap-2 flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   viewMode === "timeline"
-                    ? "bg-gray-100 text-navy shadow"
-                    : "text-gray-400 hover:text-gray-500"
+                    ? "bg-white text-navy shadow-sm"
+                    : "text-gray-400 hover:text-gray-400"
                 }`}
               >
                 <GitCommitHorizontal className="w-4 h-4" />
@@ -149,14 +140,13 @@ export default function ViagemPage({
               )}
             </motion.div>
 
-            {/* Salvar viagem — só persiste quando o usuário decide */}
             <button
               onClick={salvarViagem}
               disabled={salvo}
-              className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-semibold text-sm transition-colors ${
+              className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-semibold text-sm transition-colors mt-4 ${
                 salvo
-                  ? "bg-emerald-100 border border-emerald-200 text-emerald-600"
-                  : "bg-teal hover:bg-teal-dark text-white"
+                  ? "bg-teal-light border border-teal/20 text-teal"
+                  : "bg-navy hover:bg-navy-light text-white"
               }`}
             >
               {salvo ? (
@@ -168,7 +158,7 @@ export default function ViagemPage({
 
             <button
               onClick={() => { setRoadmap(null); setSalvo(false); }}
-              className="w-full py-3 border border-gray-200 rounded-2xl text-gray-500 text-sm hover:border-gray-600 transition-colors"
+              className="w-full py-3 border border-border rounded-2xl text-gray-400 text-sm hover:border-navy/30 hover:text-navy transition-colors mt-2"
             >
               Alterar destino / data
             </button>
@@ -179,9 +169,6 @@ export default function ViagemPage({
   );
 }
 
-// --------------------------------------------------------
-// Formulário de seleção de destino + data
-// --------------------------------------------------------
 function FormViagem({
   destino,
   setDestino,
@@ -200,77 +187,109 @@ function FormViagem({
   onGerar: () => void;
 }) {
   const [busca, setBusca] = useState("");
+  const [regiaoAtiva, setRegiaoAtiva] = useState<string | null>(null);
   const grupos = useMemo(() => getDestinosAgrupados(), []);
   const buscaLower = busca.toLowerCase().trim();
   const gruposFiltrados = useMemo(() => {
-    if (!buscaLower) return grupos;
-    return grupos
-      .map((g) => ({ ...g, destinos: g.destinos.filter((d) => d.nome.toLowerCase().includes(buscaLower)) }))
-      .filter((g) => g.destinos.length > 0);
-  }, [grupos, buscaLower]);
+    let result = grupos;
+    if (buscaLower) {
+      result = result
+        .map((g) => ({ ...g, destinos: g.destinos.filter((d) => d.nome.toLowerCase().includes(buscaLower)) }))
+        .filter((g) => g.destinos.length > 0);
+    }
+    if (regiaoAtiva) {
+      result = result.filter((g) => g.regiao === regiaoAtiva);
+    }
+    return result;
+  }, [grupos, buscaLower, regiaoAtiva]);
+
+  const regioes = grupos.map((g) => g.regiao);
 
   return (
     <div className="space-y-5">
-      {/* Destino */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-2">
+        <label className="block text-sm font-medium text-gray-500 mb-2">
           Para onde você vai viajar?
         </label>
-        <input
-          type="text"
-          placeholder="Buscar destino..."
-          value={busca}
-          onChange={(e) => setBusca(e.target.value)}
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal mb-3"
-        />
-        <div className="space-y-4">
-          {gruposFiltrados.map((grupo) => (
-            <div key={grupo.regiao}>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                {grupo.regiao}
-              </p>
-              <div className="grid grid-cols-3 gap-2">
-                {grupo.destinos.map((d) => (
-                  <button
-                    key={d.destino}
-                    onClick={() => setDestino(d.destino)}
-                    className={`py-2.5 px-2 rounded-2xl border text-center transition-colors ${
-                      destino === d.destino
-                        ? "border-teal bg-teal/10"
-                        : "border-gray-200 bg-white/50"
-                    }`}
-                  >
-                    <div className="text-xl mb-0.5">{d.bandeira}</div>
-                    <div className={`text-xs font-medium leading-tight ${destino === d.destino ? "text-teal" : "text-gray-600"}`}>
-                      {d.nome}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-          {gruposFiltrados.length === 0 && (
-            <p className="text-sm text-gray-400 text-center py-3">Nenhum destino encontrado</p>
-          )}
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Buscar destino..."
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-surface text-sm text-navy placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy transition-colors"
+          />
         </div>
       </div>
 
-      {/* Data de embarque */}
+      <div className="flex gap-2 overflow-x-auto pb-1 -mx-5 px-5 scrollbar-hide">
+        <button
+          onClick={() => setRegiaoAtiva(null)}
+          className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+            !regiaoAtiva ? "bg-navy text-white border-navy" : "bg-white text-gray-500 border-border hover:border-navy/30"
+          }`}
+        >
+          Todas
+        </button>
+        {regioes.map((r) => (
+          <button
+            key={r}
+            onClick={() => setRegiaoAtiva(regiaoAtiva === r ? null : r)}
+            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+              regiaoAtiva === r ? "bg-navy text-white border-navy" : "bg-white text-gray-500 border-border hover:border-navy/30"
+            }`}
+          >
+            {r}
+          </button>
+        ))}
+      </div>
+
+      <div className="space-y-4">
+        {gruposFiltrados.map((grupo) => (
+          <div key={grupo.regiao}>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+              {grupo.regiao}
+            </p>
+            <div className="grid grid-cols-3 gap-2">
+              {grupo.destinos.map((d) => (
+                <button
+                  key={d.destino}
+                  onClick={() => setDestino(d.destino)}
+                  className={`py-2.5 px-2 rounded-xl border text-center transition-all ${
+                    destino === d.destino
+                      ? "border-navy bg-navy/5 shadow-sm"
+                      : "border-border bg-white hover:border-gray-300"
+                  }`}
+                >
+                  <div className="text-xl mb-0.5">{d.bandeira}</div>
+                  <div className={`text-xs font-medium leading-tight ${destino === d.destino ? "text-navy" : "text-gray-400"}`}>
+                    {d.nome}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+        {gruposFiltrados.length === 0 && (
+          <p className="text-sm text-gray-400 text-center py-3">Nenhum destino encontrado</p>
+        )}
+      </div>
+
       <DateInput
-        label="📅 Data prevista de embarque"
+        label="Data prevista de embarque"
         value={dataEmbarque}
         onChange={setDataEmbarque}
       />
 
-      {/* Companhia aérea (opcional) */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-1.5">
+        <label className="block text-sm font-medium text-gray-500 mb-1.5">
           Companhia aérea (opcional)
         </label>
         <select
           value={companhiaId}
           onChange={(e) => setCompanhiaId(e.target.value)}
-          className="w-full bg-gray-100 border border-gray-200 text-navy rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal"
+          className="w-full bg-surface border border-border text-navy rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy"
         >
           <option value="">Não sei ainda</option>
           {COMPANHIAS_AEREAS.map((c) => (
@@ -287,9 +306,9 @@ function FormViagem({
       <button
         onClick={onGerar}
         disabled={!dataEmbarque}
-        className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-4 rounded-2xl transition-colors"
+        className="flex items-center justify-center gap-2 w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-4 rounded-2xl transition-colors"
       >
-        Ver o que preciso fazer
+        Próximo
         <ChevronRight className="w-5 h-5" />
       </button>
     </div>
@@ -300,9 +319,9 @@ function AirlineInfo({ id }: { id: string }) {
   const cia = COMPANHIAS_AEREAS.find((c) => c.id === id);
   if (!cia) return null;
   return (
-    <div className="mt-2 bg-white border border-gray-200 rounded-xl p-3 text-xs space-y-1.5">
+    <div className="mt-2 bg-surface border border-border rounded-xl p-3 text-xs space-y-1.5">
       <p className="font-medium text-navy">{cia.nome}</p>
-      <div className="grid grid-cols-2 gap-1 text-gray-500">
+      <div className="grid grid-cols-2 gap-1 text-gray-400">
         <span>Cabine: até {cia.pesoMaxCabine}kg</span>
         <span>Porão: até {cia.pesoMaxPorао}kg</span>
         <span>Caixa: {cia.dimensoesMaxCabine.comprimento}×{cia.dimensoesMaxCabine.largura}×{cia.dimensoesMaxCabine.altura}cm</span>

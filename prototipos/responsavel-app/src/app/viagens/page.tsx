@@ -151,7 +151,7 @@ export default function ViagensPage() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                  <div className="bg-white border border-border rounded-2xl overflow-hidden">
                     {/* Card clicável */}
                     <div
                       onClick={() => !confirmando && router.push(`/viagens/${plano.id}`)}
@@ -187,11 +187,11 @@ export default function ViagensPage() {
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
                           <p className="text-[11px] text-gray-400">Progresso</p>
-                          <p className="text-[11px] font-semibold text-gray-500">
+                          <p className="text-[11px] font-semibold text-gray-400">
                             {porcentagem}%
                           </p>
                         </div>
-                        <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-surface rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${porcentagem}%` }}
@@ -210,7 +210,7 @@ export default function ViagensPage() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="border-t border-gray-200 px-4 py-3 flex items-center gap-2"
+                          className="border-t border-border px-4 py-3 flex items-center gap-2"
                         >
                           <p className="text-xs text-red-500 flex-1">
                             Excluir esta viagem?
@@ -234,7 +234,7 @@ export default function ViagensPage() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="border-t border-gray-200 px-4 py-2 flex justify-end"
+                          className="border-t border-border px-4 py-2 flex justify-end"
                         >
                           <button
                             onClick={(e) => {
@@ -258,7 +258,7 @@ export default function ViagensPage() {
             {pets.length > 0 && (
               <Link
                 href="/planejar"
-                className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-gray-200 rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-border rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors"
               >
                 <PlusCircle className="w-4 h-4" />
                 Planejar nova viagem

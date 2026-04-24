@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Home, BookOpen, Plane, PlusCircle } from "lucide-react";
+import { Home, BookOpen, Plane } from "lucide-react";
 
 type NavItem = "home" | "passaportes" | "viagens";
 
@@ -17,7 +17,7 @@ const items = [
 
 export function BottomNav({ active }: Props) {
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white/95 backdrop-blur border-t border-gray-200 px-2 pb-safe">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white/95 backdrop-blur-lg border-t border-border px-2 pb-safe">
       <div className="flex items-center justify-around h-16">
         {items.map((item) => {
           const Icon = item.icon;
@@ -28,12 +28,12 @@ export function BottomNav({ active }: Props) {
               href={item.href}
               className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-colors ${
                 isActive
-                  ? "text-teal"
-                  : "text-gray-400 hover:text-gray-600"
+                  ? "text-navy"
+                  : "text-gray-400 hover:text-gray-500"
               }`}
             >
-              <Icon className="w-5 h-5" />
-              <span className="text-[10px] font-medium">{item.label}</span>
+              <Icon className={`w-5 h-5 ${isActive ? "stroke-[2.5]" : ""}`} />
+              <span className={`text-[10px] ${isActive ? "font-semibold" : "font-medium"}`}>{item.label}</span>
             </Link>
           );
         })}

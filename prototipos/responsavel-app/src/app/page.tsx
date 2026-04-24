@@ -29,7 +29,6 @@ export default function HomePage() {
 
   const temPets = pets.length > 0;
 
-  // Viagem mais próxima para o banner do Journey Hub
   const proximaViagem = planosViagem
     .map((plano) => {
       const pet = pets.find((p) => p.id === plano.petId);
@@ -43,28 +42,25 @@ export default function HomePage() {
     .sort((a, b) => a!.diasRestantes - b!.diasRestantes)[0] ?? null;
 
   return (
-    <div className="flex flex-col min-h-screen pb-24">
-      {/* Header */}
+    <div className="flex flex-col min-h-screen pb-24 bg-white">
       <header className="px-5 pt-14 pb-6">
         <div className="flex items-center justify-between mb-1">
           <div>
-            <p className="text-sm text-gray-500">Bem-vindo ao</p>
+            <p className="text-sm text-gray-400">Bem-vindo ao</p>
             <h1 className="text-2xl font-bold text-navy flex items-center gap-2">
-              ✈️ <span className="text-teal">iPet</span>
+              <span className="text-teal">iPet</span> Pass
             </h1>
           </div>
           <Link
             href="/configuracoes"
-            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"
+            className="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-border"
           >
-            <Settings className="w-5 h-5 text-gray-500" />
+            <Settings className="w-5 h-5 text-gray-400" />
           </Link>
         </div>
-        <p className="text-gray-500 text-sm mt-1">Pet Pass</p>
       </header>
 
-      <main className="flex-1 px-5 space-y-8">
-        {/* ── Journey Hub Banner (viagem ativa) ─────────────────── */}
+      <main className="flex-1 px-5 space-y-6">
         {proximaViagem && (
           <JourneyHubBanner
             planoId={proximaViagem.plano.id}
@@ -80,7 +76,7 @@ export default function HomePage() {
             )}
           />
         )}
-        {/* ── Meus Pets ────────────────────────────────────────────── */}
+
         {!temPets ? (
           <EmptyState />
         ) : (
@@ -98,7 +94,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/pets/novo"
-              className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-gray-200 rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors mt-3"
+              className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-border rounded-2xl text-gray-400 text-sm hover:border-navy hover:text-navy transition-colors mt-3"
             >
               <PlusCircle className="w-4 h-4" />
               Adicionar outro pet
@@ -106,18 +102,17 @@ export default function HomePage() {
           </section>
         )}
 
-        {/* ── CTA Planejar viagem (tem pets mas sem viagem ativa) ─── */}
         {temPets && !proximaViagem && (
           <Link
             href="/planejar"
-            className="flex items-center gap-4 bg-gradient-to-r from-teal/10 to-navy/5 border border-teal/20 rounded-2xl p-4 hover:border-teal/50 transition-colors"
+            className="flex items-center gap-4 bg-navy/5 border border-navy/10 rounded-2xl p-4 hover:bg-navy/10 transition-colors"
           >
-            <div className="w-11 h-11 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0">
-              <span className="text-2xl">✈️</span>
+            <div className="w-11 h-11 rounded-xl bg-navy/10 flex items-center justify-center flex-shrink-0">
+              <Plane className="w-5 h-5 text-navy" />
             </div>
             <div className="flex-1">
               <p className="text-navy font-semibold text-sm">Planejar uma viagem</p>
-              <p className="text-gray-500 text-xs mt-0.5">
+              <p className="text-gray-400 text-xs mt-0.5">
                 Por onde começo? Descubra em 3 passos.
               </p>
             </div>
@@ -125,18 +120,17 @@ export default function HomePage() {
           </Link>
         )}
 
-        {/* ── CTA Companhias aéreas ──────────────────────────────── */}
         {temPets && (
           <Link
             href="/companhias"
-            className="flex items-center gap-4 bg-white border border-gray-200 rounded-2xl p-4 hover:border-teal/40 transition-colors"
+            className="flex items-center gap-4 bg-white border border-border rounded-2xl p-4 hover:border-navy/30 transition-colors"
           >
-            <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-surface flex items-center justify-center flex-shrink-0">
               <Plane className="w-5 h-5 text-teal" />
             </div>
             <div className="flex-1">
               <p className="text-navy font-semibold text-sm">Companhias aéreas</p>
-              <p className="text-gray-500 text-xs mt-0.5">
+              <p className="text-gray-400 text-xs mt-0.5">
                 Quais aceitam meu pet na cabine ou porão?
               </p>
             </div>
@@ -144,43 +138,36 @@ export default function HomePage() {
           </Link>
         )}
 
-        {/* ── CTA Clínicas veterinárias ────────────────────────────── */}
         <Link
           href="/clinicas"
-          className="flex items-center gap-4 bg-white border border-gray-200 rounded-2xl p-4 hover:border-teal/40 transition-colors"
+          className="flex items-center gap-4 bg-white border border-border rounded-2xl p-4 hover:border-navy/30 transition-colors"
         >
-          <div className="w-11 h-11 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
-            <Stethoscope className="w-5 h-5 text-emerald-600" />
+          <div className="w-11 h-11 rounded-xl bg-teal-light flex items-center justify-center flex-shrink-0">
+            <Stethoscope className="w-5 h-5 text-teal" />
           </div>
           <div className="flex-1">
             <p className="text-navy font-semibold text-sm">Clínicas veterinárias</p>
-            <p className="text-gray-500 text-xs mt-0.5">
+            <p className="text-gray-400 text-xs mt-0.5">
               Vets habilitados MAPA, labs de sorologia e mais
             </p>
           </div>
           <ChevronRight className="w-4 h-4 text-gray-400" />
         </Link>
 
-        {/* ── Banner de destaque (apenas sem pets cadastrados) ─────── */}
         {!temPets && (
-          <div className="bg-gradient-to-r from-teal/10 to-navy/5 border border-teal/20 rounded-2xl p-4">
-            <p className="text-xs text-teal font-medium mb-1">✨ Pet Pass</p>
+          <div className="bg-navy/5 border border-navy/10 rounded-2xl p-5">
+            <p className="text-xs text-teal font-semibold mb-1 uppercase tracking-wider">iPet Pass</p>
             <p className="text-navy text-sm font-semibold">
               Viaje com seu pet com segurança e zero surpresas
             </p>
-            <p className="text-gray-500 text-xs mt-1">
+            <p className="text-gray-400 text-xs mt-1.5 leading-relaxed">
               Passaporte digital, motor de compliance e roteiro de documentos por destino.
             </p>
           </div>
         )}
 
-        {/* ── Dicas rápidas ─────────────────────────────────────────── */}
         <DicasRapidas />
-
-        {/* ── Sugestões de destinos ─────────────────────────────────── */}
         <SugestoesDestinos />
-
-        {/* ── Hotéis pet ───────────────────────────────────────────── */}
         <HoteisPetSection />
       </main>
 
@@ -192,19 +179,19 @@ export default function HomePage() {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center pt-8 pb-4 text-center px-4">
-      <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-5 text-4xl">
+      <div className="w-20 h-20 rounded-full bg-surface flex items-center justify-center mb-5 text-4xl border border-border">
         🐾
       </div>
       <h2 className="text-xl font-semibold text-navy mb-2">
         Cadastre seu primeiro pet
       </h2>
-      <p className="text-gray-500 text-sm leading-relaxed mb-6">
+      <p className="text-gray-400 text-sm leading-relaxed mb-6">
         Comece adicionando as informações do seu pet para gerar o passaporte
         digital e planejar sua viagem com segurança.
       </p>
       <Link
         href="/pets/novo"
-        className="flex items-center gap-2 bg-teal hover:bg-teal-dark text-white font-semibold px-6 py-3 rounded-2xl transition-colors"
+        className="flex items-center gap-2 bg-navy hover:bg-navy-light text-white font-semibold px-6 py-3 rounded-2xl transition-colors"
       >
         <PlusCircle className="w-5 h-5" />
         Cadastrar pet
@@ -215,28 +202,26 @@ function EmptyState() {
 
 const DICAS = [
   {
-    emoji: "💉",
+    icon: "💉",
     titulo: "Vacina antirrábica",
     texto: "Obrigatória para todos os destinos. Validade de 1 ano, carência de 21 dias.",
   },
   {
-    emoji: "🔖",
+    icon: "🔖",
     titulo: "Microchip ISO",
     texto: "Exigido pela UE, UK, Japão e Austrália. Deve ser implantado antes da vacina.",
   },
   {
-    emoji: "📋",
-    titulo: "CVI — Certificado Veterinário Internacional",
+    icon: "📋",
+    titulo: "CVI",
     texto: "Emitir 2 a 10 dias antes do embarque com veterinário credenciado pelo MAPA.",
   },
   {
-    emoji: "⏱️",
-    titulo: "Sorologia — planeje com antecedência",
+    icon: "⏱️",
+    titulo: "Sorologia",
     texto: "UE exige 90 dias de espera. Japão e Austrália exigem 180 dias. Comece cedo!",
   },
 ];
-
-// ─── Journey Hub Banner ────────────────────────────────────────
 
 interface JourneyHubBannerProps {
   planoId: string;
@@ -272,18 +257,18 @@ function JourneyHubBanner({
         href={`/viagens/${planoId}`}
         className={`block rounded-2xl border p-4 ${
           temUrgente
-            ? "bg-orange-50 border-orange-200"
-            : "bg-gradient-to-br from-teal/10 to-navy/5 border-teal/20"
+            ? "bg-orange-light border-ipet-orange/20"
+            : "bg-navy/5 border-navy/10"
         }`}
       >
         <div className="flex items-start justify-between mb-3">
           <div>
-            <p className="text-xs text-gray-500 mb-0.5">Viagem ativa</p>
+            <p className="text-xs text-gray-400 mb-0.5 font-medium uppercase tracking-wider">Viagem ativa</p>
             <p className="text-sm font-semibold text-navy">
               {petNome.split(" ")[0]} → {destino.bandeira} {destino.nome}
             </p>
-            <p className="text-xs text-gray-400">
-              ✈️ Embarque{" "}
+            <p className="text-xs text-gray-400 mt-0.5">
+              Embarque{" "}
               {diasRestantes === 0
                 ? "hoje!"
                 : `em ${diasRestantes} dia${diasRestantes !== 1 ? "s" : ""}`}{" "}
@@ -296,27 +281,26 @@ function JourneyHubBanner({
           </div>
         </div>
 
-        {/* Mini barra de progresso */}
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <p className="text-[11px] text-gray-400">
               Documentação: {concluidas}/{total}
             </p>
-            <p className="text-[11px] font-semibold text-gray-500">{progresso}%</p>
+            <p className="text-[11px] font-semibold text-navy">{progresso}%</p>
           </div>
-          <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-1.5 bg-white rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${progresso}%` }}
               transition={{ duration: 0.6 }}
-              className={`h-full rounded-full ${temUrgente ? "bg-ipet-orange" : "bg-teal"}`}
+              className={`h-full rounded-full ${temUrgente ? "bg-ipet-orange" : "bg-navy"}`}
             />
           </div>
         </div>
 
         {temUrgente && (
-          <p className="text-xs text-ipet-orange mt-2">
-            ⚠️ Há tarefas urgentes — toque para ver a jornada
+          <p className="text-xs text-ipet-orange mt-2 font-medium">
+            Há tarefas urgentes — toque para ver a jornada
           </p>
         )}
       </Link>
@@ -328,17 +312,17 @@ function DicasRapidas() {
   return (
     <section>
       <h2 className="text-base font-semibold text-navy mb-3">
-        Dicas essenciais de viagem
+        Dicas essenciais
       </h2>
       <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-5 px-5">
         {DICAS.map((d, i) => (
           <div
             key={i}
-            className="flex-shrink-0 w-52 bg-gray-100 rounded-2xl p-3.5 border border-gray-200"
+            className="flex-shrink-0 w-52 bg-white rounded-2xl p-4 border border-border"
           >
-            <span className="text-2xl">{d.emoji}</span>
+            <span className="text-2xl">{d.icon}</span>
             <p className="text-navy text-xs font-semibold mt-2 mb-1">{d.titulo}</p>
-            <p className="text-gray-500 text-[11px] leading-relaxed">{d.texto}</p>
+            <p className="text-gray-400 text-[11px] leading-relaxed">{d.texto}</p>
           </div>
         ))}
       </div>

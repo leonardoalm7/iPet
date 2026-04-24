@@ -37,13 +37,13 @@ export default function PoliticaPrivacidadePage() {
         <Section titulo="2. Dados que Coletamos">
           <table className="w-full text-xs border-collapse">
             <thead>
-              <tr className="text-gray-500 border-b border-gray-200">
+              <tr className="text-gray-500 border-b border-border">
                 <th className="text-left py-2 pr-4">Dado</th>
                 <th className="text-left py-2 pr-4">Finalidade</th>
                 <th className="text-left py-2">Base Legal (LGPD)</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-border">
               <DataRow dado="Nome completo" finalidade="Personalização e suporte" base="Art. 7º, V" />
               <DataRow dado="E-mail" finalidade="Autenticação e comunicações" base="Art. 7º, V" />
               <DataRow dado="Telefone" finalidade="Suporte e notificações" base="Art. 7º, V" />
@@ -57,7 +57,7 @@ export default function PoliticaPrivacidadePage() {
         </Section>
 
         <Section titulo="3. Dados que NÃO Coletamos">
-          <ul className="list-disc pl-5 space-y-1 text-gray-500">
+          <ul className="list-disc pl-5 space-y-1 text-gray-400">
             <li>CPF em texto simples (armazenamos apenas o hash SHA-256 irreversível)</li>
             <li>Dados de pagamento (processados diretamente pelo Mercado Pago)</li>
             <li>Localização em tempo real</li>
@@ -178,8 +178,8 @@ function DataRow({
 }) {
   return (
     <tr>
-      <td className="py-2 pr-4 text-gray-600">{dado}</td>
-      <td className="py-2 pr-4 text-gray-500">{finalidade}</td>
+      <td className="py-2 pr-4 text-gray-400">{dado}</td>
+      <td className="py-2 pr-4 text-gray-400">{finalidade}</td>
       <td className="py-2 text-teal">{base}</td>
     </tr>
   );

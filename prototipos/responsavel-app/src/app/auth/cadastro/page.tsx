@@ -113,7 +113,7 @@ export default function CadastroPage() {
           <button
             onClick={handleApple}
             disabled={!!loadingProvider || loading}
-            className="flex items-center justify-center gap-3 w-full bg-black hover:bg-white disabled:opacity-60 text-navy font-medium py-3.5 rounded-2xl border border-gray-200 transition-colors"
+            className="flex items-center justify-center gap-3 w-full bg-black hover:bg-white disabled:opacity-60 text-navy font-medium py-3.5 rounded-2xl border border-border transition-colors"
           >
             {loadingProvider === "apple" ? <Spinner /> : <AppleIcon />}
             Cadastrar com Apple
@@ -137,7 +137,7 @@ export default function CadastroPage() {
               onChange={(e) => setNome(e.target.value)}
               required
               autoComplete="name"
-              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
           </div>
 
@@ -151,7 +151,7 @@ export default function CadastroPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
           </div>
 
@@ -166,7 +166,7 @@ export default function CadastroPage() {
                 onChange={(e) => { setSenha(e.target.value); setMostrarRequisitos(true); }}
                 required
                 autoComplete="new-password"
-                className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+                className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
               />
               <button
                 type="button"
@@ -197,7 +197,7 @@ export default function CadastroPage() {
           <button
             type="submit"
             disabled={loading || !!loadingProvider || !senhaValida || !nome || !email}
-            className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
+            className="flex items-center justify-center gap-2 w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
           >
             {loading ? <Spinner /> : "Criar conta"}
           </button>

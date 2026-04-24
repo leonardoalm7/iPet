@@ -84,7 +84,7 @@ export default function MetricasPage() {
       <header className="flex items-center gap-3 px-5 pt-14 pb-4">
         <button
           onClick={() => router.back()}
-          className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"
+          className="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-border"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
@@ -123,7 +123,7 @@ export default function MetricasPage() {
         )}
 
         {/* Funil */}
-        <section className="bg-white border border-gray-200 rounded-2xl p-4">
+        <section className="bg-white border border-border rounded-2xl p-4">
           <h2 className="text-sm font-semibold text-navy mb-3 flex items-center gap-2">
             <TrendingDown className="w-4 h-4 text-teal" />
             Funil de conversão
@@ -144,7 +144,7 @@ export default function MetricasPage() {
                 return (
                   <div key={etapa.etapa}>
                     <div className="flex justify-between text-xs mb-0.5">
-                      <span className="text-gray-600">
+                      <span className="text-gray-400">
                         {ETAPA_LABELS[etapa.etapa] || etapa.etapa}
                       </span>
                       <span className="font-medium text-navy">
@@ -156,7 +156,7 @@ export default function MetricasPage() {
                         )}
                       </span>
                     </div>
-                    <div className="h-5 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-5 bg-surface rounded-full overflow-hidden">
                       <div
                         className="h-full bg-teal rounded-full transition-all duration-500"
                         style={{ width: `${Math.max(pct, 2)}%` }}
@@ -185,7 +185,7 @@ export default function MetricasPage() {
 
         {/* Veredictos */}
         {dados.contagemVeredictos.length > 0 && (
-          <section className="bg-white border border-gray-200 rounded-2xl p-4">
+          <section className="bg-white border border-border rounded-2xl p-4">
             <h2 className="text-sm font-semibold text-navy mb-3">Veredictos cias aéreas</h2>
             <div className="flex gap-2 flex-wrap">
               {dados.contagemVeredictos.map(({ item, count }) => (
@@ -198,7 +198,7 @@ export default function MetricasPage() {
                         ? "bg-amber-50 text-amber-700"
                         : item === "NAO_ACEITO"
                           ? "bg-red-50 text-red-600"
-                          : "bg-gray-100 text-gray-600"
+                          : "bg-surface text-gray-400"
                   }`}
                 >
                   {item}: {count}
@@ -209,14 +209,14 @@ export default function MetricasPage() {
         )}
 
         {/* Todos os eventos (debug) */}
-        <section className="bg-white border border-gray-200 rounded-2xl p-4">
+        <section className="bg-white border border-border rounded-2xl p-4">
           <h2 className="text-sm font-semibold text-navy mb-3">Contagem por evento</h2>
           <div className="space-y-1">
             {Object.entries(dados.contagem)
               .sort(([, a], [, b]) => b - a)
               .map(([evento, count]) => (
                 <div key={evento} className="flex justify-between text-xs">
-                  <span className="text-gray-600">{evento}</span>
+                  <span className="text-gray-400">{evento}</span>
                   <span className="font-mono text-navy">{count}</span>
                 </div>
               ))}
@@ -242,7 +242,7 @@ function StatCard({
   label: string;
 }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-3 text-center">
+    <div className="bg-white border border-border rounded-2xl p-3 text-center">
       <div className="flex justify-center text-teal mb-1">{icon}</div>
       <p className="text-xl font-bold text-navy">{valor}</p>
       <p className="text-[10px] text-gray-400 uppercase tracking-wide">{label}</p>
@@ -260,7 +260,7 @@ function RankingCard({
   items: { item: string; count: number }[];
 }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-4">
+    <div className="bg-white border border-border rounded-2xl p-4">
       <h2 className="text-sm font-semibold text-navy mb-2 flex items-center gap-1.5">
         {icon}
         {titulo}

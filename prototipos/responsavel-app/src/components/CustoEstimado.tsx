@@ -39,7 +39,7 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
         {/* Ícone de status */}
         <div className="flex-shrink-0 mt-0.5">
           {isPago ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <CheckCircle2 className="w-4 h-4 text-teal" />
           ) : (
             <Clock className="w-4 h-4 text-gray-400" />
           )}
@@ -48,11 +48,11 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
         {/* Título + categoria */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5">
-            <p className={`text-sm ${isPago ? "text-gray-500 line-through" : "text-navy"}`}>
+            <p className={`text-sm ${isPago ? "text-gray-400 line-through" : "text-navy"}`}>
               {item.titulo}
             </p>
             {item.porViagem && (
-              <span className="text-[9px] text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">
+              <span className="text-[9px] text-gray-400 bg-surface px-1.5 py-0.5 rounded-full">
                 por viagem
               </span>
             )}
@@ -68,7 +68,7 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
         {/* Faixa de preço */}
         <div className="text-right flex-shrink-0">
           {isPago ? (
-            <p className="text-xs text-emerald-600">✓ pago</p>
+            <p className="text-xs text-teal">✓ pago</p>
           ) : (
             <p className="text-xs font-medium text-gray-600">
               {formatBRL(item.minBRL)}
@@ -116,7 +116,7 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
       : `${formatBRL(estimativa.totalPendenteMin)} – ${formatBRL(estimativa.totalPendenteMax)}`;
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+    <div className="bg-white border border-border rounded-2xl overflow-hidden">
       {/* Header sempre visível */}
       <button
         onClick={() => compacto && setExpandido(!expandido)}
@@ -124,12 +124,12 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
           compacto ? "cursor-pointer" : "cursor-default"
         }`}
       >
-        <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 rounded-xl bg-teal-light flex items-center justify-center flex-shrink-0">
           <span className="text-lg">💰</span>
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold text-navy">Estimativa de custo</p>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-gray-400">
             {pet.nome.split(" ")[0]} → {regras.bandeira} {regras.nome}
           </p>
         </div>
@@ -161,7 +161,7 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="px-4 pb-4 space-y-1 border-t border-gray-200 pt-3">
+            <div className="px-4 pb-4 space-y-1 border-t border-border pt-3">
 
               {/* Já pago */}
               {temPagos && (
@@ -210,7 +210,7 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
               )}
 
               {/* Totalizadores */}
-              <div className="pt-3 mt-2 border-t border-gray-200 space-y-1.5">
+              <div className="pt-3 mt-2 border-t border-border space-y-1.5">
                 {temPagos && (
                   <div className="flex items-center justify-between">
                     <p className="text-xs text-gray-400">Já investido</p>
@@ -228,7 +228,7 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
                     <p className="text-xs text-ipet-orange font-medium">{faixaPendente}</p>
                   </div>
                 )}
-                <div className="flex items-center justify-between pt-1 border-t border-gray-200">
+                <div className="flex items-center justify-between pt-1 border-t border-border">
                   <p className="text-sm font-semibold text-navy">Total estimado</p>
                   <p className="text-sm font-bold text-navy">{faixaTotal}</p>
                 </div>

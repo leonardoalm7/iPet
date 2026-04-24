@@ -45,13 +45,13 @@ export default function DestinosPage() {
         <div className="flex items-center gap-3 mb-4">
           <button
             onClick={() => router.back()}
-            className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center"
+            className="w-9 h-9 rounded-full bg-surface flex items-center justify-center border border-border"
           >
-            <ChevronLeft className="w-5 h-5 text-gray-500" />
+            <ChevronLeft className="w-5 h-5 text-gray-400" />
           </button>
           <div>
             <h1 className="text-lg font-bold text-navy">Destinos Pet-Friendly</h1>
-            <p className="text-xs text-gray-500">{sugestoes.length} destinos disponíveis</p>
+            <p className="text-xs text-gray-400">{sugestoes.length} destinos disponíveis</p>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export default function DestinosPage() {
             placeholder="Buscar destino..."
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
-            className="w-full bg-gray-100 text-navy text-sm rounded-xl pl-9 pr-4 py-2.5 border border-gray-200 focus:outline-none focus:border-teal placeholder-gray-500"
+            className="w-full bg-gray-100 text-navy text-sm rounded-xl pl-9 pr-4 py-2.5 border border-border focus:outline-none focus:border-teal placeholder-gray-500"
           />
         </div>
 
@@ -133,7 +133,7 @@ function DestinoCard({ sugestao: s }: { sugestao: SugestaoDestino }) {
   const router = useRouter();
 
   return (
-    <div className="bg-gray-100 rounded-2xl border border-gray-200/50 overflow-hidden">
+    <div className="bg-surface rounded-2xl border border-border/50 overflow-hidden">
       <div className="flex items-start gap-3 p-4">
         {/* Emoji */}
         <div className="w-14 h-14 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center text-3xl flex-shrink-0 relative">

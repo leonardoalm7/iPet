@@ -184,14 +184,14 @@ export default function CompanhiasPage() {
         ) : (
           <>
             {/* Card do pet */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-4">
+            <div className="bg-white border border-border rounded-2xl p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl">
                   {pet.especie === "CAO" ? "🐕" : pet.especie === "GATO" ? "🐈" : "🐾"}
                 </div>
                 <div className="flex-1">
                   <p className="font-semibold text-navy">{pet.nome}</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-400">
                     {pet.raca} · {pet.peso}kg
                   </p>
                 </div>
@@ -219,11 +219,11 @@ export default function CompanhiasPage() {
 
             {/* Toggle Lista / Comparar + Filtros */}
             <div className="flex items-center gap-2">
-              <div className="flex bg-gray-100 rounded-xl p-0.5 flex-shrink-0">
+              <div className="flex bg-surface rounded-xl p-0.5 flex-shrink-0">
                 <button
                   onClick={() => setModo("lista")}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                    modo === "lista" ? "bg-white text-navy shadow-sm" : "text-gray-500"
+                    modo === "lista" ? "bg-white text-navy shadow-sm" : "text-gray-400"
                   }`}
                 >
                   Lista
@@ -231,7 +231,7 @@ export default function CompanhiasPage() {
                 <button
                   onClick={() => setModo("comparar")}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                    modo === "comparar" ? "bg-white text-navy shadow-sm" : "text-gray-500"
+                    modo === "comparar" ? "bg-white text-navy shadow-sm" : "text-gray-400"
                   }`}
                 >
                   Comparar
@@ -245,7 +245,7 @@ export default function CompanhiasPage() {
                     className={`px-2.5 py-1.5 rounded-lg text-[10px] font-medium whitespace-nowrap transition-colors ${
                       filtroVeredicto === f
                         ? "bg-teal text-white"
-                        : "bg-gray-100 text-gray-500"
+                        : "bg-gray-100 text-gray-400"
                     }`}
                   >
                     {f === "TODOS" ? "Todas" : f === "PODE_CABINE" ? "Cabine" : f === "PODE_PORAO" ? "Porão" : "Recusadas"}
@@ -379,7 +379,7 @@ function ResumoChip({
       >
         {count}
       </span>
-      <span className="text-xs text-gray-500">{label}</span>
+      <span className="text-xs text-gray-400">{label}</span>
     </div>
   );
 }
@@ -482,8 +482,8 @@ function CiaCard({
 
                 {/* Dimensões */}
                 {cia.pesoMaxCabine > 0 && (
-                  <div className="text-xs text-gray-500">
-                    <span className="font-medium text-gray-600">
+                  <div className="text-xs text-gray-400">
+                    <span className="font-medium text-gray-400">
                       Caixa cabine:
                     </span>{" "}
                     {cia.dimensoesMaxCabine.comprimento}×
@@ -518,8 +518,8 @@ function CiaCard({
 
                 {/* Idade mínima */}
                 {cia.idadeMinimaAnimal > 0 && (
-                  <div className="text-xs text-gray-500">
-                    <span className="font-medium text-gray-600">
+                  <div className="text-xs text-gray-400">
+                    <span className="font-medium text-gray-400">
                       Idade mínima:
                     </span>{" "}
                     {cia.idadeMinimaAnimal} semanas
@@ -586,7 +586,7 @@ function SpecItem({
           ? "bg-emerald-50 border-emerald-200"
           : limite > 0
           ? "bg-red-50 border-red-200"
-          : "bg-gray-50 border-gray-200"
+          : "bg-gray-50 border-border"
       }`}
     >
       <div
@@ -595,7 +595,7 @@ function SpecItem({
         {icon}
       </div>
       <div>
-        <p className="text-[10px] text-gray-500">{label}</p>
+        <p className="text-[10px] text-gray-400">{label}</p>
         <p
           className={`text-xs font-semibold ${
             ok ? "text-emerald-700" : limite > 0 ? "text-red-600" : "text-gray-400"
@@ -700,7 +700,7 @@ function ComparacaoTable({
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white border border-gray-200 rounded-2xl overflow-hidden"
+      className="bg-white border border-border rounded-2xl overflow-hidden"
     >
       <div className="overflow-x-auto">
         <table className="w-full text-xs">

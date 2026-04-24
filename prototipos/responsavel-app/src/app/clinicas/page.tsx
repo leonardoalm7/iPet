@@ -177,7 +177,7 @@ export default function ClinicasPage() {
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
             placeholder="Buscar por nome, cidade ou serviço..."
-            className="w-full bg-white border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-sm text-navy placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent"
+            className="w-full bg-white border border-border rounded-xl pl-10 pr-4 py-3 text-sm text-navy placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy"
           />
         </div>
 
@@ -269,7 +269,7 @@ function ResumoChip({ count, label, color }: { count: number; label: string; col
       <span className={`w-5 h-5 rounded-full ${color} text-white text-[10px] font-bold flex items-center justify-center`}>
         {count}
       </span>
-      <span className="text-xs text-gray-500">{label}</span>
+      <span className="text-xs text-gray-400">{label}</span>
     </div>
   );
 }
@@ -306,7 +306,7 @@ function ClinicaCard({
             ? "border-purple-200"
             : isMapa
             ? "border-emerald-200"
-            : "border-gray-200"
+            : "border-border"
         }`}
       >
         {/* Header clicável */}
@@ -366,7 +366,7 @@ function ClinicaCard({
             >
               <div className="px-4 pb-4 space-y-3 border-t border-gray-100 pt-3">
                 {/* Endereço */}
-                <div className="flex items-start gap-2 text-xs text-gray-500">
+                <div className="flex items-start gap-2 text-xs text-gray-400">
                   <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-gray-400" />
                   <span>{clinica.endereco}</span>
                 </div>
@@ -406,7 +406,7 @@ function ClinicaCard({
                   </button>
                   <button
                     onClick={onNavegar}
-                    className="flex-1 flex items-center justify-center gap-1.5 bg-white border border-gray-200 hover:border-teal/50 text-navy font-semibold py-2.5 rounded-xl transition-colors text-xs"
+                    className="flex-1 flex items-center justify-center gap-1.5 bg-white border border-border hover:border-teal/50 text-navy font-semibold py-2.5 rounded-xl transition-colors text-xs"
                   >
                     <Navigation className="w-3.5 h-3.5" />
                     Como chegar
@@ -416,9 +416,9 @@ function ClinicaCard({
                       href={clinica.site}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 flex items-center justify-center border border-gray-200 hover:border-teal/50 rounded-xl transition-colors"
+                      className="w-10 flex items-center justify-center border border-border hover:border-teal/50 rounded-xl transition-colors"
                     >
-                      <ExternalLink className="w-3.5 h-3.5 text-gray-500" />
+                      <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
                     </a>
                   )}
                 </div>

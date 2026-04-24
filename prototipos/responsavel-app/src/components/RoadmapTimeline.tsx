@@ -1,19 +1,10 @@
 "use client";
 
-/**
- * RoadmapTimeline — Visualização cronológica do roadmap de compliance
- *
- * Exibe todas as tarefas como nós em uma linha do tempo vertical,
- * agrupadas por mês, com marcadores especiais para HOJE e EMBARQUE.
- * Design nível super app: referências PetLove/Petz para polish e UX.
- */
-
 import { RoadmapCompliance, TarefaRoadmap, StatusTarefa } from "@/domain/types";
 import { parseBR, formatBR } from "@/services/travel-roadmap";
 import {
   differenceInDays,
   format,
-  isSameMonth,
   isBefore,
   isAfter,
   startOfDay,
@@ -36,8 +27,6 @@ import {
   Info,
 } from "lucide-react";
 
-// ─── Configuração visual por status ──────────────────────────────────────────
-
 const STATUS_STYLE: Record<
   StatusTarefa,
   {
@@ -52,24 +41,24 @@ const STATUS_STYLE: Record<
   }
 > = {
   CONCLUIDA: {
-    dot: "bg-emerald-500",
-    ring: "ring-emerald-500/30",
-    badge: "bg-emerald-100 border border-emerald-200",
-    badgeText: "text-emerald-700",
-    icon: CheckCircle2,
-    iconColor: "text-emerald-600",
-    cardBorder: "border-emerald-200",
-    cardBg: "bg-emerald-50",
-  },
-  PENDENTE: {
     dot: "bg-teal",
     ring: "ring-teal/30",
-    badge: "bg-teal/10 border border-teal/20",
+    badge: "bg-teal-light border border-teal/20",
     badgeText: "text-teal",
-    icon: Clock,
+    icon: CheckCircle2,
     iconColor: "text-teal",
     cardBorder: "border-teal/20",
-    cardBg: "bg-teal/5",
+    cardBg: "bg-teal-light",
+  },
+  PENDENTE: {
+    dot: "bg-ipet-orange",
+    ring: "ring-ipet-orange/30",
+    badge: "bg-orange-light border border-ipet-orange/20",
+    badgeText: "text-ipet-orange",
+    icon: Clock,
+    iconColor: "text-ipet-orange",
+    cardBorder: "border-ipet-orange/20",
+    cardBg: "bg-orange-light",
   },
   URGENTE: {
     dot: "bg-amber-500",
@@ -82,14 +71,14 @@ const STATUS_STYLE: Record<
     cardBg: "bg-amber-50",
   },
   CRITICO: {
-    dot: "bg-ipet-orange",
-    ring: "ring-orange-500/50",
-    badge: "bg-orange-100 border border-orange-200",
-    badgeText: "text-ipet-orange",
+    dot: "bg-red-500",
+    ring: "ring-red-500/50",
+    badge: "bg-red-100 border border-red-200",
+    badgeText: "text-red-600",
     icon: Zap,
-    iconColor: "text-ipet-orange",
-    cardBorder: "border-orange-200",
-    cardBg: "bg-orange-50",
+    iconColor: "text-red-500",
+    cardBorder: "border-red-200",
+    cardBg: "bg-red-50",
   },
   VENCIDA: {
     dot: "bg-red-500",
@@ -104,36 +93,34 @@ const STATUS_STYLE: Record<
   BLOQUEADA: {
     dot: "bg-gray-300",
     ring: "ring-gray-300/20",
-    badge: "bg-gray-100 border border-gray-200",
+    badge: "bg-surface border border-border",
     badgeText: "text-gray-400",
     icon: Lock,
     iconColor: "text-gray-400",
-    cardBorder: "border-gray-200",
-    cardBg: "bg-white/20",
+    cardBorder: "border-border",
+    cardBg: "bg-surface",
   },
   NAO_APLICAVEL: {
     dot: "bg-gray-200",
     ring: "ring-gray-300/20",
-    badge: "bg-gray-100 border border-gray-200",
+    badge: "bg-surface border border-border",
     badgeText: "text-gray-400",
     icon: CheckCircle2,
     iconColor: "text-gray-400",
-    cardBorder: "border-gray-200",
+    cardBorder: "border-border",
     cardBg: "bg-transparent",
   },
 };
 
 const STATUS_LABEL: Record<StatusTarefa, string> = {
-  CONCLUIDA: "Concluída",
+  CONCLUIDA: "Concluído",
   PENDENTE: "Pendente",
   URGENTE: "Urgente",
-  CRITICO: "Crítico",
+  CRITICO: "Ação Necessária",
   VENCIDA: "Vencida",
   BLOQUEADA: "Bloqueada",
   NAO_APLICAVEL: "N/A",
 };
-
-// ─── Tipos internos ───────────────────────────────────────────────────────────
 
 type TimelineItem =
   | { kind: "tarefa"; tarefa: TarefaRoadmap; date: Date }
@@ -141,14 +128,11 @@ type TimelineItem =
   | { kind: "voo"; date: Date }
   | { kind: "liberacao"; date: Date; label: string };
 
-// ─── Componente principal ─────────────────────────────────────────────────────
-
 export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
   const hoje = startOfDay(new Date());
   const dataVoo = parseBR(roadmap.dataEmbarque);
   const diasAteVoo = differenceInDays(dataVoo, hoje);
 
-  // Separa tarefas com prazo das sem prazo
   const semPrazo = roadmap.tarefas.filter(
     (t) => !t.prazo && t.status !== "NAO_APLICAVEL"
   );
@@ -156,7 +140,6 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
     .filter((t) => t.prazo && t.status !== "NAO_APLICAVEL")
     .map((t) => ({ kind: "tarefa" as const, tarefa: t, date: parseBR(t.prazo!) }));
 
-  // Monta itens da timeline ordenados por data
   const itensBase: TimelineItem[] = [
     ...comPrazo,
     { kind: "voo", date: dataVoo },
@@ -173,7 +156,6 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
     }
   }
 
-  // Insere o marcador HOJE na posição correta
   const itensOrdenados = itensBase.sort((a, b) => a.date.getTime() - b.date.getTime());
   const idxHoje = itensOrdenados.findIndex((i) => isAfter(i.date, hoje));
   const itensComHoje: TimelineItem[] = [
@@ -182,7 +164,6 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
     ...(idxHoje === -1 ? [] : itensOrdenados.slice(idxHoje)),
   ];
 
-  // Agrupa por mês
   type Grupo = { mesAno: string; itens: TimelineItem[] };
   const grupos: Grupo[] = [];
   for (const item of itensComHoje) {
@@ -196,7 +177,6 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
     }
   }
 
-  // Contadores para a barra de progresso
   const total = roadmap.tarefas.filter(
     (t) => t.status !== "NAO_APLICAVEL" && t.status !== "BLOQUEADA"
   ).length;
@@ -205,12 +185,11 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
 
   return (
     <div className="flex flex-col gap-0">
-      {/* ── Contador de dias + progresso ─────────────────────────────── */}
-      <div className="bg-white rounded-2xl p-4 mb-5 border border-gray-200">
+      <div className="bg-white rounded-2xl p-4 mb-5 border border-border">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <Plane className="w-4 h-4 text-teal" />
-            <span className="text-sm text-gray-600 font-medium">
+            <Plane className="w-4 h-4 text-navy" />
+            <span className="text-sm text-gray-500 font-medium">
               {diasAteVoo > 0
                 ? `${diasAteVoo} dias para o embarque`
                 : diasAteVoo === 0
@@ -218,20 +197,20 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
                 : `Voo há ${Math.abs(diasAteVoo)} dias`}
             </span>
           </div>
-          <span className="text-teal text-sm font-semibold">{pct}%</span>
+          <span className="text-navy text-sm font-bold">{pct}%</span>
         </div>
-        <div className="w-full bg-gray-100 rounded-full h-2">
+        <div className="w-full bg-surface rounded-full h-2">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${pct}%` }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className={`h-2 rounded-full ${
               pct === 100
-                ? "bg-emerald-500"
-                : pct >= 60
                 ? "bg-teal"
+                : pct >= 60
+                ? "bg-navy"
                 : pct >= 30
-                ? "bg-amber-500"
+                ? "bg-ipet-orange"
                 : "bg-red-500"
             }`}
           />
@@ -241,10 +220,9 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
         </p>
       </div>
 
-      {/* ── Tarefas sem prazo (já feitas ou pré-requisitos) ──────────── */}
       {semPrazo.length > 0 && (
         <div className="mb-5">
-          <p className="text-xs text-gray-400 uppercase tracking-widest mb-3 px-1">
+          <p className="text-xs text-gray-400 uppercase tracking-widest mb-3 px-1 font-medium">
             Sem prazo definido
           </p>
           <div className="flex flex-col gap-2">
@@ -255,21 +233,18 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
         </div>
       )}
 
-      {/* ── Timeline cronológica ──────────────────────────────────────── */}
       <div className="relative">
-        {/* Linha vertical contínua */}
-        <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gray-100" />
+        <div className="absolute left-[19px] top-0 bottom-0 w-px bg-border" />
 
         <div className="flex flex-col gap-0">
           {grupos.map((grupo, gi) => (
             <div key={grupo.mesAno}>
-              {/* Cabeçalho do mês */}
               <div className="flex items-center gap-3 mb-3 mt-4 first:mt-0">
                 <div className="w-10 flex-shrink-0" />
                 <span className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
                   {grupo.mesAno}
                 </span>
-                <div className="flex-1 h-px bg-gray-100" />
+                <div className="flex-1 h-px bg-border" />
               </div>
 
               {grupo.itens.map((item, ii) => {
@@ -293,8 +268,6 @@ export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
   );
 }
 
-// ─── Nó de tarefa na timeline ─────────────────────────────────────────────────
-
 function TarefaNode({
   tarefa,
   date,
@@ -312,14 +285,12 @@ function TarefaNode({
 
   return (
     <div className="flex gap-3 pb-4">
-      {/* Dot na linha */}
       <div className="flex flex-col items-center flex-shrink-0 w-10">
         <div
           className={`w-4 h-4 rounded-full ring-4 ${style.dot} ${style.ring} z-10 flex-shrink-0 mt-1`}
         />
       </div>
 
-      {/* Card da tarefa */}
       <div className="flex-1 min-w-0">
         <button
           onClick={() => setAberto(!aberto)}
@@ -331,7 +302,7 @@ function TarefaNode({
             <div className="flex items-center gap-2 flex-1 min-w-0">
               <Icon className={`w-4 h-4 flex-shrink-0 ${style.iconColor}`} />
               <p className={`text-sm font-medium leading-tight truncate ${
-                tarefa.status === "CONCLUIDA" ? "text-gray-500 line-through" : "text-navy"
+                tarefa.status === "CONCLUIDA" ? "text-gray-400 line-through" : "text-navy"
               }`}>
                 {tarefa.titulo}
               </p>
@@ -348,7 +319,6 @@ function TarefaNode({
             </div>
           </div>
 
-          {/* Data e countdown */}
           <div className="flex items-center gap-3 mt-2">
             <div className="flex items-center gap-1">
               <CalendarDays className="w-3 h-3 text-gray-400" />
@@ -362,7 +332,7 @@ function TarefaNode({
                   dias < 0
                     ? "text-red-500"
                     : dias <= 7
-                    ? "text-amber-600"
+                    ? "text-ipet-orange"
                     : "text-gray-400"
                 }`}
               >
@@ -376,7 +346,6 @@ function TarefaNode({
           </div>
         </button>
 
-        {/* Detalhe expandido */}
         <AnimatePresence>
           {aberto && (
             <motion.div
@@ -386,19 +355,19 @@ function TarefaNode({
               transition={{ duration: 0.2 }}
               className={`overflow-hidden rounded-b-2xl border border-t-0 px-4 pb-4 pt-3 ${style.cardBorder} ${style.cardBg}`}
             >
-              <p className="text-gray-500 text-xs leading-relaxed mb-2">
+              <p className="text-gray-400 text-xs leading-relaxed mb-2">
                 {tarefa.descricao}
               </p>
               {tarefa.nota && (
-                <div className="flex items-start gap-2 bg-gray-100/60 rounded-xl p-2.5">
+                <div className="flex items-start gap-2 bg-white/60 rounded-xl p-2.5">
                   <Info className="w-3.5 h-3.5 text-gray-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-gray-500 text-xs leading-relaxed">{tarefa.nota}</p>
+                  <p className="text-gray-400 text-xs leading-relaxed">{tarefa.nota}</p>
                 </div>
               )}
               {tarefa.precisaClinica && tarefa.status !== "CONCLUIDA" && (
                 <div className="flex items-center gap-1.5 mt-2">
                   <MapPin className="w-3.5 h-3.5 text-teal" />
-                  <span className="text-xs text-teal">Requer clínica veterinária</span>
+                  <span className="text-xs text-teal font-medium">Requer clínica veterinária</span>
                 </div>
               )}
               {tarefa.bloqueadaPor.length > 0 && (
@@ -416,8 +385,6 @@ function TarefaNode({
     </div>
   );
 }
-
-// ─── Tarefas sem prazo (concluídas / pré-requisitos) ─────────────────────────
 
 function TarefaCard({
   tarefa,
@@ -442,7 +409,7 @@ function TarefaCard({
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <Icon className={`w-4 h-4 flex-shrink-0 ${style.iconColor}`} />
             <p className={`text-sm font-medium truncate ${
-              tarefa.status === "CONCLUIDA" ? "text-gray-500 line-through" : "text-navy"
+              tarefa.status === "CONCLUIDA" ? "text-gray-400 line-through" : "text-navy"
             }`}>
               {tarefa.titulo}
             </p>
@@ -469,11 +436,11 @@ function TarefaCard({
             transition={{ duration: 0.2 }}
             className={`overflow-hidden rounded-b-2xl border border-t-0 px-4 pb-4 pt-3 ${style.cardBorder} ${style.cardBg}`}
           >
-            <p className="text-gray-500 text-xs leading-relaxed mb-2">{tarefa.descricao}</p>
+            <p className="text-gray-400 text-xs leading-relaxed mb-2">{tarefa.descricao}</p>
             {tarefa.nota && (
-              <div className="flex items-start gap-2 bg-gray-100/60 rounded-xl p-2.5">
+              <div className="flex items-start gap-2 bg-white/60 rounded-xl p-2.5">
                 <Info className="w-3.5 h-3.5 text-gray-400 flex-shrink-0 mt-0.5" />
-                <p className="text-gray-500 text-xs leading-relaxed">{tarefa.nota}</p>
+                <p className="text-gray-400 text-xs leading-relaxed">{tarefa.nota}</p>
               </div>
             )}
           </motion.div>
@@ -483,20 +450,18 @@ function TarefaCard({
   );
 }
 
-// ─── Marcadores especiais ─────────────────────────────────────────────────────
-
 function MarcadorHoje() {
   return (
     <div className="flex gap-3 pb-4 items-center">
       <div className="flex flex-col items-center flex-shrink-0 w-10">
-        <div className="w-4 h-4 rounded-full bg-white ring-4 ring-white/20 z-10 flex-shrink-0" />
+        <div className="w-4 h-4 rounded-full bg-navy ring-4 ring-navy/20 z-10 flex-shrink-0" />
       </div>
       <div className="flex-1 flex items-center gap-2">
-        <div className="h-px flex-1 bg-white/20" />
-        <span className="text-xs font-bold text-navy bg-gray-100 border border-gray-600 px-2.5 py-1 rounded-full">
+        <div className="h-px flex-1 bg-border" />
+        <span className="text-xs font-bold text-navy bg-surface border border-border px-2.5 py-1 rounded-full">
           HOJE
         </span>
-        <div className="h-px flex-1 bg-white/20" />
+        <div className="h-px flex-1 bg-border" />
       </div>
     </div>
   );
@@ -506,22 +471,22 @@ function MarcadorVoo({ date }: { date: Date }) {
   return (
     <div className="flex gap-3 pb-2 items-center">
       <div className="flex flex-col items-center flex-shrink-0 w-10">
-        <div className="w-6 h-6 rounded-full bg-teal ring-4 ring-teal/30 z-10 flex items-center justify-center">
-          <Plane className="w-3.5 h-3.5 text-navy" />
+        <div className="w-6 h-6 rounded-full bg-navy ring-4 ring-navy/30 z-10 flex items-center justify-center">
+          <Plane className="w-3.5 h-3.5 text-white" />
         </div>
       </div>
       <div className="flex-1">
-        <div className="bg-teal/10 border border-teal/20 rounded-2xl p-3.5">
+        <div className="bg-navy/5 border border-navy/10 rounded-2xl p-3.5">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-teal text-xs font-semibold uppercase tracking-wider">
+              <p className="text-navy text-xs font-semibold uppercase tracking-wider">
                 Embarque
               </p>
               <p className="text-navy font-bold text-base mt-0.5">
                 {format(date, "d 'de' MMMM 'de' yyyy", { locale: ptBR })}
               </p>
             </div>
-            <Plane className="w-6 h-6 text-teal" />
+            <Plane className="w-6 h-6 text-navy/30" />
           </div>
         </div>
       </div>
@@ -533,13 +498,13 @@ function MarcadorLiberacao({ label }: { label: string }) {
   return (
     <div className="flex gap-3 pb-4 items-center">
       <div className="flex flex-col items-center flex-shrink-0 w-10">
-        <div className="w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-500/30 z-10" />
+        <div className="w-4 h-4 rounded-full bg-teal ring-4 ring-teal/30 z-10" />
       </div>
       <div className="flex-1">
-        <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">
+        <div className="bg-teal-light border border-teal/20 rounded-xl px-3 py-2">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-            <p className="text-emerald-600 text-xs font-medium">{label}</p>
+            <CheckCircle2 className="w-3.5 h-3.5 text-teal flex-shrink-0" />
+            <p className="text-teal text-xs font-medium">{label}</p>
           </div>
         </div>
       </div>

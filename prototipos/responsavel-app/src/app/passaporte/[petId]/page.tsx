@@ -34,38 +34,32 @@ import { parseBR } from "@/services/travel-roadmap";
 import { PassaporteQRMini } from "@/components/PassaporteQR";
 import { track } from "@/services/analytics";
 
-// --------------------------------------------------------
-// Cores por status de autenticação
-// --------------------------------------------------------
 const AUTH_BADGE: Record<
   DocumentoSanitario["statusAutenticacao"],
   { label: string; classes: string; icon: React.ElementType }
 > = {
   PENDENTE: {
     label: "Pendente",
-    classes: "bg-amber-100 text-amber-600 border-amber-200",
+    classes: "bg-orange-light text-ipet-orange border-ipet-orange/20",
     icon: AlertCircle,
   },
   VERIFICADO: {
     label: "Verificado",
-    classes: "bg-emerald-100 text-emerald-600 border-emerald-200",
+    classes: "bg-teal-light text-teal border-teal/20",
     icon: CheckCircle2,
   },
   BLOCKCHAIN: {
     label: "Blockchain",
-    classes: "bg-teal/10 text-teal border-teal/20",
+    classes: "bg-navy/5 text-navy border-navy/20",
     icon: Link2,
   },
   REJEITADO: {
     label: "Rejeitado",
-    classes: "bg-red-100 text-red-500 border-red-200",
+    classes: "bg-red-50 text-red-500 border-red-200",
     icon: XCircle,
   },
 };
 
-// --------------------------------------------------------
-// Página principal do Passaporte
-// --------------------------------------------------------
 export default function PassaportePage({
   params,
 }: {
@@ -73,9 +67,6 @@ export default function PassaportePage({
 }) {
   const { petId } = use(params);
   const router = useRouter();
-  // Seletores estáveis: selecionar arrays primitivos do store e filtrar FORA do seletor.
-  // Usar métodos como getPet/getDocumentosPorPet dentro do selector causa loop infinito
-  // porque filter/find retorna novo array a cada render, quebrando a comparação Object.is do Zustand.
   const pet = useAppStore((s) => s.pets.find((p) => p.id === petId));
   const todosDocumentos = useAppStore((s) => s.documentos);
   const documentos = todosDocumentos.filter((d) => d.petId === petId);
@@ -91,8 +82,8 @@ export default function PassaportePage({
   if (!pet) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-5 text-center">
-        <p className="text-gray-500">Pet não encontrado.</p>
-        <Link href="/" className="text-teal mt-4 text-sm">
+        <p className="text-gray-400">Pet não encontrado.</p>
+        <Link href="/" className="text-teal mt-4 text-sm font-medium">
           Voltar ao início
         </Link>
       </div>
@@ -136,7 +127,6 @@ export default function PassaportePage({
     }
   }
 
-  // Checklist de documentos
   const temVacina = !!pet.vacina?.valida;
   const temSorologia = pet.sorologia?.status === "OK";
   const temMicrochip = !!(pet.microchip && pet.microchip.length === 15);
@@ -144,36 +134,27 @@ export default function PassaportePage({
   const docSorologia = documentos.find((d) => d.tipo === "SOROLOGIA_ANTIRRABICA");
 
   return (
-    <div className="flex flex-col min-h-screen pb-8">
-      {/* Header */}
+    <div className="flex flex-col min-h-screen pb-8 bg-white">
       <header className="flex items-center gap-3 px-5 pt-14 pb-4">
         <button
           onClick={() => router.back()}
-          className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0"
+          className="w-10 h-10 rounded-full bg-surface flex items-center justify-center flex-shrink-0 border border-border"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-5 h-5 text-navy" />
         </button>
-        <h1 className="text-lg font-semibold flex-1">Passaporte Pet</h1>
-        <ShieldCheck className="w-5 h-5 text-teal" />
+        <h1 className="text-lg font-semibold flex-1 text-navy">Passaporte Digital do Pet</h1>
       </header>
 
       <main className="px-5 space-y-5">
-        {/* Card de identidade — estilo passaporte */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="relative overflow-hidden bg-gradient-to-br from-teal/10 to-gray-300 border border-teal/20 rounded-3xl p-5"
+          className="relative overflow-hidden bg-white border border-border rounded-2xl p-5 shadow-sm"
         >
-          {/* Marca d'água */}
-          <div className="absolute right-4 top-4 opacity-5 text-[80px] select-none pointer-events-none">
-            🐾
-          </div>
-
           <div className="flex gap-4">
-            {/* Foto */}
             <div className="relative">
-              <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-100 border-2 border-teal/20 flex-shrink-0">
+              <div className="w-20 h-20 rounded-2xl overflow-hidden bg-surface border border-border flex-shrink-0">
                 {pet.foto ? (
                   <img
                     src={pet.foto}
@@ -186,27 +167,25 @@ export default function PassaportePage({
                   </div>
                 )}
               </div>
-              <button className="absolute -bottom-1.5 -right-1.5 w-7 h-7 bg-teal rounded-full flex items-center justify-center shadow">
-                <Camera className="w-3.5 h-3.5 text-navy" />
+              <button className="absolute -bottom-1.5 -right-1.5 w-7 h-7 bg-navy rounded-full flex items-center justify-center shadow">
+                <Camera className="w-3.5 h-3.5 text-white" />
               </button>
             </div>
 
-            {/* Dados */}
             <div className="flex-1 min-w-0">
               <h2 className="text-xl font-bold text-navy leading-tight mb-0.5">
                 {pet.nome}
               </h2>
-              <p className="text-sm text-teal">
-                {pet.especie === "CAO" ? "🐕" : pet.especie === "GATO" ? "🐈" : "🐾"}{" "}
-                {pet.raca}
+              <p className="text-sm text-teal font-medium">
+                iPet Pass
               </p>
-              <p className="text-xs text-gray-500 mt-1">
-                {idadePet} · {pet.peso} kg
+              <p className="text-xs text-gray-400 mt-1">
+                {pet.raca} · {idadePet} · {pet.peso} kg
               </p>
               {pet.microchip && (
                 <div className="flex items-center gap-1.5 mt-2">
-                  <Cpu className="w-3 h-3 text-teal" />
-                  <span className="font-mono text-[10px] text-teal tracking-wide">
+                  <Cpu className="w-3 h-3 text-navy/40" />
+                  <span className="font-mono text-[10px] text-navy/60 tracking-wide">
                     {pet.microchip.match(/.{1,3}/g)?.join(" ")}
                   </span>
                 </div>
@@ -214,22 +193,19 @@ export default function PassaportePage({
             </div>
           </div>
 
-          {/* Linha de separação estilo passaporte */}
-          <div className="mt-4 pt-4 border-t border-teal/20 flex items-end justify-between">
+          <div className="mt-4 pt-4 border-t border-border flex items-end justify-between">
             <div className="grid grid-cols-2 gap-3 text-xs flex-1">
               <div>
-                <p className="text-gray-400 uppercase tracking-wider text-[9px] mb-0.5">Nascimento</p>
-                <p className="text-navy">{pet.dataNascimento}</p>
+                <p className="text-gray-400 uppercase tracking-wider text-[9px] font-medium mb-0.5">Nascimento</p>
+                <p className="text-navy font-medium">{pet.dataNascimento}</p>
               </div>
               <div>
-                <p className="text-gray-400 uppercase tracking-wider text-[9px] mb-0.5">Espécie</p>
-                <p className="text-navy">
+                <p className="text-gray-400 uppercase tracking-wider text-[9px] font-medium mb-0.5">Espécie</p>
+                <p className="text-navy font-medium">
                   {pet.especie === "CAO" ? "Cão" : pet.especie === "GATO" ? "Gato" : "Outro"}
                 </p>
               </div>
             </div>
-
-            {/* QR Code mini */}
             <PassaporteQRMini
               pet={pet}
               temVacina={temVacina}
@@ -239,18 +215,31 @@ export default function PassaportePage({
           </div>
         </motion.div>
 
-        {/* Checklist de Saúde */}
         <section>
-          <h3 className="text-sm font-semibold text-gray-600 mb-3 uppercase tracking-wider">
-            Saúde &amp; Documentos
+          <h3 className="text-xs font-semibold text-gray-400 mb-3 uppercase tracking-wider">
+            Perfil Completo
+          </h3>
+          <div className="bg-white border border-border rounded-2xl divide-y divide-border">
+            <div className="px-4 py-3 flex justify-between">
+              <span className="text-sm text-gray-400">Raça</span>
+              <span className="text-sm text-navy font-medium">{pet.raca}</span>
+            </div>
+            <div className="px-4 py-3 flex justify-between">
+              <span className="text-sm text-gray-400">Idade</span>
+              <span className="text-sm text-navy font-medium">{idadePet}</span>
+            </div>
+            <div className="px-4 py-3 flex justify-between">
+              <span className="text-sm text-gray-400">Peso</span>
+              <span className="text-sm text-navy font-medium">{pet.peso} kg</span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3 className="text-xs font-semibold text-gray-400 mb-3 uppercase tracking-wider">
+            Documentos Sanitários
           </h3>
           <div className="space-y-2">
-            <HealthRow
-              label="Microchip ISO"
-              ok={temMicrochip}
-              value={temMicrochip ? pet.microchip : undefined}
-              missing={!temMicrochip ? "Não implantado" : undefined}
-            />
             <HealthRow
               label="Vacina Antirrábica"
               ok={temVacina}
@@ -265,38 +254,41 @@ export default function PassaportePage({
               doc={docSorologia}
               missing={!temSorologia ? "Pendente" : undefined}
             />
+            <HealthRow
+              label="Microchip ISO"
+              ok={temMicrochip}
+              value={temMicrochip ? pet.microchip : undefined}
+              missing={!temMicrochip ? "Não implantado" : undefined}
+            />
           </div>
         </section>
 
-        {/* Documentos enviados */}
         <section>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wider">
+            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
               Documentos
             </h3>
             <button
               onClick={() => setShowUploadForm(!showUploadForm)}
-              className="flex items-center gap-1 text-xs text-teal"
+              className="flex items-center gap-1 text-xs text-teal font-medium"
             >
               <PlusCircle className="w-4 h-4" />
               Adicionar
             </button>
           </div>
 
-          {/* Formulário de upload */}
           {showUploadForm && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
-              className="bg-white border border-gray-200 rounded-2xl p-4 mb-3 space-y-3"
+              className="bg-white border border-border rounded-2xl p-4 mb-3 space-y-3 shadow-sm"
             >
               <p className="text-sm font-medium text-navy">Enviar documento</p>
 
-              {/* Tipo */}
               <select
                 value={uploadTipo}
                 onChange={(e) => setUploadTipo(e.target.value as TipoDocumento)}
-                className="w-full bg-gray-100 border border-gray-200 text-navy rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal"
+                className="w-full bg-surface border border-border text-navy rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy"
               >
                 {(Object.keys(TIPO_DOCUMENTO_LABELS) as TipoDocumento[]).map((t) => (
                   <option key={t} value={t}>
@@ -310,7 +302,7 @@ export default function PassaportePage({
                 placeholder="Título do documento"
                 value={uploadTitulo}
                 onChange={(e) => setUploadTitulo(e.target.value)}
-                className="w-full bg-gray-100 border border-gray-200 text-navy rounded-xl px-3 py-2.5 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-teal"
+                className="w-full bg-surface border border-border text-navy rounded-xl px-3 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy"
               />
 
               <input
@@ -319,7 +311,7 @@ export default function PassaportePage({
                 value={uploadData}
                 onChange={(e) => setUploadData(e.target.value)}
                 inputMode="numeric"
-                className="w-full bg-gray-100 border border-gray-200 text-navy rounded-xl px-3 py-2.5 text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-teal"
+                className="w-full bg-surface border border-border text-navy rounded-xl px-3 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy"
               />
 
               {uploadError && (
@@ -337,8 +329,7 @@ export default function PassaportePage({
                 }}
               />
 
-              {/* Nota blockchain-ready */}
-              <div className="bg-teal/5 border border-teal/20 rounded-xl p-3 text-xs text-teal flex items-start gap-2">
+              <div className="bg-navy/5 border border-navy/10 rounded-xl p-3 text-xs text-navy/60 flex items-start gap-2">
                 <Link2 className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
                 <span>
                   Um hash SHA-256 será gerado para este documento. Em breve,
@@ -350,7 +341,7 @@ export default function PassaportePage({
               <button
                 onClick={() => fileRef.current?.click()}
                 disabled={uploading}
-                className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3 rounded-xl transition-colors text-sm"
+                className="flex items-center justify-center gap-2 w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3 rounded-xl transition-colors text-sm"
               >
                 <Upload className="w-4 h-4" />
                 {uploading ? "Processando..." : "Selecionar arquivo (PDF ou imagem)"}
@@ -359,8 +350,8 @@ export default function PassaportePage({
           )}
 
           {documentos.length === 0 && !showUploadForm && (
-            <div className="bg-white/50 border border-dashed border-gray-200 rounded-2xl p-6 text-center">
-              <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+            <div className="bg-surface border border-dashed border-border rounded-2xl p-6 text-center">
+              <Upload className="w-8 h-8 text-gray-300 mx-auto mb-2" />
               <p className="text-sm text-gray-400">
                 Nenhum documento enviado ainda
               </p>
@@ -379,28 +370,32 @@ export default function PassaportePage({
           )}
         </section>
 
-        {/* CTA Planejar Viagem */}
+        <button
+          onClick={() => setShowUploadForm(!showUploadForm)}
+          className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark text-white font-semibold py-3.5 rounded-2xl transition-colors text-sm"
+        >
+          <Upload className="w-4 h-4" />
+          Adicionar Documento
+        </button>
+
         <Link
           href={`/viagem/${pet.id}`}
-          className="flex items-center gap-3 bg-gradient-to-r from-teal to-teal-darker hover:from-teal-dark hover:to-teal-dark rounded-2xl p-4 transition-all"
+          className="flex items-center gap-3 bg-navy hover:bg-navy-light rounded-2xl p-4 transition-all"
         >
-          <Plane className="w-6 h-6 text-navy" />
+          <Plane className="w-6 h-6 text-white" />
           <div className="flex-1">
-            <p className="font-semibold text-navy text-sm">Planejar viagem</p>
-            <p className="text-xs text-teal">
+            <p className="font-semibold text-white text-sm">Planejar viagem</p>
+            <p className="text-xs text-white/60">
               Veja o que {pet.nome.split(" ")[0]} precisa para embarcar
             </p>
           </div>
-          <ChevronRight className="w-4 h-4 text-teal" />
+          <ChevronRight className="w-4 h-4 text-white/60" />
         </Link>
       </main>
     </div>
   );
 }
 
-// --------------------------------------------------------
-// Componentes auxiliares
-// --------------------------------------------------------
 function HealthRow({
   label,
   ok,
@@ -418,16 +413,16 @@ function HealthRow({
   const BadgeIcon = badge?.icon;
 
   return (
-    <div className="flex items-center gap-3 bg-white/80 border border-gray-200 rounded-xl px-4 py-3">
+    <div className="flex items-center gap-3 bg-white border border-border rounded-xl px-4 py-3">
       {ok ? (
-        <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+        <CheckCircle2 className="w-5 h-5 text-teal flex-shrink-0" />
       ) : (
-        <XCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+        <AlertCircle className="w-5 h-5 text-ipet-orange flex-shrink-0" />
       )}
       <div className="flex-1 min-w-0">
         <p className="text-sm text-navy font-medium">{label}</p>
-        {value && <p className="text-xs text-gray-500 truncate">{value}</p>}
-        {missing && <p className="text-xs text-red-500">{missing}</p>}
+        {value && <p className="text-xs text-gray-400 truncate">{value}</p>}
+        {missing && <p className="text-xs text-ipet-orange">{missing}</p>}
       </div>
       {badge && BadgeIcon && (
         <span
@@ -436,6 +431,9 @@ function HealthRow({
           <BadgeIcon className="w-3 h-3" />
           {badge.label}
         </span>
+      )}
+      {!badge && (
+        <ChevronRight className="w-4 h-4 text-gray-300" />
       )}
     </div>
   );
@@ -446,7 +444,7 @@ function DocumentoRow({ doc }: { doc: DocumentoSanitario }) {
   const BadgeIcon = badge.icon;
 
   return (
-    <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3">
+    <div className="flex items-center gap-3 bg-white border border-border rounded-xl px-4 py-3">
       <span className="text-2xl">{TIPO_DOCUMENTO_ICONES[doc.tipo]}</span>
       <div className="flex-1 min-w-0">
         <p className="text-sm text-navy font-medium truncate">{doc.titulo}</p>

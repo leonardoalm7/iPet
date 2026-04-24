@@ -259,7 +259,7 @@ export default function PlanejarPage() {
         <div className="flex items-center gap-3 mb-5">
           <button
             onClick={voltar}
-            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0"
+            className="w-10 h-10 rounded-full bg-surface flex items-center justify-center flex-shrink-0 border border-border"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -278,7 +278,7 @@ export default function PlanejarPage() {
         </div>
 
         {/* Barra de progresso dos passos */}
-        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+        <div className="h-1 bg-surface rounded-full overflow-hidden">
           <motion.div
             animate={{ width: `${progresso}%` }}
             transition={{ duration: 0.3 }}
@@ -366,7 +366,7 @@ function PassoPet({
             className={`w-full flex items-center gap-3 rounded-2xl border p-4 text-left transition-colors ${
               petIdAtual === pet.id
                 ? "border-teal bg-teal/10"
-                : "border-gray-200 bg-white hover:border-gray-200"
+                : "border-border bg-white hover:border-border"
             }`}
           >
             <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center text-2xl flex-shrink-0">
@@ -374,7 +374,7 @@ function PassoPet({
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-navy text-sm">{pet.nome}</p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-400">
                 {pet.raca} · {pet.peso}kg
               </p>
             </div>
@@ -396,7 +396,7 @@ function PassoPet({
 
       <button
         onClick={() => router.push("/pets/novo")}
-        className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-gray-200 rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors"
+        className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-border rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors"
       >
         <PlusCircle className="w-4 h-4" />
         Adicionar novo pet
@@ -450,7 +450,7 @@ function PassoDestino({
         placeholder="Buscar destino..."
         value={busca}
         onChange={(e) => setBusca(e.target.value)}
-        className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal"
+        className="w-full px-4 py-3 rounded-xl border border-border bg-white text-sm focus:outline-none focus:border-teal"
       />
 
       <div className="space-y-5">
@@ -470,7 +470,7 @@ function PassoDestino({
                   className={`py-3 px-2 rounded-2xl border text-center transition-all ${
                     selecionado === d.destino
                       ? "border-teal bg-teal/10 scale-[0.97]"
-                      : "border-gray-200 bg-white/50 hover:border-gray-300"
+                      : "border-border bg-white/50 hover:border-gray-300"
                   }`}
                 >
                   <div className="text-2xl mb-1">{d.bandeira}</div>
@@ -546,11 +546,11 @@ function PassoQuando({
             className={`py-3 px-2 rounded-2xl border text-center transition-all ${
               selecionado === mes.key
                 ? "border-teal bg-teal/10 scale-[0.97]"
-                : "border-gray-200 bg-white/60 hover:border-gray-200"
+                : "border-border bg-white/60 hover:border-border"
             }`}
           >
             <p className={`text-sm font-semibold capitalize ${
-              selecionado === mes.key ? "text-teal" : "text-gray-600"
+              selecionado === mes.key ? "text-teal" : "text-gray-400"
             }`}>
               {mes.label.split(" ")[0]}
             </p>
@@ -684,7 +684,7 @@ function PassoResultado({
 
       {/* Contador de dias */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white border border-gray-200 rounded-2xl p-4 text-center">
+        <div className="bg-white border border-border rounded-2xl p-4 text-center">
           <p className="text-2xl font-bold text-navy">{diagnostico.diasAteMeta}</p>
           <p className="text-xs text-gray-400 mt-0.5">dias até sua meta</p>
         </div>
@@ -710,7 +710,7 @@ function PassoResultado({
         <button
           onClick={onSalvar}
           disabled={salvando}
-          className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-4 rounded-2xl transition-colors"
+          className="flex items-center justify-center gap-2 w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-4 rounded-2xl transition-colors"
         >
           {salvando ? (
             <>
@@ -727,7 +727,7 @@ function PassoResultado({
 
         <button
           onClick={onVoltar}
-          className="w-full py-3 border border-gray-200 rounded-2xl text-gray-500 text-sm hover:border-gray-600 transition-colors"
+          className="w-full py-3 border border-border rounded-2xl text-gray-500 text-sm hover:border-gray-600 transition-colors"
         >
           Tentar outra data
         </button>

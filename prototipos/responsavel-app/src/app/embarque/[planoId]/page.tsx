@@ -327,7 +327,7 @@ export default function EmbarquePage({
               {pet.nome.split(" ")[0]} → {regras.bandeira} {regras.nome}
             </p>
           </div>
-          <div className="bg-gray-100 rounded-2xl px-3 py-2 text-right">
+          <div className="bg-surface rounded-2xl px-3 py-2 text-right">
             <p className="text-xs text-gray-400">Embarque</p>
             <p className="text-sm font-semibold text-teal">
               {diasRestantes === 0
@@ -347,7 +347,7 @@ export default function EmbarquePage({
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white border border-gray-200 rounded-2xl p-4"
+          className="bg-white border border-border rounded-2xl p-4"
         >
           <div className="flex items-center justify-between mb-2">
             <p className="text-sm font-medium text-navy">
@@ -359,13 +359,13 @@ export default function EmbarquePage({
                   ? "bg-emerald-100 text-emerald-700"
                   : progresso >= 50
                   ? "bg-amber-100 text-amber-700"
-                  : "bg-gray-100 text-gray-500"
+                  : "bg-gray-100 text-gray-400"
               }`}
             >
               {progresso}%
             </span>
           </div>
-          <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-2 bg-surface rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${progresso}%` }}
@@ -438,7 +438,7 @@ export default function EmbarquePage({
         </div>
 
         {/* Contatos úteis */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-4">
+        <div className="bg-white border border-border rounded-2xl p-4">
           <p className="text-sm font-semibold text-navy mb-3">📞 Contatos úteis</p>
           <div className="space-y-2 text-xs">
             <ContatoRow label="VIGIAGRO (Vigilância Agropecuária)" tel="(61) 3218-2574" />
@@ -468,7 +468,7 @@ function ChecklistItem({
         checked
           ? "bg-emerald-50/50 border-emerald-200"
           : item.obrigatorio
-          ? "bg-white border-gray-200"
+          ? "bg-white border-border"
           : "bg-gray-50/50 border-gray-100"
       }`}
     >
@@ -503,7 +503,7 @@ function ChecklistItem({
               <span className="text-[9px] text-gray-400">Opcional</span>
             )}
           </div>
-          <p className={`text-xs mt-0.5 ${checked ? "text-gray-400" : "text-gray-500"}`}>
+          <p className={`text-xs mt-0.5 ${checked ? "text-gray-400" : "text-gray-400"}`}>
             {item.detalhe}
           </p>
         </div>
@@ -539,7 +539,7 @@ function ChecklistItem({
 function ContatoRow({ label, tel }: { label: string; tel: string }) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-gray-600">{label}</span>
+      <span className="text-gray-400">{label}</span>
       <a
         href={`tel:${tel.replace(/\D/g, "")}`}
         className="flex items-center gap-1 text-teal font-medium"

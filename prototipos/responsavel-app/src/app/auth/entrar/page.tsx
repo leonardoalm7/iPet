@@ -77,7 +77,7 @@ function EntrarContent() {
           <h1 className="text-2xl font-bold text-navy">
             ✈️ <span className="text-teal">iPet</span>
           </h1>
-          <p className="text-gray-500 text-sm mt-1">Pet Pass</p>
+          <p className="text-gray-500 text-sm mt-1">Pass</p>
         </div>
       </motion.div>
 
@@ -118,7 +118,7 @@ function EntrarContent() {
           <button
             onClick={handleApple}
             disabled={!!loadingProvider || loading}
-            className="flex items-center justify-center gap-3 w-full bg-black hover:bg-white disabled:opacity-60 text-navy font-medium py-3.5 rounded-2xl border border-gray-200 transition-colors"
+            className="flex items-center justify-center gap-3 w-full bg-black hover:bg-white disabled:opacity-60 text-navy font-medium py-3.5 rounded-2xl border border-border transition-colors"
           >
             {loadingProvider === "apple" ? (
               <Spinner />
@@ -147,7 +147,7 @@ function EntrarContent() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
           </div>
 
@@ -160,12 +160,12 @@ function EntrarContent() {
               onChange={(e) => setSenha(e.target.value)}
               required
               autoComplete="current-password"
-              className="w-full bg-gray-100 border border-gray-200 focus:border-teal text-navy rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
+              className="w-full bg-gray-100 border border-border focus:border-teal text-navy rounded-2xl pl-11 pr-12 py-3.5 text-sm focus:outline-none transition-colors placeholder-gray-500"
             />
             <button
               type="button"
               onClick={() => setMostrarSenha(!mostrarSenha)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-400"
             >
               {mostrarSenha ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -183,7 +183,7 @@ function EntrarContent() {
           <button
             type="submit"
             disabled={loading || !!loadingProvider}
-            className="flex items-center justify-center gap-2 w-full bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
+            className="flex items-center justify-center gap-2 w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3.5 rounded-2xl transition-colors"
           >
             {loading ? <Spinner /> : "Entrar"}
           </button>

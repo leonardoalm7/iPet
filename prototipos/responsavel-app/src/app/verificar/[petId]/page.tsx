@@ -81,7 +81,7 @@ export default function VerificarPage({
           </div>
 
           {/* Card de identidade */}
-          <div className="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm mx-auto max-w-sm">
+          <div className="bg-white border border-border rounded-3xl p-5 shadow-sm mx-auto max-w-sm">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-16 h-16 rounded-2xl bg-gray-100 border-2 border-teal/20 flex items-center justify-center text-3xl flex-shrink-0">
                 {pet.foto ? (
@@ -96,7 +96,7 @@ export default function VerificarPage({
               </div>
               <div className="text-left">
                 <h2 className="text-xl font-bold text-navy">{pet.nome}</h2>
-                <p className="text-sm text-gray-500">{pet.raca}</p>
+                <p className="text-sm text-gray-400">{pet.raca}</p>
                 {pet.tipoPet === "CAO_GUIA" && (
                   <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full mt-1">
                     🦮 Cão-guia
@@ -139,7 +139,7 @@ export default function VerificarPage({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="bg-white border border-gray-200 rounded-2xl p-4"
+          className="bg-white border border-border rounded-2xl p-4"
         >
           <div className="flex items-center justify-between mb-2">
             <p className="text-sm font-semibold text-navy">
@@ -157,7 +157,7 @@ export default function VerificarPage({
               {passedChecks}/{totalChecks}
             </span>
           </div>
-          <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-2 bg-surface rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${(passedChecks / totalChecks) * 100}%` }}
@@ -235,7 +235,7 @@ export default function VerificarPage({
               {documentos.map((doc) => (
                 <div
                   key={doc.id}
-                  className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3"
+                  className="flex items-center gap-3 bg-white border border-border rounded-xl px-4 py-3"
                 >
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                   <div className="flex-1 min-w-0">

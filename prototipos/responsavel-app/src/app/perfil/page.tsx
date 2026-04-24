@@ -75,7 +75,7 @@ export default function PerfilPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 px-5 mb-6">
+      <div className="flex border-b border-border px-5 mb-6">
         {(["dados", "privacidade"] as Tab[]).map((t) => (
           <button
             key={t}
@@ -83,7 +83,7 @@ export default function PerfilPage() {
             className={`pb-3 pr-6 text-sm font-medium transition-colors border-b-2 -mb-px ${
               tab === t
                 ? "text-teal border-teal"
-                : "text-gray-400 border-transparent hover:text-gray-600"
+                : "text-gray-400 border-transparent hover:text-gray-400"
             }`}
           >
             {t === "dados" ? "Meus Dados" : "Privacidade"}
@@ -169,7 +169,7 @@ function TabDados({
         </div>
       )}
 
-      <div className="bg-white rounded-2xl divide-y divide-gray-200">
+      <div className="bg-white rounded-2xl divide-y divide-border">
         <CampoTexto
           icon={<User className="w-4 h-4" />}
           label="Nome completo"
@@ -211,14 +211,14 @@ function TabDados({
         <div className="flex gap-3">
           <button
             onClick={() => { setEditando(false); setFeedback(null); }}
-            className="flex-1 border border-gray-200 text-gray-600 py-3 rounded-2xl text-sm"
+            className="flex-1 border border-border text-gray-600 py-3 rounded-2xl text-sm"
           >
             Cancelar
           </button>
           <button
             onClick={salvar}
             disabled={loading}
-            className="flex-1 bg-teal hover:bg-teal-dark disabled:bg-gray-300 disabled:text-gray-400 text-white font-semibold py-3 rounded-2xl text-sm transition-colors"
+            className="flex-1 bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-3 rounded-2xl text-sm transition-colors"
           >
             {loading ? "Salvando..." : "Salvar"}
           </button>
@@ -226,7 +226,7 @@ function TabDados({
       ) : (
         <button
           onClick={() => setEditando(true)}
-          className="w-full border border-gray-200 text-gray-600 hover:text-navy py-3 rounded-2xl text-sm transition-colors"
+          className="w-full border border-border text-gray-600 hover:text-navy py-3 rounded-2xl text-sm transition-colors"
         >
           Editar dados
         </button>
@@ -273,7 +273,7 @@ function CampoTexto({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-transparent text-navy text-sm focus:outline-none placeholder-gray-600"
+            className="w-full bg-transparent text-navy text-sm focus:outline-none placeholder-gray-400"
           />
         ) : (
           <p className={`text-sm truncate ${value ? "text-navy" : "text-gray-400"}`}>
@@ -360,7 +360,7 @@ function TabPrivacidade({
       {/* Consentimentos */}
       <div>
         <h2 className="text-navy font-semibold mb-3">Consentimentos</h2>
-        <div className="bg-white rounded-2xl divide-y divide-gray-200">
+        <div className="bg-white rounded-2xl divide-y divide-border">
           <ItemConsent
             label="Termos de Uso"
             descricao="Obrigatório para uso da plataforma"
@@ -407,7 +407,7 @@ function TabPrivacidade({
           />
           <Link href="/lgpd/privacidade">
             <div className="flex items-center gap-3 bg-white rounded-2xl p-4 hover:bg-gray-100 transition-colors">
-              <Shield className="w-4 h-4 text-gray-500" />
+              <Shield className="w-4 h-4 text-gray-400" />
               <div className="flex-1">
                 <p className="text-navy text-sm">Ver Política de Privacidade</p>
                 <p className="text-gray-400 text-xs">Como tratamos seus dados</p>
@@ -445,7 +445,7 @@ function TabPrivacidade({
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirmarExclusao(false)}
-                className="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-xl text-sm"
+                className="flex-1 border border-border text-gray-600 py-2.5 rounded-xl text-sm"
               >
                 Cancelar
               </button>

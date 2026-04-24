@@ -54,24 +54,24 @@ export default function HoteisPage() {
         <div className="flex items-center gap-3 mb-4">
           <button
             onClick={() => router.back()}
-            className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center"
+            className="w-9 h-9 rounded-full bg-surface flex items-center justify-center border border-border"
           >
-            <ChevronLeft className="w-5 h-5 text-gray-500" />
+            <ChevronLeft className="w-5 h-5 text-gray-400" />
           </button>
           <div>
             <h1 className="text-lg font-bold text-navy">Hospedagem para Pets</h1>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-400">
               {aba === "DEIXAR" ? "Pet hotels e day care" : "Hotéis que aceitam seu pet"}
             </p>
           </div>
         </div>
 
         {/* Abas */}
-        <div className="flex bg-gray-100 rounded-xl p-1 gap-1 mb-4">
+        <div className="flex bg-surface rounded-xl p-1 gap-1 mb-4">
           <button
             onClick={() => setAba("DEIXAR")}
             className={`flex-1 py-2.5 rounded-lg text-xs font-medium transition-colors ${
-              aba === "DEIXAR" ? "bg-white text-navy" : "text-gray-500"
+              aba === "DEIXAR" ? "bg-white text-navy" : "text-gray-400"
             }`}
           >
             🏠 Deixar na origem
@@ -79,7 +79,7 @@ export default function HoteisPage() {
           <button
             onClick={() => setAba("VIAJAR")}
             className={`flex-1 py-2.5 rounded-lg text-xs font-medium transition-colors ${
-              aba === "VIAJAR" ? "bg-white text-navy" : "text-gray-500"
+              aba === "VIAJAR" ? "bg-white text-navy" : "text-gray-400"
             }`}
           >
             ✈️ Viajar junto
@@ -87,15 +87,15 @@ export default function HoteisPage() {
         </div>
 
         {/* Descrição da aba */}
-        <div className="bg-gray-100/50 rounded-xl p-3 mb-4 border border-gray-200/30">
+        <div className="bg-surface rounded-xl p-3 mb-4 border border-border/30">
           {aba === "DEIXAR" ? (
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-400">
               <span className="text-navy font-medium">Vai viajar sem o seu pet?</span>{" "}
               Encontre pet hotels, creches e hospedagens com acompanhamento veterinário para
               deixá-lo confortável e seguro enquanto você viaja.
             </p>
           ) : (
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-400">
               <span className="text-navy font-medium">Vai viajar com seu pet?</span>{" "}
               Aqui estão hotéis, pousadas e hospedagens que recebem animais de estimação com
               carinho — no Brasil e no mundo.
@@ -111,7 +111,7 @@ export default function HoteisPage() {
             placeholder="Buscar por nome ou cidade..."
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
-            className="w-full bg-gray-100 text-navy text-sm rounded-xl pl-9 pr-4 py-2.5 border border-gray-200 focus:outline-none focus:border-teal placeholder-gray-500"
+            className="w-full bg-gray-100 text-navy text-sm rounded-xl pl-9 pr-4 py-2.5 border border-border focus:outline-none focus:border-teal placeholder-gray-500"
           />
         </div>
       </header>
@@ -128,7 +128,7 @@ export default function HoteisPage() {
         )}
 
         {/* CTA parceiro */}
-        <div className="bg-gray-100/50 rounded-2xl border border-dashed border-gray-600 p-5 text-center mt-4">
+        <div className="bg-surface rounded-2xl border border-dashed border-gray-600 p-5 text-center mt-4">
           <p className="text-2xl mb-2">🤝</p>
           <p className="text-navy text-sm font-semibold mb-1">Torne-se parceiro iPet</p>
           <p className="text-gray-500 text-xs mb-3">
@@ -148,7 +148,7 @@ export default function HoteisPage() {
 
 function HotelCard({ hotel: h }: { hotel: HotelPet }) {
   return (
-    <div className="bg-gray-100 rounded-2xl border border-gray-200/50 overflow-hidden">
+    <div className="bg-surface rounded-2xl border border-border/50 overflow-hidden">
       {/* Topo */}
       <div className="flex items-start gap-3 p-4 pb-3">
         <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">

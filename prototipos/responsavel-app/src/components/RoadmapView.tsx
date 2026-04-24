@@ -15,9 +15,6 @@ import {
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// --------------------------------------------------------
-// Configurações visuais por status
-// --------------------------------------------------------
 const STATUS_CONFIG: Record<
   TarefaRoadmap["status"],
   {
@@ -31,35 +28,35 @@ const STATUS_CONFIG: Record<
 > = {
   CONCLUIDA: {
     icon: CheckCircle2,
-    iconColor: "text-emerald-600",
-    borderColor: "border-emerald-200",
-    bgColor: "bg-emerald-50",
-    badge: "Concluída",
-    badgeColor: "bg-emerald-100 text-emerald-600",
+    iconColor: "text-teal",
+    borderColor: "border-teal/20",
+    bgColor: "bg-teal-light",
+    badge: "Concluído",
+    badgeColor: "bg-teal-light text-teal",
   },
   PENDENTE: {
     icon: Clock,
-    iconColor: "text-teal",
-    borderColor: "border-teal/20",
-    bgColor: "bg-teal/5",
+    iconColor: "text-ipet-orange",
+    borderColor: "border-ipet-orange/20",
+    bgColor: "bg-orange-light",
     badge: "Pendente",
-    badgeColor: "bg-teal/10 text-teal",
+    badgeColor: "bg-orange-light text-ipet-orange",
   },
   URGENTE: {
     icon: AlertTriangle,
     iconColor: "text-amber-600",
-    borderColor: "border-amber-600/50",
+    borderColor: "border-amber-200",
     bgColor: "bg-amber-50",
     badge: "Urgente",
     badgeColor: "bg-amber-100 text-amber-600",
   },
   CRITICO: {
     icon: Zap,
-    iconColor: "text-ipet-orange",
-    borderColor: "border-orange-600/50",
-    bgColor: "bg-orange-50",
-    badge: "Crítico",
-    badgeColor: "bg-orange-100 text-ipet-orange",
+    iconColor: "text-red-500",
+    borderColor: "border-red-200",
+    bgColor: "bg-red-50",
+    badge: "Ação Necessária",
+    badgeColor: "bg-red-100 text-red-500",
   },
   VENCIDA: {
     icon: XCircle,
@@ -72,18 +69,18 @@ const STATUS_CONFIG: Record<
   BLOQUEADA: {
     icon: Lock,
     iconColor: "text-gray-400",
-    borderColor: "border-gray-200",
-    bgColor: "bg-white/30",
+    borderColor: "border-border",
+    bgColor: "bg-surface",
     badge: "Bloqueada",
-    badgeColor: "bg-gray-100 text-gray-400",
+    badgeColor: "bg-surface text-gray-400",
   },
   NAO_APLICAVEL: {
     icon: CheckCircle2,
     iconColor: "text-gray-400",
-    borderColor: "border-gray-200",
+    borderColor: "border-border",
     bgColor: "bg-transparent",
     badge: "N/A",
-    badgeColor: "bg-gray-100 text-gray-400",
+    badgeColor: "bg-surface text-gray-400",
   },
 };
 
@@ -92,35 +89,35 @@ const OVERALL_CONFIG: Record<
   { label: string; subLabel: string; bg: string; border: string; text: string }
 > = {
   APTO: {
-    label: "✅ Apto para embarcar!",
+    label: "Apto para embarcar!",
     subLabel: "Todos os requisitos estão completos.",
-    bg: "bg-emerald-50",
-    border: "border-emerald-200",
-    text: "text-emerald-600",
-  },
-  PENDENTE: {
-    label: "⏳ Em andamento",
-    subLabel: "Há tarefas a concluir, mas você está no prazo.",
-    bg: "bg-teal/5",
+    bg: "bg-teal-light",
     border: "border-teal/20",
     text: "text-teal",
   },
+  PENDENTE: {
+    label: "Em andamento",
+    subLabel: "Há tarefas a concluir, mas você está no prazo.",
+    bg: "bg-orange-light",
+    border: "border-ipet-orange/20",
+    text: "text-ipet-orange",
+  },
   URGENTE: {
-    label: "⚠️ Atenção necessária",
+    label: "Atenção necessária",
     subLabel: "Algumas tarefas estão com prazo curto.",
     bg: "bg-amber-50",
     border: "border-amber-200",
     text: "text-amber-600",
   },
   CRITICO: {
-    label: "🚨 Situação crítica",
+    label: "Situação crítica",
     subLabel: "Prazos se encerrando. Ação imediata necessária.",
-    bg: "bg-orange-50",
-    border: "border-orange-200",
-    text: "text-ipet-orange",
+    bg: "bg-red-50",
+    border: "border-red-200",
+    text: "text-red-500",
   },
   INAPTO: {
-    label: "❌ Inapto para esta data",
+    label: "Inapto para esta data",
     subLabel: "Não é possível embarcar nesta data com a documentação atual.",
     bg: "bg-red-50",
     border: "border-red-200",
@@ -128,9 +125,6 @@ const OVERALL_CONFIG: Record<
   },
 };
 
-// --------------------------------------------------------
-// Componente principal
-// --------------------------------------------------------
 export function RoadmapView({
   roadmap,
   pet,
@@ -142,23 +136,21 @@ export function RoadmapView({
 
   return (
     <div className="space-y-4">
-      {/* Banner de status geral */}
       <motion.div
         initial={{ scale: 0.97 }}
         animate={{ scale: 1 }}
         className={`rounded-2xl border px-4 py-4 ${overall.bg} ${overall.border}`}
       >
         <p className={`font-bold text-base ${overall.text}`}>{overall.label}</p>
-        <p className="text-sm text-gray-500 mt-0.5">{overall.subLabel}</p>
+        <p className="text-sm text-gray-400 mt-0.5">{overall.subLabel}</p>
         {roadmap.dataLiberacao && roadmap.statusGeral !== "APTO" && (
           <p className="text-xs text-gray-400 mt-2">
             Data mais cedo possível para embarcar:{" "}
-            <span className="text-gray-600 font-medium">{roadmap.dataLiberacao}</span>
+            <span className="text-navy font-medium">{roadmap.dataLiberacao}</span>
           </p>
         )}
       </motion.div>
 
-      {/* Lista de tarefas */}
       <div className="space-y-2">
         {roadmap.tarefas.map((tarefa, idx) => (
           <TarefaCard key={tarefa.id} tarefa={tarefa} index={idx} pet={pet} />
@@ -168,9 +160,6 @@ export function RoadmapView({
   );
 }
 
-// --------------------------------------------------------
-// Card de tarefa individual
-// --------------------------------------------------------
 function TarefaCard({
   tarefa,
   index,
@@ -193,7 +182,6 @@ function TarefaCard({
       transition={{ delay: index * 0.06 }}
       className={`rounded-2xl border ${cfg.borderColor} ${cfg.bgColor} overflow-hidden`}
     >
-      {/* Cabeçalho */}
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex items-center gap-3 w-full px-4 py-3.5 text-left"
@@ -203,14 +191,14 @@ function TarefaCard({
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-medium text-sm text-navy">{tarefa.titulo}</span>
             <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${cfg.badgeColor}`}>
-              {STATUS_CONFIG[tarefa.status].badge}
+              {cfg.badge}
             </span>
           </div>
           {tarefa.prazo && tarefa.status !== "CONCLUIDA" && (
             <p className="text-xs text-gray-400 mt-0.5">
               Prazo: {tarefa.prazo}
               {tarefa.diasParaPrazo !== null && tarefa.diasParaPrazo >= 0 && (
-                <span className={`ml-1 ${tarefa.diasParaPrazo <= 7 ? "text-amber-600" : ""}`}>
+                <span className={`ml-1 font-medium ${tarefa.diasParaPrazo <= 7 ? "text-ipet-orange" : ""}`}>
                   ({tarefa.diasParaPrazo} {tarefa.diasParaPrazo === 1 ? "dia" : "dias"})
                 </span>
               )}
@@ -224,7 +212,6 @@ function TarefaCard({
         )}
       </button>
 
-      {/* Detalhes expandidos */}
       <AnimatePresence>
         {expanded && (
           <motion.div
@@ -234,15 +221,15 @@ function TarefaCard({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="px-4 pb-4 space-y-3 border-t border-gray-200 pt-3">
-              <p className="text-xs text-gray-500 leading-relaxed">{tarefa.descricao}</p>
+            <div className="px-4 pb-4 space-y-3 border-t border-border pt-3">
+              <p className="text-xs text-gray-400 leading-relaxed">{tarefa.descricao}</p>
               {tarefa.nota && (
-                <p className="text-xs text-gray-600 leading-relaxed bg-gray-100/40 rounded-xl px-3 py-2.5">
+                <p className="text-xs text-gray-500 leading-relaxed bg-surface rounded-xl px-3 py-2.5">
                   {tarefa.nota}
                 </p>
               )}
               {tarefa.precisaClinica && tarefa.status !== "CONCLUIDA" && (
-                <button className="flex items-center gap-2 text-xs text-teal py-2">
+                <button className="flex items-center gap-2 text-xs text-teal font-medium py-2">
                   <MapPin className="w-4 h-4" />
                   Ver clínicas credenciadas próximas
                 </button>

@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
 
-const geist = Geist({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
-  title: "iPet — Pet Pass",
+  title: "iPet — Pass",
   description: "Seu passaporte pet digital. Viaje com segurança.",
   appleWebApp: {
     capable: true,
@@ -19,7 +19,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#2E8B9A",
+  themeColor: "#1B3A5C",
 };
 
 export default function RootLayout({
@@ -29,9 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`${geist.className} bg-cream text-navy antialiased`}>
+      <body className={`${inter.className} bg-cream text-navy antialiased`}>
         <AuthProvider>
-          <div className="mx-auto max-w-[430px] min-h-screen relative overflow-x-hidden">
+          <div className="mx-auto max-w-[430px] min-h-screen relative overflow-x-hidden bg-surface">
             {children}
           </div>
         </AuthProvider>
