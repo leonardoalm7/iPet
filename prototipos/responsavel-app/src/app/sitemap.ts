@@ -21,5 +21,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     ...destinationPages,
+    {
+      url: `${BASE_URL}/ferramentas/calculadora-quarentena`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
   ];
 }
