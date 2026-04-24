@@ -12,6 +12,11 @@ type EventosFunil = {
   documento_uploaded: { tipo: string };
   abandono_etapa: { etapa: string; tempoMs: number };
   pagina_visitada: { rota: string };
+  paywall_exibido: { destino: string };
+  paywall_clicado: { planoId: string; destino: string };
+  checkout_iniciado: { planoId: string; destino: string };
+  pagamento_aprovado: { planoId: string; destino: string; metodo: string };
+  pagamento_recusado: { planoId: string; destino: string; motivo?: string };
 };
 
 export type NomeEvento = keyof EventosFunil;

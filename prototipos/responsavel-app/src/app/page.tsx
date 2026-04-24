@@ -72,7 +72,8 @@ export default function HomePage() {
               proximaViagem.pet,
               proximaViagem.plano.destino,
               proximaViagem.plano.dataEmbarque,
-              proximaViagem.plano.id
+              proximaViagem.plano.id,
+              { isPremium: proximaViagem.plano.isPremium }
             )}
           />
         )}

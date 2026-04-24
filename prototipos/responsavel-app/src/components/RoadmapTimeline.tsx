@@ -128,10 +128,25 @@ type TimelineItem =
   | { kind: "voo"; date: Date }
   | { kind: "liberacao"; date: Date; label: string };
 
-export function RoadmapTimeline({ roadmap }: { roadmap: RoadmapCompliance }) {
+export function RoadmapTimeline({ roadmap, isPremium = true }: { roadmap: RoadmapCompliance; isPremium?: boolean }) {
   const hoje = startOfDay(new Date());
   const dataVoo = parseBR(roadmap.dataEmbarque);
   const diasAteVoo = differenceInDays(dataVoo, hoje);
+
+  if (!isPremium) {
+    return (
+      <div className="rounded-2xl border border-border bg-surface p-6 text-center space-y-3">
+        <Lock className="w-8 h-8 text-gray-300 mx-auto" />
+        <p className="text-navy font-semibold text-sm">
+          Linha do Tempo disponível no plano Premium
+        </p>
+        <p className="text-gray-400 text-xs leading-relaxed">
+          Desbloqueie o iPet Travel Plan para ver datas exatas, prazos e a
+          linha do tempo interativa da sua viagem.
+        </p>
+      </div>
+    );
+  }
 
   const semPrazo = roadmap.tarefas.filter(
     (t) => !t.prazo && t.status !== "NAO_APLICAVEL"

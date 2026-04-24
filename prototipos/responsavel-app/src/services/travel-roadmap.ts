@@ -44,12 +44,18 @@ function statusPorPrazo(prazo: Date, hoje: Date): StatusTarefa {
 // retorna a lista ordenada de tarefas com status, prazos e notas.
 // ============================================================
 
+export interface OpcoesRoadmap {
+  isPremium?: boolean;
+}
+
 export function calcularRoadmap(
   pet: Pet,
   destino: Destino,
   dataEmbarqueStr: string,
-  planoViagemId: string
+  planoViagemId: string,
+  opcoes: OpcoesRoadmap = {}
 ): RoadmapCompliance {
+  const { isPremium = true } = opcoes;
   const hoje = new Date();
   hoje.setHours(0, 0, 0, 0);
 
@@ -240,6 +246,27 @@ export function calcularRoadmap(
     dataEmbarque,
     hoje
   );
+
+  if (!isPremium) {
+    const tarefasTeaser = tarefas.map((t) => ({
+      ...t,
+      prazo: null,
+      diasParaPrazo: null,
+      status: t.concluida ? t.status : ("PENDENTE" as const),
+      nota: t.concluida ? t.nota : null,
+    }));
+
+    return {
+      petId: pet.id,
+      planoViagemId,
+      destino,
+      dataEmbarque: dataEmbarqueStr,
+      statusGeral: "PENDENTE" as const,
+      dataLiberacao: null,
+      tarefas: tarefasTeaser,
+      geradoEm: new Date().toISOString(),
+    };
+  }
 
   return {
     petId: pet.id,

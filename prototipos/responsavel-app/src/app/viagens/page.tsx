@@ -27,7 +27,7 @@ function calcularProgressoPlano(
   plano: ReturnType<typeof useAppStore.getState>["planosViagem"][number]
 ): { porcentagem: number; estado: "ok" | "urgente" | "atencao" | "pendente" } {
   const regras = REGRAS_DESTINO[plano.destino];
-  const roadmap = calcularRoadmap(pet, plano.destino, plano.dataEmbarque, plano.id);
+  const roadmap = calcularRoadmap(pet, plano.destino, plano.dataEmbarque, plano.id, { isPremium: plano.isPremium });
   const tarefasDocs = roadmap.tarefas.filter((t) => t.id !== "cvi");
   const docsConcluidos = tarefasDocs.filter((t) => t.concluida).length;
   const docsTotal = tarefasDocs.length;

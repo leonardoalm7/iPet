@@ -7,7 +7,8 @@ import { Destino } from "@/domain/types";
 import { DESTINOS_LISTA, getDestinosAgrupados } from "@/data/destinations";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { calcularRoadmap } from "@/services/travel-roadmap";
-import { ArrowLeft, Plane, ChevronRight, BookmarkPlus, Check, List, GitCommitHorizontal, Search } from "lucide-react";
+import { ArrowLeft, Plane, ChevronRight, BookmarkPlus, Check, List, GitCommitHorizontal, Search, Lock } from "lucide-react";
+import { PaywallBanner } from "@/components/PaywallBanner";
 import { motion } from "framer-motion";
 import { RoadmapView } from "@/components/RoadmapView";
 import { RoadmapTimeline } from "@/components/RoadmapTimeline";
@@ -40,13 +41,21 @@ export default function ViagemPage({
     );
   }
 
+  const planoExistente = planosExistentes.find(
+    (p) => p.petId === pet?.id && p.destino === destino && p.dataEmbarque === dataEmbarque
+  );
+  const isPremium = planoExistente?.isPremium ?? false;
+
   function gerarRoadmap() {
     if (!dataEmbarque) return;
-    const result = calcularRoadmap(pet!, destino, dataEmbarque, "preview");
+    const result = calcularRoadmap(pet!, destino, dataEmbarque, "preview", { isPremium });
     setRoadmap(result);
     setSalvo(false);
     track("destino_selecionado", { destino });
     track("roadmap_gerado", { destino, qtdTarefas: result.tarefas.length });
+    if (!isPremium) {
+      track("paywall_exibido", { destino });
+    }
   }
 
   function salvarViagem() {
@@ -127,6 +136,21 @@ export default function ViagemPage({
               </button>
             </div>
 
+            {!isPremium && (
+              <PaywallBanner
+                planoId={planoExistente?.id ?? "preview"}
+                destino={destino}
+                onDesbloquear={() => {
+                  if (planoExistente) {
+                    router.push(`/checkout/${planoExistente.id}`);
+                  } else {
+                    const plano = criarPlano({ petId: pet!.id, destino, dataEmbarque, companhiaAereaId: companhiaId || undefined });
+                    router.push(`/checkout/${plano.id}`);
+                  }
+                }}
+              />
+            )}
+
             <motion.div
               key={viewMode}
               initial={{ opacity: 0, y: 6 }}
@@ -134,9 +158,9 @@ export default function ViagemPage({
               transition={{ duration: 0.2 }}
             >
               {viewMode === "lista" ? (
-                <RoadmapView roadmap={roadmap} pet={pet} />
+                <RoadmapView roadmap={roadmap} pet={pet} isPremium={isPremium} />
               ) : (
-                <RoadmapTimeline roadmap={roadmap} />
+                <RoadmapTimeline roadmap={roadmap} isPremium={isPremium} />
               )}
             </motion.div>
 

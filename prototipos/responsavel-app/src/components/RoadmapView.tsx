@@ -128,9 +128,11 @@ const OVERALL_CONFIG: Record<
 export function RoadmapView({
   roadmap,
   pet,
+  isPremium = true,
 }: {
   roadmap: RoadmapCompliance;
   pet: Pet;
+  isPremium?: boolean;
 }) {
   const overall = OVERALL_CONFIG[roadmap.statusGeral];
 
@@ -153,7 +155,7 @@ export function RoadmapView({
 
       <div className="space-y-2">
         {roadmap.tarefas.map((tarefa, idx) => (
-          <TarefaCard key={tarefa.id} tarefa={tarefa} index={idx} pet={pet} />
+          <TarefaCard key={tarefa.id} tarefa={tarefa} index={idx} pet={pet} isPremium={isPremium} />
         ))}
       </div>
     </div>
@@ -164,45 +166,64 @@ function TarefaCard({
   tarefa,
   index,
   pet,
+  isPremium = true,
 }: {
   tarefa: TarefaRoadmap;
   index: number;
   pet: Pet;
+  isPremium?: boolean;
 }) {
   const [expanded, setExpanded] = useState(
-    tarefa.status === "URGENTE" || tarefa.status === "CRITICO"
+    isPremium && (tarefa.status === "URGENTE" || tarefa.status === "CRITICO")
   );
   const cfg = STATUS_CONFIG[tarefa.status];
   const Icon = cfg.icon;
+  const locked = !isPremium && !tarefa.concluida;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.06 }}
-      className={`rounded-2xl border ${cfg.borderColor} ${cfg.bgColor} overflow-hidden`}
+      className={`rounded-2xl border ${locked ? "border-border bg-surface" : `${cfg.borderColor} ${cfg.bgColor}`} overflow-hidden`}
     >
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex items-center gap-3 w-full px-4 py-3.5 text-left"
       >
-        <Icon className={`w-5 h-5 flex-shrink-0 ${cfg.iconColor}`} />
+        {locked ? (
+          <Lock className="w-5 h-5 flex-shrink-0 text-gray-300" />
+        ) : (
+          <Icon className={`w-5 h-5 flex-shrink-0 ${cfg.iconColor}`} />
+        )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-medium text-sm text-navy">{tarefa.titulo}</span>
-            <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${cfg.badgeColor}`}>
-              {cfg.badge}
-            </span>
+            <span className={`font-medium text-sm ${locked ? "text-gray-400" : "text-navy"}`}>{tarefa.titulo}</span>
+            {locked ? (
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-surface text-gray-400 border border-border">
+                Premium
+              </span>
+            ) : (
+              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${cfg.badgeColor}`}>
+                {cfg.badge}
+              </span>
+            )}
           </div>
-          {tarefa.prazo && tarefa.status !== "CONCLUIDA" && (
-            <p className="text-xs text-gray-400 mt-0.5">
-              Prazo: {tarefa.prazo}
-              {tarefa.diasParaPrazo !== null && tarefa.diasParaPrazo >= 0 && (
-                <span className={`ml-1 font-medium ${tarefa.diasParaPrazo <= 7 ? "text-ipet-orange" : ""}`}>
-                  ({tarefa.diasParaPrazo} {tarefa.diasParaPrazo === 1 ? "dia" : "dias"})
-                </span>
-              )}
+          {locked ? (
+            <p className="text-xs text-gray-400 mt-0.5 flex items-center gap-1">
+              <Lock className="w-3 h-3" /> Datas e prazos no plano Premium
             </p>
+          ) : (
+            tarefa.prazo && tarefa.status !== "CONCLUIDA" && (
+              <p className="text-xs text-gray-400 mt-0.5">
+                Prazo: {tarefa.prazo}
+                {tarefa.diasParaPrazo !== null && tarefa.diasParaPrazo >= 0 && (
+                  <span className={`ml-1 font-medium ${tarefa.diasParaPrazo <= 7 ? "text-ipet-orange" : ""}`}>
+                    ({tarefa.diasParaPrazo} {tarefa.diasParaPrazo === 1 ? "dia" : "dias"})
+                  </span>
+                )}
+              </p>
+            )
           )}
         </div>
         {expanded ? (
@@ -223,18 +244,18 @@ function TarefaCard({
           >
             <div className="px-4 pb-4 space-y-3 border-t border-border pt-3">
               <p className="text-xs text-gray-400 leading-relaxed">{tarefa.descricao}</p>
-              {tarefa.nota && (
+              {!locked && tarefa.nota && (
                 <p className="text-xs text-gray-500 leading-relaxed bg-surface rounded-xl px-3 py-2.5">
                   {tarefa.nota}
                 </p>
               )}
-              {tarefa.precisaClinica && tarefa.status !== "CONCLUIDA" && (
+              {!locked && tarefa.precisaClinica && tarefa.status !== "CONCLUIDA" && (
                 <button className="flex items-center gap-2 text-xs text-teal font-medium py-2">
                   <MapPin className="w-4 h-4" />
                   Ver clínicas credenciadas próximas
                 </button>
               )}
-              {tarefa.bloqueadaPor.length > 0 && (
+              {!locked && tarefa.bloqueadaPor.length > 0 && (
                 <p className="text-xs text-gray-400">
                   Aguardando:{" "}
                   {tarefa.bloqueadaPor.map((id) => (

@@ -73,7 +73,7 @@ function calcularEstagios(
   const diasRestantes = differenceInDays(dataEmbarque, hoje);
 
   const regras = REGRAS_DESTINO[plano.destino];
-  const roadmap = calcularRoadmap(pet, plano.destino, plano.dataEmbarque, plano.id);
+  const roadmap = calcularRoadmap(pet, plano.destino, plano.dataEmbarque, plano.id, { isPremium: plano.isPremium });
 
   // ── Estagio 1: Pet cadastrado ──────────────────────────────
   const temMicrochipValido = !!(pet.microchip && pet.microchip.length === 15);

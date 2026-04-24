@@ -84,6 +84,8 @@ export interface PlanoViagem {
   destino: Destino;
   dataEmbarque: string; // DD/MM/YYYY
   companhiaAereaId?: string;
+  isPremium: boolean;
+  pagamentoId?: string;
   criadoEm: string;
 }
 

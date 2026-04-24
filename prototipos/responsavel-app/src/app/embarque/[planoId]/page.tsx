@@ -22,6 +22,7 @@ import {
   ChevronRight,
   ShieldCheck,
   Info,
+  Lock,
 } from "lucide-react";
 
 interface ItemChecklist {
@@ -296,6 +297,34 @@ export default function EmbarquePage({
     return (
       <div className="flex items-center justify-center min-h-screen">
         <p className="text-gray-500 text-sm">Viagem não encontrada.</p>
+      </div>
+    );
+  }
+
+  if (!plano.isPremium) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center gap-4">
+        <div className="w-16 h-16 rounded-full bg-surface flex items-center justify-center border border-border">
+          <Lock className="w-7 h-7 text-gray-300" />
+        </div>
+        <h1 className="text-lg font-semibold text-navy">Checklist Premium</h1>
+        <p className="text-gray-400 text-sm leading-relaxed">
+          O checklist de embarque está disponível no iPet Travel Plan.
+          Desbloqueie para ter acesso ao passo a passo completo do dia do voo.
+        </p>
+        <Link
+          href={`/checkout/${plano.id}`}
+          className="flex items-center gap-2 bg-navy hover:bg-navy-light text-white font-semibold px-6 py-3 rounded-2xl transition-colors"
+        >
+          <Lock className="w-4 h-4" />
+          Desbloquear por R$ 99
+        </Link>
+        <button
+          onClick={() => history.back()}
+          className="text-gray-400 text-sm hover:text-navy transition-colors"
+        >
+          Voltar
+        </button>
       </div>
     );
   }

@@ -13,6 +13,7 @@ import {
   PlanoViagem,
   DocumentoSanitario,
   Responsavel,
+  Destino,
 } from "@/domain/types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -32,9 +33,10 @@ interface AppState {
   getPet: (id: string) => Pet | undefined;
 
   // Planos de Viagem
-  criarPlanoViagem: (plano: Omit<PlanoViagem, "id" | "criadoEm">) => PlanoViagem;
+  criarPlanoViagem: (plano: Omit<PlanoViagem, "id" | "isPremium" | "criadoEm">) => PlanoViagem;
   removerPlanoViagem: (id: string) => void;
   getPlanosPorPet: (petId: string) => PlanoViagem[];
+  ativarPremium: (planoId: string, pagamentoId: string) => void;
 
   // Documentos
   adicionarDocumento: (doc: DocumentoSanitario) => void;
@@ -86,6 +88,7 @@ export const useAppStore = create<AppState>()(
         const plano: PlanoViagem = {
           ...dados,
           id: uuidv4(),
+          isPremium: false,
           criadoEm: new Date().toISOString(),
         };
         set((s) => ({ planosViagem: [...s.planosViagem, plano] }));
@@ -99,6 +102,13 @@ export const useAppStore = create<AppState>()(
 
       getPlanosPorPet: (petId) =>
         get().planosViagem.filter((v) => v.petId === petId),
+
+      ativarPremium: (planoId, pagamentoId) =>
+        set((s) => ({
+          planosViagem: s.planosViagem.map((p) =>
+            p.id === planoId ? { ...p, isPremium: true, pagamentoId } : p
+          ),
+        })),
 
       adicionarDocumento: (doc) =>
         set((s) => ({ documentos: [...s.documentos, doc] })),
@@ -126,17 +136,24 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "ipet-storage",
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() =>
         typeof window !== "undefined" ? localStorage : ({} as Storage)
       ),
       migrate: (persisted: unknown, version: number) => {
         const state = persisted as Record<string, unknown>;
-        if (version === 0) {
+        if (version < 1) {
           const pets = (state.pets as Pet[]) ?? [];
           state.pets = pets.map((p) => ({
             ...p,
             tipoPet: p.tipoPet ?? "ESTIMACAO",
+          }));
+        }
+        if (version < 2) {
+          const planos = (state.planosViagem as PlanoViagem[]) ?? [];
+          state.planosViagem = planos.map((p) => ({
+            ...p,
+            isPremium: p.isPremium ?? false,
           }));
         }
         return state as unknown as AppState;
