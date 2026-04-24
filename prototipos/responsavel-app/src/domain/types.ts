@@ -9,21 +9,27 @@ export type Especie = "CAO" | "GATO" | "OUTRO";
 export type StatusSorologia = "OK" | "PENDENTE" | "REPROVADA";
 
 export type Destino =
-  // Destinos originais
+  // América do Sul
   | "BRASIL"
-  | "UNIAO_EUROPEIA"
-  | "JAPAO"
-  | "EUA"
-  // Europa
-  | "PORTUGAL"
-  | "REINO_UNIDO"
-  // América Latina
   | "ARGENTINA"
   | "CHILE"
   | "URUGUAI"
+  // América Central
   | "MEXICO"
   // América do Norte
+  | "EUA"
   | "CANADA"
+  // Europa — países EU (herdam regras base da UE)
+  | "PORTUGAL"
+  | "ESPANHA"
+  | "FRANCA"
+  | "ALEMANHA"
+  | "ITALIA"
+  | "HOLANDA"
+  // Europa — não-EU
+  | "REINO_UNIDO"
+  // Ásia
+  | "JAPAO"
   // Oceania
   | "AUSTRALIA";
 

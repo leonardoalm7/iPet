@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "ESPANHA",
+  "herda": "uniao-europeia",
+  "nome": "Espanha",
+  "bandeira": "🇪🇸",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://ec.europa.eu/food/animals/pet-movement/eu-rules_en",
+      "title": "European Commission — EU rules for pet movement",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.mapa.gob.es/es/ganaderia/temas/sanidad-animal-higiene-ganadera/sanidad-animal/movimiento-animales-compania/",
+      "title": "MAPA España — Movimiento de animales de compañía",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Espanha segue Regulamento (UE) 576/2013. Herda regras base da UE."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos). Implante ANTES da vacinação antirrábica.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pelo MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": ["Pit Bull Terrier", "Staffordshire Bull Terrier", "American Staffordshire Terrier", "Rottweiler", "Dogo Argentino", "Fila Brasileiro", "Tosa Inu", "Akita Inu"],
+    "observacoes": "Espanha segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). Espanha tem legislação específica sobre raças potencialmente perigosas (PPP) — exigência de seguro de responsabilidade civil e licença. Consulte a legislação autônoma da comunidade de destino.",
+    "observacoesInternas": "⚠️ Cada comunidade autônoma pode ter regras adicionais para PPP. Madrid, Catalunha e Andaluzia são os destinos mais comuns para brasileiros."
+  }
+}

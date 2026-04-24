@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "HOLANDA",
+  "herda": "uniao-europeia",
+  "nome": "Holanda",
+  "bandeira": "🇳🇱",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://ec.europa.eu/food/animals/pet-movement/eu-rules_en",
+      "title": "European Commission — EU rules for pet movement",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.nvwa.nl/onderwerpen/huisdieren-meenemen-naar-de-eu",
+      "title": "NVWA — Huisdieren meenemen naar de EU",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Holanda segue Regulamento (UE) 576/2013. Herda regras base da UE."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos). Implante ANTES da vacinação antirrábica.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pelo MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Holanda segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). Holanda revogou a proibição de Pit Bulls em 2008. Sem restrições de raça atualmente. Amsterdam e Roterdã são destinos populares para brasileiros.",
+    "observacoesInternas": "Holanda (Países Baixos) revogou o ban de pit bulls em 2008. País é bastante pet-friendly."
+  }
+}

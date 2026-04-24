@@ -136,7 +136,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "ipet-storage",
-      version: 2,
+      version: 3,
       storage: createJSONStorage(() =>
         typeof window !== "undefined" ? localStorage : ({} as Storage)
       ),
@@ -154,6 +154,13 @@ export const useAppStore = create<AppState>()(
           state.planosViagem = planos.map((p) => ({
             ...p,
             isPremium: p.isPremium ?? false,
+          }));
+        }
+        if (version < 3) {
+          const planos = (state.planosViagem as PlanoViagem[]) ?? [];
+          state.planosViagem = planos.map((p) => ({
+            ...p,
+            destino: p.destino === ("UNIAO_EUROPEIA" as Destino) ? "PORTUGAL" as Destino : p.destino,
           }));
         }
         return state as unknown as AppState;

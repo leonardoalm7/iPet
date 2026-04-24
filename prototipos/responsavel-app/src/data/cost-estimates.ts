@@ -213,7 +213,7 @@ export const CUSTOS_POR_DESTINO: Record<Destino, ItemCustoBase[]> = {
     HOTEL_PET,
   ],
 
-  UNIAO_EUROPEIA: [
+  PORTUGAL: [
     MICROCHIP,
     VACINA,
     SOROLOGIA,
@@ -224,7 +224,51 @@ export const CUSTOS_POR_DESTINO: Record<Destino, ItemCustoBase[]> = {
     HOTEL_PET,
   ],
 
-  PORTUGAL: [
+  ESPANHA: [
+    MICROCHIP,
+    VACINA,
+    SOROLOGIA,
+    CVI,
+    TAXA_EMBARQUE_MEDIO,
+    CAIXA_IATA,
+    SEGURO_PET,
+    HOTEL_PET,
+  ],
+
+  FRANCA: [
+    MICROCHIP,
+    VACINA,
+    SOROLOGIA,
+    CVI,
+    TAXA_EMBARQUE_MEDIO,
+    CAIXA_IATA,
+    SEGURO_PET,
+    HOTEL_PET,
+  ],
+
+  ALEMANHA: [
+    MICROCHIP,
+    VACINA,
+    SOROLOGIA,
+    CVI,
+    TAXA_EMBARQUE_MEDIO,
+    CAIXA_IATA,
+    SEGURO_PET,
+    HOTEL_PET,
+  ],
+
+  ITALIA: [
+    MICROCHIP,
+    VACINA,
+    SOROLOGIA,
+    CVI,
+    TAXA_EMBARQUE_MEDIO,
+    CAIXA_IATA,
+    SEGURO_PET,
+    HOTEL_PET,
+  ],
+
+  HOLANDA: [
     MICROCHIP,
     VACINA,
     SOROLOGIA,

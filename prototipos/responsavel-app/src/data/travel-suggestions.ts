@@ -131,7 +131,7 @@ export const SUGESTOES_DESTINO: SugestaoDestino[] = [
     melhorEpoca: "Abril a setembro (campos de tulipas e clima ameno)",
     imagemEmoji: "🌷",
     destacado: true,
-    destinoCompliance: "UNIAO_EUROPEIA",
+    destinoCompliance: "HOLANDA",
   },
   {
     id: "barcelona-es",
@@ -152,7 +152,7 @@ export const SUGESTOES_DESTINO: SugestaoDestino[] = [
     melhorEpoca: "Maio a outubro (clima mediterrâneo perfeito)",
     imagemEmoji: "🏖️",
     destacado: false,
-    destinoCompliance: "UNIAO_EUROPEIA",
+    destinoCompliance: "ESPANHA",
   },
   {
     id: "lisboa-pt",
