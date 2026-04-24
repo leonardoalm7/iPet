@@ -481,7 +481,24 @@ Sem estes itens, o produto nao pode ir para a mao do usuario real.
 | 11 | **Fluxo de onboarding completo** | Parcial | Primeira impressao do usuario |
 | 12 | **LGPD: consentimento + termos** | UI pronta | Obrigatorio por lei |
 
-**Estimativa para go-live:** 3-4 semanas focadas (auth real + Supabase + deploy + testes E2E).
+**Estimativa para go-live:** 3 semanas focadas (paywall + checkout + LLMO + auth + deploy).
+
+---
+
+### Essencial para Go-Live — Monetizacao e Aquisicao
+
+Novos itens criticos identificados na definicao do modelo de negocio (Abril 2026).
+
+| # | Item | Status | Por que e essencial |
+|---|------|--------|---------------------|
+| 13 | **Paywall TurboTax (free vs premium)** | Backlog | Sem paywall nao ha conversao — modelo de receita |
+| 14 | **Checkout Mercado Pago (R$ 99/viagem)** | Backlog | Sem pagamento nao ha receita |
+| 15 | **Persistencia isPremium (Supabase)** | Backlog | Status de pagamento precisa sobreviver troca de device |
+| 16 | **Paginas publicas /regras/[destino] (LLMO)** | Backlog | Aquisicao organica via Google e LLMs — canal principal |
+| 17 | **SEO tecnico (robots, sitemap, Schema.org)** | Backlog | Viabiliza indexacao das paginas de regras |
+
+Detalhamento completo em `docs/backlog/EPIC_01_TURBOTAX_PAYWALL.md` e `docs/backlog/EPIC_02_LLMO_SEO.md`.
+Sprint plan em `docs/backlog/SPRINT_PLAN_3_WEEKS.md`.
 
 ---
 
@@ -491,16 +508,20 @@ Itens que melhoram retencao e monetizacao, mas nao bloqueiam o lancamento.
 
 | # | Item | Status | Impacto |
 |---|------|--------|---------|
-| 1 | **Notificacoes push (FCM)** | Planejado | Alerta de prazos vencendo — retencao |
+| 1 | **Notificacoes push (FCM)** | Planejado | Alerta de prazos vencendo — retencao (premium-only) |
 | 2 | **Google Maps API (clinicas)** | Planejado | Busca por proximidade real — lead gen |
 | 3 | **Custos regionalizados com fontes reais** | Card criado | Estimativas mais precisas por destino |
 | 4 | **JSONs dedicados para 20 novos destinos** | Mapeado | Compliance auditado individualmente |
 | 5 | **PWA (installable)** | Nao iniciado | "Instalar" no celular sem app store |
 | 6 | **Dashboard BML com export** | Parcial | Decisoes data-driven para os socios |
 | 7 | **Compartilhar passaporte (QR)** | UI pronta | Vet escaneia e ve dados do pet |
-| 8 | **Multi-pet na mesma viagem** | Nao iniciado | Famílias com 2+ pets |
+| 8 | **Multi-pet na mesma viagem** | Nao iniciado | Familias com 2+ pets |
 | 9 | **Historico de viagens** | Parcial | Reuso de dados para proxima viagem |
 | 10 | **Portaria ANAC 17.476/2025** | Mapeado | 3 categorias (estimacao, ESA, cao-guia) |
+| 11 | **Calculadora de quarentena (lead magnet)** | Backlog | Ferramenta publica gratuita — gera backlinks e conversao |
+| 12 | **Indice de destinos /regras** | Backlog | Conecta paginas publicas e melhora SEO |
+| 13 | **Ancoragem de valor (despachante vs iPet)** | Backlog | Aumenta taxa de conversao no paywall |
+| 14 | **Checkout Transparente (cartao in-app)** | Planejado | UX melhor que redirect — V2 |
 
 ---
 
@@ -513,15 +534,17 @@ Itens estrategicos que dependem de traction ou parcerias.
 | 1 | **Blockchain Polygon (autenticidade)** | 1+ | Escala + custo de gas |
 | 2 | **ERP Vet (clinicas parceiras)** | 2 | Base de clinicas ativas |
 | 3 | **Leitor RFID Bluetooth (aeroporto)** | 3 | Hardware + parceria cia aerea |
-| 4 | **Pagamento in-app (Mercado Pago)** | 1+ | Volume de transacoes |
-| 5 | **Pesquisa de passagens (Skyscanner)** | 1+ | Parceria comercial |
-| 6 | **Reserva de hotel (Booking API)** | 1+ | Parceria comercial |
-| 7 | **Seguro viagem pet (parceria)** | 1+ | Acordo com seguradora |
+| 4 | **Marketplace clinicas com comissao 15%** | 1+ | Base de clinicas + volume de usuarios |
+| 5 | **Pesquisa de passagens (Skyscanner CPA)** | 1+ | Parceria comercial |
+| 6 | **Reserva de hotel (Booking API CPA)** | 1+ | Parceria comercial |
+| 7 | **Seguro viagem pet (CPA)** | 1+ | Acordo com seguradora |
 | 8 | **API VIGIAGRO (consulta status)** | 1+ | Acesso governamental |
 | 9 | **Integracao ANAC (sistema unico)** | 2-3 | API publica da ANAC |
 | 10 | **Gamificacao (badges de viagem)** | 1+ | Retencao comprovada |
-| 11 | **Marketplace de produtos pet** | 2+ | Escala de usuarios |
-| 12 | **Concierge IA (chat assistente)** | 1+ | LLM + base de conhecimento |
+| 11 | **Concierge IA (chat assistente)** | 1+ | LLM + base de conhecimento |
+| 12 | **iPet Health (gestao saude rotineira)** | 1+ | Retencao pos-viagem |
+| 13 | **Whitelabel para clinicas/pet shops** | 2+ | Produto maduro + demanda B2B |
+| 14 | **API-as-a-Service (compliance engine)** | 2+ | Motor validado + demanda B2B |
 
 ---
 
