@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"] }
 export const metadata: Metadata = {
   title: "iPet — Pass",
   description: "Seu passaporte pet digital. Viaje com segurança.",
+  robots: { index: false, follow: false },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
