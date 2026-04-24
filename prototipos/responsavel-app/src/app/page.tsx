@@ -29,7 +29,7 @@ export default function HomePage() {
 
   const temPets = pets.length > 0;
 
-  const proximaViagem = planosViagem
+  const viagensAtivas = planosViagem
     .map((plano) => {
       const pet = pets.find((p) => p.id === plano.petId);
       if (!pet) return null;
@@ -39,7 +39,9 @@ export default function HomePage() {
       return { plano, pet, diasRestantes };
     })
     .filter((v) => v !== null && v.diasRestantes >= 0)
-    .sort((a, b) => a!.diasRestantes - b!.diasRestantes)[0] ?? null;
+    .sort((a, b) => a!.diasRestantes - b!.diasRestantes) as { plano: typeof planosViagem[number]; pet: typeof pets[number]; diasRestantes: number }[];
+
+  const proximaViagem = viagensAtivas[0] ?? null;
 
   return (
     <div className="flex flex-col min-h-screen pb-24 bg-white">
@@ -61,21 +63,41 @@ export default function HomePage() {
       </header>
 
       <main className="flex-1 px-5 space-y-6">
-        {proximaViagem && (
-          <JourneyHubBanner
-            planoId={proximaViagem.plano.id}
-            petNome={proximaViagem.pet.nome}
-            destino={REGRAS_DESTINO[proximaViagem.plano.destino]}
-            diasRestantes={proximaViagem.diasRestantes}
-            dataEmbarque={proximaViagem.plano.dataEmbarque}
-            roadmap={calcularRoadmap(
-              proximaViagem.pet,
-              proximaViagem.plano.destino,
-              proximaViagem.plano.dataEmbarque,
-              proximaViagem.plano.id,
-              { isPremium: proximaViagem.plano.isPremium }
-            )}
-          />
+        {viagensAtivas.length > 0 && (
+          <section>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-base font-semibold text-navy">
+                {viagensAtivas.length === 1 ? "Viagem ativa" : "Viagens ativas"}
+              </h2>
+              <span className="text-xs text-gray-400">
+                {viagensAtivas.length} viage{viagensAtivas.length !== 1 ? "ns" : "m"}
+              </span>
+            </div>
+            <div className={viagensAtivas.length > 1
+              ? "flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-5 px-5"
+              : ""
+            }>
+              {viagensAtivas.map((v) => (
+                <div key={v.plano.id} className={viagensAtivas.length > 1 ? "flex-shrink-0 w-[85%]" : ""}>
+                  <JourneyHubBanner
+                    planoId={v.plano.id}
+                    petNome={v.pet.nome}
+                    destino={REGRAS_DESTINO[v.plano.destino]}
+                    diasRestantes={v.diasRestantes}
+                    dataEmbarque={v.plano.dataEmbarque}
+                    isPremium={v.plano.isPremium}
+                    roadmap={calcularRoadmap(
+                      v.pet,
+                      v.plano.destino,
+                      v.plano.dataEmbarque,
+                      v.plano.id,
+                      { isPremium: v.plano.isPremium }
+                    )}
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {!temPets ? (
@@ -103,7 +125,7 @@ export default function HomePage() {
           </section>
         )}
 
-        {temPets && !proximaViagem && (
+        {temPets && viagensAtivas.length === 0 && (
           <Link
             href="/planejar"
             className="flex items-center gap-4 bg-navy/5 border border-navy/10 rounded-2xl p-4 hover:bg-navy/10 transition-colors"
@@ -230,6 +252,7 @@ interface JourneyHubBannerProps {
   destino: { bandeira: string; nome: string };
   diasRestantes: number;
   dataEmbarque: string;
+  isPremium: boolean;
   roadmap: ReturnType<typeof calcularRoadmap>;
 }
 
@@ -238,6 +261,7 @@ function JourneyHubBanner({
   petNome,
   destino,
   diasRestantes,
+  isPremium,
   dataEmbarque,
   roadmap,
 }: JourneyHubBannerProps) {
@@ -264,7 +288,14 @@ function JourneyHubBanner({
       >
         <div className="flex items-start justify-between mb-3">
           <div>
-            <p className="text-xs text-gray-400 mb-0.5 font-medium uppercase tracking-wider">Viagem ativa</p>
+            <div className="flex items-center gap-2 mb-0.5">
+              <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Viagem ativa</p>
+              {!isPremium && (
+                <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-navy/10 text-navy">
+                  FREE
+                </span>
+              )}
+            </div>
             <p className="text-sm font-semibold text-navy">
               {petNome.split(" ")[0]} → {destino.bandeira} {destino.nome}
             </p>
