@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "PARAGUAI",
+  "nome": "Paraguai",
+  "bandeira": "🇵🇾",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://www.senacsa.gov.py/index.php/tramites/requisitos-de-importacion/caninos-y-felinos",
+      "title": "SENACSA — Servicio Nacional de Calidad y Salud Animal",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para o Paraguai."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Assim como o Uruguai, exige teste diagnóstico negativo para Leishmaniose (cães) coletado nos 60 dias anteriores ao embarque e certificado de tratamento parasitário.",
+    "observacoesInternas": "Inserir tarefa de teste de Leishmaniose obrigatoriamente."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "PERU",
+  "nome": "Peru",
+  "bandeira": "🇵🇪",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://www.gob.pe/senasa",
+      "title": "SENASA — Servicio Nacional de Sanidad Agraria",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para o Peru."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 14,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "O CVI para o Peru é válido por até 14 dias da emissão. O animal deve ter sido desparasitado interna e externamente dentro dos 15 dias antes do embarque.",
+    "observacoesInternas": "Ajustar validador de CVI no app para 14 dias em rotas pro Peru, não 10."
+  }
+}

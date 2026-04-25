@@ -3,16 +3,16 @@
   "destino": "ARGENTINA",
   "nome": "Argentina",
   "bandeira": "🇦🇷",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
-  "confidence": "MEDIA",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
   "sources": [
     {
-      "url": "https://www.argentina.gob.ar/senasa/programas-y-proyectos/animales-de-compania",
-      "title": "SENASA Argentina — Animales de Compañía",
+      "url": "https://www.argentina.gob.ar/senasa/informacion-al-viajero/ingresar-o-regresar-al-pais/ingresos-de-perros-y-o-gatos",
+      "title": "SENASA — Servicio Nacional de Sanidad y Calidad Agroalimentaria",
       "type": "OFICIAL",
-      "lastAccessed": "2026-04-16"
+      "lastAccessed": "2026-04-24"
     }
   ],
   "changeLog": [
@@ -20,11 +20,16 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. Destino muito popular para brasileiros. SENASA é o órgão regulador argentino."
+    },
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Atualização completa via pesquisa delegada. Mudanças: microchip passou de recomendado para obrigatório (ISO 11784/11785); sorologia confirmada como não exigida (Mercosul). Incluído requisito de desparasitação D-15 a D-2. Confidence elevada de MEDIA para ALTA com fonte oficial SENASA direta."
     }
   ],
   "rules": {
-    "exigeMicrochip": false,
-    "microchipPadrao": "Recomendado ISO 11784/11785 mas não obrigatório por lei federal argentina para entrada",
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
     "exigeVacina": true,
     "diasCarenciaVacina": 21,
     "validadeVacinaAnos": 1,
@@ -34,10 +39,10 @@
     "laboratoriosCredenciados": null,
     "exigeCVI": true,
     "diasAntesCVI": 10,
-    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Tradução para o espanhol pode ser solicitada no controle de fronteira.",
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Vacina antirrábica válida (máx 1 ano, mín 21 dias antes do embarque) é o requisito principal. CVI emitido pelo MAPA em até 10 dias antes do embarque. Atestado de saúde do veterinário recomendado. Argentina é destino pet-friendly com muitas opções de hospedagem e lazer para cães.",
-    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Verificar se SENASA exige CVI com endosso específico ou se o brasileiro padrão (MAPA + SFA) é aceito. Alguns postos de fronteira terrestre podem ter requisitos adicionais. Buenos Aires, Bariloche e Mendoza são tops destinos para brasileiros com cães."
+    "observacoes": "Sendo país do Mercosul, a sorologia da raiva não é exigida para animais procedentes do Brasil. O CVI deve atestar tratamento contra parasitas internos e externos nos 15 dias prévios à emissão.",
+    "observacoesInternas": "Alertar no roadmap: desparasitação entre D-15 e D-2 antes do embarque."
   }
 }

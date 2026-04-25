@@ -31,7 +31,10 @@
       "altura": 25,
       "somaDimensoes": 105
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": false,
     "idadeMinimaSemanas": 8,
     "maxAnimaisPorVoo": 5,
@@ -44,5 +47,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "⛔ American Airlines SUSPENDEU o transporte de pets no porão em agosto de 2021. Apenas cabine disponível para pets de companhia."
   },
+  "racasPerigosasBanidas": false,
   "observacoesGerais": "⚠️ IMPORTANTE: AA não aceita pets no porão desde 2021. Se o pet não cabe na cabine (>9kg com caixa), não é possível voar AA. Para rotas Brasil-EUA considerar LATAM ou outras cias que aceitam porão. Taxa de US$ 125 por trecho (confirmada no site — verificar atualização)."
 }

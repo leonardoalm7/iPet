@@ -3,16 +3,16 @@
   "destino": "URUGUAI",
   "nome": "Uruguai",
   "bandeira": "🇺🇾",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
-  "confidence": "MEDIA",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
   "sources": [
     {
-      "url": "https://www.mgap.gub.uy/unidad-organizativa/division-sanidad-animal/actividades-y-servicios/movimiento-animales-compania",
-      "title": "MGAP Uruguay — Movimiento de Animales de Compañía",
+      "url": "https://www.gub.uy/ministerio-ganaderia-agricultura-pesca/tramites-y-servicios/tramites/ingreso-perros-gatos-uruguay",
+      "title": "MGAP — Ministerio de Ganadería, Agricultura y Pesca",
       "type": "OFICIAL",
-      "lastAccessed": "2026-04-16"
+      "lastAccessed": "2026-04-24"
     }
   ],
   "changeLog": [
@@ -20,11 +20,16 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. MGAP é o órgão regulador uruguaio. Uruguai é destino fácil para brasileiros com pets."
+    },
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Atualização completa via pesquisa delegada. Microchip agora obrigatório (ISO). Adicionado requisito crítico de teste negativo para Leishmaniose (D-60) OU coleira repelente com Deltametrina + tratamento contra Echinococcus granulosus. Confidence elevada de MEDIA para ALTA."
     }
   ],
   "rules": {
-    "exigeMicrochip": false,
-    "microchipPadrao": "Recomendado mas não exigido na fronteira",
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
     "exigeVacina": true,
     "diasCarenciaVacina": 21,
     "validadeVacinaAnos": 1,
@@ -34,10 +39,10 @@
     "laboratoriosCredenciados": null,
     "exigeCVI": true,
     "diasAntesCVI": 10,
-    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Para fronteira terrestre, o DGSG uruguaio pode solicitar vistos sanitários adicionais.",
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Uruguai tem um dos processos mais simples da América do Sul. Vacina antirrábica válida + CVI são os requisitos básicos. Punta del Este, Montevidéu e Colonia del Sacramento são destinos muito pet-friendly. Muitos hotéis e restaurantes aceitam animais de estimação.",
-    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Verificar MGAP quanto a exigência de DGSG para fronteira terrestre BR-UY. Uruguai é geralmente flexível mas verificar se exige tradução ao espanhol do CVI."
+    "observacoes": "Obrigatório apresentar TESTE NEGATIVO PARA LEISHMANIOSE (kit rápido ou sorologia) realizado nos 60 dias anteriores ao embarque, ou atestar uso de coleira repelente com Deltametrina. O CVI deve atestar também tratamento contra tênia Echinococcus granulosus.",
+    "observacoesInternas": "Inserir tarefa OBRIGATÓRIA no roadmap para cães: exame de Leishmaniose e aplicação de coleira repelente/praziquantel."
   }
 }

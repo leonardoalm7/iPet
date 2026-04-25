@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "HONG_KONG",
+  "nome": "Hong Kong",
+  "bandeira": "🇭🇰",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://www.afcd.gov.hk/english/quarantine/qua_ie/qua_ie_ipab/qua_ie_ipab_idc/qua_ie_ipab_idc.html",
+      "title": "AFCD — Agriculture, Fisheries and Conservation Department",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para Hong Kong. Nota técnica: diasCarenciaSorologia normalizado para 0 (schema exige integer, sorologia não aplicável)."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 ou AVID (9 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 30,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 14,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": ["Pit Bull Terrier", "Japanese Tosa", "Dogo Argentino", "Fila Brasileiro"],
+    "observacoes": "O Brasil é classificado como país do Grupo 3. Animais vindos do Brasil estão sujeitos a uma quarentena OBRIGATÓRIA de no mínimo 120 dias nas instalações do AFCD. A reserva da quarentena e a Permissão de Importação devem ser feitas com meses de antecedência.",
+    "observacoesInternas": "Alerta CRÍTICO: Quarentena de 120 dias para pets do Brasil. Desencorajar viagens de turismo."
+  }
+}

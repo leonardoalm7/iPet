@@ -31,7 +31,10 @@
       "altura": 24,
       "somaDimensoes": 98
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": false,
     "idadeMinimaSemanas": 15,
     "maxAnimaisPorVoo": null,
@@ -44,5 +47,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "Porão climatizado. Caixa rígida IATA obrigatória. Peso máximo 75kg (animal + caixa). Confirmar disponibilidade no momento da reserva."
   },
+  "racasPerigosasBanidas": false,
   "observacoesGerais": "⚠️ Air France proíbe absolutamente raças braquicefálicas em todos os voos. Taxas cobradas por trecho. Confirmar disponibilidade com antecedência — número limitado de animais por voo."
 }

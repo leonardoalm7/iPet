@@ -14,6 +14,12 @@ export type Destino =
   | "ARGENTINA"
   | "CHILE"
   | "URUGUAI"
+  | "COLOMBIA"
+  | "PERU"
+  | "PARAGUAI"
+  | "BOLIVIA"
+  | "EQUADOR"
+  | "VENEZUELA"
   // América Central
   | "MEXICO"
   // América do Norte
@@ -51,6 +57,17 @@ export type Destino =
   | "REINO_UNIDO"
   // Ásia
   | "JAPAO"
+  | "CHINA"
+  | "HONG_KONG"
+  | "TAIWAN"
+  | "TAILANDIA"
+  | "INDONESIA"
+  | "MALASIA"
+  | "FILIPINAS"
+  | "INDIA"
+  // Oriente Médio
+  | "CATAR"
+  | "ARABIA_SAUDITA"
   // Oceania
   | "AUSTRALIA";
 

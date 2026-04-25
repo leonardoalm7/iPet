@@ -3,16 +3,16 @@
   "destino": "CHILE",
   "nome": "Chile",
   "bandeira": "🇨🇱",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
-  "confidence": "MEDIA",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
   "sources": [
     {
-      "url": "https://www.sag.gob.cl/ambitos-de-accion/mascotas-animales-de-compania",
-      "title": "SAG Chile — Mascotas y Animales de Compañía",
+      "url": "https://www.sag.gob.cl/ambitos-de-accion/ingreso-de-mascotas-perros-y-gatos-chile",
+      "title": "SAG — Servicio Agrícola y Ganadero",
       "type": "OFICIAL",
-      "lastAccessed": "2026-04-16"
+      "lastAccessed": "2026-04-24"
     }
   ],
   "changeLog": [
@@ -20,11 +20,16 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. SAG (Servicio Agrícola y Ganadero) é o órgão regulador chileno."
+    },
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Atualização completa via pesquisa delegada. Microchip agora obrigatório (ISO). Adicionadas 8 raças PPP da Ley Cholito (Rottweiler, Doberman, Pitbull, Dogo Argentino, Bullmastiff, Fila Brasileiro, Presa Canario, Tosa Inu) com exigência de focinheira/guia curta. Confidence elevada de MEDIA para ALTA."
     }
   ],
   "rules": {
-    "exigeMicrochip": false,
-    "microchipPadrao": "Recomendado mas não obrigatório para entrada no Chile",
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
     "exigeVacina": true,
     "diasCarenciaVacina": 21,
     "validadeVacinaAnos": 1,
@@ -34,10 +39,10 @@
     "laboratoriosCredenciados": null,
     "exigeCVI": true,
     "diasAntesCVI": 10,
-    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Documento deve conter dados completos do animal e responsável. Tradução em espanhol pode ser solicitada.",
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
-    "racasRestritasOuProibidas": [],
-    "observacoes": "Chile é país rabies-free e tem controle rigoroso de entrada. Exige vacina antirrábica válida + CVI endossado pelo MAPA/SFA. O SAG inspeciona os animais na entrada — levar todos os documentos originais. Santiago, Valparaíso e o sul do Chile (Torres del Paine) são destinos populares com pets.",
-    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Chile é rabies-free, o que pode significar requisitos adicionais em momentos de maior vigilância sanitária. Verificar site do SAG para lista atualizada de requisitos — pode variar por espécie. Atenção especial na fronteira terrestre vs. aérea."
+    "racasRestritasOuProibidas": ["Rottweiler", "Doberman", "Pitbull", "Dogo Argentino", "Bullmastiff", "Fila Brasileiro", "Presa Canario", "Tosa Inu"],
+    "observacoes": "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira e guia curta, devendo o tutor preencher declaração de responsabilidade.",
+    "observacoesInternas": "Alertar usuários com cães da lista PPP sobre a 'Ley Cholito' e as restrições de circulação pública."
   }
 }

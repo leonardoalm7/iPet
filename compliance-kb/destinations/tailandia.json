@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "TAILANDIA",
+  "nome": "Tailândia",
+  "bandeira": "🇹🇭",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://dld.go.th/th/",
+      "title": "DLD — Department of Livestock Development",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para Tailândia."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": ["Pit Bull Terrier", "American Staffordshire Terrier"],
+    "observacoes": "Exige Permissão de Importação (Import Permit) solicitada por e-mail ao posto de quarentena animal do aeroporto de Suvarnabhumi com pelo menos 15 a 60 dias de antecedência. Cães precisam ser vacinados contra Leptospirose (ou testados negativos) e DHPPI.",
+    "observacoesInternas": "Alertar no roadmap sobre a obrigatoriedade da vacina contra Leptospirose (presente na V8/V10)."
+  }
+}

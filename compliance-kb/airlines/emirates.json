@@ -44,5 +44,6 @@
     "racasBraquisefálicasPermitidas": false,
     "observacoes": "Animais viajam no porão como bagagem registrada ou carga supervisionada (SkyCargo). Caixa IATA obrigatória e bem ventilada. Raças braquicefálicas NÃO aceitas no porão. Processo deve ser iniciado com antecedência junto à Emirates Cargo. Verificar regras específicas do país de destino (Dubai tem regras específicas para entrada de animais)."
   },
+  "racasPerigosasBanidas": false,
   "observacoesGerais": "⚠️ Emirates aceita pets SOMENTE no porão ou como carga SkyCargo. Processo de reserva para animais no porão deve ser feito via Emirates Cargo com antecedência mínima de 72h. Verificar requisitos sanitários específicos dos Emirados Árabes Unidos (Dubai): vacina antirrábica, microchip e teste de titulação são exigidos."
 }
