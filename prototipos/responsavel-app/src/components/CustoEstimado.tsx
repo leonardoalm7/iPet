@@ -18,22 +18,24 @@ interface Props {
   compacto?: boolean;
 }
 
-const LABELS_CATEGORIA = {
+const LABELS_RELEVANCIA = {
   obrigatorio: "Obrigatório",
   recomendado: "Recomendado",
   opcional: "Opcional",
+  nao_aplicavel: "Não aplicável",
 } as const;
 
 function ItemLinha({ item }: { item: ItemCustoComStatus }) {
   const [aberto, setAberto] = useState(false);
   const isPago = item.status === "pago";
+  const temObs = !!item.observacoes;
 
   return (
     <div>
       <button
-        onClick={() => item.nota && setAberto(!aberto)}
+        onClick={() => temObs && setAberto(!aberto)}
         className={`w-full flex items-center gap-3 py-2.5 text-left ${
-          item.nota ? "cursor-pointer" : "cursor-default"
+          temObs ? "cursor-pointer" : "cursor-default"
         }`}
       >
         {/* Ícone de status */}
@@ -56,12 +58,12 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
                 por viagem
               </span>
             )}
-            {item.nota && (
+            {temObs && (
               <Info className="w-3 h-3 text-gray-400 flex-shrink-0" />
             )}
           </div>
           <p className="text-[10px] text-gray-400 capitalize">
-            {LABELS_CATEGORIA[item.categoria]}
+            {LABELS_RELEVANCIA[item.relevancia]}
           </p>
         </div>
 
@@ -82,7 +84,7 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
 
       {/* Nota expandível */}
       <AnimatePresence>
-        {aberto && item.nota && (
+        {aberto && temObs && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
@@ -90,7 +92,7 @@ function ItemLinha({ item }: { item: ItemCustoComStatus }) {
             className="overflow-hidden"
           >
             <p className="text-xs text-gray-400 leading-relaxed pb-2 pl-7 pr-2">
-              {item.nota}
+              {item.observacoes}
             </p>
           </motion.div>
         )}
@@ -178,14 +180,14 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
               )}
 
               {/* Obrigatórios pendentes */}
-              {estimativa.itensPendentes.filter((i) => i.categoria === "obrigatorio").length > 0 && (
+              {estimativa.itensPendentes.filter((i) => i.relevancia === "obrigatorio").length > 0 && (
                 <div className="mb-3">
                   <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-1">
                     A pagar (obrigatório)
                   </p>
                   <div className="divide-y divide-gray-200/50">
                     {estimativa.itensPendentes
-                      .filter((i) => i.categoria === "obrigatorio")
+                      .filter((i) => i.relevancia === "obrigatorio")
                       .map((item) => (
                         <ItemLinha key={item.id} item={item} />
                       ))}
@@ -194,14 +196,14 @@ export function CustoEstimado({ pet, destino, compacto = false }: Props) {
               )}
 
               {/* Recomendados / opcionais */}
-              {estimativa.itensPendentes.filter((i) => i.categoria !== "obrigatorio").length > 0 && (
+              {estimativa.itensPendentes.filter((i) => i.relevancia !== "obrigatorio").length > 0 && (
                 <div>
                   <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-1">
                     A pagar (recomendado)
                   </p>
                   <div className="divide-y divide-gray-200/50">
                     {estimativa.itensPendentes
-                      .filter((i) => i.categoria !== "obrigatorio")
+                      .filter((i) => i.relevancia !== "obrigatorio")
                       .map((item) => (
                         <ItemLinha key={item.id} item={item} />
                       ))}

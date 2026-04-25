@@ -1,5 +1,5 @@
 # iPet — Arquitetura da Jornada do Responsável
-**Versão:** 1.0 | **Autores:** Danielle Moreira (CEO), Victor Hugo Telles (CTO), Brunna Rosa (CPO), Leonardo Braga de Almeida (COO) | **Data:** 2026-04-17
+**Versão:** 1.1 | **Autores:** Danielle Moreira (CEO), Victor Hugo Telles (CTO), Brunna Rosa (CPO), Leonardo Braga de Almeida (COO) | **Data:** 2026-04-24
 
 > **Insight fundacional:** O usuário não sabe por onde começar. Saber o que precisa fazer não é suficiente — ele precisa ver a jornada completa, entender onde está, o que vem a seguir e como o iPet pode fazer por ele o que ele não quer ou não sabe fazer.
 
@@ -30,13 +30,13 @@ A resposta certa — "depende do destino e do prazo" — exige conhecimento que 
 
 ```mermaid
 flowchart LR
-  S1["🐾 Estágio 1\nPet cadastrado\n(microchip + perfil)"]
-  S2["🗺️ Estágio 2\nDestino e data\ndefinidos"]
-  S3["📋 Estágio 3\nDocumentação\nsanitária"]
-  S4["✈️ Estágio 4\nPassagem\ncomprada"]
-  S5["🏨 Estágio 5\nHospedagem\nconfirmada"]
-  S6["📄 Estágio 6\nCVI emitido\n(D-10 a D-2)"]
-  S7["🎉 Estágio 7\nPronto para\nembarcar!"]
+  S1 [ 🐾 Estágio 1. Pet cadastrado (microchip + perfil) ]
+  S2 [ 🗺️ Estágio 2. Destino e data definidos ]
+  S3 [ 📋 Estágio 3. Documentação sanitária ]
+  S4 [ ✈️ Estágio 4. Passagem comprada ]
+  S5 [ 🏨 Estágio 5. Hospedagem confirmada ]
+  S6 [ 📄 Estágio 6. CVI emitido (D-10 a D-2) ]
+  S7 [ 🎉 Estágio 7. Pronto para embarcar! ]
 
   S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
 ```
@@ -195,22 +195,104 @@ CONTATOS DE EMERGÊNCIA:
 
 ---
 
-## 8. Status das Features de Journey por Release
+## 8. Modelo de Monetização — TurboTax Paywall
 
-| Feature | Status | Prioridade |
-|---------|--------|-----------|
-| Timeline visual do roadmap | ✅ Entregue (abr/2026) | — |
-| Journey Hub — Central da Viagem | 📋 Backlog F1A | Máxima |
-| Onboarding "Por onde começo?" | 📋 Backlog F1A | Máxima |
-| Estimativa de custo total | 📋 Backlog F1A | Alta |
-| iPet Services — Marketplace | 📋 Backlog F1A | Alta |
-| Passagem comprada (vincular voo) | 📋 Backlog F1B | Média |
-| Modo Aeroporto | 📋 Backlog F1B | Média |
-| Compliance de retorno | 📋 Backlog F1C | Baixa |
+A jornada é **freemium por PlanoViagem**, inspirada no TurboTax: o usuário vê o valor gerado antes de pagar.
+
+### Free (teaser)
+- Visualização do roadmap com **datas e status ocultos** (cadeado)
+- Estágios 1 e 2 completos (cadastro + destino)
+- Acesso à estimativa de custo e ao diagnóstico do wizard
+
+### Premium (R$ 99 / viagem, pagamento único via Mercado Pago)
+- Roadmap completo: datas, status, próxima ação contextual
+- Journey Hub com CTAs executáveis
+- Checklist de embarque (Modo Aeroporto)
+- Ancoragem de valor: *despachante R$ 5.000 → iPet R$ 99*
+
+### Arquitetura do paywall
+- Campo `isPremium: boolean` + `pagamentoId` no tipo `PlanoViagem`
+- `calcularRoadmap()` recebe flag `isPremium`: modo teaser oculta datas/status
+- `PaywallBanner` contextual nas telas bloqueadas
+- Fluxo: `/checkout/[planoId]` → simulação MP → `/checkout/sucesso` → Hub desbloqueado
+- Rotas premium-only: `/embarque/[planoId]` com tela de bloqueio + CTA
 
 ---
 
-## 9. Princípio de Design
+## 9. LLMO & SEO — Canal de Aquisição Orgânica
+
+Páginas públicas indexáveis respondem às dúvidas do tutor **antes** dele entrar no funil, posicionando o iPet como fonte canônica.
+
+### Rotas públicas
+| Rota | Objetivo | SEO |
+|------|----------|-----|
+| `/regras` | Índice com grid de 37 destinos, badges de requisitos | `CollectionPage` schema |
+| `/regras/[destino]` | Requisitos sanitários + FAQ + fontes oficiais | ISR + `FAQPage` + `Article` JSON-LD |
+| `/ferramentas/calculadora-quarentena` | Lead magnet: calcula data ideal + janela de risco | `WebApplication` schema, CTA para cadastro |
+
+### SEO técnico
+- `robots.ts`: allow público `/regras`, `/ferramentas`; disallow rotas privadas
+- `sitemap.xml`: 1 índice + 37 destinos + calculadora (prioridade 0.9)
+- `layout.tsx`: `noindex` padrão; rotas públicas sobrescrevem
+- Link cruzado: calculadora ↔ página da regra → cadastro
+
+### Hipótese BML
+- **Hipótese:** tutor pesquisa "quarentena cachorro [destino]" no Google antes de saber que o iPet existe
+- **Sinal:** conversão de visitante orgânico → cadastro via CTA da calculadora
+- **Pivô:** se CTR < 2% em 60 dias, reformular para conteúdo jornalístico ou trocar lead magnet
+
+---
+
+## 10. Instrumentação BML — Funil do Tutor
+
+Toda decisão de produto é guiada por eventos rastreáveis. O app instrumenta 6 pontos críticos + 5 de paywall.
+
+### Eventos do funil
+| Evento | Origem | O que mede |
+|--------|--------|-----------|
+| `pet_cadastrado` | `/pets/novo` | Topo do funil |
+| `destino_selecionado` | `/planejar`, `/viagem/[petId]` | Intenção de viagem |
+| `roadmap_gerado` | wizard + Journey Hub | Valor entregue free |
+| `companhia_verificada` | `/companhias` | Engajamento com comparador |
+| `documento_uploaded` | `/passaporte/[petId]` | Execução |
+| `tarefa_concluida` | `/embarque/[planoId]` | Retenção premium |
+| `paywall_exibido` / `checkout_iniciado` / `pagamento_confirmado` | fluxo premium | Conversão |
+| `calculadora_usada` / `calculadora_cta_clicado` | rota pública | LLMO |
+
+### Dashboard
+- `/admin/metricas` — visualização do funil, rankings de destinos/cias, contagem de veredictos
+- Atualização automática (5s), persistência em `localStorage` (cap 5000 eventos)
+- Acesso via Configurações > Métricas BML
+
+---
+
+## 11. Status das Features de Journey por Release
+
+| Feature | Status | Nota |
+|---------|--------|------|
+| Timeline visual do roadmap | ✅ Entregue | abr/2026 |
+| Journey Hub — Central da Viagem | ✅ Entregue | 7 estágios, progresso ponderado, CTA contextual |
+| Wizard "Por onde começo?" | ✅ Entregue | 3 passos, diagnóstico viável/inviável + data mínima |
+| Estimativa de custo total | ✅ Entregue | KB curado por destino, já pago vs. pendente |
+| Comparador de companhias aéreas | ✅ Entregue | 9 cias, veredicto por pet (peso/raça/braqui) |
+| Paywall TurboTax | ✅ Entregue | isPremium por PlanoViagem, checkout simulado |
+| Modo Aeroporto (checklist de embarque) | ✅ Entregue | `/embarque/[planoId]`, 5 categorias dinâmicas |
+| QR Code do passaporte | ✅ Entregue | Verificação pública em `/verificar/[petId]` |
+| Clínicas veterinárias MVP | ✅ Entregue | 11 clínicas curadas, geoloc, lead gen tracking |
+| Páginas públicas `/regras` + calculadora | ✅ Entregue | LLMO, SEO técnico, JSON-LD |
+| Funil BML instrumentado | ✅ Entregue | 6 eventos + dashboard `/admin/metricas` |
+| Auth Supabase + LGPD | ✅ Entregue | OAuth Google/Apple, KYC, Art. 18 |
+| Checkout Mercado Pago real | 📋 Backlog F1B | Hoje simulado — webhook + PIX/cartão |
+| iPet Services — Marketplace | 📋 Backlog F1B | Agendar vacina/sorologia/CVI com parceiros |
+| Passagem comprada (vincular voo) | 📋 Backlog F1B | Upload comprovante + ajuste de regras |
+| Hotéis pet — reserva no app | 📋 Backlog F1B | Hoje: listagem; próximo: CPA Booking |
+| Notificações FCM | 📋 Backlog F1B | Lembretes de prazo por push |
+| Compliance de retorno | 📋 Backlog F1C | Regras de reentrada no Brasil |
+| Pesquisa de passagens (Skyscanner) | 🔮 Futuro | CPA |
+
+---
+
+## 12. Princípio de Design
 
 > **"O usuário nunca deve se perguntar 'o que faço agora?'"**
 

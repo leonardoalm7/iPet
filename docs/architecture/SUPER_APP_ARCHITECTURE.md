@@ -1,5 +1,5 @@
 # iPet — Arquitetura do Super App
-**Versão:** 1.0 | **Autores:** Danielle Moreira (CEO), Victor Hugo Telles (CTO), Brunna Rosa (CPO), Leonardo Braga de Almeida (COO) | **Data:** 2026-04-16
+**Versão:** 1.1 | **Autores:** Danielle Moreira (CEO), Victor Hugo Telles (CTO), Brunna Rosa (CPO), Leonardo Braga de Almeida (COO) | **Data:** 2026-04-24
 
 > **Regra de ouro:** documentar é tão importante quanto desenvolver. Este arquivo é o mapa vivo da plataforma — atualizar a cada nova feature ou decisão arquitetural.
 
@@ -52,7 +52,8 @@ mindmap
         Badge_de_autenticacao
     ComplianceEngine
       KnowledgeBase
-        12_destinos_internacionais
+        37_destinos_selecionaveis
+        27_paises_UE_herdam_base
         9_companhias_aereas
         Revisao_trimestral
         check_stale_script
@@ -62,6 +63,12 @@ mindmap
         Prazos_e_carencias
         Status_CONCLUIDA_URGENTE_CRITICO
         Data_de_liberacao_calculada
+        Calculadora_quarentena_publica
+      RegrasCiaAerea
+        Braquicefalico_cabine_vs_porao
+        Racas_perigosas_banidas
+        Cao_guia_bypass_Lei_11126
+        ESA_trata_como_pet_comum
       Alertas
         FCM_push_notifications
         Lembretes_de_prazo
@@ -99,16 +106,58 @@ mindmap
         Validacao_Apto_Inapto
       API_ANAC
       Dashboard_companhia_aerea
+    PaywallFreemium
+      ModeloTurboTax
+        Free_teaser_oculta_datas
+        Premium_99_por_viagem
+        isPremium_por_PlanoViagem
+      Checkout
+        Mercado_Pago_Checkout_Pro
+        Simulado_no_prototipo
+        Webhook_producao
+      Ancoragem
+        Despachante_5k_vs_iPet_99
+    LLMO_SEO
+      PaginasPublicas
+        regras_indice_37_destinos
+        regras_destino_ISR
+        calculadora_quarentena
+      SEOTecnico
+        robots_allow_regras
+        sitemap_38_urls
+        JSON_LD_FAQPage_Article
+        noindex_rotas_privadas
+      LeadMagnet
+        CTA_cadastro_iPet_Pass
+        Link_cruzado_calculadora_regras
+    AnalyticsBML
+      EventosFunil
+        pet_cadastrado
+        destino_selecionado
+        roadmap_gerado
+        companhia_verificada
+        documento_uploaded
+        tarefa_concluida
+      EventosPaywall
+        paywall_exibido
+        checkout_iniciado
+        pagamento_confirmado
+      Dashboard
+        admin_metricas
+        Funil_conversao
+        Rankings_destinos_cias
     Infraestrutura
       AuthService
-        JWT_OAuth2
-        Roles_tutor_vet_airline
+        Supabase_Auth
+        OAuth_Google_Apple
+        KYC_CPF_hash_SHA256
+        LGPD_Art18_exportacao_exclusao
       NotificationService
         Firebase_FCM
         Email_SendGrid
       PaymentService
         Mercado_Pago
-        Assinatura_SaaS
+        Pagamento_por_viagem
         Publicidade_contextual
       BlockchainFuturo
         Polygon_Network
@@ -341,24 +390,39 @@ sequenceDiagram
 
 | Feature | Status | Descrição |
 |---------|--------|-----------|
-| Cadastro de pet | ✅ | Multi-step form: espécie, raça, peso, vacina, sorologia |
+| Cadastro de pet | ✅ | Multi-step form: espécie, raça, peso, vacina, sorologia, tipo (comum/cão-guia) |
 | Passaporte Digital | ✅ | Identidade + checklist de saúde + badges de autenticação |
 | Upload de documentos | ✅ | Armazenamento local + hash SHA-256 |
+| QR Code do passaporte | ✅ | SVG nível H + página pública `/verificar/[petId]` |
 | Motor de compliance | ✅ | Roadmap inverso: dado pet + destino + data → tarefas ordenadas |
 | Plano de viagem | ✅ | Seleção destino + data embarque + roadmap + salvar |
-| 4 destinos no KB | ✅ | Brasil, UE, Japão, EUA (ALTA/MEDIA confidence) |
-| 3 cias no KB | ✅ | LATAM, GOL, Azul |
-| Compliance KB offline | ✅ | JSONs curados + check-stale.ts + generate-app-data.ts |
-| **12 destinos no KB** | 🔨 | + Portugal, UK, Argentina, Chile, Uruguai, Canadá, Austrália, México |
-| **9 cias no KB** | 🔨 | + TAP, Air France, Iberia, Copa, American, Emirates |
-| Sugestões pet-friendly | 🔨 | Cards editoriais na home com dicas de viagem |
-| Hotéis pet | 🔨 | Dois modos: deixar na origem / hospedar no destino |
-| Busca de clínicas | 📋 | Google Maps API — CTA já existe na UI |
+| **37 destinos no KB** | ✅ | 27 UE (herdam regra base) + Brasil, UK, Argentina, Chile, Uruguai, Canadá, Austrália, México, Japão, EUA |
+| **9 cias no KB** | ✅ | LATAM, GOL, Azul, TAP, Air France, Iberia, Copa, American, Emirates |
+| Compliance KB offline | ✅ | JSONs curados + check-stale.ts + generate-app-data.ts + herança entre destinos |
+| Journey Hub | ✅ | 7 estágios com progresso ponderado, próxima ação contextual |
+| Wizard "Por onde começo?" | ✅ | 3 passos → diagnóstico viável/inviável + data mínima |
+| Estimativa de custo total | ✅ | KB curado por destino, já pago vs. pendente, faixas min–max |
+| Comparador pet × cia aérea | ✅ | Veredicto Cabine/Porão/Restrição/Recusado + side-by-side até 4 cias |
+| Modelo granular braquicefálico | ✅ | `braquicefalicoCabine` / `braquicefalicoPorao` separados |
+| Cão-guia / ESA | ✅ | Bypass Lei 11.126/2005 para cão-guia; ESA tratado como pet comum |
+| Checklist de embarque | ✅ | `/embarque/[planoId]` dinâmico por pet/destino/cia (5 categorias) |
+| Clínicas veterinárias MVP | ✅ | 11 clínicas curadas (SP/RJ/MG/PR), geoloc + filtros, lead gen tracking |
+| Sugestões pet-friendly + hotéis | ✅ | Cards editoriais + duas abas (origem / destino) |
+| Paywall TurboTax | ✅ | `isPremium` por PlanoViagem, teaser oculta datas, banner de ancoragem |
+| Checkout simulado | ✅ | `/checkout/[planoId]` + `/checkout/sucesso` — Mercado Pago real pendente |
+| LLMO — páginas públicas `/regras` | ✅ | Índice + 37 destinos + JSON-LD (FAQPage/Article) + sitemap |
+| Calculadora de quarentena pública | ✅ | `/ferramentas/calculadora-quarentena` como lead magnet |
+| Funil BML instrumentado | ✅ | 6 eventos de funil + 5 de paywall + 2 de LLMO; dashboard `/admin/metricas` |
+| Autenticação Supabase + LGPD | ✅ | OAuth Google/Apple, KYC, CPF hash SHA-256, Art. 18 (export/retificar/excluir) |
+| Design system light mode | ✅ | Paleta cream/navy/teal/orange, Inter, rebranding iPet Pass |
+| Checkout Mercado Pago real | 📋 | Hoje simulado — webhook + PIX/cartão pendente |
+| iPet Services — Marketplace | 📋 | Agendar vacina/sorologia/CVI com parceiros (comissão 15%) |
+| Passagem comprada (vincular voo) | 📋 | Upload comprovante + ajuste de regras conforme cia |
+| Hotéis pet — reserva | 📋 | Hoje: listagem; próximo: CPA Booking/parceiro |
 | Notificações FCM | 📋 | Alertas de prazo no dispositivo |
-| Autenticação real | 📋 | JWT + sessão cloud (decisão de stack pendente) |
-| Compartilhar passaporte | 📋 | PDF + QR code gerado no client |
 | Reputação cias aéreas | 📋 | Avaliações de usuários sobre pet-friendliness |
-| Pesquisa de passagens | 🔮 | Skyscanner / API ANAC integração |
+| Compliance de retorno | 📋 | Regras de reentrada no Brasil |
+| Pesquisa de passagens | 🔮 | Skyscanner / API ANAC |
 
 ### Fase 2 — Clínicas Veterinárias
 
@@ -416,6 +480,39 @@ sequenceDiagram
 **Contexto:** Time pequeno + protótipo = overhead de microserviços não justificado agora.  
 **Decisão:** Estrutura de código organizada por bounded contexts (DDD), preparada para extração em serviços independentes. A separação em serviços ocorrerá à medida que os times crescerem.  
 **Status:** Aceita ✅
+
+### ADR-007 — Herança de regras entre destinos (base UE)
+**Contexto:** Todos os 27 membros da UE seguem o Reg. UE 576/2013, mas cada país tem observações locais (raças restritas, fontes, autoridades). Duplicar 27 JSONs idênticos gera manutenção cara.  
+**Decisão:** JSON base `uniao-europeia.json` + campo `"herda": "uniao-europeia"` nos países-membro. O `kb-loader` resolve a herança em tempo de build. Destino `UNIAO_EUROPEIA` removido como selecionável — tutor escolhe o país.  
+**Consequência:** 1 edição na base propaga para 27 países. UX melhor (tutor não precisa saber se Croácia é UE).  
+**Status:** Aceita ✅
+
+### ADR-008 — Paywall TurboTax por PlanoViagem (não por assinatura)
+**Contexto:** Tutor viaja ocasionalmente; assinatura recorrente gera fricção. Referência TurboTax: pagar só quando vai declarar.  
+**Decisão:** `isPremium: boolean` + `pagamentoId` no `PlanoViagem`. Teaser gratuito (wizard + roadmap com datas ocultas) gera valor percebido antes da cobrança. R$ 99 por viagem via Mercado Pago Checkout Pro.  
+**Consequência:** Receita por viagem (não MRR). Exige CAC baixo — daí o investimento em LLMO como canal orgânico.  
+**Status:** Aceita ✅
+
+### ADR-009 — LLMO como canal primário de aquisição
+**Contexto:** Tutor pesquisa "quarentena cachorro Japão" no Google antes de saber que o iPet existe. Paid traffic inviável com ticket R$ 99.  
+**Decisão:** Páginas `/regras/[destino]` e `/ferramentas/calculadora-quarentena` públicas, indexáveis, com JSON-LD (FAQPage/Article) e ISR. Layout do app usa `noindex` padrão; públicas sobrescrevem.  
+**Consequência:** Conteúdo editorial vira responsabilidade de produto. Lead magnet (calculadora) mede conversão orgânica.  
+**Status:** Aceita ✅
+
+### ADR-010 — Analytics local como MVP do pilar MEASURE (BML)
+**Contexto:** Time pré-beta sem orçamento para Amplitude/Mixpanel. Ainda assim precisa validar hipóteses.  
+**Decisão:** Service `analytics.ts` com `track()` tipado, persistência em `localStorage` (cap 5000), dashboard `/admin/metricas` (atualização a cada 5s). Migrar para backend quando houver usuários reais.  
+**Consequência:** Métricas por sessão/device, não por usuário global. Suficiente para validação interna e demo.  
+**Status:** Aceita para MVP ✅ | Revisão obrigatória antes do beta público
+
+---
+
+## Cross-references
+
+Outras BUs do ecossistema iPet (arquiteturas próprias):
+- **Pet Health** — agenda de vacinação + antiparasitas + Health Hub. Ver `docs/architecture/BU_PET_HEALTH.md`
+- **Pet Market** — mapa de pet shops + catálogo + logística last-mile. Ver `docs/architecture/BU_PET_MARKET.md`
+- **Jornada do Responsável** — detalhamento do Journey Hub, wizard, paywall e LLMO. Ver `docs/architecture/JOURNEY_ARCHITECTURE.md`
 
 ---
 

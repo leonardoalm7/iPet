@@ -6,10 +6,21 @@
  */
 
 import { Pet, Destino } from "@/domain/types";
-import { CUSTOS_POR_DESTINO, ItemCustoBase } from "@/data/cost-estimates";
-import { REGRAS_DESTINO } from "@/data/destinations";
+import {
+  CUSTOS_DETALHADOS,
+  CATEGORIA_META,
+  ItemCustoDetalhado,
+} from "@/data/cost-estimates";
 
-export interface ItemCustoComStatus extends ItemCustoBase {
+export interface ItemCustoComStatus extends ItemCustoDetalhado {
+  /** id estável dentro do destino — usado em listas React */
+  id: string;
+  /** título legível, vindo do CATEGORIA_META */
+  titulo: string;
+  /** id da tarefa do roadmap, se aplicável */
+  tarefaId?: string;
+  /** se for por viagem (não amortiza entre viagens) */
+  porViagem?: boolean;
   status: "pago" | "pendente";
 }
 
@@ -41,15 +52,13 @@ export { formatBRL };
  * Sorologia: marcada se status === "OK".
  * Demais itens: sempre pendentes (não temos como confirmar).
  */
-function jaFoiPago(item: ItemCustoBase, pet: Pet, destino: Destino): boolean {
-  const regras = REGRAS_DESTINO[destino];
-
-  switch (item.tarefaId) {
+function jaFoiPago(item: ItemCustoDetalhado, pet: Pet): boolean {
+  switch (item.categoria) {
     case "microchip":
       return !!(pet.microchip && pet.microchip.length === 15);
-    case "vacina":
-      return !!(pet.vacina?.valida);
-    case "sorologia":
+    case "vacinaAntirrabica":
+      return !!pet.vacina?.valida;
+    case "sorologiaFAVN":
       return pet.sorologia?.status === "OK";
     default:
       return false;
@@ -57,20 +66,30 @@ function jaFoiPago(item: ItemCustoBase, pet: Pet, destino: Destino): boolean {
 }
 
 export function calcularEstimativaCusto(pet: Pet, destino: Destino): EstimativaCusto {
-  const itensBase = CUSTOS_POR_DESTINO[destino] ?? [];
+  const itensBase = (CUSTOS_DETALHADOS[destino] ?? []).filter(
+    (i) => i.relevancia !== "nao_aplicavel"
+  );
 
   const itensPagos: ItemCustoComStatus[] = [];
   const itensPendentes: ItemCustoComStatus[] = [];
 
-  for (const item of itensBase) {
-    const pago = jaFoiPago(item, pet, destino);
-    const comStatus: ItemCustoComStatus = { ...item, status: pago ? "pago" : "pendente" };
+  itensBase.forEach((item, idx) => {
+    const meta = CATEGORIA_META[item.categoria];
+    const pago = jaFoiPago(item, pet);
+    const comStatus: ItemCustoComStatus = {
+      ...item,
+      id: `${destino}-${item.categoria}-${idx}`,
+      titulo: meta.titulo,
+      tarefaId: meta.tarefaId,
+      porViagem: meta.porViagem,
+      status: pago ? "pago" : "pendente",
+    };
     if (pago) {
       itensPagos.push(comStatus);
     } else {
       itensPendentes.push(comStatus);
     }
-  }
+  });
 
   const soma = (arr: ItemCustoComStatus[], campo: "minBRL" | "maxBRL") =>
     arr.reduce((acc, i) => acc + i[campo], 0);
