@@ -7,6 +7,7 @@ import { Especie, TipoPet } from "@/domain/types";
 import { ArrowLeft, ArrowRight, Check, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DateInput } from "@/components/DateInput";
+import { UploadCarteiraVacina } from "@/components/UploadCarteiraVacina";
 import { track } from "@/services/analytics";
 
 interface FormData {
@@ -145,7 +146,7 @@ export default function NovoPetPage() {
             transition={{ duration: 0.25 }}
           >
             {step === 1 && <StepIdentificacao form={form} update={update} />}
-            {step === 2 && <StepVacina form={form} update={update} />}
+            {step === 2 && <StepVacina form={form} update={update} setForm={setForm} />}
             {step === 3 && <StepSorologia form={form} update={update} />}
           </motion.div>
         </AnimatePresence>
@@ -256,7 +257,15 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
   );
 }
 
-function StepVacina({ form, update }: { form: FormData; update: (k: keyof FormData, v: string | boolean) => void }) {
+function StepVacina({
+  form,
+  update,
+  setForm,
+}: {
+  form: FormData;
+  update: (k: keyof FormData, v: string | boolean) => void;
+  setForm: React.Dispatch<React.SetStateAction<FormData>>;
+}) {
   return (
     <div className="space-y-5">
       <div>
@@ -276,6 +285,16 @@ function StepVacina({ form, update }: { form: FormData; update: (k: keyof FormDa
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
+          <UploadCarteiraVacina
+            onAplicar={({ dataAplicacao, nomeComercial }) =>
+              setForm((f) => ({
+                ...f,
+                temVacina: true,
+                vacinaData: dataAplicacao || f.vacinaData,
+                vacinaNome: nomeComercial || f.vacinaNome,
+              }))
+            }
+          />
           <DateInput label="Data da vacinação *" value={form.vacinaData} onChange={(v) => update("vacinaData", v)} />
           <Field label="Nome comercial (opcional)" value={form.vacinaNome} onChange={(v) => update("vacinaNome", v)} placeholder="Ex: Rabisin, Defensor" />
           <InfoBox>

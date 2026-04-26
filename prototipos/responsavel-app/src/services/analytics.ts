@@ -21,6 +21,10 @@ type EventosFunil = {
   calculadora_cta_clicado: { destino: string };
   service_card_view: { etapa: string; destino: string };
   service_cta_click: { etapa: string; destino: string };
+  ocr_vacina_iniciado: { tamanhoBytes: number; tipo: string };
+  ocr_vacina_sucesso: { confidenceMedia: number; camposPreenchidos: number; encontrouAntirrabica: boolean };
+  ocr_vacina_falha: { motivo: string };
+  ocr_vacina_aceito: { camposEditados: number };
 };
 
 export type NomeEvento = keyof EventosFunil;
