@@ -19,6 +19,8 @@ type EventosFunil = {
   pagamento_recusado: { planoId: string; destino: string; motivo?: string };
   calculadora_usada: { destino: string; temTempo: boolean };
   calculadora_cta_clicado: { destino: string };
+  service_card_view: { etapa: string; destino: string };
+  service_cta_click: { etapa: string; destino: string };
 };
 
 export type NomeEvento = keyof EventosFunil;

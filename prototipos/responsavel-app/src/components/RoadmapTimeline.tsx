@@ -1,6 +1,7 @@
 "use client";
 
-import { RoadmapCompliance, TarefaRoadmap, StatusTarefa } from "@/domain/types";
+import { RoadmapCompliance, TarefaRoadmap, StatusTarefa, Destino } from "@/domain/types";
+import { ServicoCard } from "@/components/ServicoCard";
 import { parseBR, formatBR } from "@/services/travel-roadmap";
 import {
   differenceInDays,
@@ -23,7 +24,6 @@ import {
   CalendarDays,
   ChevronDown,
   ChevronUp,
-  MapPin,
   Info,
 } from "lucide-react";
 
@@ -271,6 +271,7 @@ export function RoadmapTimeline({ roadmap, isPremium = true }: { roadmap: Roadma
                     key={item.tarefa.id}
                     tarefa={item.tarefa}
                     date={item.date}
+                    destino={roadmap.destino}
                     isLast={gi === grupos.length - 1 && ii === grupo.itens.length - 1}
                   />
                 );
@@ -286,10 +287,12 @@ export function RoadmapTimeline({ roadmap, isPremium = true }: { roadmap: Roadma
 function TarefaNode({
   tarefa,
   date,
+  destino,
   isLast,
 }: {
   tarefa: TarefaRoadmap;
   date: Date;
+  destino: Destino;
   isLast: boolean;
 }) {
   const [aberto, setAberto] = useState(false);
@@ -380,10 +383,7 @@ function TarefaNode({
                 </div>
               )}
               {tarefa.precisaClinica && tarefa.status !== "CONCLUIDA" && (
-                <div className="flex items-center gap-1.5 mt-2">
-                  <MapPin className="w-3.5 h-3.5 text-teal" />
-                  <span className="text-xs text-teal font-medium">Requer clínica veterinária</span>
-                </div>
+                <ServicoCard tarefaId={tarefa.id} destino={destino} />
               )}
               {tarefa.bloqueadaPor.length > 0 && (
                 <div className="flex items-center gap-1.5 mt-2">

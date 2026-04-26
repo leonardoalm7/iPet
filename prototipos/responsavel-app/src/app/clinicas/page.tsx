@@ -6,6 +6,7 @@ import {
   CLINICAS_CREDENCIADAS,
   ClinicaCredenciada,
   TipoClinica,
+  ServicoClinica,
   TIPO_CLINICA_LABEL,
   TIPO_CLINICA_COLOR,
   SERVICO_LABEL,
@@ -13,6 +14,7 @@ import {
 } from "@/data/clinicas-credenciadas";
 import { BottomNav } from "@/components/BottomNav";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import {
   MapPin,
   Phone,
@@ -27,8 +29,18 @@ import {
   ChevronDown,
   ChevronUp,
   Star,
+  X,
 } from "lucide-react";
 import Link from "next/link";
+
+const SERVICOS_VALIDOS: ServicoClinica[] = [
+  "VACINA_ANTIRRABICA",
+  "MICROCHIP",
+  "SOROLOGIA",
+  "CVI",
+  "ATESTADO_SAUDE",
+  "CONSULTA_GERAL",
+];
 
 type Filtro = "TODOS" | TipoClinica;
 
@@ -53,6 +65,12 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): nu
 
 export default function ClinicasPage() {
   const registrarEngajamento = useAppStore((s) => s.registrarEngajamento);
+  const searchParams = useSearchParams();
+  const servicoQueryRaw = searchParams.get("servico");
+  const servicoQuery: ServicoClinica | null =
+    servicoQueryRaw && SERVICOS_VALIDOS.includes(servicoQueryRaw as ServicoClinica)
+      ? (servicoQueryRaw as ServicoClinica)
+      : null;
   const [filtro, setFiltro] = useState<Filtro>("TODOS");
   const [busca, setBusca] = useState("");
   const [expandidoId, setExpandidoId] = useState<string | null>(null);
@@ -80,6 +98,10 @@ export default function ClinicasPage() {
   const clinicasFiltradas = useMemo(() => {
     let lista = CLINICAS_CREDENCIADAS;
 
+    if (servicoQuery) {
+      lista = lista.filter((c) => c.servicos.includes(servicoQuery));
+    }
+
     if (filtro !== "TODOS") {
       lista = lista.filter((c) => c.tipo.includes(filtro));
     }
@@ -104,7 +126,7 @@ export default function ClinicasPage() {
     }
 
     return lista;
-  }, [filtro, busca, userLat, userLng]);
+  }, [servicoQuery, filtro, busca, userLat, userLng]);
 
   const resumo = useMemo(() => {
     const mapa = CLINICAS_CREDENCIADAS.filter((c) => c.habilitadoMapa).length;
@@ -162,6 +184,26 @@ export default function ClinicasPage() {
       </header>
 
       <main className="flex-1 px-5 space-y-4">
+        {/* Pré-filtro por serviço (deep link do roadmap) */}
+        {servicoQuery && (
+          <div className="flex items-center justify-between bg-teal-light border border-teal/20 rounded-xl px-3 py-2.5">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="text-base">{SERVICO_EMOJI[servicoQuery]}</span>
+              <p className="text-xs text-navy">
+                Filtrando clínicas que oferecem{" "}
+                <span className="font-semibold">{SERVICO_LABEL[servicoQuery]}</span>
+              </p>
+            </div>
+            <Link
+              href="/clinicas"
+              className="flex items-center justify-center w-6 h-6 rounded-full hover:bg-white/60 flex-shrink-0"
+              aria-label="Limpar filtro"
+            >
+              <X className="w-3.5 h-3.5 text-teal" />
+            </Link>
+          </div>
+        )}
+
         {/* Resumo */}
         <div className="flex gap-3">
           <ResumoChip count={resumo.total} label="Clínicas" color="bg-teal" />

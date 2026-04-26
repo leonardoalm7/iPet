@@ -1,19 +1,19 @@
 "use client";
 
-import { Pet, RoadmapCompliance, TarefaRoadmap, StatusCompliance } from "@/domain/types";
+import { Pet, RoadmapCompliance, TarefaRoadmap, StatusCompliance, Destino } from "@/domain/types";
 import {
   CheckCircle2,
   XCircle,
   AlertTriangle,
   Clock,
   Lock,
-  MapPin,
   ChevronDown,
   ChevronUp,
   Zap,
 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ServicoCard } from "@/components/ServicoCard";
 
 const STATUS_CONFIG: Record<
   TarefaRoadmap["status"],
@@ -155,7 +155,14 @@ export function RoadmapView({
 
       <div className="space-y-2">
         {roadmap.tarefas.map((tarefa, idx) => (
-          <TarefaCard key={tarefa.id} tarefa={tarefa} index={idx} pet={pet} isPremium={isPremium} />
+          <TarefaCard
+            key={tarefa.id}
+            tarefa={tarefa}
+            index={idx}
+            pet={pet}
+            destino={roadmap.destino}
+            isPremium={isPremium}
+          />
         ))}
       </div>
     </div>
@@ -166,11 +173,13 @@ function TarefaCard({
   tarefa,
   index,
   pet,
+  destino,
   isPremium = true,
 }: {
   tarefa: TarefaRoadmap;
   index: number;
   pet: Pet;
+  destino: Destino;
   isPremium?: boolean;
 }) {
   const [expanded, setExpanded] = useState(
@@ -250,10 +259,7 @@ function TarefaCard({
                 </p>
               )}
               {!locked && tarefa.precisaClinica && tarefa.status !== "CONCLUIDA" && (
-                <button className="flex items-center gap-2 text-xs text-teal font-medium py-2">
-                  <MapPin className="w-4 h-4" />
-                  Ver clínicas credenciadas próximas
-                </button>
+                <ServicoCard tarefaId={tarefa.id} destino={destino} />
               )}
               {!locked && tarefa.bloqueadaPor.length > 0 && (
                 <p className="text-xs text-gray-400">

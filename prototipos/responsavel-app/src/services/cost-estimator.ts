@@ -65,6 +65,25 @@ function jaFoiPago(item: ItemCustoDetalhado, pet: Pet): boolean {
   }
 }
 
+/**
+ * Lookup direto de custo por tarefaId — não depende do pet.
+ * Usado pelo ServicoCard para mostrar custo inline ao lado da tarefa.
+ */
+export function getCustoPorTarefaId(
+  destino: Destino,
+  tarefaId: string,
+): { minBRL: number; maxBRL: number } | null {
+  const itens = CUSTOS_DETALHADOS[destino] ?? [];
+  for (const item of itens) {
+    if (item.relevancia === "nao_aplicavel") continue;
+    const meta = CATEGORIA_META[item.categoria];
+    if (meta.tarefaId === tarefaId) {
+      return { minBRL: item.minBRL, maxBRL: item.maxBRL };
+    }
+  }
+  return null;
+}
+
 export function calcularEstimativaCusto(pet: Pet, destino: Destino): EstimativaCusto {
   const itensBase = (CUSTOS_DETALHADOS[destino] ?? []).filter(
     (i) => i.relevancia !== "nao_aplicavel"
