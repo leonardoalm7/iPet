@@ -18,6 +18,8 @@ import {
   TrendingDown,
   Plane,
   MapPin,
+  ScanLine,
+  Sparkles,
 } from "lucide-react";
 
 const ETAPA_LABELS: Record<string, string> = {
@@ -49,6 +51,34 @@ export default function MetricasPage() {
     const veredictos = getByEvento("companhia_verificada");
     const contagemVeredictos = rankear(veredictos.map((e) => e.props.veredicto));
 
+    // OCR Vacina
+    const vacinaIniciado = getByEvento("ocr_vacina_iniciado");
+    const vacinaSucesso = getByEvento("ocr_vacina_sucesso");
+    const vacinaFalha = getByEvento("ocr_vacina_falha");
+    const vacinaAceito = getByEvento("ocr_vacina_aceito");
+    const confMediaVacina = vacinaSucesso.length > 0
+      ? vacinaSucesso.reduce((s, e) => s + e.props.confidenceMedia, 0) / vacinaSucesso.length
+      : 0;
+    const topFalhasVacina = rankear(vacinaFalha.map((e) => e.props.motivo)).slice(0, 3);
+
+    // OCR Microchip
+    const chipIniciado = getByEvento("ocr_microchip_iniciado");
+    const chipSucesso = getByEvento("ocr_microchip_sucesso");
+    const chipFalha = getByEvento("ocr_microchip_falha");
+    const chipAceito = getByEvento("ocr_microchip_aceito");
+    const confMediaChip = chipSucesso.length > 0
+      ? chipSucesso.reduce((s, e) => s + e.props.confidence, 0) / chipSucesso.length
+      : 0;
+    const topFalhasChip = rankear(chipFalha.map((e) => e.props.motivo)).slice(0, 3);
+
+    // iPet Services CTR
+    const serviceViews = getByEvento("service_card_view");
+    const serviceClicks = getByEvento("service_cta_click");
+    const ctrServices = serviceViews.length > 0
+      ? Math.round((serviceClicks.length / serviceViews.length) * 100)
+      : 0;
+    const topEtapasServices = rankear(serviceViews.map((e) => e.props.etapa)).slice(0, 5);
+
     const primeiro = todos.length > 0 ? todos[0].timestamp : null;
     const ultimo = todos.length > 0 ? todos[todos.length - 1].timestamp : null;
 
@@ -60,6 +90,28 @@ export default function MetricasPage() {
       rankingDestinos,
       rankingCias,
       contagemVeredictos,
+      ocrVacina: {
+        iniciado: vacinaIniciado.length,
+        sucesso: vacinaSucesso.length,
+        aceito: vacinaAceito.length,
+        falha: vacinaFalha.length,
+        confidenceMedia: confMediaVacina,
+        topFalhas: topFalhasVacina,
+      },
+      ocrChip: {
+        iniciado: chipIniciado.length,
+        sucesso: chipSucesso.length,
+        aceito: chipAceito.length,
+        falha: chipFalha.length,
+        confidenceMedia: confMediaChip,
+        topFalhas: topFalhasChip,
+      },
+      services: {
+        views: serviceViews.length,
+        clicks: serviceClicks.length,
+        ctr: ctrServices,
+        topEtapas: topEtapasServices,
+      },
       primeiro,
       ultimo,
     };
@@ -208,6 +260,52 @@ export default function MetricasPage() {
           </section>
         )}
 
+        {/* OCR Carteira de Vacinação */}
+        <OcrCard
+          titulo="OCR · Carteira de vacinação"
+          dados={dados.ocrVacina}
+        />
+
+        {/* OCR Microchip */}
+        <OcrCard
+          titulo="OCR · Certificado de microchip"
+          dados={dados.ocrChip}
+        />
+
+        {/* iPet Services CTR */}
+        <section className="bg-white border border-border rounded-2xl p-4">
+          <h2 className="text-sm font-semibold text-navy mb-3 flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-teal" />
+            iPet Services · CTR
+          </h2>
+          {dados.services.views === 0 ? (
+            <p className="text-sm text-gray-400 text-center py-2">
+              Nenhuma impressão de service card ainda.
+            </p>
+          ) : (
+            <>
+              <div className="grid grid-cols-3 gap-2 mb-3">
+                <MiniStat label="Views" valor={dados.services.views} />
+                <MiniStat label="Clicks" valor={dados.services.clicks} />
+                <MiniStat label="CTR" valor={`${dados.services.ctr}%`} />
+              </div>
+              {dados.services.topEtapas.length > 0 && (
+                <div className="space-y-1">
+                  <p className="text-[11px] uppercase text-gray-400 tracking-wide mb-1">
+                    Views por etapa do roadmap
+                  </p>
+                  {dados.services.topEtapas.map(({ item, count }) => (
+                    <div key={item} className="flex justify-between text-xs">
+                      <span className="text-gray-600 truncate">{item}</span>
+                      <span className="font-mono text-navy">{count}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </section>
+
         {/* Todos os eventos (debug) */}
         <section className="bg-white border border-border rounded-2xl p-4">
           <h2 className="text-sm font-semibold text-navy mb-3">Contagem por evento</h2>
@@ -280,6 +378,75 @@ function RankingCard({
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+interface OcrStats {
+  iniciado: number;
+  sucesso: number;
+  aceito: number;
+  falha: number;
+  confidenceMedia: number;
+  topFalhas: { item: string; count: number }[];
+}
+
+function OcrCard({ titulo, dados }: { titulo: string; dados: OcrStats }) {
+  const taxaSucesso = dados.iniciado > 0 ? Math.round((dados.sucesso / dados.iniciado) * 100) : 0;
+  const taxaAceitacao = dados.sucesso > 0 ? Math.round((dados.aceito / dados.sucesso) * 100) : 0;
+
+  return (
+    <section className="bg-white border border-border rounded-2xl p-4">
+      <h2 className="text-sm font-semibold text-navy mb-3 flex items-center gap-2">
+        <ScanLine className="w-4 h-4 text-teal" />
+        {titulo}
+      </h2>
+      {dados.iniciado === 0 ? (
+        <p className="text-sm text-gray-400 text-center py-2">
+          Nenhuma tentativa de OCR ainda.
+        </p>
+      ) : (
+        <>
+          <div className="grid grid-cols-4 gap-2 mb-3">
+            <MiniStat label="Tentativas" valor={dados.iniciado} />
+            <MiniStat label="Sucesso" valor={`${taxaSucesso}%`} />
+            <MiniStat label="Aceito" valor={`${taxaAceitacao}%`} />
+            <MiniStat
+              label="Conf. média"
+              valor={dados.sucesso > 0 ? `${Math.round(dados.confidenceMedia * 100)}%` : "—"}
+            />
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-[11px] text-gray-400 mb-2">
+            <span>Iniciado: <span className="text-navy font-medium">{dados.iniciado}</span></span>
+            <span>Sucesso: <span className="text-navy font-medium">{dados.sucesso}</span></span>
+            <span>Falha: <span className="text-red-400 font-medium">{dados.falha}</span></span>
+          </div>
+          {dados.topFalhas.length > 0 && (
+            <div className="border-t border-border pt-2 mt-2">
+              <p className="text-[11px] uppercase text-gray-400 tracking-wide mb-1">
+                Top motivos de falha
+              </p>
+              <div className="space-y-1">
+                {dados.topFalhas.map(({ item, count }) => (
+                  <div key={item} className="flex justify-between text-xs gap-2">
+                    <span className="text-gray-600 truncate">{item}</span>
+                    <span className="font-mono text-red-400 flex-shrink-0">{count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </section>
+  );
+}
+
+function MiniStat({ label, valor }: { label: string; valor: number | string }) {
+  return (
+    <div className="bg-surface rounded-lg p-2 text-center">
+      <p className="text-base font-bold text-navy leading-tight">{valor}</p>
+      <p className="text-[10px] text-gray-400 uppercase tracking-wide mt-0.5">{label}</p>
     </div>
   );
 }
