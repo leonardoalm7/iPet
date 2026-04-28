@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight, Check, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DateInput } from "@/components/DateInput";
 import { UploadCarteiraVacina } from "@/components/UploadCarteiraVacina";
+import { UploadCertificadoMicrochip } from "@/components/UploadCertificadoMicrochip";
 import { track } from "@/services/analytics";
 
 interface FormData {
@@ -225,7 +226,7 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
         </div>
       </div>
 
-      <div>
+      <div className="space-y-2">
         <Field
           label="Microchip ISO (15 dígitos)"
           value={form.microchip}
@@ -234,6 +235,7 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
           type="text"
           inputMode="numeric"
         />
+        <UploadCertificadoMicrochip onAplicar={(numero) => update("microchip", numero)} />
         <p className="text-xs text-gray-400 mt-1">
           Obrigatório para viagens internacionais. Deixe vazio se ainda não implantou.
         </p>

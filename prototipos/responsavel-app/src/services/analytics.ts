@@ -25,6 +25,10 @@ type EventosFunil = {
   ocr_vacina_sucesso: { confidenceMedia: number; camposPreenchidos: number; encontrouAntirrabica: boolean };
   ocr_vacina_falha: { motivo: string };
   ocr_vacina_aceito: { camposEditados: number };
+  ocr_microchip_iniciado: { tamanhoBytes: number; tipo: string };
+  ocr_microchip_sucesso: { confidence: number; encontrouMicrochip: boolean };
+  ocr_microchip_falha: { motivo: string };
+  ocr_microchip_aceito: { numero: string };
 };
 
 export type NomeEvento = keyof EventosFunil;
