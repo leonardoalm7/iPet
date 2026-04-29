@@ -5,6 +5,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { useAppStore } from "@/store/app-store";
 import { createClient } from "@/lib/supabase/client";
 import { getPerfil } from "@/services/auth-service";
+import { loadFromSupabase, migrateLocalToSupabase, startSync, stopSync } from "@/services/sync";
 
 /**
  * AuthProvider — monta no layout raiz.
@@ -21,25 +22,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const supabase = createClient();
+    let stopSyncFn: (() => void) | null = null;
+
+    async function hidratar(userId: string) {
+      const { vazio } = await loadFromSupabase(userId, supabase);
+      // Primeira vez no Supabase mas tem dados locais → upload one-shot
+      if (vazio) {
+        const tem = useAppStore.getState();
+        if (tem.pets.length > 0 || tem.planosViagem.length > 0 || tem.documentos.length > 0) {
+          await migrateLocalToSupabase(userId, supabase);
+        }
+      }
+      stopSyncFn?.();
+      stopSyncFn = startSync(userId, supabase);
+    }
 
     // Inicializa sessão existente
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
 
       if (session?.user) {
-        getPerfil(session.user.id).then((perfil) => {
-          setPerfil(perfil);
-          // Sincroniza com o app-store para compatibilidade com código existente
-          if (perfil) {
-            setResponsavel({
-              id: perfil.id,
-              nome: perfil.nomeCompleto,
-              email: perfil.email,
-              criadoEm: perfil.criadoEm,
-            });
-          }
-        });
+        const perfil = await getPerfil(session.user.id);
+        setPerfil(perfil);
+        if (perfil) {
+          setResponsavel({
+            id: perfil.id,
+            nome: perfil.nomeCompleto,
+            email: perfil.email,
+            criadoEm: perfil.criadoEm,
+          });
+        }
+        await hidratar(session.user.id);
       }
 
       setLoading(false);
@@ -66,13 +80,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             criadoEm: perfil.criadoEm,
           });
         }
+        await hidratar(session.user.id);
         setLoading(false);
       } else if (event === "SIGNED_OUT") {
+        stopSyncFn?.();
+        stopSyncFn = null;
+        stopSync();
         clearAuth();
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      stopSyncFn?.();
+      stopSync();
+    };
   }, [setUser, setSession, setPerfil, setLoading, setInitialized, clearAuth, setResponsavel]);
 
   return <>{children}</>;
