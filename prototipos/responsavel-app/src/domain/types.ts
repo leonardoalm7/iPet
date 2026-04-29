@@ -218,7 +218,8 @@ export interface DocumentoSanitario {
   titulo: string;
   dataDocumento: string;     // DD/MM/YYYY (data constante no documento)
   dataUpload: string;        // ISO — quando foi enviado
-  arquivoUrl: string;        // URL do arquivo (local blob ou S3 futuramente)
+  arquivoUrl: string;        // legado: blob:URL local. Novos uploads usam storagePath + signed URL on-demand.
+  storagePath?: string;      // path no bucket Supabase Storage: {owner}/{pet}/{doc}-{nome}
   arquivoNome: string;
   arquivoTipo: string;       // MIME type
   tamanhoBytes: number;

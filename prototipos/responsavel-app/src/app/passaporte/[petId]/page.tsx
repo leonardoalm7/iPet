@@ -25,6 +25,7 @@ import { useRef, useState } from "react";
 import {
   calcularHashDocumento,
   criarDocumento,
+  obterSignedUrlDocumento,
   TIPO_DOCUMENTO_LABELS,
   TIPO_DOCUMENTO_ICONES,
 } from "@/services/document-service";
@@ -33,6 +34,8 @@ import { differenceInYears, differenceInMonths } from "date-fns";
 import { parseBR } from "@/services/travel-roadmap";
 import { PassaporteQRMini } from "@/components/PassaporteQR";
 import { track } from "@/services/analytics";
+import { createClient } from "@/lib/supabase/client";
+import { useAuthStore } from "@/store/auth-store";
 
 const AUTH_BADGE: Record<
   DocumentoSanitario["statusAutenticacao"],
@@ -71,6 +74,7 @@ export default function PassaportePage({
   const todosDocumentos = useAppStore((s) => s.documentos);
   const documentos = todosDocumentos.filter((d) => d.petId === petId);
   const adicionarDocumento = useAppStore((s) => s.adicionarDocumento);
+  const userId = useAuthStore((s) => s.user?.id ?? null);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [showUploadForm, setShowUploadForm] = useState(false);
@@ -103,27 +107,45 @@ export default function PassaportePage({
       setUploadError("Preencha o título e a data do documento.");
       return;
     }
+    if (!userId) {
+      setUploadError("Sessão expirada. Faça login novamente.");
+      return;
+    }
     setUploading(true);
     setUploadError(null);
     try {
+      const supabase = createClient();
       const hash = await calcularHashDocumento(file);
-      const doc = criarDocumento({
+      const doc = await criarDocumento({
         petId: pet!.id,
+        ownerId: userId,
         tipo: uploadTipo,
         titulo: uploadTitulo,
         dataDocumento: uploadData,
         file,
         hash,
+        supabase,
       });
       adicionarDocumento(doc);
       track("documento_uploaded", { tipo: uploadTipo });
       setShowUploadForm(false);
       setUploadTitulo("");
       setUploadData("");
-    } catch {
-      setUploadError("Erro ao processar o arquivo. Tente novamente.");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Erro ao processar o arquivo.";
+      setUploadError(msg);
     } finally {
       setUploading(false);
+    }
+  }
+
+  async function abrirDocumento(doc: DocumentoSanitario) {
+    const supabase = createClient();
+    const url = await obterSignedUrlDocumento(doc, supabase);
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    } else {
+      setUploadError("Não foi possível abrir o documento. Tente reenviar.");
     }
   }
 
@@ -364,7 +386,7 @@ export default function PassaportePage({
           {documentos.length > 0 && (
             <div className="space-y-2">
               {documentos.map((doc) => (
-                <DocumentoRow key={doc.id} doc={doc} />
+                <DocumentoRow key={doc.id} doc={doc} onAbrir={abrirDocumento} />
               ))}
             </div>
           )}
@@ -439,12 +461,24 @@ function HealthRow({
   );
 }
 
-function DocumentoRow({ doc }: { doc: DocumentoSanitario }) {
+function DocumentoRow({
+  doc,
+  onAbrir,
+}: {
+  doc: DocumentoSanitario;
+  onAbrir: (doc: DocumentoSanitario) => void;
+}) {
   const badge = AUTH_BADGE[doc.statusAutenticacao];
   const BadgeIcon = badge.icon;
+  const podeAbrir = !!doc.storagePath;
 
   return (
-    <div className="flex items-center gap-3 bg-white border border-border rounded-xl px-4 py-3">
+    <button
+      type="button"
+      onClick={() => podeAbrir && onAbrir(doc)}
+      disabled={!podeAbrir}
+      className="flex items-center gap-3 bg-white border border-border rounded-xl px-4 py-3 w-full text-left hover:bg-surface disabled:cursor-not-allowed transition-colors"
+    >
       <span className="text-2xl">{TIPO_DOCUMENTO_ICONES[doc.tipo]}</span>
       <div className="flex-1 min-w-0">
         <p className="text-sm text-navy font-medium truncate">{doc.titulo}</p>
@@ -461,6 +495,6 @@ function DocumentoRow({ doc }: { doc: DocumentoSanitario }) {
         <BadgeIcon className="w-3 h-3" />
         {badge.label}
       </span>
-    </div>
+    </button>
   );
 }

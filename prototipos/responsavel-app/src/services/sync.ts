@@ -53,7 +53,8 @@ interface DocRow {
   titulo: string;
   data_documento: string;
   data_upload: string;
-  arquivo_url: string;
+  arquivo_url: string | null;
+  storage_path: string | null;
   arquivo_nome: string;
   arquivo_tipo: string;
   tamanho_bytes: number;
@@ -136,7 +137,8 @@ function docToRow(doc: DocumentoSanitario, ownerId: string): Omit<DocRow, "data_
     tipo: doc.tipo,
     titulo: doc.titulo,
     data_documento: doc.dataDocumento,
-    arquivo_url: doc.arquivoUrl,
+    arquivo_url: doc.arquivoUrl || null,
+    storage_path: doc.storagePath ?? null,
     arquivo_nome: doc.arquivoNome,
     arquivo_tipo: doc.arquivoTipo,
     tamanho_bytes: doc.tamanhoBytes,
@@ -157,7 +159,8 @@ function rowToDoc(row: DocRow): DocumentoSanitario {
     titulo: row.titulo,
     dataDocumento: row.data_documento,
     dataUpload: row.data_upload,
-    arquivoUrl: row.arquivo_url,
+    arquivoUrl: row.arquivo_url ?? "",
+    storagePath: row.storage_path ?? undefined,
     arquivoNome: row.arquivo_nome,
     arquivoTipo: row.arquivo_tipo,
     tamanhoBytes: Number(row.tamanho_bytes),
