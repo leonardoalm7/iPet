@@ -6,9 +6,10 @@ import { NextResponse, type NextRequest } from "next/server";
  *
  * Responsabilidades:
  * 1. Renovar o access token em cada requisição (Supabase SSR)
- * 2. Proteger rotas autenticadas — redireciona para /auth/entrar
- * 3. Redirecionar usuários autenticados sem onboarding para /onboarding
- * 4. Redirecionar usuários já logados para fora das páginas de auth
+ * 2. Páginas: redireciona não-autenticados para /auth/entrar
+ * 3. /api/*: retorna 401 JSON (sem redirect) e 503 quando Supabase não configurado
+ * 4. Onboarding incompleto: força /onboarding em páginas (não em /api/*)
+ * 5. Usuários logados não voltam pra páginas de auth
  */
 
 // Rotas públicas — acessíveis sem autenticação
@@ -22,12 +23,22 @@ const PUBLIC_PATHS = [
 ];
 
 export async function middleware(request: NextRequest) {
+  const { pathname: pathnameInicial } = request.nextUrl;
+  const isApiPath = pathnameInicial.startsWith("/api/");
+
   // ── Modo dev sem Supabase configurado ─────────────────────────
-  // Se as env vars não estiverem presentes, passa tudo direto sem auth.
-  // Remove este bloco quando ativar o Supabase em produção.
+  // Páginas: passam direto sem auth (DX local).
+  // Rotas /api/*: bloqueadas com 503 — endpoints chamam APIs pagas
+  // (Anthropic, Mercado Pago) e não podem ficar abertos por descuido.
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!supabaseUrl || !supabaseKey) {
+    if (isApiPath) {
+      return Response.json(
+        { ok: false, erro: "Auth não configurada — API indisponível." },
+        { status: 503 },
+      );
+    }
     return NextResponse.next({ request });
   }
 
@@ -58,6 +69,15 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isPublicPath = PUBLIC_PATHS.some((p) => pathname.startsWith(p));
 
+  // 0. Rota /api/* sem sessão: 401 JSON (não redireciona — não é navegação).
+  // Bloqueia abuso de quota das APIs pagas (Anthropic, MP).
+  if (isApiPath && !user) {
+    return Response.json(
+      { ok: false, erro: "Não autenticado." },
+      { status: 401 },
+    );
+  }
+
   // 1. Rota pública: se já logado, redireciona para home
   if (isPublicPath && user) {
     return NextResponse.redirect(new URL("/", request.url));
@@ -71,7 +91,8 @@ export async function middleware(request: NextRequest) {
   }
 
   // 3. Usuário autenticado — verificar se completou onboarding
-  if (user && !isPublicPath && pathname !== "/onboarding") {
+  // (pula /api/* — onboarding incompleto não deve redirecionar chamadas JSON)
+  if (user && !isPublicPath && !isApiPath && pathname !== "/onboarding") {
     const { data: profile } = await supabase
       .from("profiles")
       .select("onboarding_completo")
