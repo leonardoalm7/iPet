@@ -11,6 +11,7 @@ import { differenceInDays, format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { verificarCompanhia } from "@/services/airline-checker";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -36,7 +37,8 @@ interface ItemChecklist {
 
 function gerarChecklist(
   pet: ReturnType<typeof useAppStore.getState>["pets"][number],
-  plano: ReturnType<typeof useAppStore.getState>["planosViagem"][number]
+  plano: ReturnType<typeof useAppStore.getState>["planosViagem"][number],
+  vaiNaCabine: boolean = true
 ): ItemChecklist[] {
   const regras = REGRAS_DESTINO[plano.destino];
   const cia = plano.companhiaAereaId
@@ -202,14 +204,34 @@ function gerarChecklist(
     });
   }
 
-  items.push({
-    id: "aero-seguranca",
-    categoria: "✈️ No Aeroporto",
-    titulo: "Raio-X: pet sai da caixa (cabine)",
-    detalhe: "Na inspeção de segurança, retire o pet da caixa e passe a caixa no raio-X",
-    obrigatorio: pet.peso <= (cia?.pesoMaxCabine ?? 10),
-    dica: "Use coleira e guia curta. Tenha cuidado em ambientes barulhentos.",
-  });
+  if (vaiNaCabine) {
+    items.push({
+      id: "aero-seguranca",
+      categoria: "✈️ No Aeroporto",
+      titulo: "Raio-X: pet sai da caixa (cabine)",
+      detalhe: "Na inspeção de segurança, retire o pet da caixa e passe a caixa no raio-X",
+      obrigatorio: true,
+      dica: "Use coleira e guia curta. Tenha cuidado em ambientes barulhentos.",
+    });
+  } else {
+    items.push({
+      id: "aero-porao-entrega",
+      categoria: "✈️ No Aeroporto",
+      titulo: "Entregar pet na guarda de bagagem (porão)",
+      detalhe: "Dirigir-se ao balcão de despacho de bagagem/oversized — não levar pet até a porta de embarque",
+      obrigatorio: true,
+      dica: "Confirme com o agente de check-in onde fazer a entrega. O pet será mantido em temperatura controlada.",
+    });
+
+    items.push({
+      id: "aero-porao-iata",
+      categoria: "✈️ No Aeroporto",
+      titulo: "Caixa rígida IATA obrigatória (porão)",
+      detalhe: "Caixa mole/soft não é aceita no porão. Confirmar modelo IATA aprovado pela companhia",
+      obrigatorio: true,
+      dica: "Mesmo que o pet caiba na cabine, não mude para porão em caixa soft. Respeite as regras da cia.",
+    });
+  }
 
   // ── Itens de conforto ─────────────────────────────────────
   items.push({
@@ -268,10 +290,20 @@ export default function EmbarquePage({
     });
   }, [plano]);
 
+  const vaiNaCabine = useMemo(() => {
+    if (!pet || !plano) return true;
+    const cia = plano.companhiaAereaId
+      ? COMPANHIAS_AEREAS.find((c) => c.id === plano.companhiaAereaId)
+      : null;
+    if (!cia) return pet.peso <= 10;
+    const resultado = verificarCompanhia(pet, cia);
+    return resultado.cabine;
+  }, [pet, plano]);
+
   const checklist = useMemo(() => {
     if (!pet || !plano) return [];
-    return gerarChecklist(pet, plano);
-  }, [pet, plano]);
+    return gerarChecklist(pet, plano, vaiNaCabine);
+  }, [pet, plano, vaiNaCabine]);
 
   const categorias = useMemo(() => {
     const map = new Map<string, ItemChecklist[]>();
@@ -372,6 +404,26 @@ export default function EmbarquePage({
       </header>
 
       <main className="px-5 space-y-4 flex-1">
+        {/* Banner: Local de viagem */}
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`border rounded-2xl p-4 text-center ${
+            vaiNaCabine
+              ? "bg-emerald-50/50 border-emerald-200"
+              : "bg-teal/5 border-teal/30"
+          }`}
+        >
+          <p className="text-sm font-semibold text-navy">
+            {vaiNaCabine ? "✈️ Seu pet viaja na CABINE" : "📦 Seu pet viaja no PORÃO"}
+          </p>
+          <p className="text-xs text-gray-500 mt-1">
+            {vaiNaCabine
+              ? "Com você na cabine — respeite as regras de peso e dimensões"
+              : "Na guarda de bagagem do avião — caixa rígida IATA obrigatória"}
+          </p>
+        </motion.div>
+
         {/* Barra de progresso */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}

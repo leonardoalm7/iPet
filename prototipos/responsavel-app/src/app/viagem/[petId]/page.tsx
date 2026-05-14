@@ -3,7 +3,7 @@
 import { use, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
-import { Destino } from "@/domain/types";
+import { Destino, Pet } from "@/domain/types";
 import { DESTINOS_LISTA, getDestinosAgrupados } from "@/data/destinations";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { calcularRoadmap } from "@/services/travel-roadmap";
@@ -14,6 +14,8 @@ import { RoadmapView } from "@/components/RoadmapView";
 import { RoadmapTimeline } from "@/components/RoadmapTimeline";
 import { DateInput } from "@/components/DateInput";
 import { track } from "@/services/analytics";
+import { verificarCompanhia } from "@/services/airline-checker";
+import { ChevronDown } from "lucide-react";
 
 export default function ViagemPage({
   params,
@@ -98,6 +100,7 @@ export default function ViagemPage({
             companhiaId={companhiaId}
             setCompanhiaId={setCompanhiaId}
             onGerar={gerarRoadmap}
+            pet={pet}
           />
         ) : (
           <motion.div
@@ -201,6 +204,7 @@ function FormViagem({
   companhiaId,
   setCompanhiaId,
   onGerar,
+  pet,
 }: {
   destino: Destino;
   setDestino: (d: Destino) => void;
@@ -209,6 +213,7 @@ function FormViagem({
   companhiaId: string;
   setCompanhiaId: (s: string) => void;
   onGerar: () => void;
+  pet: Pet;
 }) {
   const [busca, setBusca] = useState("");
   const [regiaoAtiva, setRegiaoAtiva] = useState<string | null>(null);
@@ -322,8 +327,8 @@ function FormViagem({
             </option>
           ))}
         </select>
-        {companhiaId && (
-          <AirlineInfo id={companhiaId} />
+        {companhiaId && pet && (
+          <AirlineInfo id={companhiaId} pet={pet} />
         )}
       </div>
 
@@ -339,19 +344,83 @@ function FormViagem({
   );
 }
 
-function AirlineInfo({ id }: { id: string }) {
+function AirlineInfo({ id, pet }: { id: string; pet: Pet }) {
+  const [detalhesAbertos, setDetalhesAbertos] = useState(false);
   const cia = COMPANHIAS_AEREAS.find((c) => c.id === id);
-  if (!cia) return null;
+  if (!cia || !pet) return null;
+
+  const resultado = verificarCompanhia(pet, cia);
+  const vaiNaCabine = resultado.cabine;
+  const vaiNoPorao = resultado.porao && !resultado.cabine;
+  const naoAceito = resultado.veredicto === "NAO_ACEITO";
+
+  const badgeColor = vaiNaCabine ? "emerald" : vaiNoPorao ? "teal" : "red";
+  const badgeLabel = vaiNaCabine ? "✈️ Cabine" : vaiNoPorao ? "📦 Porão" : "❌ Não aceito";
+
   return (
-    <div className="mt-2 bg-surface border border-border rounded-xl p-3 text-xs space-y-1.5">
-      <p className="font-medium text-navy">{cia.nome}</p>
-      <div className="grid grid-cols-2 gap-1 text-gray-400">
-        <span>Cabine: até {cia.pesoMaxCabine}kg</span>
-        <span>Porão: até {cia.pesoMaxPorао}kg</span>
-        <span>Caixa: {cia.dimensoesMaxCabine.comprimento}×{cia.dimensoesMaxCabine.largura}×{cia.dimensoesMaxCabine.altura}cm</span>
-        <span>Braqui cabine: {cia.braquicefalicoCabine ? "✅" : "❌"} · porão: {cia.braquicefalicoPorao ? "✅" : "❌"}</span>
+    <motion.div
+      initial={{ opacity: 0, y: -4 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={`mt-2 border rounded-xl p-4 text-sm space-y-3 ${
+        vaiNaCabine
+          ? "bg-emerald-50/50 border-emerald-200"
+          : vaiNoPorao
+          ? "bg-teal/5 border-teal/30"
+          : "bg-red-50/50 border-red-200"
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="font-semibold text-navy">{cia.nome}</p>
+          <p className={`text-xs mt-0.5 ${
+            vaiNaCabine ? "text-emerald-600" : vaiNoPorao ? "text-teal" : "text-red-600"
+          }`}>
+            {badgeLabel}
+          </p>
+        </div>
       </div>
-      <p className="text-gray-400 leading-relaxed">{cia.anotacoes}</p>
-    </div>
+
+      {resultado.motivos.length > 0 && (
+        <div className="text-xs space-y-1">
+          {resultado.motivos.map((motivo, i) => (
+            <p key={i} className="text-gray-600">
+              • {motivo}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {resultado.alertas.length > 0 && (
+        <div className="bg-white/50 rounded-lg p-2 space-y-0.5">
+          {resultado.alertas.map((alerta, i) => (
+            <p key={i} className="text-xs text-gray-600">
+              ⚠️ {alerta}
+            </p>
+          ))}
+        </div>
+      )}
+
+      <button
+        onClick={() => setDetalhesAbertos(!detalhesAbertos)}
+        className="flex items-center gap-1 text-xs text-gray-500 hover:text-navy transition-colors"
+      >
+        <ChevronDown className={`w-3 h-3 transition-transform ${detalhesAbertos ? "rotate-180" : ""}`} />
+        {detalhesAbertos ? "Ocultar" : "Ver"} detalhes técnicos
+      </button>
+
+      {detalhesAbertos && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          className="grid grid-cols-2 gap-2 pt-2 border-t border-gray-200 text-xs text-gray-500"
+        >
+          <span>Cabine: até {cia.pesoMaxCabine}kg</span>
+          <span>Porão: até {cia.pesoMaxPorао}kg</span>
+          <span className="col-span-2">Caixa: {cia.dimensoesMaxCabine.comprimento}×{cia.dimensoesMaxCabine.largura}×{cia.dimensoesMaxCabine.altura}cm</span>
+          <span>Braqui cabine: {cia.braquicefalicoCabine ? "✅" : "❌"}</span>
+          <span>Braqui porão: {cia.braquicefalicoPorao ? "✅" : "❌"}</span>
+        </motion.div>
+      )}
+    </motion.div>
   );
 }
