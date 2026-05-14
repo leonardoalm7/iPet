@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useAppStore } from "@/store/app-store";
 import Link from "next/link";
+import { Pet } from "@/domain/types";
 import { PlusCircle, Settings, ChevronRight, AlertTriangle, Plane, Stethoscope } from "lucide-react";
 import { PetCardHome } from "@/components/PetCardHome";
 import { BottomNav } from "@/components/BottomNav";
@@ -144,21 +145,7 @@ export default function HomePage() {
         )}
 
         {temPets && (
-          <Link
-            href="/companhias"
-            className="flex items-center gap-4 bg-white border border-border rounded-2xl p-4 hover:border-navy/30 transition-colors"
-          >
-            <div className="w-11 h-11 rounded-xl bg-surface flex items-center justify-center flex-shrink-0">
-              <Plane className="w-5 h-5 text-teal" />
-            </div>
-            <div className="flex-1">
-              <p className="text-navy font-semibold text-sm">Companhias aéreas</p>
-              <p className="text-gray-400 text-xs mt-0.5">
-                Quais aceitam meu pet na cabine ou porão?
-              </p>
-            </div>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
-          </Link>
+          <CompanhiasCard pets={pets} />
         )}
 
         <Link
@@ -337,6 +324,32 @@ function JourneyHubBanner({
         )}
       </Link>
     </motion.div>
+  );
+}
+
+function CompanhiasCard({ pets }: { pets: Pet[] }) {
+  const primeiroPet = pets[0];
+  const href = pets.length === 1 && primeiroPet ? `/companhias?petId=${primeiroPet.id}` : "/companhias";
+  const subtexto = pets.length === 1 && primeiroPet
+    ? `${primeiroPet.nome}: ver quais cias aceitam`
+    : "Quais aceitam meu pet na cabine ou porão?";
+
+  return (
+    <Link
+      href={href}
+      className="flex items-center gap-4 bg-white border border-border rounded-2xl p-4 hover:border-navy/30 transition-colors"
+    >
+      <div className="w-11 h-11 rounded-xl bg-surface flex items-center justify-center flex-shrink-0">
+        <Plane className="w-5 h-5 text-teal" />
+      </div>
+      <div className="flex-1">
+        <p className="text-navy font-semibold text-sm">Companhias aéreas</p>
+        <p className="text-gray-400 text-xs mt-0.5">
+          {subtexto}
+        </p>
+      </div>
+      <ChevronRight className="w-4 h-4 text-gray-400" />
+    </Link>
   );
 }
 

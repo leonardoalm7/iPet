@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { Pet } from "@/domain/types";
-import { ChevronRight, Shield, AlertTriangle } from "lucide-react";
+import { ChevronRight, Shield, AlertTriangle, Plane } from "lucide-react";
+import { useMemo } from "react";
+import { verificarTodasCompanhias } from "@/services/airline-checker";
+import { COMPANHIAS_AEREAS } from "@/data/airlines";
 
 interface Props {
   pet: Pet;
@@ -14,6 +17,20 @@ export function PetCardHome({ pet }: Props) {
   const temMicrochip = !!(pet.microchip && pet.microchip.length === 15);
 
   const status = temVacina && temMicrochip ? "ok" : "pendente";
+
+  const companhiasInfo = useMemo(() => {
+    const resultados = verificarTodasCompanhias(pet, COMPANHIAS_AEREAS);
+    const ciasOk = resultados.filter(r => r.veredicto !== "NAO_ACEITO").length;
+    const total = COMPANHIAS_AEREAS.length;
+    const percentual = Math.round((ciasOk / total) * 100);
+    return { ciasOk, total, percentual };
+  }, [pet]);
+
+  const corCias = companhiasInfo.ciasOk === companhiasInfo.total
+    ? "text-teal"
+    : companhiasInfo.ciasOk >= Math.ceil(companhiasInfo.total / 2)
+    ? "text-ipet-orange"
+    : "text-red-500";
 
   return (
     <Link
@@ -46,6 +63,10 @@ export function PetCardHome({ pet }: Props) {
           <Badge ok={temVacina} label="Vacina" />
           <Badge ok={temSorologia} label="Sorologia" />
           <Badge ok={temMicrochip} label="Chip" />
+        </div>
+        <div className={`flex items-center gap-1 mt-2 text-xs font-medium ${corCias}`}>
+          <Plane className="w-3 h-3" />
+          <span>{companhiasInfo.ciasOk} de {companhiasInfo.total} cias</span>
         </div>
       </div>
 

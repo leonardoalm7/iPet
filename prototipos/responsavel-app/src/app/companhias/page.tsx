@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import {
@@ -85,8 +86,12 @@ type ModoView = "lista" | "comparar";
 
 export default function CompanhiasPage() {
   const { pets, planosViagem } = useAppStore();
+  const searchParams = useSearchParams();
+  const petIdParam = searchParams.get("petId");
+
+  const petValido = petIdParam && pets.find((p) => p.id === petIdParam);
   const [petSelecionadoId, setPetSelecionadoId] = useState<string>(
-    pets[0]?.id ?? ""
+    petValido ? petIdParam : pets[0]?.id ?? ""
   );
   const [expandidoId, setExpandidoId] = useState<string | null>(null);
   const [modo, setModo] = useState<ModoView>("lista");
@@ -358,7 +363,7 @@ export default function CompanhiasPage() {
         )}
       </main>
 
-      <BottomNav active="viagens" />
+      <BottomNav active="home" />
     </div>
   );
 }
