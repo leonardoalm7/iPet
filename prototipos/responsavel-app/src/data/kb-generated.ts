@@ -125,6 +125,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
     observacoes: "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira e guia curta, devendo o tutor preencher declaração de responsabilidade.",
+    racasRestritasFocinheira: ["Pit Bull", "Rottweiler", "Dogo Argentino", "Fila Brasileiro"],
+    exigeSeguroResponsabilidade: true,
     // KB metadata
     _kbConfidence: "ALTA" as const,
     _kbLastVerified: "2026-04-24",
@@ -161,6 +163,7 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
     observacoes: "Cães das raças restritas não podem ser importados para a Colômbia. Se o animal for dessas raças, a entrada será negada. O tutor deve realizar inspeção presencial no escritório do ICA no porto de chegada para liberação.",
+    racasProibidas: ["Pit Bull", "Dogo Argentino", "Rottweiler", "Dobermann"],
     // KB metadata
     _kbConfidence: "ALTA" as const,
     _kbLastVerified: "2026-04-24",
@@ -305,6 +308,9 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
     observacoes: "França segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). França classifica cães em 2 categorias de periculosidade — cães de 1ª categoria são proibidos de entrar no território. Consulte a lista atualizada antes de viajar.",
+    racasProibidas: ["Pit Bull", "Tosa Inu"],
+    racasRestritasFocinheira: ["Rottweiler", "Staffordshire Bull Terrier", "American Staffordshire Terrier"],
+    exigeSeguroResponsabilidade: true,
     // KB metadata
     _kbConfidence: "ALTA" as const,
     _kbLastVerified: "2026-04-24",
@@ -323,6 +329,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
     observacoes: "Alemanha segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). Alemanha tem legislação federal (Hundeverbringungs- und -einfuhrbeschränkungsgesetz) que restringe importação de raças perigosas. Cada Bundesland pode ter regras adicionais.",
+    racasRestritasFocinheira: ["Pit Bull", "Staffordshire Bull Terrier", "American Staffordshire Terrier", "Bull Terrier"],
+    exigeSeguroResponsabilidade: true,
     // KB metadata
     _kbConfidence: "ALTA" as const,
     _kbLastVerified: "2026-04-24",
@@ -467,6 +475,7 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
     observacoes: "A Dinamarca tem uma das leis de raças mais rigorosas do mundo, banindo 13 raças específicas e seus cruzamentos. Animais destas raças serão confiscados e podem sofrer eutanásia na chegada.",
+    racasProibidas: ["Pit Bull", "Tosa Inu", "Dogo Argentino", "Fila Brasileiro", "American Staffordshire Terrier", "Rottweiler", "Boerboel", "Caucasian Shepherd"],
     // KB metadata
     _kbConfidence: "MEDIA" as const,
     _kbLastVerified: "2026-04-24",
@@ -755,6 +764,7 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
     observacoes: "Pós-Brexit (2021), o UK não faz mais parte do esquema EU Pet Travel. O Brasil é um 'Part 2 listed country' para o PETS Travel Scheme, o que significa regras similares à UE mas com documentação própria do UK (AHC em vez do CVI padrão). Processo: (1) Microchip → (2) Vacina antirrábica (≥21 dias) → (3) Sorologia (≥90 dias antes de entrar no UK) → (4) AHC emitido por vet credenciado. Pit Bull Terrier, Tosa Inu, Dogo Argentino e Fila Brasileiro são PROIBIDOS no UK.",
+    racasProibidas: ["Pit Bull Terrier", "Tosa Inu", "Dogo Argentino", "Fila Brasileiro"],
     // KB metadata
     _kbConfidence: "MEDIA" as const,
     _kbLastVerified: "2026-04-16",
@@ -990,6 +1000,7 @@ export const KB_COMPANHIAS: RegrasAereaComMeta[] = [
     braquicefalicoCabine: true,
     braquicefalicoPorao: false,
     racasPerigosasBanidas: true,
+    racasBanidasLista: ["Pit Bull", "Rottweiler", "Fila Brasileiro", "American Staffordshire Terrier", "Bull Terrier"],
     anotacoes: "⚠️ Regras variam por rota (doméstica/internacional) e aeronave. Raças perigosas (Pit Bull, Rottweiler, Fila, etc.) banidas completamente. Sempre confirmar com a LATAM na reserva. Taxa cobrada por trecho.",
     // KB metadata
     _kbConfidence: "MEDIA" as const,

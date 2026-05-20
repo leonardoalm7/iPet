@@ -524,8 +524,15 @@ function CiaCard({
 
                 {/* Raças perigosas */}
                 {cia.racasPerigosasBanidas && (
-                  <div className="flex items-center gap-2 text-xs text-red-500 font-medium">
-                    🚫 Raças perigosas banidas (Pit Bull, Rottweiler, Fila, etc.)
+                  <div className="text-xs text-red-500 font-medium">
+                    <div className="flex items-center gap-2 mb-1">
+                      🚫 Raças perigosas banidas
+                    </div>
+                    {cia.racasBanidasLista?.length ? (
+                      <p className="text-[11px] text-red-600">{cia.racasBanidasLista.join(", ")}</p>
+                    ) : (
+                      <p className="text-[11px] text-gray-500">(Pit Bull, Rottweiler, Fila Brasileiro e similares)</p>
+                    )}
                   </div>
                 )}
 
@@ -698,9 +705,16 @@ function ComparacaoTable({
     {
       label: "Raças perigosas",
       render: (r) => (
-        <span className={r.companhia.racasPerigosasBanidas ? "text-red-500" : "text-emerald-600"}>
-          {r.companhia.racasPerigosasBanidas ? "Banidas" : "Aceita"}
-        </span>
+        <div>
+          <span className={r.companhia.racasPerigosasBanidas ? "text-red-500" : "text-emerald-600"}>
+            {r.companhia.racasPerigosasBanidas ? "Banidas" : "Aceita"}
+          </span>
+          {r.companhia.racasPerigosasBanidas && r.companhia.racasBanidasLista && (
+            <p className="text-[9px] text-gray-400 mt-0.5 leading-tight">
+              {r.companhia.racasBanidasLista.slice(0, 2).join(", ")}{r.companhia.racasBanidasLista.length > 2 ? "…" : ""}
+            </p>
+          )}
+        </div>
       ),
     },
     {

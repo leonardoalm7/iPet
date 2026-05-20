@@ -4,6 +4,8 @@ import { use } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { DocumentoSanitario, TipoDocumento } from "@/domain/types";
+import { isRacaPerigosa } from "@/data/racas-perigosas";
+import { isBraquicefalico } from "@/data/braquicefalicos";
 import {
   ArrowLeft,
   Plane,
@@ -19,6 +21,7 @@ import {
   PlusCircle,
   ChevronRight,
   Cpu,
+  AlertTriangle,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -212,6 +215,22 @@ export default function PassaportePage({
               <p className="text-xs text-gray-400 mt-1">
                 {pet.raca} · {idadePet} · {pet.peso} kg
               </p>
+              {(isRacaPerigosa(pet.raca) || isBraquicefalico(pet.raca)) && (
+                <div className="flex gap-1.5 mt-2 flex-wrap">
+                  {isRacaPerigosa(pet.raca) && (
+                    <span className="text-[10px] font-semibold bg-red-50 border border-red-200 text-red-600 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <AlertTriangle className="w-3 h-3" />
+                      Restrições internacionais
+                    </span>
+                  )}
+                  {isBraquicefalico(pet.raca) && (
+                    <span className="text-[10px] font-semibold bg-amber-50 border border-amber-200 text-amber-600 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      Braquicefálica
+                    </span>
+                  )}
+                </div>
+              )}
               {pet.microchip && (
                 <div className="flex items-center gap-1.5 mt-2">
                   <Cpu className="w-3 h-3 text-navy/40" />

@@ -7,6 +7,7 @@ import {
   StatusTarefa,
 } from "@/domain/types";
 import { REGRAS_DESTINO } from "@/data/destinations";
+import { isRacaPerigosa } from "@/data/racas-perigosas";
 import {
   differenceInDays,
   addDays,
@@ -38,6 +39,14 @@ function statusPorPrazo(prazo: Date, hoje: Date): StatusTarefa {
   return "PENDENTE";
 }
 
+function normalizar(s: string): string {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
 // ============================================================
 // Motor do Roadmap
 // Dado um pet + destino + data de embarque,
@@ -62,6 +71,40 @@ export function calcularRoadmap(
   const dataEmbarque = parseBR(dataEmbarqueStr);
   const regras = REGRAS_DESTINO[destino];
   const tarefas: TarefaRoadmap[] = [];
+
+  // ----------------------------------------------------------------
+  // Verificar banimento por raça
+  // ----------------------------------------------------------------
+  const racaBanida = regras.racasProibidas?.some(
+    (r) => normalizar(pet.raca).includes(normalizar(r)) || normalizar(r).includes(normalizar(pet.raca))
+  );
+  const racaRestrita = !racaBanida && regras.racasRestritasFocinheira?.some(
+    (r) => normalizar(pet.raca).includes(normalizar(r)) || normalizar(r).includes(normalizar(pet.raca))
+  );
+
+  if (racaBanida) {
+    return {
+      petId: pet.id,
+      planoViagemId,
+      destino,
+      dataEmbarque: dataEmbarqueStr,
+      statusGeral: "INAPTO" as const,
+      dataLiberacao: null,
+      tarefas: [{
+        id: "raca-banida",
+        titulo: "Raça proibida neste destino",
+        descricao: "",
+        nota: `${pet.raca} consta na lista de raças proibidas em ${regras.nome}. Entrada será negada na alfândega. Não é possível embarcar.`,
+        status: "CRITICO" as const,
+        prazo: null,
+        diasParaPrazo: null,
+        concluida: false,
+        precisaClinica: false,
+        bloqueadaPor: [],
+      }],
+      geradoEm: new Date().toISOString(),
+    };
+  }
 
   // ----------------------------------------------------------------
   // TAREFA 1: Microchip
@@ -233,6 +276,24 @@ export function calcularRoadmap(
       precisaClinica: true,
       bloqueadaPor: srologiaPendente ? ["sorologia"] : [],
       concluida: false,
+    });
+  }
+
+  // ----------------------------------------------------------------
+  // Adicionar aviso se raça tem restrições
+  // ----------------------------------------------------------------
+  if (racaRestrita) {
+    tarefas.unshift({
+      id: "raca-restrita",
+      titulo: `Restrição de raça em ${regras.nome}`,
+      descricao: "",
+      nota: `${pet.raca} requer focinheira, guia curta e seguro de responsabilidade civil. Verifique legislação local antes de embarcar.`,
+      status: "URGENTE" as const,
+      prazo: null,
+      diasParaPrazo: null,
+      concluida: false,
+      precisaClinica: false,
+      bloqueadaPor: [],
     });
   }
 

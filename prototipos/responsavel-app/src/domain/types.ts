@@ -174,6 +174,7 @@ export interface RegrasCompanhiaAerea {
   braquicefalicoCabine: boolean;
   braquicefalicoPorao: boolean;
   racasPerigosasBanidas: boolean;
+  racasBanidasLista?: string[];   // lista específica; se ausente, usa RACAS_PERIGOSAS global
   anotacoes: string;
 }
 
@@ -192,6 +193,9 @@ export interface RegrasDestino {
   diasAntesCVI: number; // emitir X dias antes do embarque
   exigePermissaoImportacao: boolean;
   observacoes: string;
+  racasProibidas?: string[];              // entrada completamente negada
+  racasRestritasFocinheira?: string[];    // permitido com focinheira + seguro
+  exigeSeguroResponsabilidade?: boolean;
 }
 
 // ---------- Documentos Sanitários ----------
