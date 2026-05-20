@@ -13,6 +13,7 @@ import {
   AlertCircle,
   Shield,
   ShieldCheck,
+  Pencil,
   Link2,
   Camera,
   PlusCircle,
@@ -165,6 +166,13 @@ export default function PassaportePage({
           <ArrowLeft className="w-5 h-5 text-navy" />
         </button>
         <h1 className="text-lg font-semibold flex-1 text-navy">Passaporte Digital do Pet</h1>
+        <Link
+          href={`/pets/${pet.id}/editar`}
+          className="w-10 h-10 rounded-full bg-surface flex items-center justify-center flex-shrink-0 border border-border hover:bg-gray-50 transition-colors"
+          title="Editar pet"
+        >
+          <Pencil className="w-4 h-4 text-gray-400" />
+        </Link>
       </header>
 
       <main className="px-5 space-y-5">
