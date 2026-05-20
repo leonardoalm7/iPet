@@ -43,8 +43,9 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
-    "racasRestritasOuProibidas": ["Pit Bull Terrier", "American Staffordshire Terrier", "Staffordshire Bull Terrier", "Bull Terrier"],
-    "observacoes": "Alemanha segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). Alemanha tem legislação federal (Hundeverbringungs- und -einfuhrbeschränkungsgesetz) que restringe importação de raças perigosas. Cada Bundesland pode ter regras adicionais.",
+    "racasRestritasFocinheira": ["Pit Bull", "Staffordshire Bull Terrier", "American Staffordshire Terrier", "Bull Terrier"],
+    "exigeSeguroResponsabilidade": true,
+    "observacoes": "Alemanha segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). Alemanha tem legislação federal (Hundeverbringungs- und -einfuhrbeschränkungsgesetz) que restringe importação de raças perigosas. Cães em lista federal exigem focinheira, guia curta e seguro de responsabilidade. Cada Bundesland pode ter regras adicionais.",
     "observacoesInternas": "⚠️ Legislação de raças perigosas varia por estado (Bundesland). Berlim, Baviera e NRW têm listas diferentes. A lei federal proíbe importação de 4 raças específicas."
   }
 }

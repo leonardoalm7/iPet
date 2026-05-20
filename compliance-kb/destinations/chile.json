@@ -41,8 +41,9 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
-    "racasRestritasOuProibidas": ["Rottweiler", "Doberman", "Pitbull", "Dogo Argentino", "Bullmastiff", "Fila Brasileiro", "Presa Canario", "Tosa Inu"],
-    "observacoes": "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira e guia curta, devendo o tutor preencher declaração de responsabilidade.",
+    "racasRestritasFocinheira": ["Pit Bull", "Rottweiler", "Dogo Argentino", "Fila Brasileiro"],
+    "exigeSeguroResponsabilidade": true,
+    "observacoes": "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira, guia curta e seguro de responsabilidade civil.",
     "observacoesInternas": "Alertar usuários com cães da lista PPP sobre a 'Ley Cholito' e as restrições de circulação pública."
   }
 }

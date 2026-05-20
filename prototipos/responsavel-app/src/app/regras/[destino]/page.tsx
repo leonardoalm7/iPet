@@ -10,6 +10,7 @@ import {
   ExternalLink,
   ShieldCheck,
   ChevronRight,
+  AlertTriangle,
 } from "lucide-react";
 
 export const revalidate = 86400;
@@ -191,6 +192,35 @@ export default async function RegrasDestinoPage({
               ))}
             </div>
           </section>
+
+          {(regras.rules.racasProibidas?.length || regras.rules.racasRestritasFocinheira?.length) && (
+            <section className="bg-red-50 border border-red-200 rounded-2xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <AlertTriangle className="w-4 h-4 text-red-500" />
+                <p className="text-sm font-semibold text-red-700">Raças proibidas ou restritas</p>
+              </div>
+              {!!regras.rules.racasProibidas?.length && (
+                <>
+                  <p className="text-xs text-red-600 font-medium mb-1.5">Entrada completamente negada:</p>
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {regras.rules.racasProibidas.map((r) => (
+                      <span key={r} className="text-[10px] bg-red-100 text-red-700 px-2 py-1 rounded-lg font-medium">{r}</span>
+                    ))}
+                  </div>
+                </>
+              )}
+              {!!regras.rules.racasRestritasFocinheira?.length && (
+                <>
+                  <p className="text-xs text-amber-700 font-medium mb-1.5">Permitidas com restrições (focinheira + seguro):</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {regras.rules.racasRestritasFocinheira.map((r) => (
+                      <span key={r} className="text-[10px] bg-amber-100 text-amber-700 px-2 py-1 rounded-lg font-medium">{r}</span>
+                    ))}
+                  </div>
+                </>
+              )}
+            </section>
+          )}
 
           {regras.rules.exigeSorologia && (
             <section className="bg-orange-light border border-ipet-orange/20 rounded-xl p-4">

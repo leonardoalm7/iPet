@@ -43,8 +43,10 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório. CVI preferencialmente em francês ou inglês.",
     "exigePermissaoImportacao": false,
-    "racasRestritasOuProibidas": ["American Staffordshire Terrier", "Tosa Inu", "Mastiff"],
-    "observacoes": "França segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). França classifica cães em 2 categorias de periculosidade — cães de 1ª categoria são proibidos de entrar no território. Consulte a lista atualizada antes de viajar.",
+    "racasProibidas": ["Pit Bull", "Tosa Inu"],
+    "racasRestritasFocinheira": ["Rottweiler", "Staffordshire Bull Terrier", "American Staffordshire Terrier"],
+    "exigeSeguroResponsabilidade": true,
+    "observacoes": "França segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). França classifica cães em 2 categorias de periculosidade — cães de 1ª categoria são proibidos de entrar no território. Cães de 2ª categoria exigem focinheira, guia curta e seguro de responsabilidade civil. Consulte a lista atualizada antes de viajar.",
     "observacoesInternas": "⚠️ França tem legislação rigorosa sobre cães perigosos (Loi 99-5). Cães de 1ª categoria (ataque) são PROIBIDOS. Cães de 2ª categoria (guarda/defesa) exigem declaração na mairie."
   }
 }

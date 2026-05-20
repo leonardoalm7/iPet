@@ -36,7 +36,7 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA. Documento oficial de saúde animal (AHC — Animal Health Certificate) para o Reino Unido é necessário — diferente do CVI padrão UE.",
     "exigePermissaoImportacao": false,
-    "racasRestritasOuProibidas": ["PIT_BULL", "TOSA_INU", "DOGO_ARGENTINO", "FILA_BRASILEIRO"],
+    "racasProibidas": ["Pit Bull Terrier", "Tosa Inu", "Dogo Argentino", "Fila Brasileiro"],
     "observacoes": "Pós-Brexit (2021), o UK não faz mais parte do esquema EU Pet Travel. O Brasil é um 'Part 2 listed country' para o PETS Travel Scheme, o que significa regras similares à UE mas com documentação própria do UK (AHC em vez do CVI padrão). Processo: (1) Microchip → (2) Vacina antirrábica (≥21 dias) → (3) Sorologia (≥90 dias antes de entrar no UK) → (4) AHC emitido por vet credenciado. Pit Bull Terrier, Tosa Inu, Dogo Argentino e Fila Brasileiro são PROIBIDOS no UK.",
     "observacoesInternas": "⚠️ CONFIANÇA MEDIA: UK saiu da UE e tem sistema próprio (PETS). Brasil é 'Part 2 listed' — verificar se mudou para 'unlisted' (quarentena obrigatória). AHC é diferente do CVI usado para EU. Confirmar se vets brasileiros podem emitir AHC válido para UK. Raças proibidas: verificar a lista completa (Dangerous Dogs Act 1991)."
   }

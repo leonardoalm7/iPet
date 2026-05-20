@@ -24,6 +24,9 @@ export interface RegrasPublicas {
     emissoresCVI?: string;
     exigePermissaoImportacao: boolean;
     observacoes: string;
+    racasProibidas?: string[];
+    racasRestritasFocinheira?: string[];
+    exigeSeguroResponsabilidade?: boolean;
   };
 }
 
@@ -64,6 +67,9 @@ export function loadDestinationRules(slug: string): RegrasPublicas | null {
       emissoresCVI: raw.rules.emissoresCVI,
       exigePermissaoImportacao: raw.rules.exigePermissaoImportacao,
       observacoes: raw.rules.observacoes,
+      racasProibidas: raw.rules.racasProibidas,
+      racasRestritasFocinheira: raw.rules.racasRestritasFocinheira,
+      exigeSeguroResponsabilidade: raw.rules.exigeSeguroResponsabilidade,
     },
   };
 }

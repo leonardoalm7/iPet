@@ -36,8 +36,8 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
-    "racasRestritasOuProibidas": ["Staffordshire Terrier", "American Staffordshire Terrier", "Pit Bull Terrier", "American Pit Bull Terrier"],
-    "observacoes": "Cães das raças restritas não podem ser importados para a Colômbia. Se o animal for dessas raças, a entrada será negada. O tutor deve realizar inspeção presencial no escritório do ICA no porto de chegada para liberação.",
+    "racasProibidas": ["Pit Bull", "Dogo Argentino", "Rottweiler", "Dobermann"],
+    "observacoes": "Cães das raças proibidas não podem ser importados para a Colômbia. Se o animal for dessas raças, a entrada será negada. O tutor deve realizar inspeção presencial no escritório do ICA no porto de chegada para liberação.",
     "observacoesInternas": "Alerta vermelho no cadastro de Pit Bulls/Staffords: entrada proibida na Colômbia."
   }
 }
