@@ -6,9 +6,11 @@ import { useAppStore } from "@/store/app-store";
 import { calcularRoadmap, parseBR } from "@/services/travel-roadmap";
 import { REGRAS_DESTINO } from "@/data/destinations";
 import { CustoEstimado } from "@/components/CustoEstimado";
+import { RoadmapView } from "@/components/RoadmapView";
+import { RoadmapTimeline } from "@/components/RoadmapTimeline";
 import { differenceInDays, format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -29,6 +31,8 @@ import {
   ScanLine,
   Building2,
   Trash2,
+  List,
+  GitCommitHorizontal,
 } from "lucide-react";
 
 // ─── Tipos internos ───────────────────────────────────────────
@@ -66,7 +70,7 @@ interface ProximaAcao {
 function calcularEstagios(
   pet: ReturnType<typeof useAppStore.getState>["pets"][number],
   plano: ReturnType<typeof useAppStore.getState>["planosViagem"][number]
-): { estagios: Estagio[]; progresso: number; proximaAcao: ProximaAcao } {
+): { estagios: Estagio[]; progresso: number; proximaAcao: ProximaAcao; roadmap: ReturnType<typeof calcularRoadmap> } {
   const hoje = new Date();
   hoje.setHours(0, 0, 0, 0);
   const dataEmbarque = parseBR(plano.dataEmbarque);
@@ -338,6 +342,7 @@ function calcularEstagios(
     estagios,
     progresso: Math.round(Math.min(progressoTotal, 100)),
     proximaAcao,
+    roadmap,
   };
 }
 
@@ -365,14 +370,29 @@ export default function JourneyHubPage({
   const pet = useAppStore((s) => s.pets.find((p) => p.id === plano?.petId));
   const removerPlanoViagem = useAppStore((s) => s.removerPlanoViagem);
   const [confirmandoExclusao, setConfirmandoExclusao] = useState(false);
+  const [viewMode, setViewMode] = useState<"lista" | "timeline">("lista");
 
   function excluirViagem() {
     removerPlanoViagem(planoId);
     router.replace("/viagens");
   }
 
-  const { estagios, progresso, proximaAcao } = useMemo(() => {
-    if (!pet || !plano) return { estagios: [], progresso: 0, proximaAcao: null as unknown as ProximaAcao };
+  const { estagios, progresso, proximaAcao, roadmap } = useMemo(() => {
+    if (!pet || !plano) return {
+      estagios: [],
+      progresso: 0,
+      proximaAcao: null as unknown as ProximaAcao,
+      roadmap: {
+        petId: "",
+        planoViagemId: "",
+        destino: "BRASIL" as const,
+        dataEmbarque: "",
+        statusGeral: "PENDENTE" as const,
+        dataLiberacao: null,
+        tarefas: [],
+        geradoEm: new Date().toISOString(),
+      },
+    };
     return calcularEstagios(pet, plano);
   }, [pet, plano]);
 
@@ -441,6 +461,50 @@ export default function JourneyHubPage({
               />
             ))}
           </div>
+        </section>
+
+        {/* ── Roadmap de Compliance ──────────────────────────────── */}
+        <section>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wider">
+              Roadmap de Compliance
+            </h2>
+            <div className="flex gap-1 bg-surface border border-border rounded-xl p-1">
+              <button
+                onClick={() => setViewMode("lista")}
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  viewMode === "lista" ? "bg-white text-navy shadow-sm" : "text-gray-400"
+                }`}
+              >
+                <List className="w-3.5 h-3.5" />
+                Lista
+              </button>
+              <button
+                onClick={() => setViewMode("timeline")}
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  viewMode === "timeline" ? "bg-white text-navy shadow-sm" : "text-gray-400"
+                }`}
+              >
+                <GitCommitHorizontal className="w-3.5 h-3.5" />
+                Linha do tempo
+              </button>
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={viewMode}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+            >
+              {viewMode === "lista"
+                ? <RoadmapView roadmap={roadmap} pet={pet} isPremium={plano.isPremium} />
+                : <RoadmapTimeline roadmap={roadmap} isPremium={plano.isPremium} />
+              }
+            </motion.div>
+          </AnimatePresence>
         </section>
 
         {/* ── Estimativa de custo ────────────────────────────────── */}

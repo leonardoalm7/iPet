@@ -110,7 +110,7 @@ export default function EditarPetPage({
           ? { data: form.sorologiaData, valor: form.sorologiaValor || "≥0,5 UI/mL", status: "OK" }
           : undefined,
     });
-    track("pet_editado", { petId, especie: form.especie });
+    track("pet_editado", { campos: ["nome", "raca", "peso", "dataNascimento"] });
     router.back();
   }
 

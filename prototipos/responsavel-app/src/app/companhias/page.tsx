@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { COMPANHIAS_AEREAS } from "@/data/airlines";
@@ -85,6 +85,14 @@ const VEREDICTO_CONFIG: Record<
 type ModoView = "lista" | "comparar";
 
 export default function CompanhiasPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><p>Carregando...</p></div>}>
+      <CompanhiasContent />
+    </Suspense>
+  );
+}
+
+function CompanhiasContent() {
   const { pets, planosViagem } = useAppStore();
   const searchParams = useSearchParams();
   const petIdParam = searchParams.get("petId");

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect, useCallback } from "react";
+import { Suspense, useMemo, useState, useEffect, useCallback } from "react";
 import { useAppStore } from "@/store/app-store";
 import {
   CLINICAS_CREDENCIADAS,
@@ -64,6 +64,14 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): nu
 }
 
 export default function ClinicasPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><p>Carregando...</p></div>}>
+      <ClinicasContent />
+    </Suspense>
+  );
+}
+
+function ClinicasContent() {
   const registrarEngajamento = useAppStore((s) => s.registrarEngajamento);
   const searchParams = useSearchParams();
   const servicoQueryRaw = searchParams.get("servico");
