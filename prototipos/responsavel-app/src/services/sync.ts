@@ -13,7 +13,7 @@
 
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { useAppStore } from "@/store/app-store";
-import type { Pet, PlanoViagem, DocumentoSanitario } from "@/domain/types";
+import type { Pet, PlanoViagem, PlanoViagemPet, DocumentoSanitario } from "@/domain/types";
 
 // ── DTOs (snake_case do banco) ───────────────────────────────
 
@@ -36,12 +36,23 @@ interface PetRow {
 interface PlanoRow {
   id: string;
   owner_id: string;
-  pet_id: string;
   destino: string;
   data_embarque: string;
   companhia_aerea_id: string | null;
   is_premium: boolean;
   pagamento_id: string | null;
+  criado_em: string;
+}
+
+interface PlanoViagemPetRow {
+  id: string;
+  owner_id: string;
+  plano_viagem_id: string;
+  pet_id: string;
+  modo_transporte: PlanoViagemPet["modoTransporte"] | null;
+  pagamento_individual_id: string | null;
+  acompanhante_humano_id: string | null;
+  observacoes: string | null;
   criado_em: string;
 }
 
@@ -107,7 +118,6 @@ function planoToRow(plano: PlanoViagem, ownerId: string): Omit<PlanoRow, "criado
   return {
     id: plano.id,
     owner_id: ownerId,
-    pet_id: plano.petId,
     destino: plano.destino,
     data_embarque: plano.dataEmbarque,
     companhia_aerea_id: plano.companhiaAereaId ?? null,
@@ -119,12 +129,37 @@ function planoToRow(plano: PlanoViagem, ownerId: string): Omit<PlanoRow, "criado
 function rowToPlano(row: PlanoRow): PlanoViagem {
   return {
     id: row.id,
-    petId: row.pet_id,
     destino: row.destino as PlanoViagem["destino"],
     dataEmbarque: row.data_embarque,
     companhiaAereaId: row.companhia_aerea_id ?? undefined,
     isPremium: row.is_premium,
     pagamentoId: row.pagamento_id ?? undefined,
+    criadoEm: row.criado_em,
+  };
+}
+
+function planoViagemPetToRow(pvp: PlanoViagemPet, ownerId: string): Omit<PlanoViagemPetRow, "criado_em"> {
+  return {
+    id: pvp.id,
+    owner_id: ownerId,
+    plano_viagem_id: pvp.planoViagemId,
+    pet_id: pvp.petId,
+    modo_transporte: pvp.modoTransporte ?? null,
+    pagamento_individual_id: pvp.pagamentoIndividualId ?? null,
+    acompanhante_humano_id: pvp.acompanhanteHumanoId ?? null,
+    observacoes: pvp.observacoes ?? null,
+  };
+}
+
+function rowToPlanoViagemPet(row: PlanoViagemPetRow): PlanoViagemPet {
+  return {
+    id: row.id,
+    planoViagemId: row.plano_viagem_id,
+    petId: row.pet_id,
+    modoTransporte: row.modo_transporte ?? undefined,
+    pagamentoIndividualId: row.pagamento_individual_id ?? undefined,
+    acompanhanteHumanoId: row.acompanhante_humano_id ?? undefined,
+    observacoes: row.observacoes ?? undefined,
     criadoEm: row.criado_em,
   };
 }
@@ -187,17 +222,23 @@ export async function loadFromSupabase(
 ): Promise<{ vazio: boolean }> {
   hidratando = true;
   try {
-    const [{ data: pets }, { data: planos }, { data: docs }] = await Promise.all([
+    const [{ data: pets }, { data: planos }, { data: pvps }, { data: docs }] = await Promise.all([
       supabase.from("pets").select("*").eq("owner_id", userId),
       supabase.from("planos_viagem").select("*").eq("owner_id", userId),
+      supabase.from("planos_viagem_pets").select("*").eq("owner_id", userId),
       supabase.from("documentos_sanitarios").select("*").eq("owner_id", userId),
     ]);
 
-    const vazio = (pets?.length ?? 0) === 0 && (planos?.length ?? 0) === 0 && (docs?.length ?? 0) === 0;
+    const vazio =
+      (pets?.length ?? 0) === 0 &&
+      (planos?.length ?? 0) === 0 &&
+      (pvps?.length ?? 0) === 0 &&
+      (docs?.length ?? 0) === 0;
 
     useAppStore.setState({
       pets: (pets ?? []).map((r) => rowToPet(r as PetRow)),
       planosViagem: (planos ?? []).map((r) => rowToPlano(r as PlanoRow)),
+      planosViagemPets: (pvps ?? []).map((r) => rowToPlanoViagemPet(r as PlanoViagemPetRow)),
       documentos: (docs ?? []).map((r) => rowToDoc(r as DocRow)),
     });
 
@@ -215,13 +256,19 @@ export async function migrateLocalToSupabase(
 ): Promise<void> {
   hidratando = true;
   try {
-    const { pets, planosViagem, documentos } = useAppStore.getState();
+    const { pets, planosViagem, planosViagemPets, documentos } = useAppStore.getState();
 
     if (pets.length > 0) {
       await supabase.from("pets").upsert(pets.map((p) => petToRow(p, userId)));
     }
     if (planosViagem.length > 0) {
       await supabase.from("planos_viagem").upsert(planosViagem.map((p) => planoToRow(p, userId)));
+    }
+    // PlanoViagemPet vai depois de planos_viagem (FK) e antes de documentos
+    if (planosViagemPets.length > 0) {
+      await supabase
+        .from("planos_viagem_pets")
+        .upsert(planosViagemPets.map((pvp) => planoViagemPetToRow(pvp, userId)));
     }
     if (documentos.length > 0) {
       await supabase.from("documentos_sanitarios").upsert(documentos.map((d) => docToRow(d, userId)));
@@ -243,6 +290,7 @@ export async function migrateLocalToSupabase(
 interface Snapshot {
   pets: Map<string, Pet>;
   planos: Map<string, PlanoViagem>;
+  pvps: Map<string, PlanoViagemPet>;
   docs: Map<string, DocumentoSanitario>;
 }
 
@@ -251,6 +299,7 @@ function snapshot(): Snapshot {
   return {
     pets: new Map(s.pets.map((p) => [p.id, p])),
     planos: new Map(s.planosViagem.map((p) => [p.id, p])),
+    pvps: new Map(s.planosViagemPets.map((pv) => [pv.id, pv])),
     docs: new Map(s.documentos.map((d) => [d.id, d])),
   };
 }
@@ -282,11 +331,13 @@ export function startSync(userId: string, supabase: SupabaseClient): () => void 
     const next: Snapshot = {
       pets: new Map(state.pets.map((p) => [p.id, p])),
       planos: new Map(state.planosViagem.map((p) => [p.id, p])),
+      pvps: new Map(state.planosViagemPets.map((pv) => [pv.id, pv])),
       docs: new Map(state.documentos.map((d) => [d.id, d])),
     };
 
     const dPets = diff(prev.pets, next.pets);
     const dPlanos = diff(prev.planos, next.planos);
+    const dPvps = diff(prev.pvps, next.pvps);
     const dDocs = diff(prev.docs, next.docs);
 
     const ops: PromiseLike<unknown>[] = [];
@@ -301,6 +352,16 @@ export function startSync(userId: string, supabase: SupabaseClient): () => void 
     }
     if (dPlanos.deletes.length > 0) {
       ops.push(supabase.from("planos_viagem").delete().in("id", dPlanos.deletes));
+    }
+    if (dPvps.upserts.length > 0) {
+      ops.push(
+        supabase
+          .from("planos_viagem_pets")
+          .upsert(dPvps.upserts.map((pv) => planoViagemPetToRow(pv, userId))),
+      );
+    }
+    if (dPvps.deletes.length > 0) {
+      ops.push(supabase.from("planos_viagem_pets").delete().in("id", dPvps.deletes));
     }
     if (dDocs.upserts.length > 0) {
       ops.push(supabase.from("documentos_sanitarios").upsert(dDocs.upserts.map((d) => docToRow(d, userId))));

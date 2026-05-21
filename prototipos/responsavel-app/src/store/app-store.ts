@@ -11,6 +11,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import {
   Pet,
   PlanoViagem,
+  PlanoViagemPet,
   TrechoViagem,
   DocumentoSanitario,
   Responsavel,
@@ -22,6 +23,7 @@ interface AppState {
   responsavel: Responsavel | null;
   pets: Pet[];
   planosViagem: PlanoViagem[];
+  planosViagemPets: PlanoViagemPet[];
   documentos: DocumentoSanitario[];
 
   // Responsável
@@ -34,10 +36,26 @@ interface AppState {
   getPet: (id: string) => Pet | undefined;
 
   // Planos de Viagem
-  criarPlanoViagem: (plano: Omit<PlanoViagem, "id" | "isPremium" | "criadoEm"> & { trechos?: TrechoViagem[] }) => PlanoViagem;
+  criarPlanoViagem: (
+    plano: Omit<PlanoViagem, "id" | "isPremium" | "criadoEm"> & {
+      trechos?: TrechoViagem[];
+      petIds: string[]; // mínimo 1 pet
+    }
+  ) => PlanoViagem;
   removerPlanoViagem: (id: string) => void;
   getPlanosPorPet: (petId: string) => PlanoViagem[];
   ativarPremium: (planoId: string, pagamentoId: string) => void;
+
+  // PlanoViagemPet (join entity)
+  adicionarPetAoPlano: (
+    planoViagemId: string,
+    petId: string,
+    dados?: Partial<Omit<PlanoViagemPet, "id" | "planoViagemId" | "petId" | "criadoEm">>
+  ) => PlanoViagemPet;
+  removerPetDoPlano: (id: string) => void;
+  atualizarPlanoViagemPet: (id: string, dados: Partial<PlanoViagemPet>) => void;
+  getPetsPorPlano: (planoViagemId: string) => PlanoViagemPet[];
+  getPrimeiroPetIdDoPlano: (planoViagemId: string) => string | undefined;
 
   // Documentos
   adicionarDocumento: (doc: DocumentoSanitario) => void;
@@ -55,6 +73,7 @@ export const useAppStore = create<AppState>()(
       responsavel: null,
       pets: [],
       planosViagem: [],
+      planosViagemPets: [],
       documentos: [],
 
       setResponsavel: (r) => set({ responsavel: r }),
@@ -77,41 +96,69 @@ export const useAppStore = create<AppState>()(
         })),
 
       removerPet: (id) =>
-        set((s) => ({
-          pets: s.pets.filter((p) => p.id !== id),
-          planosViagem: s.planosViagem.filter((v) => v.petId !== id),
-          documentos: s.documentos.filter((d) => d.petId !== id),
-        })),
+        set((s) => {
+          // Remove o pet e todos os PlanoViagemPet onde ele aparece
+          const planosViagemPetsRestantes = s.planosViagemPets.filter((pv) => pv.petId !== id);
+          // Identifica planos que ficaram sem nenhum pet — cascade remove
+          const planosComPet = new Set(planosViagemPetsRestantes.map((pv) => pv.planoViagemId));
+          return {
+            pets: s.pets.filter((p) => p.id !== id),
+            planosViagemPets: planosViagemPetsRestantes,
+            planosViagem: s.planosViagem.filter((p) => planosComPet.has(p.id)),
+            documentos: s.documentos.filter((d) => d.petId !== id),
+          };
+        }),
 
       getPet: (id) => get().pets.find((p) => p.id === id),
 
-      criarPlanoViagem: (dados: any) => {
-        let trechos: TrechoViagem[];
-        if ('trechos' in dados && dados.trechos) {
-          trechos = dados.trechos;
-        } else {
-          trechos = [{ destino: dados.destino, dataEmbarque: dados.dataEmbarque }];
+      criarPlanoViagem: (dados) => {
+        const { petIds, ...resto } = dados;
+        if (!petIds || petIds.length === 0) {
+          throw new Error("criarPlanoViagem requer ao menos 1 petId");
         }
+        const trechos: TrechoViagem[] = resto.trechos && resto.trechos.length > 0
+          ? resto.trechos
+          : [{ destino: resto.destino, dataEmbarque: resto.dataEmbarque }];
+
+        const planoId = uuidv4();
+        const criadoEm = new Date().toISOString();
+
         const plano: PlanoViagem = {
-          ...dados,
+          ...resto,
           trechos,
           destino: trechos[trechos.length - 1].destino,
           dataEmbarque: trechos[0].dataEmbarque,
-          id: uuidv4(),
+          id: planoId,
           isPremium: false,
-          criadoEm: new Date().toISOString(),
+          criadoEm,
         };
-        set((s) => ({ planosViagem: [...s.planosViagem, plano] }));
+
+        const novasAssociacoes: PlanoViagemPet[] = petIds.map((petId) => ({
+          id: uuidv4(),
+          planoViagemId: planoId,
+          petId,
+          criadoEm,
+        }));
+
+        set((s) => ({
+          planosViagem: [...s.planosViagem, plano],
+          planosViagemPets: [...s.planosViagemPets, ...novasAssociacoes],
+        }));
         return plano;
       },
 
       removerPlanoViagem: (id) =>
         set((s) => ({
           planosViagem: s.planosViagem.filter((v) => v.id !== id),
+          planosViagemPets: s.planosViagemPets.filter((pv) => pv.planoViagemId !== id),
         })),
 
-      getPlanosPorPet: (petId) =>
-        get().planosViagem.filter((v) => v.petId === petId),
+      getPlanosPorPet: (petId) => {
+        const planoIds = new Set(
+          get().planosViagemPets.filter((pv) => pv.petId === petId).map((pv) => pv.planoViagemId)
+        );
+        return get().planosViagem.filter((p) => planoIds.has(p.id));
+      },
 
       ativarPremium: (planoId, pagamentoId) =>
         set((s) => ({
@@ -119,6 +166,46 @@ export const useAppStore = create<AppState>()(
             p.id === planoId ? { ...p, isPremium: true, pagamentoId } : p
           ),
         })),
+
+      adicionarPetAoPlano: (planoViagemId, petId, dados) => {
+        const pvp: PlanoViagemPet = {
+          ...(dados ?? {}),
+          id: uuidv4(),
+          planoViagemId,
+          petId,
+          criadoEm: new Date().toISOString(),
+        };
+        set((s) => ({ planosViagemPets: [...s.planosViagemPets, pvp] }));
+        return pvp;
+      },
+
+      removerPetDoPlano: (id) =>
+        set((s) => {
+          const remover = s.planosViagemPets.find((pv) => pv.id === id);
+          if (!remover) return s;
+          const restantes = s.planosViagemPets.filter((pv) => pv.id !== id);
+          // Cascade: se foi o último pet do plano, remove o plano também
+          const aindaTemPet = restantes.some((pv) => pv.planoViagemId === remover.planoViagemId);
+          return {
+            planosViagemPets: restantes,
+            planosViagem: aindaTemPet
+              ? s.planosViagem
+              : s.planosViagem.filter((p) => p.id !== remover.planoViagemId),
+          };
+        }),
+
+      atualizarPlanoViagemPet: (id, dados) =>
+        set((s) => ({
+          planosViagemPets: s.planosViagemPets.map((pv) =>
+            pv.id === id ? { ...pv, ...dados } : pv
+          ),
+        })),
+
+      getPetsPorPlano: (planoViagemId) =>
+        get().planosViagemPets.filter((pv) => pv.planoViagemId === planoViagemId),
+
+      getPrimeiroPetIdDoPlano: (planoViagemId) =>
+        get().planosViagemPets.find((pv) => pv.planoViagemId === planoViagemId)?.petId,
 
       adicionarDocumento: (doc) =>
         set((s) => ({ documentos: [...s.documentos, doc] })),
@@ -146,7 +233,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "ipet-storage",
-      version: 4,
+      version: 5,
       storage: createJSONStorage(() =>
         typeof window !== "undefined" ? localStorage : ({} as Storage)
       ),
@@ -179,6 +266,21 @@ export const useAppStore = create<AppState>()(
             ...p,
             trechos: p.trechos ?? [{ destino: p.destino, dataEmbarque: p.dataEmbarque }],
           }));
+        }
+        if (version < 5) {
+          // Migração: cada plano antigo (com petId) gera 1 PlanoViagemPet.
+          // Depois remove petId de cada PlanoViagem.
+          const planos = (state.planosViagem as any[]) ?? [];
+          const planosViagemPets: PlanoViagemPet[] = planos
+            .filter((p) => p.petId)
+            .map((p) => ({
+              id: uuidv4(),
+              planoViagemId: p.id,
+              petId: p.petId as string,
+              criadoEm: (p.criadoEm as string) ?? new Date().toISOString(),
+            }));
+          state.planosViagemPets = planosViagemPets;
+          state.planosViagem = planos.map(({ petId: _petId, ...rest }) => rest);
         }
         return state as unknown as AppState;
       },

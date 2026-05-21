@@ -70,7 +70,7 @@ function calcularProgressoPlano(
 // ─── Página principal ─────────────────────────────────────────
 
 export default function ViagensPage() {
-  const { planosViagem, pets, removerPlanoViagem } = useAppStore();
+  const { planosViagem, pets, removerPlanoViagem, getPrimeiroPetIdDoPlano } = useAppStore();
   const router = useRouter();
   const [confirmandoId, setConfirmandoId] = useState<string | null>(null);
 
@@ -83,7 +83,7 @@ export default function ViagensPage() {
     () =>
       planosViagem
         .map((plano) => {
-          const pet = pets.find((p) => p.id === plano.petId);
+          const pet = pets.find((p) => p.id === getPrimeiroPetIdDoPlano(plano.id));
           if (!pet) return null;
           const { porcentagem, estado } = calcularProgressoPlano(pet, plano);
           return { plano, pet, porcentagem, estado };

@@ -15,7 +15,7 @@ import { differenceInDays } from "date-fns";
 import { motion } from "framer-motion";
 
 export default function HomePage() {
-  const { pets, responsavel, planosViagem, setResponsavel } = useAppStore();
+  const { pets, responsavel, planosViagem, setResponsavel, getPrimeiroPetIdDoPlano } = useAppStore();
 
   useEffect(() => {
     if (!responsavel) {
@@ -32,7 +32,7 @@ export default function HomePage() {
 
   const viagensAtivas = planosViagem
     .map((plano) => {
-      const pet = pets.find((p) => p.id === plano.petId);
+      const pet = pets.find((p) => p.id === getPrimeiroPetIdDoPlano(plano.id));
       if (!pet) return null;
       const hoje = new Date();
       hoje.setHours(0, 0, 0, 0);

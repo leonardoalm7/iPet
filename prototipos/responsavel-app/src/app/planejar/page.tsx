@@ -240,7 +240,7 @@ function gerarMeses(quantidade = 24) {
 
 export default function PlanejarPage() {
   const router = useRouter();
-  const { pets, planosViagem, criarPlanoViagem } = useAppStore();
+  const { pets, planosViagem, planosViagemPets, criarPlanoViagem } = useAppStore();
 
   const [passo, setPasso] = useState<Passo>(pets.length === 1 ? "destino" : "pet");
   const [petId, setPetId] = useState<string>(pets[0]?.id ?? "");
@@ -320,18 +320,19 @@ export default function PlanejarPage() {
     const destinoFinal = trechosComData[trechosComData.length - 1].destino;
     const dataEmbarquePrimeiro = trechosComData[0].dataEmbarque;
 
-    const jaExiste = planosViagem.some(
-      (p) => p.petId === pet.id && p.destino === destinoFinal && p.dataEmbarque === dataEmbarquePrimeiro
+    const planoIdsDoPet = new Set(
+      planosViagemPets.filter((pv) => pv.petId === pet.id).map((pv) => pv.planoViagemId),
+    );
+    const planoDuplicado = planosViagem.find(
+      (p) => planoIdsDoPet.has(p.id) && p.destino === destinoFinal && p.dataEmbarque === dataEmbarquePrimeiro,
     );
 
     let planoId: string;
-    if (jaExiste) {
-      planoId = planosViagem.find(
-        (p) => p.petId === pet.id && p.destino === destinoFinal && p.dataEmbarque === dataEmbarquePrimeiro
-      )!.id;
+    if (planoDuplicado) {
+      planoId = planoDuplicado.id;
     } else {
       const novoPlano = criarPlanoViagem({
-        petId: pet.id,
+        petIds: [pet.id],
         destino: destinoFinal,
         dataEmbarque: dataEmbarquePrimeiro,
         trechos: trechosComData,

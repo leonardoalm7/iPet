@@ -129,7 +129,6 @@ export interface TrechoViagem {
 
 export interface PlanoViagem {
   id: string;
-  petId: string;
   destino: Destino;        // derived: trechos[trechos.length - 1].destino
   dataEmbarque: string;    // derived: trechos[0].dataEmbarque
   trechos?: TrechoViagem[]; // optional for backward-compat; minimum 1 entry when present
@@ -137,6 +136,28 @@ export interface PlanoViagem {
   isPremium: boolean;
   pagamentoId?: string;
   criadoEm: string;
+}
+
+// ---------- PlanoViagemPet — Join entity (OrderLine pattern) ----------
+
+export type ModoTransporte = "CABINE" | "PORAO" | "CARGA";
+
+/**
+ * PlanoViagemPet — entidade de junção (Order/OrderLine).
+ * Permite múltiplos pets por PlanoViagem, cada um com estado próprio
+ * dentro do contexto da viagem (transporte, pagamento, acompanhante).
+ *
+ * RLS no Supabase: auth.uid() = owner_id (espelha pets e planos_viagem).
+ */
+export interface PlanoViagemPet {
+  id: string;
+  planoViagemId: string;
+  petId: string;
+  modoTransporte?: ModoTransporte;
+  pagamentoIndividualId?: string;        // ID do pagamento Mercado Pago per-pet
+  acompanhanteHumanoId?: string;          // FK PerfilUsuario — regra 1:1 (a confirmar)
+  observacoes?: string;
+  criadoEm: string; // ISO
 }
 
 // ---------- Roadmap de Compliance ----------

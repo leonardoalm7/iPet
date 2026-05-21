@@ -26,7 +26,16 @@ export default function ViagemPage({
   const router = useRouter();
   const pet = useAppStore((s) => s.pets.find((p) => p.id === petId));
   const criarPlano = useAppStore((s) => s.criarPlanoViagem);
-  const planosExistentes = useAppStore((s) => s.planosViagem);
+  const planosViagem = useAppStore((s) => s.planosViagem);
+  const planosViagemPets = useAppStore((s) => s.planosViagemPets);
+  const planosExistentes = pet
+    ? (() => {
+        const planoIds = new Set(
+          planosViagemPets.filter((pv) => pv.petId === pet.id).map((pv) => pv.planoViagemId),
+        );
+        return planosViagem.filter((p) => planoIds.has(p.id));
+      })()
+    : [];
 
   const [destino, setDestino] = useState<Destino>("BRASIL");
   const [dataEmbarque, setDataEmbarque] = useState("");
@@ -44,7 +53,7 @@ export default function ViagemPage({
   }
 
   const planoExistente = planosExistentes.find(
-    (p) => p.petId === pet?.id && p.destino === destino && p.dataEmbarque === dataEmbarque
+    (p) => p.destino === destino && p.dataEmbarque === dataEmbarque
   );
   const isPremium = planoExistente?.isPremium ?? false;
 
@@ -63,10 +72,10 @@ export default function ViagemPage({
   function salvarViagem() {
     if (!roadmap || salvo) return;
     const duplicado = planosExistentes.some(
-      (p) => p.petId === pet!.id && p.destino === destino && p.dataEmbarque === dataEmbarque
+      (p) => p.destino === destino && p.dataEmbarque === dataEmbarque
     );
     if (!duplicado) {
-      criarPlano({ petId: pet!.id, destino, dataEmbarque, companhiaAereaId: companhiaId || undefined });
+      criarPlano({ petIds: [pet!.id], destino, dataEmbarque, companhiaAereaId: companhiaId || undefined });
     }
     setSalvo(true);
   }
@@ -147,7 +156,7 @@ export default function ViagemPage({
                   if (planoExistente) {
                     router.push(`/checkout/${planoExistente.id}`);
                   } else {
-                    const plano = criarPlano({ petId: pet!.id, destino, dataEmbarque, companhiaAereaId: companhiaId || undefined });
+                    const plano = criarPlano({ petIds: [pet!.id], destino, dataEmbarque, companhiaAereaId: companhiaId || undefined });
                     router.push(`/checkout/${plano.id}`);
                   }
                 }}

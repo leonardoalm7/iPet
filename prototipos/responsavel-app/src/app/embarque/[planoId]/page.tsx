@@ -276,7 +276,9 @@ export default function EmbarquePage({
 }) {
   const { planoId } = use(params);
   const plano = useAppStore((s) => s.planosViagem.find((p) => p.id === planoId));
-  const pet = useAppStore((s) => s.pets.find((p) => p.id === plano?.petId));
+  const pet = useAppStore((s) =>
+    plano ? s.pets.find((p) => p.id === s.getPrimeiroPetIdDoPlano(plano.id)) : undefined,
+  );
 
   const [marcados, setMarcados] = useState<Record<string, boolean>>({});
 

@@ -369,7 +369,9 @@ export default function JourneyHubPage({
   const { planoId } = use(params);
   const router = useRouter();
   const plano = useAppStore((s) => s.planosViagem.find((p) => p.id === planoId));
-  const pet = useAppStore((s) => s.pets.find((p) => p.id === plano?.petId));
+  const pet = useAppStore((s) =>
+    plano ? s.pets.find((p) => p.id === s.getPrimeiroPetIdDoPlano(plano.id)) : undefined,
+  );
   const removerPlanoViagem = useAppStore((s) => s.removerPlanoViagem);
   const [confirmandoExclusao, setConfirmandoExclusao] = useState(false);
   const [viewMode, setViewMode] = useState<"lista" | "timeline">("lista");
