@@ -11,6 +11,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import {
   Pet,
   PlanoViagem,
+  TrechoViagem,
   DocumentoSanitario,
   Responsavel,
   Destino,
@@ -33,7 +34,7 @@ interface AppState {
   getPet: (id: string) => Pet | undefined;
 
   // Planos de Viagem
-  criarPlanoViagem: (plano: Omit<PlanoViagem, "id" | "isPremium" | "criadoEm">) => PlanoViagem;
+  criarPlanoViagem: (plano: Omit<PlanoViagem, "id" | "isPremium" | "criadoEm"> & { trechos?: TrechoViagem[] }) => PlanoViagem;
   removerPlanoViagem: (id: string) => void;
   getPlanosPorPet: (petId: string) => PlanoViagem[];
   ativarPremium: (planoId: string, pagamentoId: string) => void;
@@ -84,9 +85,18 @@ export const useAppStore = create<AppState>()(
 
       getPet: (id) => get().pets.find((p) => p.id === id),
 
-      criarPlanoViagem: (dados) => {
+      criarPlanoViagem: (dados: any) => {
+        let trechos: TrechoViagem[];
+        if ('trechos' in dados && dados.trechos) {
+          trechos = dados.trechos;
+        } else {
+          trechos = [{ destino: dados.destino, dataEmbarque: dados.dataEmbarque }];
+        }
         const plano: PlanoViagem = {
           ...dados,
+          trechos,
+          destino: trechos[trechos.length - 1].destino,
+          dataEmbarque: trechos[0].dataEmbarque,
           id: uuidv4(),
           isPremium: false,
           criadoEm: new Date().toISOString(),
@@ -136,7 +146,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "ipet-storage",
-      version: 3,
+      version: 4,
       storage: createJSONStorage(() =>
         typeof window !== "undefined" ? localStorage : ({} as Storage)
       ),
@@ -161,6 +171,13 @@ export const useAppStore = create<AppState>()(
           state.planosViagem = planos.map((p) => ({
             ...p,
             destino: p.destino === ("UNIAO_EUROPEIA" as Destino) ? "PORTUGAL" as Destino : p.destino,
+          }));
+        }
+        if (version < 4) {
+          const planos = (state.planosViagem as any[]) ?? [];
+          state.planosViagem = planos.map((p) => ({
+            ...p,
+            trechos: p.trechos ?? [{ destino: p.destino, dataEmbarque: p.dataEmbarque }],
           }));
         }
         return state as unknown as AppState;

@@ -5,6 +5,7 @@ import {
   RoadmapCompliance,
   StatusCompliance,
   StatusTarefa,
+  TrechoViagem,
 } from "@/domain/types";
 import { REGRAS_DESTINO } from "@/data/destinations";
 import { isRacaPerigosa } from "@/data/racas-perigosas";
@@ -418,4 +419,157 @@ function calcularStatusGeral(
     statusGeral,
     dataLiberacao: dataLiberacao ? formatBR(dataLiberacao) : null,
   };
+}
+
+// ============================================================
+// Multi-leg travel: merge roadmaps from multiple destinations
+// ============================================================
+
+const STATUS_PRIORITY: Record<StatusCompliance, number> = {
+  INAPTO: 5,
+  CRITICO: 4,
+  URGENTE: 3,
+  PENDENTE: 2,
+  APTO: 1,
+};
+
+const TAREFA_STATUS_PRIORITY: Record<StatusTarefa, number> = {
+  VENCIDA: 6,
+  CRITICO: 5,
+  URGENTE: 4,
+  BLOQUEADA: 3,
+  PENDENTE: 2,
+  CONCLUIDA: 0,
+  NAO_APLICAVEL: 0,
+};
+
+function statusMaisRestritivo(s1: StatusCompliance, s2: StatusCompliance): StatusCompliance {
+  if (STATUS_PRIORITY[s1] >= STATUS_PRIORITY[s2]) return s1;
+  return s2;
+}
+
+export function mesclarRoadmaps(
+  roadmaps: { roadmap: RoadmapCompliance; nomeDestino: string }[],
+  planoViagemId: string,
+  destinoFinal: Destino,
+  dataEmbarqueStr: string
+): RoadmapCompliance {
+  if (roadmaps.length === 0) {
+    return {
+      petId: "",
+      planoViagemId,
+      destino: destinoFinal,
+      dataEmbarque: dataEmbarqueStr,
+      statusGeral: "APTO",
+      dataLiberacao: null,
+      tarefas: [],
+      geradoEm: new Date().toISOString(),
+    };
+  }
+
+  if (roadmaps.length === 1) {
+    return roadmaps[0].roadmap;
+  }
+
+  // Merge logic: for each task ID, take the most restrictive version
+  const tarefasMap = new Map<string, TarefaRoadmap>();
+  let statusGeralMerged: StatusCompliance = "APTO";
+  let dataLiberacaoMerged: Date | null = null;
+
+  for (const { roadmap, nomeDestino } of roadmaps) {
+    statusGeralMerged = statusMaisRestritivo(statusGeralMerged, roadmap.statusGeral);
+
+    if (roadmap.dataLiberacao) {
+      const dataLiberacao = parseBR(roadmap.dataLiberacao);
+      if (!dataLiberacaoMerged || isAfter(dataLiberacao, dataLiberacaoMerged)) {
+        dataLiberacaoMerged = dataLiberacao;
+      }
+    }
+
+    for (const tarefa of roadmap.tarefas) {
+      const existing = tarefasMap.get(tarefa.id);
+      if (!existing) {
+        tarefasMap.set(tarefa.id, {
+          ...tarefa,
+          nota: tarefa.nota ? `${tarefa.nota} (${nomeDestino})` : `Exigido por ${nomeDestino}`,
+        });
+      } else {
+        // Keep the more restrictive version
+        const existingPriority = TAREFA_STATUS_PRIORITY[existing.status] || 0;
+        const newPriority = TAREFA_STATUS_PRIORITY[tarefa.status] || 0;
+        if (newPriority > existingPriority) {
+          tarefasMap.set(tarefa.id, {
+            ...tarefa,
+            nota: tarefa.nota ? `${tarefa.nota} (${nomeDestino})` : `Exigido por ${nomeDestino}`,
+          });
+        } else if (newPriority === existingPriority && tarefa.prazo && existing.prazo) {
+          // Same priority: keep the earlier deadline
+          const tarefaDate = parseBR(tarefa.prazo);
+          const existingDate = parseBR(existing.prazo);
+          if (isBefore(tarefaDate, existingDate)) {
+            tarefasMap.set(tarefa.id, {
+              ...tarefa,
+              nota: tarefa.nota ? `${tarefa.nota} (${nomeDestino})` : `Exigido por ${nomeDestino}`,
+            });
+          }
+        }
+      }
+    }
+  }
+
+  return {
+    petId: roadmaps[0].roadmap.petId,
+    planoViagemId,
+    destino: destinoFinal,
+    dataEmbarque: dataEmbarqueStr,
+    statusGeral: statusGeralMerged,
+    dataLiberacao: dataLiberacaoMerged ? formatBR(dataLiberacaoMerged) : null,
+    tarefas: Array.from(tarefasMap.values()),
+    geradoEm: new Date().toISOString(),
+  };
+}
+
+export function calcularRoadmapMultiLeg(
+  pet: Pet,
+  trechosInput: TrechoViagem[] | undefined,
+  planoViagemId: string,
+  opcoes: OpcoesRoadmap = {}
+): RoadmapCompliance {
+  const trechos = trechosInput && trechosInput.length > 0 ? trechosInput : undefined;
+
+  // If no trechos defined, this is a legacy single-destination plan
+  if (!trechos) {
+    return {
+      petId: pet.id,
+      planoViagemId,
+      destino: "BRASIL" as Destino,
+      dataEmbarque: "",
+      statusGeral: "PENDENTE",
+      dataLiberacao: null,
+      tarefas: [],
+      geradoEm: new Date().toISOString(),
+    };
+  }
+
+  // Calculate roadmap for each leg
+  const roadmapsPorTrecho = trechos.map((trecho) => {
+    const regras = REGRAS_DESTINO[trecho.destino];
+    return {
+      roadmap: calcularRoadmap(pet, trecho.destino, trecho.dataEmbarque, planoViagemId, opcoes),
+      nomeDestino: regras.nome,
+    };
+  });
+
+  // If any leg returns INAPTO (e.g., breed banned), return immediately
+  for (const { roadmap } of roadmapsPorTrecho) {
+    if (roadmap.statusGeral === "INAPTO") {
+      return roadmap;
+    }
+  }
+
+  // Merge all leg roadmaps
+  const destinoFinal = trechos[trechos.length - 1].destino;
+  const dataEmbarquePrimeiro = trechos[0].dataEmbarque;
+
+  return mesclarRoadmaps(roadmapsPorTrecho, planoViagemId, destinoFinal, dataEmbarquePrimeiro);
 }

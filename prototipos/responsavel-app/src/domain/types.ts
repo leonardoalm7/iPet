@@ -122,11 +122,17 @@ export interface Pet {
   criadoEm: string; // ISO
 }
 
+export interface TrechoViagem {
+  destino: Destino;
+  dataEmbarque: string; // DD/MM/YYYY
+}
+
 export interface PlanoViagem {
   id: string;
   petId: string;
-  destino: Destino;
-  dataEmbarque: string; // DD/MM/YYYY
+  destino: Destino;        // derived: trechos[trechos.length - 1].destino
+  dataEmbarque: string;    // derived: trechos[0].dataEmbarque
+  trechos?: TrechoViagem[]; // optional for backward-compat; minimum 1 entry when present
   companhiaAereaId?: string;
   isPremium: boolean;
   pagamentoId?: string;
