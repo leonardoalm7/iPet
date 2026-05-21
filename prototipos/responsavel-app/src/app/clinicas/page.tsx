@@ -13,6 +13,7 @@ import {
   SERVICO_EMOJI,
 } from "@/data/clinicas-credenciadas";
 import { BottomNav } from "@/components/BottomNav";
+import { ClinicasMap } from "@/components/ClinicasMap";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import {
@@ -30,6 +31,8 @@ import {
   ChevronUp,
   Star,
   X,
+  Map,
+  List,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -85,6 +88,7 @@ function ClinicasContent() {
   const [userLat, setUserLat] = useState<number | null>(null);
   const [userLng, setUserLng] = useState<number | null>(null);
   const [geoStatus, setGeoStatus] = useState<"idle" | "loading" | "ok" | "denied">("idle");
+  const [viewMode, setViewMode] = useState<"list" | "map">("list");
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -182,9 +186,35 @@ function ClinicasContent() {
           <ArrowLeft className="w-4 h-4" />
           Início
         </Link>
-        <div className="flex items-center gap-2 mb-1">
-          <Stethoscope className="w-6 h-6 text-teal" />
-          <h1 className="text-2xl font-bold text-navy">Clínicas Veterinárias</h1>
+        <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center gap-2">
+            <Stethoscope className="w-6 h-6 text-teal" />
+            <h1 className="text-2xl font-bold text-navy">Clínicas Veterinárias</h1>
+          </div>
+          <div className="flex gap-1.5">
+            <button
+              onClick={() => setViewMode("list")}
+              className={`p-2 rounded-lg transition-colors ${
+                viewMode === "list"
+                  ? "bg-teal text-white"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+              }`}
+              title="Visualização em lista"
+            >
+              <List className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setViewMode("map")}
+              className={`p-2 rounded-lg transition-colors ${
+                viewMode === "map"
+                  ? "bg-teal text-white"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+              }`}
+              title="Visualização em mapa"
+            >
+              <Map className="w-5 h-5" />
+            </button>
+          </div>
         </div>
         <p className="text-gray-500 text-sm">
           Encontre veterinários credenciados para a jornada do seu pet
@@ -263,32 +293,50 @@ function ClinicasContent() {
           <p className="text-xs text-gray-400 text-center">📍 Localização indisponível — mostrando por estado</p>
         )}
 
-        {/* Lista de clínicas */}
-        <div className="space-y-2">
-          {clinicasFiltradas.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-400 text-sm">Nenhuma clínica encontrada.</p>
-              <p className="text-gray-400 text-xs mt-1">Tente um filtro diferente.</p>
-            </div>
-          ) : (
-            clinicasFiltradas.map((clinica, i) => (
-              <ClinicaCard
-                key={clinica.id}
-                clinica={clinica}
-                index={i}
-                expandido={expandidoId === clinica.id}
-                onToggle={() => handleExpandir(clinica)}
-                onLigar={() => handleLigar(clinica)}
-                onNavegar={() => handleNavegar(clinica)}
-                distancia={
-                  userLat !== null && userLng !== null
-                    ? haversineKm(userLat, userLng, clinica.lat, clinica.lng)
-                    : null
-                }
+        {/* Mapa view */}
+        {viewMode === "map" ? (
+          <>
+            {clinicasFiltradas.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-400 text-sm">Nenhuma clínica encontrada.</p>
+                <p className="text-gray-400 text-xs mt-1">Tente um filtro diferente.</p>
+              </div>
+            ) : (
+              <ClinicasMap
+                clinicas={clinicasFiltradas}
+                userLat={userLat}
+                userLng={userLng}
               />
-            ))
-          )}
-        </div>
+            )}
+          </>
+        ) : (
+          /* Lista view */
+          <div className="space-y-2">
+            {clinicasFiltradas.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-400 text-sm">Nenhuma clínica encontrada.</p>
+                <p className="text-gray-400 text-xs mt-1">Tente um filtro diferente.</p>
+              </div>
+            ) : (
+              clinicasFiltradas.map((clinica, i) => (
+                <ClinicaCard
+                  key={clinica.id}
+                  clinica={clinica}
+                  index={i}
+                  expandido={expandidoId === clinica.id}
+                  onToggle={() => handleExpandir(clinica)}
+                  onLigar={() => handleLigar(clinica)}
+                  onNavegar={() => handleNavegar(clinica)}
+                  distancia={
+                    userLat !== null && userLng !== null
+                      ? haversineKm(userLat, userLng, clinica.lat, clinica.lng)
+                      : null
+                  }
+                />
+              ))
+            )}
+          </div>
+        )}
 
         {/* Info */}
         <div className="flex items-start gap-2 bg-teal/5 border border-teal/20 rounded-2xl p-3.5">
