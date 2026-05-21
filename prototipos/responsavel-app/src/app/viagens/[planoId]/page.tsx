@@ -3,7 +3,7 @@
 import { use, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
-import { calcularRoadmap, parseBR } from "@/services/travel-roadmap";
+import { calcularRoadmap, calcularRoadmapMultiLeg, parseBR } from "@/services/travel-roadmap";
 import { REGRAS_DESTINO } from "@/data/destinations";
 import { CustoEstimado } from "@/components/CustoEstimado";
 import { RoadmapView } from "@/components/RoadmapView";
@@ -70,14 +70,16 @@ interface ProximaAcao {
 function calcularEstagios(
   pet: ReturnType<typeof useAppStore.getState>["pets"][number],
   plano: ReturnType<typeof useAppStore.getState>["planosViagem"][number]
-): { estagios: Estagio[]; progresso: number; proximaAcao: ProximaAcao; roadmap: ReturnType<typeof calcularRoadmap> } {
+): { estagios: Estagio[]; progresso: number; proximaAcao: ProximaAcao; roadmap: ReturnType<typeof calcularRoadmap> | ReturnType<typeof calcularRoadmapMultiLeg> } {
   const hoje = new Date();
   hoje.setHours(0, 0, 0, 0);
   const dataEmbarque = parseBR(plano.dataEmbarque);
   const diasRestantes = differenceInDays(dataEmbarque, hoje);
 
   const regras = REGRAS_DESTINO[plano.destino];
-  const roadmap = calcularRoadmap(pet, plano.destino, plano.dataEmbarque, plano.id, { isPremium: plano.isPremium });
+  const roadmap = plano.trechos && plano.trechos.length > 1
+    ? calcularRoadmapMultiLeg(pet, plano.trechos, plano.id, { isPremium: plano.isPremium })
+    : calcularRoadmap(pet, plano.destino, plano.dataEmbarque, plano.id, { isPremium: plano.isPremium });
 
   // ── Estagio 1: Pet cadastrado ──────────────────────────────
   const temMicrochipValido = !!(pet.microchip && pet.microchip.length === 15);
@@ -422,11 +424,31 @@ export default function JourneyHubPage({
 
         {/* Identidade da viagem */}
         <div className="flex items-start justify-between">
-          <div>
-            <p className="text-sm text-gray-400">
-              {pet.nome.split(" ")[0]} → {regras.bandeira} {regras.nome}
-            </p>
-            <h1 className="text-xl font-bold text-navy mt-0.5">Jornada da Viagem</h1>
+          <div className="flex-1">
+            {plano.trechos && plano.trechos.length > 1 ? (
+              <div>
+                <p className="text-xs text-gray-400 mb-1">Rota com escala:</p>
+                <div className="text-sm text-gray-600 space-y-0.5">
+                  {plano.trechos.map((trecho, idx) => {
+                    const r = REGRAS_DESTINO[trecho.destino];
+                    return (
+                      <div key={idx} className="flex items-center gap-1">
+                        <span>{r.bandeira} {r.nome}</span>
+                        {idx < plano.trechos!.length - 1 && <span className="text-gray-400">→</span>}
+                      </div>
+                    );
+                  })}
+                </div>
+                <h1 className="text-xl font-bold text-navy mt-2">Jornada da Viagem</h1>
+              </div>
+            ) : (
+              <div>
+                <p className="text-sm text-gray-400">
+                  {pet.nome.split(" ")[0]} → {regras.bandeira} {regras.nome}
+                </p>
+                <h1 className="text-xl font-bold text-navy mt-0.5">Jornada da Viagem</h1>
+              </div>
+            )}
           </div>
           <div className="bg-surface rounded-2xl px-3 py-2 text-right">
             <p className="text-xs text-gray-400">Embarque</p>

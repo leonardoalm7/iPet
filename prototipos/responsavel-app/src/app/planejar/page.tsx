@@ -3,9 +3,9 @@
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
-import { calcularRoadmap, parseBR, formatBR } from "@/services/travel-roadmap";
+import { calcularRoadmap, calcularRoadmapMultiLeg, parseBR, formatBR } from "@/services/travel-roadmap";
 import { DESTINOS_LISTA, REGRAS_DESTINO, getDestinosAgrupados } from "@/data/destinations";
-import { Destino, Pet } from "@/domain/types";
+import { Destino, Pet, TrechoViagem } from "@/domain/types";
 import { CustoEstimado } from "@/components/CustoEstimado";
 import { track } from "@/services/analytics";
 import {
@@ -33,6 +33,7 @@ import {
   ScanLine,
   ChevronRight,
   PlusCircle,
+  X,
 } from "lucide-react";
 
 // ─── Tipos ───────────────────────────────────────────────────
@@ -53,6 +54,17 @@ interface Diagnostico {
   atrasoMeses: number; // meses que vai precisar adiar (se podeViajar=false)
   tarefasCriticas: string[]; // o que precisa fazer AGORA
   alertas: string[]; // avisos importantes
+  progresso: { feito: number; total: number };
+}
+
+interface DiagnosticoMultiLeg {
+  podeViajar: boolean;
+  dataLiberacaoReal: Date;
+  diasAteMeta: number;
+  diasAteLibera: number;
+  atrasoMeses: number;
+  tarefasCriticas: string[];
+  alertas: string[];
   progresso: { feito: number; total: number };
 }
 
@@ -158,6 +170,57 @@ function calcularDiagnostico(
   };
 }
 
+function calcularDiagnosticoMultiLeg(
+  pet: Pet,
+  trechos: TrechoViagem[],
+  metaDate: Date
+): DiagnosticoMultiLeg {
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+
+  const diasAteMeta = differenceInDays(metaDate, hoje);
+
+  // Calcula roadmap multi-leg usando a data meta
+  const dataEmbarqueStr = formatBR(metaDate);
+  const roadmap = calcularRoadmapMultiLeg(pet, trechos, "preview");
+
+  // Data de liberação é o máximo entre os trechos (já vem do roadmap mesclado)
+  const dataLiberacao = roadmap.dataLiberacao ? parseBR(roadmap.dataLiberacao) : addDays(hoje, 30);
+  const dataEmbarqueMinimo = addDays(dataLiberacao, 2);
+
+  const diasAteLibera = differenceInDays(dataEmbarqueMinimo, hoje);
+  const podeViajar = diasAteMeta >= diasAteLibera;
+  const atrasoMeses = podeViajar
+    ? 0
+    : Math.ceil((diasAteLibera - diasAteMeta) / 30);
+
+  // Tarefas críticas vêm do roadmap mesclado
+  const tarefasCriticas = roadmap.tarefas
+    .filter((t) => ["URGENTE", "CRITICO"].includes(t.status))
+    .map((t) => t.descricao);
+
+  const alertas: string[] = [];
+  if (!podeViajar) {
+    alertas.push(
+      `Data escolhida não é viável. Embarque mais cedo possível: ${format(dataEmbarqueMinimo, "d 'de' MMMM 'de' yyyy", { locale: ptBR })}`
+    );
+  }
+
+  const tarefasDocs = roadmap.tarefas.filter((t) => t.id !== "cvi");
+  const feito = tarefasDocs.filter((t) => t.concluida).length;
+
+  return {
+    podeViajar,
+    dataLiberacaoReal: dataEmbarqueMinimo,
+    diasAteMeta,
+    diasAteLibera,
+    atrasoMeses,
+    tarefasCriticas,
+    alertas,
+    progresso: { feito, total: tarefasDocs.length },
+  };
+}
+
 // ─── Gerador de meses ─────────────────────────────────────────
 
 function gerarMeses(quantidade = 24) {
@@ -181,23 +244,33 @@ export default function PlanejarPage() {
 
   const [passo, setPasso] = useState<Passo>(pets.length === 1 ? "destino" : "pet");
   const [petId, setPetId] = useState<string>(pets[0]?.id ?? "");
-  const [destino, setDestino] = useState<Destino | null>(null);
+  const [trechos, setTrechos] = useState<TrechoViagem[]>([]);
   const [metaDate, setMetaDate] = useState<Date | null>(null);
   const [salvando, setSalvando] = useState(false);
+  const [adicionandoEscala, setAdicionandoEscala] = useState(false);
 
   const pet = pets.find((p) => p.id === petId);
   const meses = useMemo(() => gerarMeses(24), []);
 
   const diagnostico = useMemo(() => {
-    if (!pet || !destino || !metaDate) return null;
-    return calcularDiagnostico(pet, destino, metaDate);
-  }, [pet, destino, metaDate]);
+    if (!pet || trechos.length === 0 || !metaDate) return null;
+    if (trechos.length === 1) {
+      return calcularDiagnostico(pet, trechos[0].destino, metaDate);
+    }
+    return calcularDiagnosticoMultiLeg(pet, trechos, metaDate);
+  }, [pet, trechos, metaDate]);
 
   function voltar() {
     if (passo === "destino") {
       if (pets.length > 1) setPasso("pet");
       else router.back();
-    } else if (passo === "quando") setPasso("destino");
+    } else if (passo === "quando") {
+      if (adicionandoEscala) {
+        setAdicionandoEscala(false);
+      } else {
+        setPasso("destino");
+      }
+    }
     else if (passo === "resultado") setPasso("quando");
     else router.back();
   }
@@ -208,8 +281,24 @@ export default function PlanejarPage() {
   }
 
   function avancarParaQuando(d: Destino) {
-    setDestino(d);
+    setTrechos([{ destino: d, dataEmbarque: "" }]);
+    setAdicionandoEscala(false);
     setPasso("quando");
+  }
+
+  function adicionarEscala(d: Destino) {
+    if (trechos.length >= 3) return; // máx 3 trechos
+    setTrechos([...trechos, { destino: d, dataEmbarque: "" }]);
+    setAdicionandoEscala(false);
+  }
+
+  function removerEscala(index: number) {
+    if (trechos.length === 1) {
+      setPasso("destino");
+      setTrechos([]);
+    } else {
+      setTrechos(trechos.filter((_, i) => i !== index));
+    }
   }
 
   function avancarParaResultado(date: Date) {
@@ -218,29 +307,41 @@ export default function PlanejarPage() {
   }
 
   function salvarEContinuar() {
-    if (!pet || !destino || !metaDate || salvando) return;
+    if (!pet || trechos.length === 0 || !metaDate || salvando) return;
     setSalvando(true);
 
     const dataEmbarqueStr = formatBR(metaDate);
+    const trechosComData = trechos.map((t, i) => ({
+      ...t,
+      dataEmbarque: i === 0 ? dataEmbarqueStr : t.dataEmbarque || dataEmbarqueStr,
+    }));
 
-    // Evita duplicata
+    // Verificar duplicata (por destino final e data primeiro voo)
+    const destinoFinal = trechosComData[trechosComData.length - 1].destino;
+    const dataEmbarquePrimeiro = trechosComData[0].dataEmbarque;
+
     const jaExiste = planosViagem.some(
-      (p) => p.petId === pet.id && p.destino === destino && p.dataEmbarque === dataEmbarqueStr
+      (p) => p.petId === pet.id && p.destino === destinoFinal && p.dataEmbarque === dataEmbarquePrimeiro
     );
 
     let planoId: string;
     if (jaExiste) {
       planoId = planosViagem.find(
-        (p) => p.petId === pet.id && p.destino === destino && p.dataEmbarque === dataEmbarqueStr
+        (p) => p.petId === pet.id && p.destino === destinoFinal && p.dataEmbarque === dataEmbarquePrimeiro
       )!.id;
     } else {
-      const novoPlano = criarPlanoViagem({ petId: pet.id, destino, dataEmbarque: dataEmbarqueStr });
+      const novoPlano = criarPlanoViagem({
+        petId: pet.id,
+        destino: destinoFinal,
+        dataEmbarque: dataEmbarquePrimeiro,
+        trechos: trechosComData,
+      });
       planoId = novoPlano.id;
     }
 
-    track("destino_selecionado", { destino });
-    const preview = calcularRoadmap(pet, destino, dataEmbarqueStr, "preview");
-    track("roadmap_gerado", { destino, qtdTarefas: preview.tarefas.length });
+    track("destino_selecionado", { destino: destinoFinal });
+    const preview = calcularRoadmapMultiLeg(pet, trechosComData, "preview");
+    track("roadmap_gerado", { destino: destinoFinal, qtdTarefas: preview.tarefas.length });
     router.push(`/viagens/${planoId}`);
   }
 
@@ -298,26 +399,37 @@ export default function PlanejarPage() {
               onSelecionar={avancarParaDestino}
             />
           )}
-          {passo === "destino" && (
+          {passo === "destino" && !adicionandoEscala && (
             <PassoDestino
               key="destino"
-              destinoAtual={destino}
+              destinoAtual={null}
               onSelecionar={avancarParaQuando}
             />
           )}
-          {passo === "quando" && (
-            <PassoQuando
+          {passo === "destino" && adicionandoEscala && (
+            <PassoDestino
+              key="destino-adicional"
+              destinoAtual={null}
+              onSelecionar={adicionarEscala}
+            />
+          )}
+          {passo === "quando" && trechos.length > 0 && (
+            <PassoQuandoMultiLeg
               key="quando"
+              trechos={trechos}
               meses={meses}
               metaDateAtual={metaDate}
               onSelecionar={avancarParaResultado}
+              onAdicionarEscala={() => setAdicionandoEscala(true)}
+              onRemoverEscala={removerEscala}
+              podeAdicionarEscala={trechos.length < 3}
             />
           )}
-          {passo === "resultado" && diagnostico && pet && destino && metaDate && (
-            <PassoResultado
+          {passo === "resultado" && diagnostico && pet && trechos.length > 0 && metaDate && (
+            <PassoResultadoMultiLeg
               key="resultado"
               pet={pet}
-              destino={destino}
+              trechos={trechos}
               metaDate={metaDate}
               diagnostico={diagnostico}
               onSalvar={salvarEContinuar}
@@ -562,6 +674,100 @@ function PassoQuando({
   );
 }
 
+// ─── Passo 3b: Quando (Multi-leg) ────────────────────────────
+
+function PassoQuandoMultiLeg({
+  trechos,
+  meses,
+  metaDateAtual,
+  onSelecionar,
+  onAdicionarEscala,
+  onRemoverEscala,
+  podeAdicionarEscala,
+}: {
+  trechos: TrechoViagem[];
+  meses: ReturnType<typeof gerarMeses>;
+  metaDateAtual: Date | null;
+  onSelecionar: (date: Date) => void;
+  onAdicionarEscala: () => void;
+  onRemoverEscala: (index: number) => void;
+  podeAdicionarEscala: boolean;
+}) {
+  const [selecionado, setSelecionado] = useState<string | null>(
+    metaDateAtual ? format(metaDateAtual, "yyyy-MM") : null
+  );
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      className="pt-4 space-y-4"
+    >
+      <div>
+        <h2 className="text-xl font-bold text-navy mb-1">Quando você quer viajar?</h2>
+        <p className="text-gray-500 text-sm">
+          Seu primeiro embarque — a rota será calculada para o destino final.
+        </p>
+      </div>
+
+      {/* Chips de trechos selecionados */}
+      <div className="flex flex-wrap gap-2">
+        {trechos.map((trecho, idx) => {
+          const regras = REGRAS_DESTINO[trecho.destino];
+          return (
+            <div key={idx} className="flex items-center gap-2 bg-teal/10 border border-teal rounded-full px-3 py-1.5">
+              <span className="text-sm">{regras.bandeira} {regras.nome}</span>
+              <button
+                onClick={() => onRemoverEscala(idx)}
+                className="hover:opacity-60 transition-opacity"
+              >
+                <X className="w-3.5 h-3.5 text-teal" />
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="grid grid-cols-3 gap-2">
+        {meses.map((mes) => (
+          <button
+            key={mes.key}
+            onClick={() => {
+              setSelecionado(mes.key);
+              const ultimoDia = endOfMonth(mes.date);
+              setTimeout(() => onSelecionar(ultimoDia), 200);
+            }}
+            className={`py-3 px-2 rounded-2xl border text-center transition-all ${
+              selecionado === mes.key
+                ? "border-teal bg-teal/10 scale-[0.97]"
+                : "border-border bg-white/60 hover:border-border"
+            }`}
+          >
+            <p className={`text-sm font-semibold capitalize ${
+              selecionado === mes.key ? "text-teal" : "text-gray-400"
+            }`}>
+              {mes.label.split(" ")[0]}
+            </p>
+            <p className="text-[11px] text-gray-400">{mes.label.split(" ")[1]}</p>
+          </button>
+        ))}
+      </div>
+
+      {/* Botão adicionar escala */}
+      {podeAdicionarEscala && (
+        <button
+          onClick={onAdicionarEscala}
+          className="flex items-center justify-center gap-2 w-full py-3.5 border border-dashed border-border rounded-2xl text-gray-400 text-sm hover:border-teal hover:text-teal transition-colors"
+        >
+          <PlusCircle className="w-4 h-4" />
+          Adicionar escala (máx 3 destinos)
+        </button>
+      )}
+    </motion.div>
+  );
+}
+
 // ─── Passo 4: Resultado ───────────────────────────────────────
 
 function PassoResultado({
@@ -704,6 +910,188 @@ function PassoResultado({
 
       {/* Estimativa de custo */}
       <CustoEstimado pet={pet} destino={destino} compacto />
+
+      {/* CTAs */}
+      <div className="space-y-3 pt-2">
+        <button
+          onClick={onSalvar}
+          disabled={salvando}
+          className="flex items-center justify-center gap-2 w-full bg-navy hover:bg-navy-light disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold py-4 rounded-2xl transition-colors"
+        >
+          {salvando ? (
+            <>
+              <Clock className="w-5 h-5 animate-spin" />
+              Montando seu roadmap...
+            </>
+          ) : (
+            <>
+              <Sparkles className="w-5 h-5" />
+              Montar meu roadmap completo
+            </>
+          )}
+        </button>
+
+        <button
+          onClick={onVoltar}
+          className="w-full py-3 border border-border rounded-2xl text-gray-500 text-sm hover:border-gray-600 transition-colors"
+        >
+          Tentar outra data
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Passo 4b: Resultado (Multi-leg) ──────────────────────────
+
+function PassoResultadoMultiLeg({
+  pet,
+  trechos,
+  metaDate,
+  diagnostico,
+  onSalvar,
+  onVoltar,
+  salvando,
+}: {
+  pet: Pet;
+  trechos: TrechoViagem[];
+  metaDate: Date;
+  diagnostico: DiagnosticoMultiLeg;
+  onSalvar: () => void;
+  onVoltar: () => void;
+  salvando: boolean;
+}) {
+  const destinoFinal = trechos[trechos.length - 1].destino;
+  const regras = REGRAS_DESTINO[destinoFinal];
+  const mesLabel = format(metaDate, "MMMM 'de' yyyy", { locale: ptBR });
+  const dataLiberacaoLabel = format(
+    diagnostico.dataLiberacaoReal,
+    "d 'de' MMMM 'de' yyyy",
+    { locale: ptBR }
+  );
+
+  // Build route label (e.g., "🇧🇷 Brasil → 🇵🇹 Portugal → 🇬🇧 Reino Unido")
+  const rotaLabel = trechos.map((t) => {
+    const r = REGRAS_DESTINO[t.destino];
+    return `${r.bandeira} ${r.nome}`;
+  }).join(" → ");
+
+  const tom =
+    !diagnostico.podeViajar
+      ? { cor: "orange", bg: "bg-orange-50", border: "border-orange-200" }
+      : diagnostico.tarefasCriticas.length > 0
+      ? { cor: "teal", bg: "bg-teal/5", border: "border-teal/20" }
+      : { cor: "emerald", bg: "bg-emerald-50", border: "border-emerald-200" };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
+      className="pt-4 space-y-4"
+    >
+      {/* Card de diagnóstico principal */}
+      <div className={`rounded-2xl border p-5 ${tom.bg} ${tom.border}`}>
+        <div className="flex items-start gap-2 mb-3">
+          <span className="text-2xl">{regras.bandeira}</span>
+          <div className="flex-1">
+            <p className="text-xs text-gray-400 capitalize">{mesLabel}</p>
+            <p className="text-sm font-bold text-navy mb-1">
+              {pet.nome} — Rota
+            </p>
+            <p className="text-xs text-gray-600">{rotaLabel}</p>
+          </div>
+        </div>
+
+        {/* Veredicto */}
+        {diagnostico.podeViajar ? (
+          <div className="flex items-start gap-2.5 mb-4">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-emerald-600 font-semibold text-sm">
+                {diagnostico.tarefasCriticas.length === 0
+                  ? "Tudo pronto! Você pode embarcar."
+                  : "Viável — mas você precisa agir já."}
+              </p>
+              <p className="text-gray-500 text-xs mt-0.5">
+                Você tem {diagnostico.diasAteMeta} dias.
+                Data mínima de embarque: {dataLiberacaoLabel}.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="flex items-start gap-2.5 mb-4">
+            <AlertTriangle className="w-5 h-5 text-ipet-orange flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-ipet-orange font-semibold text-sm">
+                Data inviável — adie ~{diagnostico.atrasoMeses}{" "}
+                {diagnostico.atrasoMeses === 1 ? "mês" : "meses"}
+              </p>
+              <p className="text-gray-500 text-xs mt-0.5">
+                Embarque mais cedo possível: {dataLiberacaoLabel}.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Linha do tempo compacta */}
+        <div className="space-y-2">
+          <p className="text-[11px] text-gray-400 uppercase tracking-wider mb-1">
+            O que fazer primeiro
+          </p>
+          {diagnostico.tarefasCriticas.length === 0 ? (
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <p className="text-sm text-emerald-600">
+                {diagnostico.progresso.feito}/{diagnostico.progresso.total} documentos já em ordem
+              </p>
+            </div>
+          ) : (
+            diagnostico.tarefasCriticas.slice(0, 3).map((t, i) => (
+              <div key={i} className="flex items-start gap-2">
+                <span className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">
+                  {i + 1}
+                </span>
+                <p className="text-sm text-gray-600 leading-snug">{t}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+
+      {/* Alertas adicionais */}
+      {diagnostico.alertas.map((a, i) => (
+        <div
+          key={i}
+          className="flex items-start gap-2.5 bg-yellow-50 border border-yellow-200 rounded-2xl p-3.5"
+        >
+          <AlertTriangle className="w-4 h-4 text-yellow-500 flex-shrink-0 mt-0.5" />
+          <p className="text-yellow-600 text-xs leading-relaxed">{a}</p>
+        </div>
+      ))}
+
+      {/* Contador de dias */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="bg-white border border-border rounded-2xl p-4 text-center">
+          <p className="text-2xl font-bold text-navy">{diagnostico.diasAteMeta}</p>
+          <p className="text-xs text-gray-400 mt-0.5">dias até sua meta</p>
+        </div>
+        <div className={`rounded-2xl p-4 text-center border ${
+          diagnostico.podeViajar
+            ? "bg-emerald-50 border-emerald-200"
+            : "bg-orange-50 border-orange-200"
+        }`}>
+          <p className={`text-2xl font-bold ${
+            diagnostico.podeViajar ? "text-emerald-600" : "text-ipet-orange"
+          }`}>
+            {diagnostico.diasAteLibera}
+          </p>
+          <p className="text-xs text-gray-400 mt-0.5">dias mínimos necessários</p>
+        </div>
+      </div>
+
+      {/* Estimativa de custo */}
+      <CustoEstimado pet={pet} destino={destinoFinal} compacto />
 
       {/* CTAs */}
       <div className="space-y-3 pt-2">
