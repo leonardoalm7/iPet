@@ -54,6 +54,7 @@ export const RACAS_CATALOGADAS: RacaCatalogada[] = [
   { nome: "Cocker Spaniel Americano", especie: "CAO", aliases: ["american cocker spaniel"] },
   { nome: "Cocker Spaniel Inglês", especie: "CAO", aliases: ["english cocker spaniel"] },
   { nome: "Collie", especie: "CAO" },
+  { nome: "Coton de Tulear", especie: "CAO", aliases: ["cotón de tulear", "cotão de tulear", "coton", "royal dog of madagascar"] },
   { nome: "Dachshund", especie: "CAO", aliases: ["salsicha", "teckel"] },
   { nome: "Dálmata", especie: "CAO", aliases: ["dalmatian"] },
   { nome: "Doberman", especie: "CAO", aliases: ["dobermann"] },
