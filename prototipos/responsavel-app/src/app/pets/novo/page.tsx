@@ -7,6 +7,7 @@ import { Especie, TipoPet } from "@/domain/types";
 import { ArrowLeft, ArrowRight, Check, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DateInput } from "@/components/DateInput";
+import { RacaCombobox } from "@/components/RacaCombobox";
 import { UploadCarteiraVacina } from "@/components/UploadCarteiraVacina";
 import { UploadCertificadoMicrochip } from "@/components/UploadCertificadoMicrochip";
 import { track } from "@/services/analytics";
@@ -206,7 +207,12 @@ function StepIdentificacao({ form, update }: { form: FormData; update: (k: keyof
       </div>
 
       <Field label="Nome *" value={form.nome} onChange={(v) => update("nome", v)} placeholder="Ex: José Manuel" />
-      <Field label="Raça *" value={form.raca} onChange={(v) => update("raca", v)} placeholder="Ex: Chihuahua" />
+      <RacaCombobox
+        valor={form.raca}
+        onChange={(v) => update("raca", v)}
+        especie={form.especie}
+        required
+      />
 
       <div className="grid grid-cols-2 gap-3">
         <DateInput label="Data de nascimento *" value={form.dataNascimento} onChange={(v) => update("dataNascimento", v)} />
