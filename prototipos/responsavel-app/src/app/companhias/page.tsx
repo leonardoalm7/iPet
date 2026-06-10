@@ -26,6 +26,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const VEREDICTO_CONFIG: Record<
   VeredictoCia,
@@ -93,9 +94,11 @@ export default function CompanhiasPage() {
 }
 
 function CompanhiasContent() {
-  const { pets, planosViagem } = useAppStore();
+  const { pets, planosViagem, atualizarPlanoViagem } = useAppStore();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const petIdParam = searchParams.get("petId");
+  const planoIdParam = searchParams.get("planoId");
 
   const petValido = petIdParam && pets.find((p) => p.id === petIdParam);
   const [petSelecionadoId, setPetSelecionadoId] = useState<string>(
@@ -105,6 +108,12 @@ function CompanhiasContent() {
   const [modo, setModo] = useState<ModoView>("lista");
   const [comparando, setComparando] = useState<Set<string>>(new Set());
   const [filtroVeredicto, setFiltroVeredicto] = useState<VeredictoCia | "TODOS">("TODOS");
+
+  function selecionarCompanhia(ciaId: string) {
+    if (!planoIdParam) return;
+    atualizarPlanoViagem(planoIdParam, { companhiaAereaId: ciaId });
+    router.push(`/viagens/${planoIdParam}`);
+  }
 
   const pet = pets.find((p) => p.id === petSelecionadoId);
 
@@ -149,18 +158,20 @@ function CompanhiasContent() {
       {/* Header */}
       <header className="px-5 pt-14 pb-4">
         <Link
-          href="/"
+          href={planoIdParam ? `/viagens/${planoIdParam}` : "/"}
           className="flex items-center gap-1 text-teal text-sm mb-4"
         >
           <ArrowLeft className="w-4 h-4" />
-          Início
+          {planoIdParam ? "Voltar ao plano" : "Início"}
         </Link>
         <div className="flex items-center gap-2 mb-1">
           <Plane className="w-6 h-6 text-teal" />
           <h1 className="text-2xl font-bold text-navy">Companhias Aéreas</h1>
         </div>
         <p className="text-gray-500 text-sm">
-          {COMPANHIAS_AEREAS.length} companhias mapeadas
+          {planoIdParam
+            ? "Selecione a companhia para este plano de viagem"
+            : `${COMPANHIAS_AEREAS.length} companhias mapeadas`}
         </p>
       </header>
 
@@ -337,6 +348,7 @@ function CompanhiasContent() {
                         }
                       }}
                       pet={pet}
+                      onSelecionar={planoIdParam ? () => selecionarCompanhia(resultado.companhia.id) : undefined}
                     />
                   </div>
                 </div>
@@ -403,12 +415,14 @@ function CiaCard({
   expandido,
   onToggle,
   pet,
+  onSelecionar,
 }: {
   resultado: ResultadoVerificacao;
   index: number;
   expandido: boolean;
   onToggle: () => void;
   pet: { peso: number };
+  onSelecionar?: () => void;
 }) {
   const cfg = VEREDICTO_CONFIG[resultado.veredicto];
   const Icon = cfg.icon;
@@ -574,6 +588,16 @@ function CiaCard({
                       </div>
                     ))}
                   </div>
+                )}
+
+                {/* Botão de seleção para plano de viagem */}
+                {onSelecionar && resultado.veredicto !== "NAO_ACEITO" && (
+                  <button
+                    onClick={onSelecionar}
+                    className="w-full mt-1 py-2.5 bg-teal text-white text-sm font-semibold rounded-xl hover:bg-teal/90 transition-colors"
+                  >
+                    Selecionar {cia.nome} para este plano
+                  </button>
                 )}
               </div>
             </motion.div>

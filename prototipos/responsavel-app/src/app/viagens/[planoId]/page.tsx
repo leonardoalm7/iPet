@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAppStore } from "@/store/app-store";
 import { calcularRoadmap, calcularRoadmapMultiLeg, parseBR } from "@/services/travel-roadmap";
 import { REGRAS_DESTINO } from "@/data/destinations";
+import { COMPANHIAS_AEREAS } from "@/data/airlines";
 import { CustoEstimado } from "@/components/CustoEstimado";
 import { RoadmapView } from "@/components/RoadmapView";
 import { RoadmapTimeline } from "@/components/RoadmapTimeline";
@@ -108,6 +109,9 @@ function calcularEstagios(
 
   // ── Estagio 4: Passagem comprada ───────────────────────────
   const temCompanhia = !!plano.companhiaAereaId;
+  const companhiaSelecionada = plano.companhiaAereaId
+    ? COMPANHIAS_AEREAS.find((c) => c.id === plano.companhiaAereaId)
+    : undefined;
   // companhia selecionada = "em andamento"; sem companhia = não iniciado
   const estado4: EstadoEstagio = temCompanhia ? "EM_ANDAMENTO" : "NAO_INICIADO";
 
@@ -211,15 +215,15 @@ function calcularEstagios(
       id: "passagem",
       numero: 4,
       titulo: "Passagem aérea",
-      descricao: temCompanhia
-        ? "Companhia selecionada. Adicione o número do voo quando comprar."
+      descricao: companhiaSelecionada
+        ? `${companhiaSelecionada.nome} selecionada. Adicione o número do voo quando comprar.`
         : "Veja quais companhias aceitam seu pet.",
       estado: estado4,
       ctaLabel: temCompanhia ? "Trocar companhia" : "Ver companhias",
-      ctaHref: "/companhias",
+      ctaHref: `/companhias?petId=${pet.id}&planoId=${plano.id}`,
       servicoiPet: {
         label: "Quais cias aceitam meu pet?",
-        href: "/companhias",
+        href: `/companhias?petId=${pet.id}&planoId=${plano.id}`,
         icon: "✈️",
       },
     },
@@ -316,7 +320,7 @@ function calcularEstagios(
     proximaAcao = {
       titulo: "Compre a passagem aérea",
       subtitulo: "Confirme a companhia e o número do voo para garantir compliance com as regras do transportador.",
-      ctaPrimario: { label: "Ver companhias que aceitam pets", href: `/viagem/${pet.id}` },
+      ctaPrimario: { label: "Ver companhias que aceitam pets", href: `/companhias?petId=${pet.id}&planoId=${plano.id}` },
     };
   } else if (estado6 === "BLOQUEADO") {
     proximaAcao = {

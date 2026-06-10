@@ -42,6 +42,7 @@ interface AppState {
       petIds: string[]; // mínimo 1 pet
     }
   ) => PlanoViagem;
+  atualizarPlanoViagem: (id: string, dados: Partial<PlanoViagem>) => void;
   removerPlanoViagem: (id: string) => void;
   getPlanosPorPet: (petId: string) => PlanoViagem[];
   ativarPremium: (planoId: string, pagamentoId: string) => void;
@@ -146,6 +147,13 @@ export const useAppStore = create<AppState>()(
         }));
         return plano;
       },
+
+      atualizarPlanoViagem: (id, dados) =>
+        set((s) => ({
+          planosViagem: s.planosViagem.map((p) =>
+            p.id === id ? { ...p, ...dados } : p
+          ),
+        })),
 
       removerPlanoViagem: (id) =>
         set((s) => ({
