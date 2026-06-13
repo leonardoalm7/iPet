@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s \"https://api.trello.com*)",
+      "Bash(curl -s http://localhost*)"
+    ]
+  }
+}

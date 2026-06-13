@@ -1,0 +1,5 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  # prototipos/responsavel-app continua funcionando de forma independente
+  # Migration para apps/app é um sprint dedicado
