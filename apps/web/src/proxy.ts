@@ -1,17 +1,18 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_PATHS = [
+const AUTH_PATHS = [
   "/auth/entrar",
   "/auth/cadastro",
   "/auth/verificar-email",
   "/auth/callback",
   "/auth/esqueci-senha",
   "/auth/redefinir-senha",
-  "/lgpd",
 ];
+const OPEN_PATHS = ["/lgpd", "/verificar"];
+const PUBLIC_PATHS = [...AUTH_PATHS, ...OPEN_PATHS];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isApiPath = pathname.startsWith("/api/");
 
@@ -40,11 +41,12 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
   const isPublicPath = PUBLIC_PATHS.some((p) => pathname.startsWith(p));
+  const isAuthPath = AUTH_PATHS.some((p) => pathname.startsWith(p));
 
   if (isApiPath && !user) {
     return Response.json({ ok: false, erro: "Não autenticado." }, { status: 401 });
   }
-  if (isPublicPath && user) {
+  if (isAuthPath && user) {
     return NextResponse.redirect(new URL("/", request.url));
   }
   if (!isPublicPath && !user) {
@@ -67,5 +69,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
 };

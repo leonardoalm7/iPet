@@ -15,7 +15,7 @@ const TABS = [
 export function BottomNav() {
   const pathname = usePathname();
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-border z-40 safe-area-pb">
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-bone/90 backdrop-blur-lg border-t border-border z-40 safe-area-pb">
       <div className="flex">
         {TABS.map(({ label, href, icon: Icon }) => {
           const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -23,12 +23,28 @@ export function BottomNav() {
             <Link
               key={href}
               href={href}
-              className={`flex-1 flex flex-col items-center py-3 gap-0.5 text-xs font-medium transition-colors ${
-                active ? "text-teal" : "text-navy/40"
-              }`}
+              className="flex-1 flex flex-col items-center pt-2.5 pb-2 gap-1 group"
             >
-              <Icon size={22} strokeWidth={active ? 2.5 : 1.8} />
-              {label}
+              <div
+                className={`relative h-9 w-12 flex items-center justify-center rounded-full transition-all ${
+                  active ? "bg-ink" : ""
+                }`}
+              >
+                <Icon
+                  size={18}
+                  strokeWidth={active ? 1.75 : 1.5}
+                  className={`transition-colors ${
+                    active ? "text-bone" : "text-ink/45 group-hover:text-ink"
+                  }`}
+                />
+              </div>
+              <span
+                className={`text-[10px] tracking-wider transition-colors ${
+                  active ? "text-ink font-medium" : "text-ink/45"
+                }`}
+              >
+                {label}
+              </span>
             </Link>
           );
         })}

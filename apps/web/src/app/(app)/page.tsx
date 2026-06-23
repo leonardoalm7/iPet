@@ -1,21 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { useAppStore, useAuthStore, calcularRoadmap } from "@ipet/core";
-import { PawPrint, Plus, Map, ArrowRight, AlertTriangle, CheckCircle2, Clock } from "lucide-react";
+import { useAppStore, useAuthStore } from "@ipet/core";
+import type { Pet } from "@ipet/core";
+import {
+  PawPrint,
+  Plus,
+  ArrowRight,
+  AlertTriangle,
+  CheckCircle2,
+  Map,
+  BookOpen,
+  Plane,
+  Dog,
+  Cat,
+  Calendar,
+  Sparkles,
+} from "lucide-react";
 import { format, parse, differenceInDays } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { motion } from "framer-motion";
 
-function StatusBadge({ status }: { status: string }) {
-  const map: Record<string, { label: string; className: string }> = {
-    APTO: { label: "Apto", className: "bg-green-100 text-green-700" },
-    PENDENTE: { label: "Pendente", className: "bg-yellow-100 text-yellow-700" },
-    URGENTE: { label: "Urgente", className: "bg-orange-100 text-orange-700" },
-    CRITICO: { label: "Crítico", className: "bg-red-100 text-red-700" },
-    INAPTO: { label: "Inapto", className: "bg-red-200 text-red-800" },
-  };
-  const { label, className } = map[status] ?? { label: status, className: "bg-surface text-navy/60" };
-  return <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${className}`}>{label}</span>;
+const stagger = {
+  initial: {},
+  animate: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+};
+const fadeUp = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
+function PetGlyph({ pet, className = "" }: { pet: Pet; className?: string }) {
+  const Icon = pet.especie === "CAO" ? Dog : pet.especie === "GATO" ? Cat : PawPrint;
+  return <Icon strokeWidth={1.5} className={className} />;
 }
 
 export default function HomePage() {
@@ -24,7 +41,6 @@ export default function HomePage() {
 
   const nome = perfil?.nomeCompleto?.split(" ")[0] ?? "Tutor";
 
-  // Viagens ativas (data de embarque no futuro)
   const hoje = new Date();
   const viagensAtivas = planosViagem
     .filter((p) => {
@@ -37,35 +53,78 @@ export default function HomePage() {
       return da.getTime() - db.getTime();
     });
 
+  const compliancePending = pets.filter((p) => !p.vacina || !p.microchip).length;
+  const docsCount = pets.reduce((acc) => acc, 0); // placeholder
+
   return (
-    <div className="space-y-8">
-      {/* Saudação */}
-      <div>
-        <h2 className="text-2xl font-bold text-navy">Olá, {nome} 👋</h2>
-        <p className="text-navy/60 mt-1">Bem-vindo ao iPet. Gerencie a saúde e viagens dos seus pets.</p>
-      </div>
+    <motion.div
+      variants={stagger}
+      initial="initial"
+      animate="animate"
+      className="space-y-12 pb-8"
+    >
+      {/* ───────── Saudação editorial ───────── */}
+      <motion.section variants={fadeUp}>
+        <p className="kicker text-terracotta">
+          {format(hoje, "EEEE · dd 'de' MMMM", { locale: ptBR })}
+        </p>
+        <h1 className="font-display text-[clamp(2.25rem,4vw,3.25rem)] leading-[1.04] font-light tracking-tight text-ink mt-3">
+          Olá, <em className="font-display-soft italic text-sage">{nome}</em>.
+        </h1>
+        <p className="text-muted text-[15px] mt-3 max-w-xl leading-relaxed">
+          Acompanhe seus pets, planeje viagens internacionais e mantenha
+          documentos em conformidade — tudo em um só lugar.
+        </p>
+      </motion.section>
 
-      {/* Cards de resumo */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <SummaryCard label="Pets cadastrados" value={pets.length} icon="🐾" href="/passaportes" />
-        <SummaryCard label="Viagens ativas" value={viagensAtivas.length} icon="✈️" href="/viagens" />
-        <SummaryCard label="Compliance" value={pets.length > 0 ? "Ver status" : "—"} icon="📋" href="/passaportes" isText />
-        <SummaryCard label="Documentos" value="Ver todos" icon="📄" href="/passaportes" isText />
-      </div>
+      {/* ───────── Resumo ───────── */}
+      <motion.section
+        variants={fadeUp}
+        className="grid grid-cols-2 lg:grid-cols-4 gap-4"
+      >
+        <StatCard
+          kicker="Cadastrados"
+          value={pets.length}
+          label="pets"
+          Icon={PawPrint}
+          href="/passaportes"
+        />
+        <StatCard
+          kicker="Em rota"
+          value={viagensAtivas.length}
+          label="viagens"
+          Icon={Plane}
+          href="/viagens"
+        />
+        <StatCard
+          kicker="Atenção"
+          value={compliancePending}
+          label="itens pendentes"
+          Icon={AlertTriangle}
+          href="/passaportes"
+          tone={compliancePending > 0 ? "warn" : undefined}
+        />
+        <StatCard
+          kicker="Biblioteca"
+          value={70}
+          label="países cobertos"
+          Icon={BookOpen}
+          href="/regras"
+        />
+      </motion.section>
 
-      {/* Seção de pets */}
-      <section>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-navy">Seus Pets</h3>
-          <Link href="/passaportes" className="text-sm text-teal font-medium hover:underline flex items-center gap-1">
-            Ver todos <ArrowRight size={14} />
-          </Link>
-        </div>
+      {/* ───────── Pets ───────── */}
+      <motion.section variants={fadeUp}>
+        <SectionHead
+          kicker="Quem voa"
+          title="Seus pets"
+          link={{ href: "/passaportes", label: "Ver todos" }}
+        />
         {pets.length === 0 ? (
           <EmptyState
-            icon={<PawPrint size={32} className="text-navy/30" />}
+            Icon={PawPrint}
             title="Nenhum pet cadastrado"
-            desc="Adicione seu primeiro pet para começar."
+            desc="Comece adicionando o primeiro companheiro de viagem."
             action={{ label: "Adicionar pet", href: "/pets/novo" }}
           />
         ) : (
@@ -75,160 +134,363 @@ export default function HomePage() {
             ))}
             <Link
               href="/pets/novo"
-              className="border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center gap-2 py-8 text-navy/40 hover:border-teal hover:text-teal transition-colors"
+              className="group border border-dashed border-border rounded-2xl flex flex-col items-center justify-center gap-2.5 py-10 text-muted hover:border-ink hover:text-ink transition-all bg-paper/40 hover:bg-paper"
             >
-              <Plus size={24} />
-              <span className="text-sm font-medium">Novo pet</span>
+              <Plus
+                size={22}
+                strokeWidth={1.5}
+                className="transition-transform duration-500 ease-[var(--ease-editorial)] group-hover:rotate-90"
+              />
+              <span className="text-[13px] font-medium">Novo pet</span>
             </Link>
           </div>
         )}
-      </section>
+      </motion.section>
 
-      {/* Viagens ativas */}
+      {/* ───────── Próximas viagens ───────── */}
       {viagensAtivas.length > 0 && (
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-navy">Próximas Viagens</h3>
-            <Link href="/viagens" className="text-sm text-teal font-medium hover:underline flex items-center gap-1">
-              Ver todas <ArrowRight size={14} />
-            </Link>
-          </div>
+        <motion.section variants={fadeUp}>
+          <SectionHead
+            kicker="No horizonte"
+            title="Próximas viagens"
+            link={{ href: "/viagens", label: "Ver todas" }}
+          />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {viagensAtivas.slice(0, 4).map((plano) => {
               const petsDoPlano = planosViagemPets
                 .filter((pvp) => pvp.planoViagemId === plano.id)
                 .map((pvp) => pets.find((p) => p.id === pvp.petId))
-                .filter(Boolean) as typeof pets;
-              const dataEmbarque = parse(plano.dataEmbarque, "dd/MM/yyyy", new Date());
+                .filter(Boolean) as Pet[];
+              const dataEmbarque = parse(
+                plano.dataEmbarque,
+                "dd/MM/yyyy",
+                new Date()
+              );
               const diasRestantes = differenceInDays(dataEmbarque, hoje);
+              const urgencia =
+                diasRestantes <= 7
+                  ? "bg-[#FBEBE8] text-[#8C3329]"
+                  : diasRestantes <= 30
+                  ? "bg-terracotta-soft text-terracotta-deep"
+                  : "bg-sage-soft text-sage-deep";
               return (
                 <Link
                   key={plano.id}
                   href={`/viagens/${plano.id}`}
-                  className="bg-white rounded-xl border border-border p-5 hover:shadow-md transition-shadow"
+                  className="group bg-paper rounded-2xl border border-border p-6 hover:border-ink hover:shadow-[var(--shadow-soft)] transition-all"
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <p className="font-semibold text-navy capitalize">{plano.destino.replace(/_/g, " ").toLowerCase()}</p>
-                      <p className="text-sm text-navy/60 mt-0.5">
-                        {format(dataEmbarque, "d 'de' MMMM yyyy", { locale: ptBR })}
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="min-w-0">
+                      <p className="kicker text-muted mb-1.5">Destino</p>
+                      <p className="font-display text-xl text-ink leading-tight tracking-tight capitalize truncate">
+                        {plano.destino.replace(/_/g, " ").toLowerCase()}
+                      </p>
+                      <p className="text-[12px] text-muted mt-1.5 flex items-center gap-1.5">
+                        <Calendar size={11} strokeWidth={1.5} />
+                        <span className="font-mono">
+                          {format(dataEmbarque, "dd MMM yyyy", { locale: ptBR })}
+                        </span>
                       </p>
                     </div>
-                    <span className={`text-xs font-bold px-2 py-1 rounded-full ${diasRestantes <= 7 ? "bg-red-100 text-red-700" : diasRestantes <= 30 ? "bg-orange-100 text-orange-700" : "bg-teal-light text-teal"}`}>
+                    <span
+                      className={`shrink-0 text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full ${urgencia}`}
+                    >
                       {diasRestantes === 0 ? "Hoje" : `${diasRestantes}d`}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap pt-4 border-t border-border">
                     {petsDoPlano.map((p) => (
-                      <span key={p.id} className="text-xs bg-surface text-navy/70 px-2 py-0.5 rounded-full">{p.nome}</span>
+                      <span
+                        key={p.id}
+                        className="text-[11px] bg-bone-deep text-ink/70 px-2.5 py-1 rounded-full flex items-center gap-1.5"
+                      >
+                        <PetGlyph pet={p} className="w-3 h-3" />
+                        {p.nome}
+                      </span>
                     ))}
-                    {plano.isPremium && <span className="text-xs bg-ipet-orange/10 text-ipet-orange px-2 py-0.5 rounded-full ml-auto">Premium</span>}
+                    {plano.isPremium && (
+                      <span className="ml-auto text-[10px] font-mono uppercase tracking-widest text-terracotta-deep bg-terracotta-soft px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Sparkles size={10} strokeWidth={1.5} /> Premium
+                      </span>
+                    )}
                   </div>
                 </Link>
               );
             })}
           </div>
-        </section>
+        </motion.section>
       )}
 
-      {/* CTAs rápidos */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {/* ───────── CTAs ───────── */}
+      <motion.section
+        variants={fadeUp}
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+      >
         <QuickAction
-          icon="🗺️"
+          Icon={Map}
           title="Planejar nova viagem"
-          desc="Gere o roadmap de compliance para qualquer destino"
+          desc="Gere o roadmap de compliance para qualquer destino."
           href="/planejar"
-          color="teal"
+          variant="ink"
         />
         <QuickAction
-          icon="📋"
+          Icon={BookOpen}
           title="Regras por país"
-          desc="Consulte os requisitos sanitários de mais de 70 destinos"
+          desc="Consulte requisitos sanitários de mais de 70 destinos."
           href="/regras"
-          color="navy"
+          variant="paper"
         />
-      </section>
+      </motion.section>
+    </motion.div>
+  );
+}
+
+// ─────────────────────────── COMPONENTS ───────────────────────────
+
+function SectionHead({
+  kicker,
+  title,
+  link,
+}: {
+  kicker: string;
+  title: string;
+  link?: { href: string; label: string };
+}) {
+  return (
+    <header className="flex items-end justify-between mb-5 gap-4 flex-wrap">
+      <div>
+        <p className="kicker text-terracotta">{kicker}</p>
+        <h2 className="font-display text-2xl text-ink tracking-tight mt-1.5">
+          {title}
+        </h2>
+      </div>
+      {link && (
+        <Link
+          href={link.href}
+          className="text-[13px] text-ink/70 hover:text-ink link-underline flex items-center gap-1.5"
+        >
+          {link.label} <ArrowRight size={13} strokeWidth={1.5} />
+        </Link>
+      )}
+    </header>
+  );
+}
+
+function StatCard({
+  kicker,
+  value,
+  label,
+  Icon,
+  href,
+  tone,
+}: {
+  kicker: string;
+  value: number | string;
+  label: string;
+  Icon: typeof PawPrint;
+  href: string;
+  tone?: "warn";
+}) {
+  return (
+    <Link
+      href={href}
+      className="group bg-paper rounded-2xl border border-border p-5 hover:border-ink hover:shadow-[var(--shadow-soft)] transition-all"
+    >
+      <div className="flex items-start justify-between">
+        <p className="kicker text-muted">{kicker}</p>
+        <Icon
+          size={15}
+          strokeWidth={1.5}
+          className={`${
+            tone === "warn" ? "text-terracotta" : "text-ink/35"
+          } group-hover:text-ink transition-colors`}
+        />
+      </div>
+      <p
+        className={`font-display text-4xl leading-none tracking-tight mt-4 ${
+          tone === "warn" ? "text-terracotta-deep" : "text-ink"
+        }`}
+      >
+        {value}
+      </p>
+      <p className="text-[11px] text-muted mt-2">{label}</p>
+    </Link>
+  );
+}
+
+function PetCard({ pet }: { pet: Pet }) {
+  const microchipOk = !!pet.microchip;
+  const vacinaOk = !!pet.vacina;
+  return (
+    <Link
+      href={`/passaporte/${pet.id}`}
+      className="group bg-paper rounded-2xl border border-border p-5 hover:border-ink hover:shadow-[var(--shadow-soft)] transition-all"
+    >
+      <div className="flex items-center gap-3 mb-5">
+        <div className="w-11 h-11 rounded-full bg-bone-deep flex items-center justify-center shrink-0 group-hover:bg-ink group-hover:text-bone transition-colors">
+          <PetGlyph pet={pet} className="w-5 h-5 text-ink/70 group-hover:text-bone" />
+        </div>
+        <div className="min-w-0">
+          <p className="font-display text-lg text-ink truncate leading-tight">
+            {pet.nome}
+          </p>
+          <p className="text-[11px] text-muted mt-0.5 truncate">{pet.raca}</p>
+        </div>
+      </div>
+      <dl className="space-y-2 text-[12px]">
+        <Stat label="Peso" value={`${pet.peso} kg`} mono />
+        <Stat
+          label="Microchip"
+          value={
+            microchipOk ? (
+              <span className="text-status-ok flex items-center gap-1">
+                <CheckCircle2 size={11} strokeWidth={1.75} /> Registrado
+              </span>
+            ) : (
+              <span className="text-faint">—</span>
+            )
+          }
+        />
+        <Stat
+          label="Vacina"
+          value={
+            vacinaOk ? (
+              <span className="text-status-ok flex items-center gap-1">
+                <CheckCircle2 size={11} strokeWidth={1.75} /> OK
+              </span>
+            ) : (
+              <span className="text-terracotta-deep flex items-center gap-1">
+                <AlertTriangle size={11} strokeWidth={1.75} /> Pendente
+              </span>
+            )
+          }
+        />
+      </dl>
+    </Link>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  mono,
+}: {
+  label: string;
+  value: React.ReactNode;
+  mono?: boolean;
+}) {
+  return (
+    <div className="flex items-center justify-between">
+      <dt className="text-muted">{label}</dt>
+      <dd
+        className={`text-ink/85 ${mono ? "font-mono text-[11px]" : "font-medium"}`}
+      >
+        {value}
+      </dd>
     </div>
   );
 }
 
-function SummaryCard({ label, value, icon, href, isText }: {
-  label: string; value: number | string; icon: string; href: string; isText?: boolean;
-}) {
-  return (
-    <Link href={href} className="bg-white rounded-xl border border-border p-4 hover:shadow-sm transition-shadow">
-      <span className="text-2xl">{icon}</span>
-      <p className={`font-bold mt-2 ${isText ? "text-base text-teal" : "text-2xl text-navy"}`}>{value}</p>
-      <p className="text-xs text-navy/50 mt-0.5">{label}</p>
-    </Link>
-  );
-}
-
-function PetCard({ pet }: { pet: ReturnType<typeof useAppStore.getState>["pets"][number] }) {
-  const especieEmoji = pet.especie === "CAO" ? "🐕" : pet.especie === "GATO" ? "🐈" : "🐾";
-  return (
-    <Link href={`/passaporte/${pet.id}`} className="bg-white rounded-xl border border-border p-4 hover:shadow-md transition-shadow">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="text-3xl">{especieEmoji}</span>
-        <div className="min-w-0">
-          <p className="font-semibold text-navy truncate">{pet.nome}</p>
-          <p className="text-xs text-navy/50">{pet.raca}</p>
-        </div>
-      </div>
-      <div className="space-y-1.5">
-        <div className="flex justify-between text-xs">
-          <span className="text-navy/50">Peso</span>
-          <span className="font-medium text-navy">{pet.peso} kg</span>
-        </div>
-        <div className="flex justify-between text-xs">
-          <span className="text-navy/50">Microchip</span>
-          {pet.microchip
-            ? <span className="text-green-600 font-medium flex items-center gap-1"><CheckCircle2 size={11} /> OK</span>
-            : <span className="text-navy/30">—</span>
-          }
-        </div>
-        <div className="flex justify-between text-xs">
-          <span className="text-navy/50">Vacina</span>
-          {pet.vacina
-            ? <span className="text-green-600 font-medium flex items-center gap-1"><CheckCircle2 size={11} /> OK</span>
-            : <span className="text-orange-500 font-medium flex items-center gap-1"><AlertTriangle size={11} /> Pendente</span>
-          }
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-function EmptyState({ icon, title, desc, action }: {
-  icon: React.ReactNode; title: string; desc: string;
+function EmptyState({
+  Icon,
+  title,
+  desc,
+  action,
+}: {
+  Icon: typeof PawPrint;
+  title: string;
+  desc: string;
   action?: { label: string; href: string };
 }) {
   return (
-    <div className="bg-white rounded-xl border border-border py-12 flex flex-col items-center gap-3 text-center">
-      {icon}
-      <p className="font-semibold text-navy">{title}</p>
-      <p className="text-sm text-navy/50 max-w-xs">{desc}</p>
+    <div className="bg-paper rounded-2xl border border-dashed border-border py-16 flex flex-col items-center gap-3 text-center px-6">
+      <Icon size={26} strokeWidth={1.25} className="text-faint" />
+      <p className="font-display text-xl text-ink mt-1 tracking-tight">{title}</p>
+      <p className="text-[13px] text-muted max-w-xs">{desc}</p>
       {action && (
-        <Link href={action.href} className="mt-2 bg-teal text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-teal-dark transition-colors">
-          {action.label}
+        <Link
+          href={action.href}
+          className="mt-3 inline-flex items-center gap-2 bg-ink text-bone text-[13px] px-5 py-2.5 rounded-full hover:bg-sage transition-colors"
+        >
+          <Plus size={14} strokeWidth={1.75} /> {action.label}
         </Link>
       )}
     </div>
   );
 }
 
-function QuickAction({ icon, title, desc, href, color }: {
-  icon: string; title: string; desc: string; href: string; color: "teal" | "navy";
+function QuickAction({
+  Icon,
+  title,
+  desc,
+  href,
+  variant,
+}: {
+  Icon: typeof Map;
+  title: string;
+  desc: string;
+  href: string;
+  variant: "ink" | "paper";
 }) {
-  const bg = color === "teal" ? "bg-teal hover:bg-teal-dark" : "bg-navy hover:bg-navy-light";
+  const isInk = variant === "ink";
   return (
-    <Link href={href} className={`${bg} rounded-xl p-5 text-white transition-colors flex items-start gap-4`}>
-      <span className="text-3xl shrink-0">{icon}</span>
-      <div>
-        <p className="font-semibold">{title}</p>
-        <p className="text-sm opacity-80 mt-0.5">{desc}</p>
+    <Link
+      href={href}
+      className={`group relative overflow-hidden rounded-2xl p-6 transition-all border ${
+        isInk
+          ? "bg-ink text-bone border-ink hover:border-ink"
+          : "bg-paper text-ink border-border hover:border-ink hover:shadow-[var(--shadow-soft)]"
+      }`}
+    >
+      {isInk && (
+        <>
+          <div aria-hidden className="absolute inset-0 paper-grain opacity-50 pointer-events-none" />
+          <div
+            aria-hidden
+            className="absolute -top-20 -right-20 w-[280px] h-[280px] rounded-full pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(201,123,78,0.22) 0%, transparent 60%)",
+            }}
+          />
+        </>
+      )}
+      <div className="relative flex items-start gap-5">
+        <div
+          className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 ${
+            isInk ? "bg-bone/8 ring-1 ring-bone/15" : "bg-sage-soft"
+          }`}
+        >
+          <Icon
+            size={18}
+            strokeWidth={1.5}
+            className={isInk ? "text-bone" : "text-sage-deep"}
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p
+            className={`font-display text-xl tracking-tight ${
+              isInk ? "text-bone" : "text-ink"
+            }`}
+          >
+            {title}
+          </p>
+          <p
+            className={`text-[13px] mt-1.5 leading-relaxed ${
+              isInk ? "text-bone/65" : "text-muted"
+            }`}
+          >
+            {desc}
+          </p>
+        </div>
+        <ArrowRight
+          size={16}
+          strokeWidth={1.5}
+          className={`shrink-0 mt-1 transition-transform duration-500 ease-[var(--ease-editorial)] group-hover:translate-x-1 ${
+            isInk ? "text-bone/65" : "text-ink/45"
+          }`}
+        />
       </div>
-      <ArrowRight size={18} className="ml-auto self-center opacity-60 shrink-0" />
     </Link>
   );
 }

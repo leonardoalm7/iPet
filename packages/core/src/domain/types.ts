@@ -195,7 +195,7 @@ export interface RegrasCompanhiaAerea {
   nome: string;
   codigo: string; // IATA
   pesoMaxCabine: number; // kg (animal + caixa)
-  pesoMaxPorао: number;
+  pesoMaxPorao: number;
   dimensoesMaxCabine: { comprimento: number; largura: number; altura: number }; // cm
   idadeMinimaAnimal: number; // semanas
   braquicefalicoCabine: boolean;

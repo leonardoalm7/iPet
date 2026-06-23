@@ -87,8 +87,8 @@ export function verificarCompanhia(
   }
 
   // Porão
-  if (cia.pesoMaxPorао > 0) {
-    if (pet.peso <= cia.pesoMaxPorао) {
+  if (cia.pesoMaxPorao > 0) {
+    if (pet.peso <= cia.pesoMaxPorao) {
       if (!braqui || cia.braquicefalicoPorao) {
         porao = true;
       } else {
@@ -98,7 +98,7 @@ export function verificarCompanhia(
       }
     } else {
       motivos.push(
-        `Peso do pet (${pet.peso}kg) excede o limite de porão (${cia.pesoMaxPorао}kg)`
+        `Peso do pet (${pet.peso}kg) excede o limite de porão (${cia.pesoMaxPorao}kg)`
       );
     }
   } else {

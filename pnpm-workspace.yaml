@@ -3,3 +3,6 @@ packages:
   - "packages/*"
   # prototipos/responsavel-app continua funcionando de forma independente
   # Migration para apps/app é um sprint dedicado
+allowBuilds:
+  sharp: true
+  unrs-resolver: true

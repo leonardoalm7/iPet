@@ -1,5 +1,13 @@
-import fs from "fs";
-import path from "path";
+/**
+ * kb-public-loader — versão browser-safe.
+ *
+ * Usa KB_DESTINOS pré-gerado em vez de ler arquivos JSON com fs,
+ * permitindo uso tanto em Server Components quanto em Client Components.
+ */
+
+import { KB_DESTINOS } from "../data/kb-generated";
+import { slugToDestino } from "../data/destination-slugs";
+import type { Destino } from "../domain/types";
 
 export interface RegrasPublicas {
   destino: string;
@@ -31,45 +39,33 @@ export interface RegrasPublicas {
 }
 
 export function loadDestinationRules(slug: string): RegrasPublicas | null {
-  const filePath = path.join(
-    process.cwd(),
-    "..",
-    "..",
-    "compliance-kb",
-    "destinations",
-    `${slug}.json`
-  );
+  const destino = slugToDestino(slug) as Destino | undefined;
+  if (!destino) return null;
 
-  if (!fs.existsSync(filePath)) return null;
-
-  const raw = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+  const kb = (KB_DESTINOS as Record<string, unknown>)[destino] as (typeof KB_DESTINOS)[Destino] | undefined;
+  if (!kb) return null;
 
   return {
-    destino: raw.destino,
-    nome: raw.nome,
-    bandeira: raw.bandeira,
-    lastVerified: raw.lastVerified,
-    verifiedBy: raw.verifiedBy,
-    confidence: raw.confidence,
-    sources: raw.sources ?? [],
+    destino: kb.destino,
+    nome: kb.nome,
+    bandeira: kb.bandeira,
+    lastVerified: (kb as { _kbLastVerified?: string })._kbLastVerified ?? "—",
+    verifiedBy: "iPet Compliance Team",
+    confidence: (kb as { _kbConfidence?: string })._kbConfidence ?? "MEDIA",
+    sources: [],
     rules: {
-      exigeMicrochip: raw.rules.exigeMicrochip,
-      microchipPadrao: raw.rules.microchipPadrao,
-      exigeVacina: raw.rules.exigeVacina,
-      diasCarenciaVacina: raw.rules.diasCarenciaVacina,
-      validadeVacinaAnos: raw.rules.validadeVacinaAnos,
-      exigeSorologia: raw.rules.exigeSorologia,
-      diasCarenciaSorologia: raw.rules.diasCarenciaSorologia,
-      valorMinimoSorologia: raw.rules.valorMinimoSorologia,
-      laboratoriosCredenciados: raw.rules.laboratoriosCredenciados,
-      exigeCVI: raw.rules.exigeCVI,
-      diasAntesCVI: raw.rules.diasAntesCVI,
-      emissoresCVI: raw.rules.emissoresCVI,
-      exigePermissaoImportacao: raw.rules.exigePermissaoImportacao,
-      observacoes: raw.rules.observacoes,
-      racasProibidas: raw.rules.racasProibidas,
-      racasRestritasFocinheira: raw.rules.racasRestritasFocinheira,
-      exigeSeguroResponsabilidade: raw.rules.exigeSeguroResponsabilidade,
+      exigeMicrochip: kb.exigeMicrochip,
+      exigeVacina: kb.exigeVacina,
+      diasCarenciaVacina: kb.diasCarenciaVacina,
+      exigeSorologia: kb.exigeSorologia,
+      diasCarenciaSorologia: kb.diasCarenciaSorologia,
+      exigeCVI: kb.exigeCVI,
+      diasAntesCVI: kb.diasAntesCVI,
+      exigePermissaoImportacao: kb.exigePermissaoImportacao,
+      observacoes: kb.observacoes,
+      racasProibidas: kb.racasProibidas,
+      racasRestritasFocinheira: kb.racasRestritasFocinheira,
+      exigeSeguroResponsabilidade: kb.exigeSeguroResponsabilidade,
     },
   };
 }
@@ -86,33 +82,26 @@ export function generateFAQs(regras: RegrasPublicas): { question: string; answer
   if (regras.rules.exigeSorologia) {
     faqs.push({
       question: `Preciso de sorologia antirrábica para levar meu pet para ${nome}?`,
-      answer: `Sim. ${nome} exige sorologia antirrábica com resultado ${regras.rules.valorMinimoSorologia || ">=0,5 UI/mL"}, com carência mínima de ${regras.rules.diasCarenciaSorologia} dias antes do embarque. O exame deve ser feito em laboratório credenciado pelo MAPA.`,
+      answer: `Sim. ${nome} exige sorologia antirrábica com resultado ${regras.rules.valorMinimoSorologia || "≥0,5 UI/mL"}, com carência mínima de ${regras.rules.diasCarenciaSorologia} dias antes do embarque.`,
     });
   }
 
   faqs.push({
     question: `Qual a carência da vacina antirrábica para ${nome}?`,
-    answer: `A vacina antirrábica deve ter sido aplicada há pelo menos ${regras.rules.diasCarenciaVacina} dias antes do embarque${regras.rules.validadeVacinaAnos ? ` e ter validade de ${regras.rules.validadeVacinaAnos} ano${regras.rules.validadeVacinaAnos > 1 ? "s" : ""}` : ""}.`,
+    answer: `A vacina antirrábica deve ter sido aplicada há pelo menos ${regras.rules.diasCarenciaVacina} dias antes do embarque${regras.rules.validadeVacinaAnos ? ` e ter validade de ${regras.rules.validadeVacinaAnos} ano(s)` : ""}.`,
   });
 
   if (regras.rules.exigeMicrochip) {
     faqs.push({
       question: `Preciso de microchip para viajar com pet para ${nome}?`,
-      answer: `Sim. ${nome} exige microchip ${regras.rules.microchipPadrao || "padrão ISO 11784/11785"}. O microchip deve ser implantado ANTES da vacinação antirrábica.`,
+      answer: `Sim. ${nome} exige microchip ${regras.rules.microchipPadrao || "padrão ISO 11784/11785"}. O microchip deve ser implantado ANTES da vacinação.`,
     });
   }
 
   if (regras.rules.exigeCVI) {
     faqs.push({
       question: `Quando devo emitir o CVI para viajar com pet para ${nome}?`,
-      answer: `O Certificado Veterinário Internacional (CVI) deve ser emitido entre ${regras.rules.diasAntesCVI} e 2 dias antes do embarque, por um médico veterinário credenciado pelo MAPA.${regras.rules.emissoresCVI ? ` ${regras.rules.emissoresCVI}` : ""}`,
-    });
-  }
-
-  if (regras.rules.exigePermissaoImportacao) {
-    faqs.push({
-      question: `${nome} exige permissão de importação para pets?`,
-      answer: `Sim. É necessário solicitar uma permissão de importação junto ao órgão de controle animal de ${nome} com antecedência. Recomendamos iniciar o processo com pelo menos 6 meses de antecedência.`,
+      answer: `O CVI deve ser emitido entre ${regras.rules.diasAntesCVI} e 2 dias antes do embarque por médico veterinário credenciado pelo MAPA.`,
     });
   }
 
@@ -124,7 +113,7 @@ function buildDocumentList(regras: RegrasPublicas): string {
   if (regras.rules.exigeMicrochip) docs.push("Microchip ISO 11784/11785");
   if (regras.rules.exigeVacina) docs.push(`Vacina antirrábica (carência de ${regras.rules.diasCarenciaVacina} dias)`);
   if (regras.rules.exigeSorologia) docs.push(`Sorologia antirrábica (carência de ${regras.rules.diasCarenciaSorologia} dias)`);
-  if (regras.rules.exigeCVI) docs.push(`CVI — Certificado Veterinário Internacional (${regras.rules.diasAntesCVI} a 2 dias antes do embarque)`);
-  if (regras.rules.exigePermissaoImportacao) docs.push("Permissão de importação do país de destino");
+  if (regras.rules.exigeCVI) docs.push(`CVI (${regras.rules.diasAntesCVI} a 2 dias antes do embarque)`);
+  if (regras.rules.exigePermissaoImportacao) docs.push("Permissão de importação");
   return `Para viajar com pet para ${regras.nome}, você precisa de: ${docs.join("; ")}.`;
 }
