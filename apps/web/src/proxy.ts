@@ -9,7 +9,13 @@ const AUTH_PATHS = [
   "/auth/esqueci-senha",
   "/auth/redefinir-senha",
 ];
-const OPEN_PATHS = ["/lgpd", "/verificar", "/regras", "/ferramentas"];
+const OPEN_PATHS = [
+  "/lgpd",
+  "/verificar",
+  "/regras",
+  "/ferramentas",
+  "/firebase-messaging-sw.js",
+];
 const OPEN_API_PATHS = ["/api/checkout/webhook"];
 const PUBLIC_PATHS = [...AUTH_PATHS, ...OPEN_PATHS];
 

@@ -14,6 +14,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { PushToggle } from "@/components/shared/PushToggle";
 
 export default function PerfilPage() {
   const { perfil, setPerfil } = useAuthStore();
@@ -178,6 +179,12 @@ export default function PerfilPage() {
           )}
         </div>
       </form>
+
+      {/* Notificações */}
+      <section className="bg-paper rounded-2xl border border-border p-6">
+        <p className="kicker text-muted mb-4">Notificações</p>
+        <PushToggle />
+      </section>
 
       {/* LGPD */}
       <section className="bg-paper rounded-2xl border border-border p-6">
