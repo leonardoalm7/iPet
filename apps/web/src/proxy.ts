@@ -9,7 +9,7 @@ const AUTH_PATHS = [
   "/auth/esqueci-senha",
   "/auth/redefinir-senha",
 ];
-const OPEN_PATHS = ["/lgpd", "/verificar"];
+const OPEN_PATHS = ["/lgpd", "/verificar", "/regras", "/ferramentas"];
 const PUBLIC_PATHS = [...AUTH_PATHS, ...OPEN_PATHS];
 
 export async function proxy(request: NextRequest) {

@@ -1,24 +1,66 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { CLINICAS_CREDENCIADAS } from "@ipet/core";
+import {
+  SERVICO_LABEL,
+  type ServicoClinica,
+} from "@ipet/core/data/clinicas-credenciadas";
 import { ClinicasMap } from "@/components/shared/ClinicasMap";
-import { MapPin, List, Map, Phone, Navigation, Search, Stethoscope } from "lucide-react";
+import {
+  MapPin,
+  List,
+  Map,
+  Phone,
+  Navigation,
+  Search,
+  Stethoscope,
+  X,
+  Loader2,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 type View = "mapa" | "lista";
 
-export default function ClinicasPage() {
+const SERVICOS_VALIDOS = new Set<ServicoClinica>([
+  "VACINA_ANTIRRABICA",
+  "MICROCHIP",
+  "SOROLOGIA",
+  "CVI",
+  "ATESTADO_SAUDE",
+  "CONSULTA_GERAL",
+]);
+
+function ClinicasContent() {
+  const router = useRouter();
+  const params = useSearchParams();
+  const servicoParam = params.get("servico");
+  const servicoFiltro: ServicoClinica | null =
+    servicoParam && SERVICOS_VALIDOS.has(servicoParam as ServicoClinica)
+      ? (servicoParam as ServicoClinica)
+      : null;
+
   const [view, setView] = useState<View>("lista");
   const [busca, setBusca] = useState("");
 
-  const filtradas = CLINICAS_CREDENCIADAS.filter(
-    (c) =>
-      busca === "" ||
-      c.nome.toLowerCase().includes(busca.toLowerCase()) ||
-      c.cidade.toLowerCase().includes(busca.toLowerCase()) ||
-      c.estado?.toLowerCase().includes(busca.toLowerCase())
-  );
+  const filtradas = CLINICAS_CREDENCIADAS.filter((c) => {
+    if (servicoFiltro && !c.servicos.includes(servicoFiltro)) return false;
+    if (busca === "") return true;
+    const q = busca.toLowerCase();
+    return (
+      c.nome.toLowerCase().includes(q) ||
+      c.cidade.toLowerCase().includes(q) ||
+      c.estado?.toLowerCase().includes(q)
+    );
+  });
+
+  const removerFiltroServico = () => {
+    const next = new URLSearchParams(params);
+    next.delete("servico");
+    const qs = next.toString();
+    router.replace(qs ? `/clinicas?${qs}` : "/clinicas", { scroll: false });
+  };
 
   return (
     <motion.div
@@ -59,6 +101,29 @@ export default function ClinicasPage() {
 
       <div className="editorial-rule" />
 
+      {servicoFiltro && (
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center justify-between gap-3 bg-sage-soft border border-sage/30 rounded-2xl px-4 py-3"
+        >
+          <div className="flex items-center gap-2.5 min-w-0">
+            <span className="kicker text-sage-deep shrink-0">Filtro ativo</span>
+            <p className="text-[13px] text-ink truncate">
+              Mostrando clínicas que oferecem{" "}
+              <span className="font-medium">{SERVICO_LABEL[servicoFiltro]}</span>
+            </p>
+          </div>
+          <button
+            onClick={removerFiltroServico}
+            aria-label="Remover filtro"
+            className="flex items-center gap-1 text-[11px] text-sage-deep hover:text-ink transition-colors shrink-0"
+          >
+            <X size={12} strokeWidth={2} /> Limpar
+          </button>
+        </motion.div>
+      )}
+
       <div className="relative">
         <Search
           size={15}
@@ -81,7 +146,11 @@ export default function ClinicasPage() {
       ) : filtradas.length === 0 ? (
         <div className="border border-dashed border-border rounded-2xl py-16 text-center bg-paper">
           <Stethoscope size={26} strokeWidth={1.25} className="text-faint mx-auto mb-3" />
-          <p className="text-[14px] text-muted">Nenhuma clínica encontrada para "{busca}".</p>
+          <p className="text-[14px] text-muted">
+            {servicoFiltro
+              ? `Nenhuma clínica oferece ${SERVICO_LABEL[servicoFiltro]} nesta busca.`
+              : `Nenhuma clínica encontrada para "${busca}".`}
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -129,5 +198,19 @@ export default function ClinicasPage() {
         </div>
       )}
     </motion.div>
+  );
+}
+
+export default function ClinicasPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center py-16">
+          <Loader2 size={18} className="animate-spin text-muted" />
+        </div>
+      }
+    >
+      <ClinicasContent />
+    </Suspense>
   );
 }
