@@ -10,11 +10,17 @@ const AUTH_PATHS = [
   "/auth/redefinir-senha",
 ];
 const OPEN_PATHS = ["/lgpd", "/verificar", "/regras", "/ferramentas"];
+const OPEN_API_PATHS = ["/api/checkout/webhook"];
 const PUBLIC_PATHS = [...AUTH_PATHS, ...OPEN_PATHS];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isApiPath = pathname.startsWith("/api/");
+  const isOpenApiPath = OPEN_API_PATHS.some((p) => pathname.startsWith(p));
+
+  if (isOpenApiPath) {
+    return NextResponse.next({ request });
+  }
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;

@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore, REGRAS_DESTINO } from "@ipet/core";
 import {
@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   Lock,
   ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -25,7 +26,8 @@ export default function CheckoutPage({
   const pet = useAppStore((s) =>
     plano ? s.pets.find((p) => p.id === s.getPrimeiroPetIdDoPlano(plano.id)) : undefined,
   );
-  const ativarPremium = useAppStore((s) => s.ativarPremium);
+  const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
 
   if (!plano || !pet) {
     return (
@@ -42,10 +44,25 @@ export default function CheckoutPage({
 
   const regras = REGRAS_DESTINO[plano.destino];
 
-  function handlePagar() {
+  async function handlePagar() {
     if (!plano) return;
-    ativarPremium(planoId, `sim_${Date.now()}`);
-    router.push(`/checkout/sucesso?planoId=${planoId}`);
+    setErro(null);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout/criar-preferencia", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ planoId }),
+      });
+      const data = await res.json();
+      if (!data.ok || !data.initPoint) {
+        throw new Error(data.erro ?? "Erro ao iniciar pagamento.");
+      }
+      window.location.href = data.initPoint;
+    } catch (e) {
+      setErro(e instanceof Error ? e.message : "Erro ao iniciar pagamento.");
+      setLoading(false);
+    }
   }
 
   return (
@@ -161,16 +178,36 @@ export default function CheckoutPage({
         </div>
       </div>
 
+      {erro && (
+        <motion.p
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-[12px] text-status-crit bg-[#FBEBE8] border border-[#F2C8C0] rounded-xl px-3 py-2.5"
+        >
+          {erro}
+        </motion.p>
+      )}
+
       <button
         onClick={handlePagar}
-        className="group w-full flex items-center justify-center gap-2 bg-ink text-bone py-4 rounded-full text-[14px] font-semibold hover:bg-sage transition-colors"
+        disabled={loading}
+        className="group w-full flex items-center justify-center gap-2 bg-ink text-bone py-4 rounded-full text-[14px] font-semibold hover:bg-sage disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
       >
-        Pagar com Mercado Pago
-        <ArrowRight
-          size={15}
-          strokeWidth={1.75}
-          className="transition-transform group-hover:translate-x-1"
-        />
+        {loading ? (
+          <>
+            <Loader2 size={14} className="animate-spin" />
+            Redirecionando…
+          </>
+        ) : (
+          <>
+            Pagar com Mercado Pago
+            <ArrowRight
+              size={15}
+              strokeWidth={1.75}
+              className="transition-transform group-hover:translate-x-1"
+            />
+          </>
+        )}
       </button>
 
       <p className="text-[11px] text-faint text-center leading-relaxed">
