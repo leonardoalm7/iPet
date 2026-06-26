@@ -16,7 +16,7 @@ const OPEN_PATHS = [
   "/ferramentas",
   "/firebase-messaging-sw.js",
 ];
-const OPEN_API_PATHS = ["/api/checkout/webhook"];
+const OPEN_API_PATHS = ["/api/checkout/webhook", "/api/push/cron-prazos"];
 const PUBLIC_PATHS = [...AUTH_PATHS, ...OPEN_PATHS];
 
 export async function proxy(request: NextRequest) {

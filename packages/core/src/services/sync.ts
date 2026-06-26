@@ -96,7 +96,7 @@ function petToRow(pet: Pet, ownerId: string): Omit<PetRow, "criado_em"> {
   };
 }
 
-function rowToPet(row: PetRow): Pet {
+export function rowToPet(row: PetRow): Pet {
   return {
     id: row.id,
     nome: row.nome,
@@ -126,7 +126,7 @@ function planoToRow(plano: PlanoViagem, ownerId: string): Omit<PlanoRow, "criado
   };
 }
 
-function rowToPlano(row: PlanoRow): PlanoViagem {
+export function rowToPlano(row: PlanoRow): PlanoViagem {
   return {
     id: row.id,
     destino: row.destino as PlanoViagem["destino"],
