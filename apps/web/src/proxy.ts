@@ -16,7 +16,13 @@ const OPEN_PATHS = [
   "/ferramentas",
   "/firebase-messaging-sw.js",
 ];
-const OPEN_API_PATHS = ["/api/checkout/webhook", "/api/push/cron-prazos"];
+// /api/events aceita anônimo: páginas públicas (LLMO/calculadora) trackeiam
+// sem login; a rota valida whitelist de eventos e limita o lote.
+const OPEN_API_PATHS = [
+  "/api/checkout/webhook",
+  "/api/push/cron-prazos",
+  "/api/events",
+];
 const PUBLIC_PATHS = [...AUTH_PATHS, ...OPEN_PATHS];
 
 export async function proxy(request: NextRequest) {

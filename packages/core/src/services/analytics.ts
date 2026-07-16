@@ -33,7 +33,40 @@ type EventosFunil = {
 
 export type NomeEvento = keyof EventosFunil;
 
-interface EventoRegistrado<K extends NomeEvento = NomeEvento> {
+// Record<NomeEvento, true> força atualizar esta lista quando um evento
+// novo entra no type map — a whitelist de /api/events deriva daqui.
+const EVENTO_FLAGS: Record<NomeEvento, true> = {
+  pet_cadastrado: true,
+  pet_editado: true,
+  destino_selecionado: true,
+  roadmap_gerado: true,
+  tarefa_concluida: true,
+  companhia_verificada: true,
+  documento_uploaded: true,
+  abandono_etapa: true,
+  pagina_visitada: true,
+  paywall_exibido: true,
+  paywall_clicado: true,
+  checkout_iniciado: true,
+  pagamento_aprovado: true,
+  pagamento_recusado: true,
+  calculadora_usada: true,
+  calculadora_cta_clicado: true,
+  service_card_view: true,
+  service_cta_click: true,
+  ocr_vacina_iniciado: true,
+  ocr_vacina_sucesso: true,
+  ocr_vacina_falha: true,
+  ocr_vacina_aceito: true,
+  ocr_microchip_iniciado: true,
+  ocr_microchip_sucesso: true,
+  ocr_microchip_falha: true,
+  ocr_microchip_aceito: true,
+};
+
+export const NOMES_EVENTOS = Object.keys(EVENTO_FLAGS) as NomeEvento[];
+
+export interface EventoRegistrado<K extends NomeEvento = NomeEvento> {
   id: string;
   evento: K;
   props: EventosFunil[K];
@@ -99,6 +132,95 @@ export function track<K extends NomeEvento>(
   const todos = getEventos();
   todos.push(registro as EventoRegistrado);
   salvar(todos);
+
+  enfileirar(registro as EventoRegistrado);
+}
+
+// ── Fila de envio pro Supabase (via /api/events) ─────────────
+// localStorage continua sendo o registro local; a fila só guarda
+// o que ainda não foi confirmado pelo servidor. Envio best-effort:
+// offline ou Supabase fora, a fila segura (cap 1000) e tenta de novo.
+
+const QUEUE_KEY = "ipet_analytics_queue";
+const LOTE_MAX = 50;
+const FILA_MAX = 1000;
+
+let flushTimer: ReturnType<typeof setTimeout> | null = null;
+let pagehideRegistrado = false;
+
+function getFila(): EventoRegistrado[] {
+  if (!hasStorage()) return [];
+  try {
+    return JSON.parse(localStorage.getItem(QUEUE_KEY) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function salvarFila(fila: EventoRegistrado[]): void {
+  if (!hasStorage()) return;
+  const trimmed = fila.length > FILA_MAX ? fila.slice(-FILA_MAX) : fila;
+  localStorage.setItem(QUEUE_KEY, JSON.stringify(trimmed));
+}
+
+function enfileirar(registro: EventoRegistrado): void {
+  if (!hasStorage() || typeof fetch === "undefined") return;
+  const fila = getFila();
+  fila.push(registro);
+  salvarFila(fila);
+  agendarFlush();
+}
+
+function agendarFlush(): void {
+  registrarPagehide();
+  if (flushTimer) return;
+  flushTimer = setTimeout(() => {
+    flushTimer = null;
+    void flushEventos();
+  }, 2000);
+}
+
+function registrarPagehide(): void {
+  if (pagehideRegistrado || typeof window === "undefined") return;
+  pagehideRegistrado = true;
+  window.addEventListener("pagehide", () => {
+    const fila = getFila();
+    if (!fila.length || typeof navigator === "undefined" || !navigator.sendBeacon) return;
+    const lote = fila.slice(0, LOTE_MAX);
+    const blob = new Blob([JSON.stringify({ eventos: lote })], {
+      type: "application/json",
+    });
+    // Dedupe por id no servidor — reenvio em dobro é inofensivo.
+    if (navigator.sendBeacon("/api/events", blob)) {
+      const ids = new Set(lote.map((e) => e.id));
+      salvarFila(getFila().filter((e) => !ids.has(e.id)));
+    }
+  });
+}
+
+export async function flushEventos(): Promise<void> {
+  if (!hasStorage() || typeof fetch === "undefined") return;
+  const fila = getFila();
+  if (!fila.length) return;
+
+  const lote = fila.slice(0, LOTE_MAX);
+  try {
+    const res = await fetch("/api/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ eventos: lote }),
+      keepalive: true,
+    });
+    // 2xx: enviado. 4xx: lote rejeitado — reenviar não vai mudar o
+    // veredicto, descarta pra fila não travar. 5xx/offline: mantém.
+    if (res.ok || (res.status >= 400 && res.status < 500)) {
+      const ids = new Set(lote.map((e) => e.id));
+      salvarFila(getFila().filter((e) => !ids.has(e.id)));
+      if (res.ok && getFila().length > 0) agendarFlush();
+    }
+  } catch {
+    /* offline — fila mantida pro próximo track */
+  }
 }
 
 // ── Consultas (para o dashboard) ─────────────────────────────

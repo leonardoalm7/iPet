@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { AuthProvider } from "@/components/auth/AuthProvider";
+import { AnalyticsFlush } from "@/components/shared/AnalyticsFlush";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${fraunces.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <body>
+        <AnalyticsFlush />
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
