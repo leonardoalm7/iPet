@@ -4,9 +4,9 @@
   "nome": "Azul Linhas Aéreas",
   "codigo": "AD",
   "lastVerified": "2026-07-17",
-  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "verifiedBy": "Claude via Chrome (fonte oficial navegada) — revisão humana pendente: Leonardo Braga de Almeida",
   "nextReviewDate": "2026-10-15",
-  "confidence": "MEDIA",
+  "confidence": "ALTA",
   "sources": [
     {
       "url": "https://www.voeazul.com.br/informacoes/animais",
@@ -17,6 +17,11 @@
     {
       "url": "https://www.voeazul.com.br/br/informacoes/viaje-com-seu-pet",
       "title": "Azul — Viaje com seu pet",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.voeazul.com.br/br/pt/sua-viagem/pet-na-cabine",
+      "title": "Azul — Pet na Cabine (página oficial, navegada em 17/07/2026)",
       "lastAccessed": "2026-07-17"
     }
   ],
@@ -35,6 +40,11 @@
       "date": "2026-07-17",
       "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
       "description": "Revisão 2026-07-17: idade mínima corrigida para 4 meses (16 semanas); limite cabine 10 kg confirmado em imprensa; aceitação de braquicefálicos no porão NÃO reconfirmada em fonte oficial (site 403) — mantida com alerta interno forte. REVISÃO HUMANA: confirmar braq/porão com a Azul."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "CORREÇÃO CRÍTICA via página oficial (Chrome): Azul NÃO transporta pets no porão — o 'diferencial braquicefálico no porão' registrado em 04/2026 não existe (mais). Cabine confirmada: 10 kg, ≥4 meses, caixa 43×31,5×20, 3 pets/voo, preços R$320/R$1.400/R$1.650, sem ESA, cão BR→EUA vetado. Confiança ALTA."
     }
   ],
   "cabine": {
@@ -42,9 +52,9 @@
     "pesoMaxKg": 10,
     "dimensoesMaxCm": {
       "comprimento": 43,
-      "largura": 30,
-      "altura": 23,
-      "somaDimensoes": 96
+      "largura": 31.5,
+      "altura": 20,
+      "somaDimensoes": 94.5
     },
     "especiesPermitidas": [
       "CAO",
@@ -52,16 +62,16 @@
     ],
     "racasBraquisefálicasPermitidas": true,
     "idadeMinimaSemanas": 16,
-    "maxAnimaisPorVoo": 5,
-    "reservaAntecedenciaHoras": 2,
-    "observacoes": "Até 10 kg (animal + caixa) na cabine; idade mínima 4 meses; 1 pet por passageiro; até 3 pets por voo doméstico. Braquicefálicos aceitos em cabine. Caixa ligeiramente menor que GOL/LATAM (43×30×23) — atenção."
+    "maxAnimaisPorVoo": 3,
+    "reservaAntecedenciaHoras": 4,
+    "observacoes": "Cabine (único serviço de pet da Azul): cão/gato ≥4 meses, até 10 kg (pet + container), caixa rígida OU flexível máx. 43×31,5×20 cm sob o assento dianteiro. 1 pet por cliente; máx. 3 pets/voo nacional. Preços por trecho: R$320 (nacional/América do Sul), R$1.400 Economy / R$1.650 Business (EUA/Europa). Check-in: 2h antes (doméstico), 3h (internacional). Não disponível em Azul Conecta (Cessna Caravan) nem em voos codeshare/interline. A330: só container flexível e assentos específicos. ATENÇÃO EUA: cães NÃO embarcam do Brasil para os EUA pela Azul (só EUA→Brasil); gatos OK (≥6 meses + microchip + certificado ≤10 dias em inglês). Curaçao: proibido animal da América do Sul/Central. Ninhada: mãe + até 2 filhotes de 4 a 6 meses no mesmo container."
   },
   "porao": {
-    "permitido": true,
-    "pesoMaxKg": 45,
-    "racasBraquisefálicasPermitidas": true,
-    "observacoes": "Histórico: a Azul era a única cia brasileira a aceitar braquicefálicos também no PORÃO (verificado 2026-04-25). ⚠️ Verificação de 2026-07-17 NÃO conseguiu reconfirmar em fonte oficial (site 403) — manter a informação mas CONFIRMAR na reserva/site antes de exibir como certeza ao usuário. Caixa rígida IATA obrigatória."
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "A AZUL NAO TRANSPORTA ANIMAIS NO PORAO (FAQ oficial: 'a Azul não transporta animais de estimação no porão da aeronave'). Pet acima de 10 kg NÃO viaja pela Azul. A informação anterior deste KB (braquicefálico aceito no porão como 'diferencial') estava DESATUALIZADA/INCORRETA."
   },
   "racasPerigosasBanidas": false,
-  "observacoesGerais": "⚠️ Diferencial histórico da Azul: braquicefálicos no porão (reconfirmar a cada revisão — política pode mudar sem aviso). Portaria ANAC 17.476/SAS/2025 (vigente desde 20/10/2025): cia deve divulgar na venda peso/dimensões/raças aceitas e documentação; cão-guia tem embarque obrigatório e gratuito em cabine; animal de suporte emocional segue política da cia."
+  "observacoesGerais": "CORREÇÃO IMPORTANTE (17/07/2026, página oficial navegada): Azul é CABINE-ONLY — não existe serviço de porão. Não transporta cão de suporte emocional (só estimação e cão-guia, conforme Portaria ANAC 17.476/2025). A página oficial da Azul também documenta exigências por destino (EUA, Portugal, França, Espanha, Uruguai, Argentina, Paraguai, Curaçao, Fernando de Noronha) — fonte útil para revisões do KB."
 }

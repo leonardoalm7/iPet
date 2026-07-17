@@ -3,16 +3,16 @@
   "destino": "FILIPINAS",
   "nome": "Filipinas",
   "bandeira": "🇵🇭",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
       "url": "https://www.bai.gov.ph/",
       "title": "BAI — Bureau of Animal Industry",
       "type": "OFICIAL",
-      "lastAccessed": "2026-04-24"
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +20,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para Filipinas."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: mecânica de permit/inspeção confirmada em pesquisa (BAI Filipinas); demais regras mantidas."
     }
   ],
   "rules": {
@@ -37,7 +42,7 @@
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": true,
     "racasRestritasOuProibidas": [],
-    "observacoes": "A Permissão de Importação (SPSIC - Sanitary and Phytosanitary Import Clearance) é estritamente obrigatória e deve ser solicitada online no portal do BAI antes de iniciar o CVI. Se o processo for seguido corretamente, não há quarentena.",
+    "observacoes": "A Permissão de Importação (SPSIC - Sanitary and Phytosanitary Import Clearance) é estritamente obrigatória e deve ser solicitada online no portal do BAI antes de iniciar o CVI. Se o processo for seguido corretamente, não há quarentena. SPS Import Permit do BAI emitido ANTES do embarque (validade ~60 dias); inspeção na chegada; sem quarentena com docs completos.",
     "observacoesInternas": "Inserir o SPSIC clearance como step obrigatório D-30 no roadmap."
   }
 }

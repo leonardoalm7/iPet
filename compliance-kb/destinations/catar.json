@@ -3,9 +3,9 @@
   "destino": "CATAR",
   "nome": "Catar",
   "bandeira": "🇶🇦",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -20,6 +20,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para o Catar."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: sem mudança identificada em pesquisa para Catar (permit prévio + vacina + certificado; listas de raças banidas mantidas). Detalhes de titulação/validade do permit a confirmar em fonte oficial na próxima revisão — manter confiança MEDIA."
     }
   ],
   "rules": {
@@ -36,7 +41,20 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": true,
-    "racasRestritasOuProibidas": ["Afghan Hound", "American Staffordshire Terrier", "Boerboel", "Boston Terrier", "Boxer", "Bull Terrier", "Bulldog", "Mastiff", "Doberman", "Great Dane", "Rottweiler", "Shar-Pei"],
+    "racasRestritasOuProibidas": [
+      "Afghan Hound",
+      "American Staffordshire Terrier",
+      "Boerboel",
+      "Boston Terrier",
+      "Boxer",
+      "Bull Terrier",
+      "Bulldog",
+      "Mastiff",
+      "Doberman",
+      "Great Dane",
+      "Rottweiler",
+      "Shar-Pei"
+    ],
     "observacoes": "A Permissão de Importação é obrigatória e válida por apenas 30 dias após emissão. A sorologia deve ser coletada pelo menos 90 dias antes do embarque. Animais geralmente não podem viajar na cabine nos voos da Qatar Airways, apenas como excesso de bagagem ou carga.",
     "observacoesInternas": "Sincronizar a regra de cabine da Qatar Airways (já mapeada) com este destino."
   }

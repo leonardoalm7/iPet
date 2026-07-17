@@ -46,15 +46,15 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     bandeira: "🇺🇸",
     exigeMicrochip: true,
     exigeVacina: true,
-    diasCarenciaVacina: 21,
+    diasCarenciaVacina: 28,
     exigeSorologia: true,
     diasCarenciaSorologia: 30,
     exigeCVI: true,
     diasAntesCVI: 10,
     exigePermissaoImportacao: true,
-    observacoes: "O Brasil é classificado pelo CDC como PAÍS DE ALTO RISCO para raiva canina — regras rígidas para CÃES (vigentes desde 01/08/2024): (1) idade mínima 6 MESES na entrada; (2) microchip implantado antes da vacina; (3) vacina antirrábica válida; (4) CDC Dog Import Form preenchido online (recibo apresentado à cia aérea no embarque e ao CBP na chegada); (5) Certification of Foreign Rabies Vaccination and Microchip preenchida por veterinário; (6) titulação (RNATT) ≥0,5 UI/mL em lab aprovado pelo CDC para EVITAR quarentena de 28 dias; (7) entrada por porto com instalação de cuidado animal registrada no CDC quando aplicável. GATOS: sem exigências federais do CDC (vacina antirrábica recomendada; alguns estados exigem). CVI do MAPA continua necessário para SAIR do Brasil. Havaí tem quarentena própria — tratar à parte.",
+    observacoes: "Brasil = ALTO RISCO para raiva canina (CDC, regras de 01/08/2024 — confirmadas na página oficial em 17/07/2026). CÃES (vacinados no exterior, caso padrão do público iPet): (1) idade mínima 6 MESES; (2) microchip legível por scanner universal ANTES da vacina (senão a vacina é inválida); (3) 1ª vacina antirrábica com ≥12 semanas de idade e ≥28 dias antes da entrada; (4) Certification of Foreign Rabies Vaccination and Microchip — preenchida por veterinário e ENDOSSADA por veterinário oficial do governo (MAPA/SFA), emitida ≤30 dias antes da viagem, uso único; (5) CDC Dog Import Form online (gratuito, 1 por cão; recibo válido só para a data/aeroporto declarados; foto do cão ≤15 dias se <1 ano); (6) RESERVA OBRIGATÓRIA em CDC-registered animal care facility — MESMO COM titulação válida (exame + revacinação com vacina dos EUA, custos do tutor); SEM titulação válida: +28 dias de quarentena na instalação; (7) chegada por VOO INTERNACIONAL DIRETO ao aeroporto da instalação reservada — sem conexões domésticas antes; (8) titulação: coleta ≥30 dias após a 1ª vacina E ≥28 dias antes da entrada, em lab aprovado pelo CDC; resultado aprovado vale por toda a vida do cão se não houver lapso vacinal. GATOS: sem exigências federais do CDC (vacina recomendada; alguns estados exigem). CVI do MAPA segue necessário para SAIR do Brasil. Cão de serviço (14 CFR 382.3) tem exceções; ESA não conta. Cias: Azul não embarca cães BR→EUA; American/Delta sem cabine ex-Brasil — checar cia antes.",
     // KB metadata
-    _kbConfidence: "MEDIA" as const,
+    _kbConfidence: "ALTA" as const,
     _kbLastVerified: "2026-07-17",
     _kbNextReview: "2026-10-15",
   },
@@ -106,11 +106,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
-    observacoes: "Sendo país do Mercosul, a sorologia da raiva não é exigida para animais procedentes do Brasil. O CVI deve atestar tratamento contra parasitas internos e externos nos 15 dias prévios à emissão.",
+    observacoes: "Sendo país do Mercosul, a sorologia da raiva não é exigida para animais procedentes do Brasil. O CVI deve atestar tratamento contra parasitas internos e externos nos 15 dias prévios à emissão. Desparasitação interna e externa ≤15 dias antes da emissão do CVI (procedimento exigido pelo SENASA). CVI emitido ≤10 dias antes da viagem; e-CVI eletrônico Brasil→Argentina disponível (gratuito, via Portal Gov.br).",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   CHILE: {
     destino: "CHILE" as const,
@@ -123,12 +123,12 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     diasCarenciaSorologia: 0,
     exigeCVI: true,
     diasAntesCVI: 10,
-    exigePermissaoImportacao: false,
-    observacoes: "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira, guia curta e seguro de responsabilidade civil.",
+    exigePermissaoImportacao: true,
+    observacoes: "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira, guia curta e seguro de responsabilidade civil. NOVO: o SAG exige AUTORIZAÇÃO SANITÁRIA PRÉVIA + declaração jurada digital preenchida ANTES do embarque (portal ingresoachile.cl). Desparasitação interna/externa ≤30 dias antes da entrada, registrada no certificado. Microchip ISO e vacinas múltiplas válidas.",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   URUGUAI: {
     destino: "URUGUAI" as const,
@@ -142,11 +142,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
-    observacoes: "Obrigatório apresentar TESTE NEGATIVO PARA LEISHMANIOSE (kit rápido ou sorologia) realizado nos 60 dias anteriores ao embarque, ou atestar uso de coleira repelente com Deltametrina. O CVI deve atestar também tratamento contra tênia Echinococcus granulosus.",
+    observacoes: "Obrigatório apresentar TESTE NEGATIVO PARA LEISHMANIOSE (kit rápido ou sorologia) realizado nos 60 dias anteriores ao embarque, ou atestar uso de coleira repelente com Deltametrina. O CVI deve atestar também tratamento contra tênia Echinococcus granulosus. EXCLUSIVO CÃES do Brasil: teste NEGATIVO de leishmaniose (IFAT, ELISA, aglutinação direta ou detecção molecular) realizado ≤60 dias antes da entrada — o Uruguai NÃO admite cão com diagnóstico prévio de leishmaniose. Desparasitação interna/externa ≤15 dias antes da emissão do CVI (produto e data no certificado). Microchip OBRIGATÓRIO para cães não-residentes (associado ao CVI). Estadia <30 dias: pode retornar com o mesmo certificado de entrada se dentro da validade.",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   COLOMBIA: {
     destino: "COLOMBIA" as const,
@@ -163,8 +163,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     observacoes: "Cães das raças proibidas não podem ser importados para a Colômbia. Se o animal for dessas raças, a entrada será negada. O tutor deve realizar inspeção presencial no escritório do ICA no porto de chegada para liberação.",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   PERU: {
     destino: "PERU" as const,
@@ -181,8 +181,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     observacoes: "O CVI para o Peru é válido por até 14 dias da emissão. O animal deve ter sido desparasitado interna e externamente dentro dos 15 dias antes do embarque.",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   PARAGUAI: {
     destino: "PARAGUAI" as const,
@@ -196,11 +196,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 10,
     exigePermissaoImportacao: false,
-    observacoes: "Assim como o Uruguai, exige teste diagnóstico negativo para Leishmaniose (cães) coletado nos 60 dias anteriores ao embarque e certificado de tratamento parasitário.",
+    observacoes: "Assim como o Uruguai, exige teste diagnóstico negativo para Leishmaniose (cães) coletado nos 60 dias anteriores ao embarque e certificado de tratamento parasitário. Idade mínima 3 meses. Atestado de saúde ≤10 dias + CVI + vacina antirrábica (1ª dose ≥21 dias antes; reforços sem carência).",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   BOLIVIA: {
     destino: "BOLIVIA" as const,
@@ -217,8 +217,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     observacoes: "Não exige sorologia da raiva. O CVI deve estar perfeitamente legível, carimbado e validado. Recomenda-se vacinação polivalente atualizada.",
     // KB metadata
     _kbConfidence: "MEDIA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   EQUADOR: {
     destino: "EQUADOR" as const,
@@ -235,8 +235,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     observacoes: "O CVI emitido pelo VIGIAGRO deve certificar imunização contra Raiva e vacinas múltiplas (cinomose, hepatite, leptospirose, parvovirose). Tratamento antiparasitário deve ter sido aplicado nos 21 dias prévios à viagem.",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   VENEZUELA: {
     destino: "VENEZUELA" as const,
@@ -253,8 +253,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     observacoes: "Exige solicitação de Licença Sanitária de Importação via sistema eletrônico do INSAI (RUNSAI) antes da viagem. Exames coproparasitológico e atestado de desparasitação carimbado são rigorosamente exigidos.",
     // KB metadata
     _kbConfidence: "MEDIA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   PORTUGAL: {
     destino: "PORTUGAL" as const,
@@ -790,11 +790,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 14,
     exigePermissaoImportacao: false,
-    observacoes: "Permitido apenas 1 pet por passaporte de viajante. Para evitar a quarentena obrigatória de 30 dias, o pet deve ter sorologia aprovada e entrar obrigatoriamente por portos designados com infraestrutura de quarentena (ex: Pequim, Xangai, Guangzhou).",
+    observacoes: "Permitido apenas 1 pet por passaporte de viajante. Para evitar a quarentena obrigatória de 30 dias, o pet deve ter sorologia aprovada e entrar obrigatoriamente por portos designados com infraestrutura de quarentena (ex: Pequim, Xangai, Guangzhou). O Brasil NÃO está na lista de países/regiões designados pela China: cão/gato ex-Brasil cumpre QUARENTENA DE 30 DIAS em instalação governamental na chegada, e a entrada só é aceita em portos autorizados a receber quarentena (ex.: Beijing Capital, Shanghai Pudong — confirmar porto antes de emitir passagem). Microchip ISO + 2 vacinas antirrábicas + titulação + certificado sanitário reduzem risco de recusa mas NÃO isentam a quarentena para país não-designado. Limite: 1 pet por passageiro.",
     // KB metadata
-    _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbConfidence: "MEDIA" as const,
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   HONG_KONG: {
     destino: "HONG_KONG" as const,
@@ -808,11 +808,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 14,
     exigePermissaoImportacao: true,
-    observacoes: "O Brasil é classificado como país do Grupo 3. Animais vindos do Brasil estão sujeitos a uma quarentena OBRIGATÓRIA de no mínimo 120 dias nas instalações do AFCD. A reserva da quarentena e a Permissão de Importação devem ser feitas com meses de antecedência.",
+    observacoes: "O Brasil é classificado como país do Grupo 3. Animais vindos do Brasil estão sujeitos a uma quarentena OBRIGATÓRIA de no mínimo 120 dias nas instalações do AFCD. A reserva da quarentena e a Permissão de Importação devem ser feitas com meses de antecedência. O AFCD classifica origens em grupos (I, II, IIIA, IIIB); o BRASIL NÃO está nos grupos isentos: cão/gato ex-Brasil exige Special Permit prévio do AFCD e QUARENTENA em instalação governamental (mínimo 30 dias — podendo chegar a 120 dias conforme o grupo; confirmar enquadramento exato do Brasil antes de qualquer viagem). Transbordo/trânsito por HK também exige permit.",
     // KB metadata
-    _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbConfidence: "MEDIA" as const,
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   TAIWAN: {
     destino: "TAIWAN" as const,
@@ -826,11 +826,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 10,
     exigePermissaoImportacao: true,
-    observacoes: "O sangue para sorologia deve ser coletado pelo menos 90 dias antes da viagem. É obrigatório solicitar a Permissão de Importação online pelo menos 20 dias antes. Quarentena obrigatória de 7 dias na chegada.",
+    observacoes: "O sangue para sorologia deve ser coletado pelo menos 90 dias antes da viagem. É obrigatório solicitar a Permissão de Importação online pelo menos 20 dias antes. Quarentena obrigatória de 7 dias na chegada. Detalhes oficiais BAPHIQ/APHIA: idade ≥90 dias; microchip; vacina antirrábica entre 30 dias e 1 ano antes do embarque; RNATT ≥0,5 UI/mL em laboratório designado, com COLETA entre 90 dias e 1 ano antes do embarque; import permit prévio; quarentena pós-entrada curta (7 dias) que PODE SER DISPENSADA (home release) se todos os critérios forem atendidos — confirmar condições vigentes ao planejar.",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   TAILANDIA: {
     destino: "TAILANDIA" as const,
@@ -844,11 +844,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 10,
     exigePermissaoImportacao: true,
-    observacoes: "Exige Permissão de Importação (Import Permit) solicitada por e-mail ao posto de quarentena animal do aeroporto de Suvarnabhumi com pelo menos 15 a 60 dias de antecedência. Cães precisam ser vacinados contra Leptospirose (ou testados negativos) e DHPPI.",
+    observacoes: "Exige Permissão de Importação (Import Permit) solicitada por e-mail ao posto de quarentena animal do aeroporto de Suvarnabhumi com pelo menos 15 a 60 dias de antecedência. Cães precisam ser vacinados contra Leptospirose (ou testados negativos) e DHPPI. Import permit do DLD solicitado previamente (validade ~60 dias); inspeção na chegada (Suvarnabhumi); sem quarentena com documentação completa.",
     // KB metadata
     _kbConfidence: "MEDIA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   INDONESIA: {
     destino: "INDONESIA" as const,
@@ -862,11 +862,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 5,
     exigePermissaoImportacao: true,
-    observacoes: "ATENÇÃO: É estritamente proibida a entrada de cães e gatos em áreas livres de raiva, como a Ilha de BALI. A entrada deve ser por Jacarta, com quarentena obrigatória de 7 a 14 dias. A Permissão de Importação do Ministério da Agricultura Indonésio é obrigatória e complexa de se obter sem despachante local.",
+    observacoes: "ATENÇÃO: É estritamente proibida a entrada de cães e gatos em áreas livres de raiva, como a Ilha de BALI. A entrada deve ser por Jacarta, com quarentena obrigatória de 7 a 14 dias. A Permissão de Importação do Ministério da Agricultura Indonésio é obrigatória e complexa de se obter sem despachante local. Import permit prévio obrigatório; atenção: DKI Jakarta é zona livre de raiva com restrições adicionais de entrada de cães/gatos — confirmar rota/porto de entrada; quarentena possível conforme origem.",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   MALASIA: {
     destino: "MALASIA" as const,
@@ -880,11 +880,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 7,
     exigePermissaoImportacao: true,
-    observacoes: "Animais do Brasil estão sujeitos a uma quarentena obrigatória mínima de 7 dias (frequentemente estendida para 14 dias) nas instalações do governo. O Import Permit (Licença de Importação) deve ser emitido pelo DVS Malaysia antes do embarque.",
+    observacoes: "Animais do Brasil estão sujeitos a uma quarentena obrigatória mínima de 7 dias (frequentemente estendida para 14 dias) nas instalações do governo. O Import Permit (Licença de Importação) deve ser emitido pelo DVS Malaysia antes do embarque. Import permit do DVS obrigatório + QUARENTENA na chegada (instalação de Sepang/KLIA; duração conforme origem — Brasil não isento; tipicamente ≥7 dias, confirmar). Raças banidas (Pit Bull, Amstaff, Akita etc.) e raças com aprovação prévia por escrito do diretor veterinário estadual (Rottweiler, Pastor Alemão, Doberman etc.).",
     // KB metadata
     _kbConfidence: "MEDIA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   FILIPINAS: {
     destino: "FILIPINAS" as const,
@@ -898,11 +898,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 10,
     exigePermissaoImportacao: true,
-    observacoes: "A Permissão de Importação (SPSIC - Sanitary and Phytosanitary Import Clearance) é estritamente obrigatória e deve ser solicitada online no portal do BAI antes de iniciar o CVI. Se o processo for seguido corretamente, não há quarentena.",
+    observacoes: "A Permissão de Importação (SPSIC - Sanitary and Phytosanitary Import Clearance) é estritamente obrigatória e deve ser solicitada online no portal do BAI antes de iniciar o CVI. Se o processo for seguido corretamente, não há quarentena. SPS Import Permit do BAI emitido ANTES do embarque (validade ~60 dias); inspeção na chegada; sem quarentena com docs completos.",
     // KB metadata
     _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   INDIA: {
     destino: "INDIA" as const,
@@ -916,11 +916,11 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     exigeCVI: true,
     diasAntesCVI: 10,
     exigePermissaoImportacao: true,
-    observacoes: "Extremamente restritivo: A importação de pets para a Índia só é permitida para pessoas que estão se mudando definitivamente (Transfer of Residence) ou com vistos de trabalho de longo prazo. Viagens de turismo com pets não são autorizadas. Exige um NOC (No Objection Certificate) do AQCS antes do embarque.",
+    observacoes: "Extremamente restritivo: A importação de pets para a Índia só é permitida para pessoas que estão se mudando definitivamente (Transfer of Residence) ou com vistos de trabalho de longo prazo. Viagens de turismo com pets não são autorizadas. Exige um NOC (No Objection Certificate) do AQCS antes do embarque. RESTRIÇÃO CRÍTICA: a Índia só permite importar pet como bagagem em caso de TRANSFERÊNCIA DE RESIDÊNCIA do tutor (mudança para a Índia, com comprovação) ou re-importação de animal indiano — TURISTA NÃO PODE levar pet para a Índia. Alternativa: licença de importação DGFT (processo comercial, complexo). Máx. 2 pets por tutor em transfer of residence. Certificado sanitário deve atestar ausência de raiva, cinomose, parvovirose e leptospirose; NOC do AQCS na chegada.",
     // KB metadata
-    _kbConfidence: "ALTA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbConfidence: "MEDIA" as const,
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   CATAR: {
     destino: "CATAR" as const,
@@ -937,8 +937,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     observacoes: "A Permissão de Importação é obrigatória e válida por apenas 30 dias após emissão. A sorologia deve ser coletada pelo menos 90 dias antes do embarque. Animais geralmente não podem viajar na cabine nos voos da Qatar Airways, apenas como excesso de bagagem ou carga.",
     // KB metadata
     _kbConfidence: "MEDIA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   ARABIA_SAUDITA: {
     destino: "ARABIA_SAUDITA" as const,
@@ -955,8 +955,8 @@ export const KB_DESTINOS: Record<Destino, RegrasDestinoComMeta> = {
     observacoes: "Oficialmente, a Arábia Saudita só permite a entrada de cães classificados como 'cães de guarda, cães de caça ou cães de assistência/trabalho'. O tutor precisa declarar a função do cão ao solicitar o Import Permit no portal Naama. Cães e gatos só podem entrar via carga manifestada.",
     // KB metadata
     _kbConfidence: "MEDIA" as const,
-    _kbLastVerified: "2026-04-24",
-    _kbNextReview: "2026-07-24",
+    _kbLastVerified: "2026-07-17",
+    _kbNextReview: "2026-10-15",
   },
   AUSTRALIA: {
     destino: "AUSTRALIA" as const,
@@ -986,13 +986,13 @@ export const KB_COMPANHIAS: RegrasAereaComMeta[] = [
     pesoMaxCabine: 99,
     pesoMaxPorao: 45,
     dimensoesMaxCabine: { comprimento: 36, largura: 33, altura: 19 },
-    idadeMinimaAnimal: 8,
+    idadeMinimaAnimal: 16,
     braquicefalicoCabine: true,
     braquicefalicoPorao: false,
     racasPerigosasBanidas: true,
     anotacoes: "⚠️ Regras variam por rota e aeronave — o teto de peso do porão depende da duração do voo. Raças perigosas (Pit Bull, Rottweiler, Fila etc.) banidas em qualquer modalidade. Taxa por trecho. Portaria ANAC 17.476/SAS/2025 (vigente desde 20/10/2025): cia deve divulgar na venda peso/dimensões/raças aceitas e documentação; cão-guia tem embarque obrigatório e gratuito em cabine; animal de suporte emocional segue política da cia.",
     // KB metadata
-    _kbConfidence: "MEDIA" as const,
+    _kbConfidence: "ALTA" as const,
     _kbLastVerified: "2026-07-17",
     _kbNextReview: "2026-10-15",
   },
@@ -1009,7 +1009,7 @@ export const KB_COMPANHIAS: RegrasAereaComMeta[] = [
     racasPerigosasBanidas: false,
     anotacoes: "⚠️ Vagas limitadas por voo — confirmar disponibilidade na reserva. Portaria ANAC 17.476/SAS/2025 (vigente desde 20/10/2025): cia deve divulgar na venda peso/dimensões/raças aceitas e documentação; cão-guia tem embarque obrigatório e gratuito em cabine; animal de suporte emocional segue política da cia.",
     // KB metadata
-    _kbConfidence: "MEDIA" as const,
+    _kbConfidence: "ALTA" as const,
     _kbLastVerified: "2026-07-17",
     _kbNextReview: "2026-10-15",
   },
@@ -1018,15 +1018,15 @@ export const KB_COMPANHIAS: RegrasAereaComMeta[] = [
     nome: "Azul Linhas Aéreas",
     codigo: "AD",
     pesoMaxCabine: 10,
-    pesoMaxPorao: 45,
-    dimensoesMaxCabine: { comprimento: 43, largura: 30, altura: 23 },
+    pesoMaxPorao: 0,
+    dimensoesMaxCabine: { comprimento: 43, largura: 31.5, altura: 20 },
     idadeMinimaAnimal: 16,
     braquicefalicoCabine: true,
-    braquicefalicoPorao: true,
+    braquicefalicoPorao: false,
     racasPerigosasBanidas: false,
-    anotacoes: "⚠️ Diferencial histórico da Azul: braquicefálicos no porão (reconfirmar a cada revisão — política pode mudar sem aviso). Portaria ANAC 17.476/SAS/2025 (vigente desde 20/10/2025): cia deve divulgar na venda peso/dimensões/raças aceitas e documentação; cão-guia tem embarque obrigatório e gratuito em cabine; animal de suporte emocional segue política da cia.",
+    anotacoes: "CORREÇÃO IMPORTANTE (17/07/2026, página oficial navegada): Azul é CABINE-ONLY — não existe serviço de porão. Não transporta cão de suporte emocional (só estimação e cão-guia, conforme Portaria ANAC 17.476/2025). A página oficial da Azul também documenta exigências por destino (EUA, Portugal, França, Espanha, Uruguai, Argentina, Paraguai, Curaçao, Fernando de Noronha) — fonte útil para revisões do KB.",
     // KB metadata
-    _kbConfidence: "MEDIA" as const,
+    _kbConfidence: "ALTA" as const,
     _kbLastVerified: "2026-07-17",
     _kbNextReview: "2026-10-15",
   },

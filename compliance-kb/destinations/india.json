@@ -3,16 +3,22 @@
   "destino": "INDIA",
   "nome": "Índia",
   "bandeira": "🇮🇳",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
-  "confidence": "ALTA",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
   "sources": [
     {
       "url": "https://aqcsindia.gov.in/",
       "title": "AQCS — Animal Quarantine and Certification Services",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://aqcsindia.gov.in/Home/ImportPetUnderBaggage",
+      "title": "AQCS Índia — Import of pet under baggage rules (oficial)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para Índia."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: ADICIONADA restrição crítica — pet só entra na Índia em transferência de residência ou via licença DGFT; turismo com pet é inviável. O app deve sinalizar Índia como destino restrito."
     }
   ],
   "rules": {
@@ -37,7 +48,7 @@
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": true,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Extremamente restritivo: A importação de pets para a Índia só é permitida para pessoas que estão se mudando definitivamente (Transfer of Residence) ou com vistos de trabalho de longo prazo. Viagens de turismo com pets não são autorizadas. Exige um NOC (No Objection Certificate) do AQCS antes do embarque.",
+    "observacoes": "Extremamente restritivo: A importação de pets para a Índia só é permitida para pessoas que estão se mudando definitivamente (Transfer of Residence) ou com vistos de trabalho de longo prazo. Viagens de turismo com pets não são autorizadas. Exige um NOC (No Objection Certificate) do AQCS antes do embarque. RESTRIÇÃO CRÍTICA: a Índia só permite importar pet como bagagem em caso de TRANSFERÊNCIA DE RESIDÊNCIA do tutor (mudança para a Índia, com comprovação) ou re-importação de animal indiano — TURISTA NÃO PODE levar pet para a Índia. Alternativa: licença de importação DGFT (processo comercial, complexo). Máx. 2 pets por tutor em transfer of residence. Certificado sanitário deve atestar ausência de raiva, cinomose, parvovirose e leptospirose; NOC do AQCS na chegada.",
     "observacoesInternas": "Alerta vermelho no app: turismo com pet é proibido na Índia. Visto permanente/trabalho é exigido para emitir o NOC."
   }
 }

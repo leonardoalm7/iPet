@@ -3,9 +3,9 @@
   "destino": "TAIWAN",
   "nome": "Taiwan",
   "bandeira": "🇹🇼",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "BAPHIQ — Bureau of Animal and Plant Health Inspection and Quarantine",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.aphia.gov.tw/en/ws.php?id=14261",
+      "title": "APHIA/BAPHIQ — Quarantine for Dogs & Cats (oficial)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para Taiwan."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026 com fonte oficial APHIA: janela da vacina (30d–1a), coleta do RNATT (90d–1a antes), permit e regra de dispensa da quarentena documentadas. Confiança ALTA."
     }
   ],
   "rules": {
@@ -36,8 +47,15 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": true,
-    "racasRestritasOuProibidas": ["Pit Bull Terrier", "Japanese Tosa", "Neapolitan Mastiff", "Dogo Argentino", "Fila Brasileiro", "Mastiff"],
-    "observacoes": "O sangue para sorologia deve ser coletado pelo menos 90 dias antes da viagem. É obrigatório solicitar a Permissão de Importação online pelo menos 20 dias antes. Quarentena obrigatória de 7 dias na chegada.",
+    "racasRestritasOuProibidas": [
+      "Pit Bull Terrier",
+      "Japanese Tosa",
+      "Neapolitan Mastiff",
+      "Dogo Argentino",
+      "Fila Brasileiro",
+      "Mastiff"
+    ],
+    "observacoes": "O sangue para sorologia deve ser coletado pelo menos 90 dias antes da viagem. É obrigatório solicitar a Permissão de Importação online pelo menos 20 dias antes. Quarentena obrigatória de 7 dias na chegada. Detalhes oficiais BAPHIQ/APHIA: idade ≥90 dias; microchip; vacina antirrábica entre 30 dias e 1 ano antes do embarque; RNATT ≥0,5 UI/mL em laboratório designado, com COLETA entre 90 dias e 1 ano antes do embarque; import permit prévio; quarentena pós-entrada curta (7 dias) que PODE SER DISPENSADA (home release) se todos os critérios forem atendidos — confirmar condições vigentes ao planejar.",
     "observacoesInternas": "Garantir que o cálculo retroativo do roadmap considere 90 dias de espera da sorologia + tempo de processamento do Import Permit."
   }
 }

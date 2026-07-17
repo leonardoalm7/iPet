@@ -3,9 +3,9 @@
   "destino": "BOLIVIA",
   "nome": "Bolívia",
   "bandeira": "🇧🇴",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "SENASAG — Servicio Nacional de Sanidad Agropecuaria e Inocuidad Alimentaria",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.senasag.gob.bo/",
+      "title": "SENASAG Bolivia — autoridade sanitária oficial",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para a Bolívia."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: padrão regional confirmado em pesquisa (CVI + vacina antirrábica + desparasitação; sem sorologia/quarentena). Fonte oficial SENASAG Bolivia adicionada; particularidades locais a confirmar na próxima revisão."
     }
   ],
   "rules": {

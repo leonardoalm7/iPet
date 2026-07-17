@@ -4,9 +4,9 @@
   "nome": "LATAM Airlines",
   "codigo": "LA",
   "lastVerified": "2026-07-17",
-  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "verifiedBy": "Claude via Chrome (fonte oficial navegada) — revisão humana pendente: Leonardo Braga de Almeida",
   "nextReviewDate": "2026-10-15",
-  "confidence": "MEDIA",
+  "confidence": "ALTA",
   "sources": [
     {
       "url": "https://www.latamairlines.com/br/pt/central-de-ajuda/informacoes-de-voo/passageiros/viagem-com-animais",
@@ -40,6 +40,11 @@
       "date": "2026-07-17",
       "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
       "description": "Revisão 2026-07-17: MUDANÇA GRANDE — cabine sem limite de peso (critério = caixa 36×33×19 rígida / 40×28×25 flexível; pesoMaxKg=0 convencionado como 'sem limite'); porão escalonado 32/23/45 kg por duração/aeronave. Fonte oficial retorna 403 ao fetch; dados de resultados de busca das páginas LATAM + imprensa especializada. REVISÃO HUMANA: confirmar no site antes de publicar."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Confirmação via página oficial LATAM (Chrome): cabine sem limite de peso, caixa 36×33×19 rígida / 40×28×25 flexível, 16 semanas mínimo (EUA 6 meses), assento corredor, Economy 5/voo + Premium Economy 1/voo, sem sedação, pedido até 4h antes. Confiança elevada para ALTA."
     }
   ],
   "cabine": {
@@ -56,10 +61,10 @@
       "GATO"
     ],
     "racasBraquisefálicasPermitidas": true,
-    "idadeMinimaSemanas": 8,
+    "idadeMinimaSemanas": 16,
     "maxAnimaisPorVoo": 5,
     "reservaAntecedenciaHoras": 24,
-    "observacoes": "MUDANÇA 2025/2026: a LATAM ABOLIU o limite de peso para pets na cabine — o critério passou a ser apenas a caixa: rígida máx. 36×33×19 cm OU bolsa flexível máx. 40×28×25 cm, sob o assento dianteiro. O pet deve caber em pé sem tocar o teto e conseguir girar naturalmente. pesoMaxKg=99 é sentinela de SEM LIMITE DE PESO (no app, 0 significa modalidade indisponível; o critério real é a caixa). 1 animal por passageiro; reserva prévia obrigatória. Braquicefálicos aceitos em cabine."
+    "observacoes": "CONFIRMADO na página oficial (17/07/2026): SEM limite de peso na cabine — critério é o pet caber em pé na caixa sem tocar o teto e girar naturalmente (pesoMaxKg=99 é sentinela de 'sem limite'). Caixa rígida máx. 36×33×19 cm (porta metálica com trava dupla) OU bolsa flexível máx. 40×28×25 cm, sob o assento dianteiro, sem rodinhas. Idade mínima 16 SEMANAS (desmame ≥5 dias antes); EUA: 6 meses. 1 pet/passageiro; Economy até 5/voo, Premium Economy 1/voo; Premium Business NÃO aceita. Assento de CORREDOR obrigatório (não 1ª fileira nem emergência). Pet não pode estar sedado; fêmea não pode estar prenha nem ter parido nas últimas 48h. Solicitação da compra até 4h antes do voo (Central/WhatsApp/lojas); cartão de embarque só no aeroporto. Só voos operados LATAM (sem codeshare/interline)."
   },
   "porao": {
     "permitido": true,

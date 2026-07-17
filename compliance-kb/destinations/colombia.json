@@ -3,9 +3,9 @@
   "destino": "COLOMBIA",
   "nome": "Colômbia",
   "bandeira": "🇨🇴",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "ICA — Instituto Colombiano Agropecuario",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.ica.gov.co/importacion-y-exportacion/otros-procedimientos/requisitos-para-importar-mascotas",
+      "title": "ICA Colombia — autoridade sanitária oficial",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para a Colômbia."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: padrão regional confirmado em pesquisa (CVI + vacina antirrábica + desparasitação; sem sorologia/quarentena). Fonte oficial ICA Colombia adicionada; particularidades locais a confirmar na próxima revisão."
     }
   ],
   "rules": {
@@ -36,7 +47,12 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
-    "racasProibidas": ["Pit Bull", "Dogo Argentino", "Rottweiler", "Dobermann"],
+    "racasProibidas": [
+      "Pit Bull",
+      "Dogo Argentino",
+      "Rottweiler",
+      "Dobermann"
+    ],
     "observacoes": "Cães das raças proibidas não podem ser importados para a Colômbia. Se o animal for dessas raças, a entrada será negada. O tutor deve realizar inspeção presencial no escritório do ICA no porto de chegada para liberação.",
     "observacoesInternas": "Alerta vermelho no cadastro de Pit Bulls/Staffords: entrada proibida na Colômbia."
   }

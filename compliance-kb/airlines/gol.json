@@ -4,9 +4,9 @@
   "nome": "GOL Linhas Aéreas",
   "codigo": "G3",
   "lastVerified": "2026-07-17",
-  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "verifiedBy": "Claude via Chrome (fonte oficial navegada) — revisão humana pendente: Leonardo Braga de Almeida",
   "nextReviewDate": "2026-10-15",
-  "confidence": "MEDIA",
+  "confidence": "ALTA",
   "sources": [
     {
       "url": "https://www.voegol.com.br/informacoes/animais-de-estimacao",
@@ -35,6 +35,11 @@
       "date": "2026-07-17",
       "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
       "description": "Revisão 2026-07-17: cabine 10→12 kg, caixa 43×31,5×20, idade mínima 8 semanas→6 MESES; porão 32→30 kg com dimensões máximas de caixa documentadas. Fonte oficial 403 ao fetch; dados do PDF/página oficial GOL via busca. REVISÃO HUMANA: confirmar no site da GOL antes de publicar."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Confirmação via página oficial GOL (Chrome): cabine 12 kg / 6 meses / caixa 43×31,5×20 / check-in balcão 2h / formulário digital prévio. Porão 30 kg mantido de fonte oficial anterior. Confiança elevada para ALTA."
     }
   ],
   "cabine": {
@@ -54,7 +59,7 @@
     "idadeMinimaSemanas": 26,
     "maxAnimaisPorVoo": 3,
     "reservaAntecedenciaHoras": 24,
-    "observacoes": "Atualização 2026: até 12 kg (animal + caixa) na cabine; caixa máx. 43×31,5×20 cm; idade mínima 6 MESES (antes era 8 semanas — mudou após incidentes). Cão e gato. Braquicefálicos aceitos em cabine. Giro de 360º dentro da caixa obrigatório. Reserva antecipada obrigatória (vagas limitadas por voo)."
+    "observacoes": "CONFIRMADO na página oficial (17/07/2026): até 12 kg (animal + caixa) na cabine; idade mínima 6 MESES; exige atestado veterinário com raça, nome, idade, origem e pedigree (se houver). Caixa máx. 43×31,5×20 cm (rígida ou flexível), sob o assento; proibido 1ª fileira e saída de emergência. Check-in EXCLUSIVO no balcão GOL, 2h antes; documentação enviada antecipadamente por formulário digital (Minhas Viagens > Serviços Contratados) e originais apresentados no balcão para retirar o Pet Pass. Disponível em voos domésticos e internacionais; incluído na tarifa Premium Economy; internacional em Economy ou Premium Economy."
   },
   "porao": {
     "permitido": true,

@@ -4,9 +4,9 @@
   "nome": "Estados Unidos",
   "bandeira": "🇺🇸",
   "lastVerified": "2026-07-17",
-  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "verifiedBy": "Claude via Chrome (fonte oficial navegada) — revisão humana pendente: Leonardo Braga de Almeida",
   "nextReviewDate": "2026-10-15",
-  "confidence": "MEDIA",
+  "confidence": "ALTA",
   "sources": [
     {
       "url": "https://www.cdc.gov/importation/dogs/index.html",
@@ -43,6 +43,12 @@
       "title": "AVMA — CDC dog importation requirements FAQ",
       "type": "REFERENCIA",
       "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.cdc.gov/importation/dogs/foreign-vaccinated-high-risk-countries.html",
+      "title": "CDC — Entry Requirements for Foreign-Vaccinated Dogs from High-Risk Countries (navegada em 17/07/2026)",
+      "lastAccessed": "2026-07-17",
+      "type": "OFICIAL"
     }
   ],
   "changeLog": [
@@ -55,13 +61,18 @@
       "date": "2026-07-17",
       "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
       "description": "Revisão 2026-07-17: REGRAS REESCRITAS para refletir o regime CDC vigente desde 01/08/2024 — Brasil é país de alto risco; cães: ≥6 meses, microchip obrigatório pré-vacina, CDC Dog Import Form, certificação de vacina estrangeira e titulação em lab CDC (sem ela: 28 dias de quarentena). Antes o registro não exigia microchip nem sorologia (defasado). Confiança MEDIA — CDC bloqueia fetch direto; validar manualmente."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026 via páginas oficiais do CDC (Chrome): confirmado e detalhado o regime de 01/08/2024 — facility obrigatória mesmo com titulação; certification ≤30 dias endossada; 1ª vacina ≥12 semanas de idade e ≥28 dias antes da entrada; titulação vale a vida sem lapso vacinal; voo direto ao aeroporto da facility. Confiança elevada para ALTA."
     }
   ],
   "rules": {
     "exigeMicrochip": true,
     "microchipPadrao": "OBRIGATÓRIO para cães (regra CDC desde 01/08/2024): microchip legível por scanner universal, implantado ANTES da vacina antirrábica (senão a vacina é inválida). Número do chip deve constar em todos os formulários.",
     "exigeVacina": true,
-    "diasCarenciaVacina": 21,
+    "diasCarenciaVacina": 28,
     "validadeVacinaAnos": 1,
     "exigeSorologia": true,
     "diasCarenciaSorologia": 30,
@@ -72,7 +83,7 @@
     "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA + endosso SFA. Deve estar em inglês ou acompanhado de tradução juramentada.",
     "exigePermissaoImportacao": true,
     "racasRestritasOuProibidas": [],
-    "observacoes": "O Brasil é classificado pelo CDC como PAÍS DE ALTO RISCO para raiva canina — regras rígidas para CÃES (vigentes desde 01/08/2024): (1) idade mínima 6 MESES na entrada; (2) microchip implantado antes da vacina; (3) vacina antirrábica válida; (4) CDC Dog Import Form preenchido online (recibo apresentado à cia aérea no embarque e ao CBP na chegada); (5) Certification of Foreign Rabies Vaccination and Microchip preenchida por veterinário; (6) titulação (RNATT) ≥0,5 UI/mL em lab aprovado pelo CDC para EVITAR quarentena de 28 dias; (7) entrada por porto com instalação de cuidado animal registrada no CDC quando aplicável. GATOS: sem exigências federais do CDC (vacina antirrábica recomendada; alguns estados exigem). CVI do MAPA continua necessário para SAIR do Brasil. Havaí tem quarentena própria — tratar à parte.",
-    "observacoesInternas": "⚠️ CORREÇÃO IMPORTANTE 2026-07-17: o registro anterior dizia exigeMicrochip=false e exigeSorologia=false — ERRADO desde 01/08/2024 (regra CDC pós-suspensão de 2021). Páginas do CDC retornam 403 para fetch automatizado; dados compilados de resultados de busca das páginas oficiais do CDC + FAQ da AVMA. REVISÃO HUMANA OBRIGATÓRIA antes de publicar: confirmar (a) prazo exato da coleta da titulação vs chegada; (b) lista de portos de entrada exigidos para cães vacinados no exterior com titulação OK (pode ser qualquer porto) vs sem titulação (6 portos com quarentena CDC); (c) se o formulário do CDC gera recibo com validade. Modelar no app o fluxo cão ≥6 meses (bloqueia filhotes!)."
+    "observacoes": "Brasil = ALTO RISCO para raiva canina (CDC, regras de 01/08/2024 — confirmadas na página oficial em 17/07/2026). CÃES (vacinados no exterior, caso padrão do público iPet): (1) idade mínima 6 MESES; (2) microchip legível por scanner universal ANTES da vacina (senão a vacina é inválida); (3) 1ª vacina antirrábica com ≥12 semanas de idade e ≥28 dias antes da entrada; (4) Certification of Foreign Rabies Vaccination and Microchip — preenchida por veterinário e ENDOSSADA por veterinário oficial do governo (MAPA/SFA), emitida ≤30 dias antes da viagem, uso único; (5) CDC Dog Import Form online (gratuito, 1 por cão; recibo válido só para a data/aeroporto declarados; foto do cão ≤15 dias se <1 ano); (6) RESERVA OBRIGATÓRIA em CDC-registered animal care facility — MESMO COM titulação válida (exame + revacinação com vacina dos EUA, custos do tutor); SEM titulação válida: +28 dias de quarentena na instalação; (7) chegada por VOO INTERNACIONAL DIRETO ao aeroporto da instalação reservada — sem conexões domésticas antes; (8) titulação: coleta ≥30 dias após a 1ª vacina E ≥28 dias antes da entrada, em lab aprovado pelo CDC; resultado aprovado vale por toda a vida do cão se não houver lapso vacinal. GATOS: sem exigências federais do CDC (vacina recomendada; alguns estados exigem). CVI do MAPA segue necessário para SAIR do Brasil. Cão de serviço (14 CFR 382.3) tem exceções; ESA não conta. Cias: Azul não embarca cães BR→EUA; American/Delta sem cabine ex-Brasil — checar cia antes.",
+    "observacoesInternas": "Revisado 17/07/2026 NAVEGANDO as páginas oficiais do CDC via Chrome (403 para fetch direto, OK no browser real). Nuance que derruba suposição anterior: a reserva em facility é obrigatória para TODO cão vacinado no exterior de país de alto risco — a titulação só evita os 28 dias de quarentena, não a facility. Lista de aeroportos com facility: conferir em cdc.gov (JFK, MIA, LAX, ATL, PHL, SEA, IAD — validar antes de publicar). PRODUTO: o roadmap do app precisa de tarefas específicas EUA (form CDC, certification endossada ≤30d, reserva facility, voo direto ao aeroporto da facility) — campos atuais do KB não geram essas tarefas automaticamente."
   }
 }

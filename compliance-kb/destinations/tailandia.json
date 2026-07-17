@@ -3,9 +3,9 @@
   "destino": "TAILANDIA",
   "nome": "Tailândia",
   "bandeira": "🇹🇭",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "DLD — Department of Livestock Development",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.aphis.usda.gov/pet-travel/us-to-another-country-export/pet-travel-us-thailand",
+      "title": "DLD Tailândia — referência oficial",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para Tailândia."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: mecânica de permit/inspeção confirmada em pesquisa (DLD Tailândia); demais regras mantidas."
     }
   ],
   "rules": {
@@ -36,8 +47,11 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": true,
-    "racasRestritasOuProibidas": ["Pit Bull Terrier", "American Staffordshire Terrier"],
-    "observacoes": "Exige Permissão de Importação (Import Permit) solicitada por e-mail ao posto de quarentena animal do aeroporto de Suvarnabhumi com pelo menos 15 a 60 dias de antecedência. Cães precisam ser vacinados contra Leptospirose (ou testados negativos) e DHPPI.",
+    "racasRestritasOuProibidas": [
+      "Pit Bull Terrier",
+      "American Staffordshire Terrier"
+    ],
+    "observacoes": "Exige Permissão de Importação (Import Permit) solicitada por e-mail ao posto de quarentena animal do aeroporto de Suvarnabhumi com pelo menos 15 a 60 dias de antecedência. Cães precisam ser vacinados contra Leptospirose (ou testados negativos) e DHPPI. Import permit do DLD solicitado previamente (validade ~60 dias); inspeção na chegada (Suvarnabhumi); sem quarentena com documentação completa.",
     "observacoesInternas": "Alertar no roadmap sobre a obrigatoriedade da vacina contra Leptospirose (presente na V8/V10)."
   }
 }

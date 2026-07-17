@@ -3,9 +3,9 @@
   "destino": "URUGUAI",
   "nome": "Uruguai",
   "bandeira": "🇺🇾",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "MGAP — Ministerio de Ganadería, Agricultura y Pesca",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.gub.uy/ministerio-ganaderia-agricultura-pesca/",
+      "title": "MGAP Uruguai — autoridade sanitária",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -25,6 +31,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Atualização completa via pesquisa delegada. Microchip agora obrigatório (ISO). Adicionado requisito crítico de teste negativo para Leishmaniose (D-60) OU coleira repelente com Deltametrina + tratamento contra Echinococcus granulosus. Confidence elevada de MEDIA para ALTA."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: ADICIONADO teste de leishmaniose negativo ≤60 dias (obrigatório p/ cães ex-Brasil), desparasitação ≤15 dias pré-CVI e microchip obrigatório p/ não-residentes. Reuso do certificado em estadias <30 dias documentado."
     }
   ],
   "rules": {
@@ -42,7 +53,7 @@
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Obrigatório apresentar TESTE NEGATIVO PARA LEISHMANIOSE (kit rápido ou sorologia) realizado nos 60 dias anteriores ao embarque, ou atestar uso de coleira repelente com Deltametrina. O CVI deve atestar também tratamento contra tênia Echinococcus granulosus.",
-    "observacoesInternas": "Inserir tarefa OBRIGATÓRIA no roadmap para cães: exame de Leishmaniose e aplicação de coleira repelente/praziquantel."
+    "observacoes": "Obrigatório apresentar TESTE NEGATIVO PARA LEISHMANIOSE (kit rápido ou sorologia) realizado nos 60 dias anteriores ao embarque, ou atestar uso de coleira repelente com Deltametrina. O CVI deve atestar também tratamento contra tênia Echinococcus granulosus. EXCLUSIVO CÃES do Brasil: teste NEGATIVO de leishmaniose (IFAT, ELISA, aglutinação direta ou detecção molecular) realizado ≤60 dias antes da entrada — o Uruguai NÃO admite cão com diagnóstico prévio de leishmaniose. Desparasitação interna/externa ≤15 dias antes da emissão do CVI (produto e data no certificado). Microchip OBRIGATÓRIO para cães não-residentes (associado ao CVI). Estadia <30 dias: pode retornar com o mesmo certificado de entrada se dentro da validade.",
+    "observacoesInternas": "ATUALIZAÇÃO IMPORTANTE 17/07/2026: adicionado teste de LEISHMANIOSE obrigatório p/ cães do Brasil (fonte: página oficial da Azul citando exigência uruguaia + MGAP). O app deve gerar tarefa de exame de leishmaniose no roadmap Uruguai — hoje não existe campo estruturado pra isso (vai em observações). Confirmar no site do MGAP/SNIG na próxima revisão."
   }
 }

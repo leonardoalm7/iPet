@@ -3,9 +3,9 @@
   "destino": "ARABIA_SAUDITA",
   "nome": "Arábia Saudita",
   "bandeira": "🇸🇦",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -20,6 +20,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para a Arábia Saudita."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: sem mudança identificada em pesquisa para Arábia Saudita (permit prévio + vacina + certificado; listas de raças banidas mantidas). Detalhes de titulação/validade do permit a confirmar em fonte oficial na próxima revisão — manter confiança MEDIA."
     }
   ],
   "rules": {
@@ -36,7 +41,14 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": true,
-    "racasRestritasOuProibidas": ["Pit Bull", "Rottweiler", "Staffordshire Bull Terrier", "Mastiff", "Bullmastiff", "Dogo Argentino"],
+    "racasRestritasOuProibidas": [
+      "Pit Bull",
+      "Rottweiler",
+      "Staffordshire Bull Terrier",
+      "Mastiff",
+      "Bullmastiff",
+      "Dogo Argentino"
+    ],
     "observacoes": "Oficialmente, a Arábia Saudita só permite a entrada de cães classificados como 'cães de guarda, cães de caça ou cães de assistência/trabalho'. O tutor precisa declarar a função do cão ao solicitar o Import Permit no portal Naama. Cães e gatos só podem entrar via carga manifestada.",
     "observacoesInternas": "Alerta sobre a declaração de cães como 'cães de guarda' para contornar a regra islâmica de pets. Sugerir consultoria especializada."
   }

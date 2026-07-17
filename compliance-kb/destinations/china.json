@@ -3,16 +3,22 @@
   "destino": "CHINA",
   "nome": "China",
   "bandeira": "🇨🇳",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
-  "confidence": "ALTA",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
   "sources": [
     {
       "url": "http://english.customs.gov.cn/",
       "title": "GACC — General Administration of Customs of the People's Republic of China",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.aphis.usda.gov/pet-travel/us-to-another-country-export/pet-travel-us-china",
+      "title": "USDA APHIS — Pet travel to China (referência GACC)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para a China."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: explicitado que Brasil é NÃO-designado → quarentena 30 dias obrigatória e entrada só por portos autorizados; 1 pet/passageiro. Detalhes de portos a confirmar na próxima revisão."
     }
   ],
   "rules": {
@@ -37,7 +48,7 @@
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Permitido apenas 1 pet por passaporte de viajante. Para evitar a quarentena obrigatória de 30 dias, o pet deve ter sorologia aprovada e entrar obrigatoriamente por portos designados com infraestrutura de quarentena (ex: Pequim, Xangai, Guangzhou).",
+    "observacoes": "Permitido apenas 1 pet por passaporte de viajante. Para evitar a quarentena obrigatória de 30 dias, o pet deve ter sorologia aprovada e entrar obrigatoriamente por portos designados com infraestrutura de quarentena (ex: Pequim, Xangai, Guangzhou). O Brasil NÃO está na lista de países/regiões designados pela China: cão/gato ex-Brasil cumpre QUARENTENA DE 30 DIAS em instalação governamental na chegada, e a entrada só é aceita em portos autorizados a receber quarentena (ex.: Beijing Capital, Shanghai Pudong — confirmar porto antes de emitir passagem). Microchip ISO + 2 vacinas antirrábicas + titulação + certificado sanitário reduzem risco de recusa mas NÃO isentam a quarentena para país não-designado. Limite: 1 pet por passageiro.",
     "observacoesInternas": "Alertar o tutor sobre a lista estrita de aeroportos de entrada para isenção de quarentena."
   }
 }

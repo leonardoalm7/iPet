@@ -3,9 +3,9 @@
   "destino": "ARGENTINA",
   "nome": "Argentina",
   "bandeira": "🇦🇷",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "SENASA — Servicio Nacional de Sanidad y Calidad Agroalimentaria",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://mascotas.senasa.gob.ar/index.php/consultar_requisitos",
+      "title": "SENASA — Consulta de requisitos para mascotas",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -25,6 +31,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Atualização completa via pesquisa delegada. Mudanças: microchip passou de recomendado para obrigatório (ISO 11784/11785); sorologia confirmada como não exigida (Mercosul). Incluído requisito de desparasitação D-15 a D-2. Confidence elevada de MEDIA para ALTA com fonte oficial SENASA direta."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: adicionada desparasitação ≤15 dias pré-CVI (SENASA) e e-CVI eletrônico. Sem outras mudanças."
     }
   ],
   "rules": {
@@ -42,7 +53,7 @@
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Sendo país do Mercosul, a sorologia da raiva não é exigida para animais procedentes do Brasil. O CVI deve atestar tratamento contra parasitas internos e externos nos 15 dias prévios à emissão.",
+    "observacoes": "Sendo país do Mercosul, a sorologia da raiva não é exigida para animais procedentes do Brasil. O CVI deve atestar tratamento contra parasitas internos e externos nos 15 dias prévios à emissão. Desparasitação interna e externa ≤15 dias antes da emissão do CVI (procedimento exigido pelo SENASA). CVI emitido ≤10 dias antes da viagem; e-CVI eletrônico Brasil→Argentina disponível (gratuito, via Portal Gov.br).",
     "observacoesInternas": "Alertar no roadmap: desparasitação entre D-15 e D-2 antes do embarque."
   }
 }
