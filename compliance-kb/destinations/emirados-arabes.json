@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "EMIRADOS_ARABES",
+  "nome": "Emirados Árabes Unidos",
+  "bandeira": "🇦🇪",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.moccae.gov.ae/",
+      "title": "MOCCAE — Ministry of Climate Change and Environment (autoridade)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.pettravel.com/information/pet-passports/united-arab-emirates-pet-import-requirements/",
+      "title": "PetTravel — UAE pet import requirements",
+      "type": "REFERENCIA",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: permit MOCCAE + chip + vacina + RNATT ≤90 dias (alto risco) + chegada como carga manifestada + raças banidas. Confiança MEDIA — validar permit/prazos no MOCCAE."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos), implantado antes da vacina antirrábica",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": "≥0,5 UI/mL com coleta nos 90 dias ANTERIORES à viagem (países de alto risco, Brasil incluído)",
+    "laboratoriosCredenciados": "Laboratório reconhecido — confirmar lista aceita pelo MOCCAE",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Certificado sanitário + endosso oficial; import permit do MOCCAE emitido ANTES do embarque",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": [
+      "American Pit Bull Terrier",
+      "American Staffordshire Terrier",
+      "Tosa",
+      "Dogo Argentino",
+      "Fila Brasileiro",
+      "Híbridos de lobo",
+      "Mastiffs de tipo briga (lista MOCCAE)"
+    ],
+    "observacoes": "EAU/Dubai (MOCCAE): import permit obrigatório ANTES do embarque + microchip ISO + vacina antirrábica válida + RNATT ≥0,5 UI/mL coletado nos 90 dias anteriores (exigido para países sem programa de controle de raiva reconhecido — Brasil incluído; países como UK/Alemanha/Japão são isentos) + certificado sanitário endossado. Sem titulação válida: QUARENTENA na chegada + teste às custas do tutor. Pets chegam como CARGA MANIFESTADA (regra do governo — cabine/bagagem não aceitas no destino final EAU). Limite de 2 pets por passageiro/permit. Raças banidas nos EAU (lista MOCCAE): Pit Bull, Mastiffs de briga, Tosa, Dogo Argentino, Fila Brasileiro e híbridos de lobo.",
+    "observacoesInternas": "Criado 2026-07-17 com base em fontes secundárias consistentes (carrymypet/pettravel citando MOCCAE). REVISÃO HUMANA: confirmar no portal MOCCAE (moccae.gov.ae) o prazo dos 90 dias da titulação, validade do permit (30 dias?) e lista oficial de raças. Registrei diasCarenciaSorologia=0 porque a regra é 'coleta recente' (≤90d), não carência mínima — semântica INVERTIDA vs UE; documentar no app."
+  }
+}

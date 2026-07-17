@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "TURQUIA",
+  "nome": "Turquia",
+  "bandeira": "🇹🇷",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "BAIXA",
+  "sources": [
+    {
+      "url": "https://www.tarimorman.gov.tr/",
+      "title": "Ministério da Agricultura e Florestas da Turquia (HAYGEM)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: chip + vacina + RNATT + certificado recente, até 2 pets, sem quarentena. Confiança BAIXA — prazos e validade pendentes de fonte oficial."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos), implantado antes da vacina antirrábica",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": "≥0,5 UI/mL (coleta ≥30 dias após a vacina; resultado aceito por período longo se reforços em dia)",
+    "laboratoriosCredenciados": "Laboratório autorizado UE/MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Certificado veterinário oficial (CVI/MAPA + endosso SFA), emitido poucos dias antes do embarque",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Turquia (HAYGEM/Ministério da Agricultura): microchip ISO + vacina antirrábica válida + RNATT ≥0,5 UI/mL (coleta ≥30 dias após a vacina, em lab aprovado UE) + certificado veterinário oficial recente + até 2 pets por viajante. Sem quarentena com documentação completa. Entrada por pontos com controle veterinário (IST/SAW).",
+    "observacoesInternas": "Criado 2026-07-17 com base em conhecimento consolidado + fontes secundárias — SEM leitura de fonte oficial turca nesta revisão. BAIXA confiança: confirmar em tarimorman.gov.tr (HAYGEM) validade do certificado (48h? 10 dias?), aceitação de resultado antigo de RNATT e limite de animais antes de publicar."
+  }
+}

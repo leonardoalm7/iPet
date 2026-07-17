@@ -3,9 +3,9 @@
   "id": "air-france",
   "nome": "Air France",
   "codigo": "AF",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,11 @@
       "title": "Air France — Transporte de Animais",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://wwws.airfrance.us/information/passagers/voyager-avec-son-animal-chien-chat",
+      "title": "Air France — Travel with your pet",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +25,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. Air France opera rota Brasil-Paris. Importante para destinos europeus."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: confirmados 8 kg cabine / 75 kg porão; dimensões da bolsa de cabine atualizadas para 46×28×24 (padrão atual AF). Sem mudança estrutural."
     }
   ],
   "cabine": {
@@ -39,13 +49,13 @@
     "idadeMinimaSemanas": 15,
     "maxAnimaisPorVoo": null,
     "reservaAntecedenciaHoras": 48,
-    "observacoes": "Peso inclui animal + transportadora. Máx 8kg. Apenas 1 animal por passageiro. Reserva com mínimo 48h de antecedência pelo SAC Air France. Raças braquicefálicas proibidas em todos os segmentos."
+    "observacoes": "Cabine: cão/gato até 8 kg (animal + bolsa), bolsa FLEXÍVEL máx. 46×28×24 cm sob o assento dianteiro. Proibido abrir a bolsa a bordo. Idade mínima 10 semanas (voos internacionais: conforme regras sanitárias do destino). Braquicefálicos: aceitos em cabine dentro do limite; não aceitos no porão."
   },
   "porao": {
     "permitido": true,
     "pesoMaxKg": 75,
     "racasBraquisefálicasPermitidas": false,
-    "observacoes": "Porão climatizado. Caixa rígida IATA obrigatória. Peso máximo 75kg (animal + caixa). Confirmar disponibilidade no momento da reserva."
+    "observacoes": "Porão: animal >8 kg até 75 kg (animal + caixa), caixa rígida IATA. Braquicefálicos PROIBIDOS no porão. Restrições sazonais de temperatura podem embargar o porão em certas rotas/épocas."
   },
   "racasPerigosasBanidas": false,
   "observacoesGerais": "⚠️ Air France proíbe absolutamente raças braquicefálicas em todos os voos. Taxas cobradas por trecho. Confirmar disponibilidade com antecedência — número limitado de animais por voo."

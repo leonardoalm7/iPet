@@ -3,16 +3,22 @@
   "destino": "MEXICO",
   "nome": "México",
   "bandeira": "🇲🇽",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
-  "confidence": "MEDIA",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "ALTA",
   "sources": [
     {
       "url": "https://www.gob.mx/senasica/acciones-y-programas/importacion-de-animales-de-compania",
       "title": "SENASICA México — Importación de Animales de Compañía",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.gob.mx/senasica/documentos/si-viajas-con-tu-mascota-194177",
+      "title": "SENASICA — Si viajas con tu mascota (requisitos oficiais)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. SENASICA (SADER) é o órgão regulador mexicano. México é destino crescente para brasileiros — Cancún, Cidade do México, Los Cabos."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17 via página oficial SENASICA (gob.mx): confirmados certificado ≤10 dias, vacina antirrábica, vermifugação ≤6 meses e fluxo OISA/CZI (grátis 1–2 pets). Sem mudança de regra estrutural. Confiança elevada para ALTA."
     }
   ],
   "rules": {
@@ -37,7 +48,7 @@
     "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Tradução para espanhol recomendada mas não obrigatória. Algumas companhias aéreas que operam para o México exigem o certificado em inglês.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "México tem processo relativamente simples para entrada de cães e gatos de companhia. Exige vacina antirrábica válida + CVI. O SENASICA pode inspecionar o animal na chegada. Cancún, Cidade do México, Guadalajara e Los Cabos são destinos populares. Atenção: hotéis de luxo em Cancún/Riviera Maya variam muito na política pet.",
+    "observacoes": "Requisitos SENASICA para cães e gatos do Brasil: (1) Certificado de saúde (zoossanitário) emitido pela autoridade federal do Brasil (CVI/MAPA — e-CVI disponível para o México) OU por veterinário em papel timbrado com credenciais profissionais, com NO MÁXIMO 10 DIAS de emissão; (2) comprovante de vacina antirrábica com data de aplicação e validade; (3) vermifugação interna e externa nos últimos 6 MESES registrada no certificado e animal livre de ectoparasitas. Na chegada: inspeção física na OISA (Oficina de Inspección de Sanidad Agropecuaria) do aeroporto; emissão do Certificado Zoosanitário para Importação (CZI) — GRATUITO para 1–2 pets, taxa a partir do 3º. Sem microchip obrigatório, sem sorologia, sem quarentena.",
     "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Verificar site do SENASICA pois regras podem variar por porto de entrada. Tradução juramentada para espanhol pode ser solicitada por agentes de fronteira."
   }
 }

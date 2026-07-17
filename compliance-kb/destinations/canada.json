@@ -3,9 +3,9 @@
   "destino": "CANADA",
   "nome": "Canadá",
   "bandeira": "🇨🇦",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,18 @@
       "title": "CFIA Canada — Importing Pet Dogs and Cats",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://inspection.canada.ca/en/importing-food-plants-animals/pets",
+      "title": "CFIA — Importing and travelling with pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://inspection.canada.ca/en/animal-health/terrestrial-animals/diseases/reportable/rabies/countries-high-risk-dog",
+      "title": "CFIA — Countries at high-risk for dog rabies",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +32,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. CFIA (Canadian Food Inspection Agency) é o órgão regulador. Canadá é destino crescente para brasileiros."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: regras de pet pessoal mantidas (certificado antirrábico EN/FR); adicionada proibição de cães comerciais de países de alto risco (desde 28/09/2022, Brasil incluído) e alerta de possível endurecimento em análise pela CFIA. Confiança MEDIA — página oficial de importação pessoal inacessível ao fetch automatizado."
     }
   ],
   "rules": {
@@ -37,7 +54,7 @@
     "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Documento deve estar em inglês ou francês (ou acompanhado de tradução juramentada). Endosso SFA recomendado.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Canadá (CFIA) exige vacina antirrábica válida para cães oriundos do Brasil. CVI em inglês ou francês é obrigatório. Gatos têm requisitos menos restritivos — vacina antirrábica não é federalmente obrigatória para gatos, mas alguns estados (províncias) podem exigir. Toronto, Vancouver e Montreal são destinos populares e pet-friendly.",
-    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Regras do Canadá são relativamente simples mas CFIA pode atualizar exigências. Verificar se Brasil continua como país de baixo risco para raiva canina. Províncias como Ontario têm restrições próprias para certas raças (ex: Pit Bull proibido em Ontario). Tradução juramentada do CVI é importante verificar."
+    "observacoes": "PET PESSOAL (acompanhado do tutor): cão/gato >3 meses precisa de certificado de vacinação antirrábica válido, em inglês ou francês, emitido e assinado por veterinário licenciado, identificando o animal (raça, sexo, cor, peso). Sem quarentena, sem sorologia, sem microchip obrigatório para pet pessoal. CVI do MAPA segue necessário para SAIR do Brasil (e-CVI disponível para o Canadá). ATENÇÃO: cães COMERCIAIS (revenda, adoção, criação, exposição) de países de alto risco para raiva — Brasil incluído — estão PROIBIDOS desde 28/09/2022. Cão de assistência acompanhando o usuário: sem restrições.",
+    "observacoesInternas": "⚠️ Revisado 2026-07-17. A página oficial da CFIA de importação pessoal mudou de URL (antiga retorna 410) e a CFIA declarou que 'vai explorar endurecimento' das regras para pets pessoais de países de alto risco. Blogs de 2026 já citam microchip obrigatório + idade mínima 7 meses + import permit para cães de países de alto risco — NÃO consegui confirmar em fonte oficial. REVISÃO HUMANA OBRIGATÓRIA: usar a ferramenta interativa da CFIA (inspection.canada.ca) simulando cão pessoal do Brasil antes de publicar. Se confirmado, atualizar exigeMicrochip e adicionar idade mínima."
   }
 }

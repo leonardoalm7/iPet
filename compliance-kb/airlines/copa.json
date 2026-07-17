@@ -3,9 +3,9 @@
   "id": "copa",
   "nome": "Copa Airlines",
   "codigo": "CM",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,11 @@
       "title": "Copa Airlines — Viajando com Animais de Estimação",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.copaair.com/en-us/travel-information/special-assistance/traveling-with-pets/",
+      "title": "Copa Airlines — Traveling with pets",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +25,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. Copa Airlines é hub em Panamá — importante para rotas Brasil → América Central → América do Norte."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: CORREÇÃO — porão como bagagem despachada NÃO existe na Copa (registro anterior dizia 45 kg); transporte de animais grandes é exclusivamente via Copa Cargo (seg–qui, 2 meses–11 anos, lista de raças banidas). Cabine confirmada 10 kg / 16 semanas."
     }
   ],
   "cabine": {
@@ -36,17 +46,17 @@
       "GATO"
     ],
     "racasBraquisefálicasPermitidas": false,
-    "idadeMinimaSemanas": 8,
+    "idadeMinimaSemanas": 16,
     "maxAnimaisPorVoo": 2,
     "reservaAntecedenciaHoras": 24,
-    "observacoes": "Máximo 2 animais por voo na cabine. Peso máximo 10kg (animal + caixa). Copa é hub de conexão em Panamá — verificar regras de trânsito para animais na escala."
+    "observacoes": "Cabine: cão/gato ≥16 semanas, até 10 kg (22 lb) animal + caixa, sob o assento. Máx. 3 pets em cabine por voo — reservar cedo. Taxa US$125 internacional."
   },
   "porao": {
-    "permitido": true,
-    "pesoMaxKg": 45,
+    "permitido": false,
+    "pesoMaxKg": 0,
     "racasBraquisefálicasPermitidas": false,
-    "observacoes": "Caixa IATA obrigatória para porão. Verificar restrições por rota e tipo de aeronave."
+    "observacoes": "A Copa NÃO transporta animais como bagagem despachada (porão). Alternativa: Copa Cargo, apenas segunda a quinta-feira, animais entre 2 meses e 11 anos. Raças banidas no cargo: Pit Bull Terrier, American Staffordshire, Bulldog Inglês, Dogo Canario, Dogo Argentino, Cane Corso, Fila Brasileiro. Braquicefálicos: caixa maior obrigatória, sem voos em calor extremo, e NÃO são transportados para o Brasil via cargo."
   },
   "racasPerigosasBanidas": false,
-  "observacoesGerais": "⚠️ Copa é o principal hub para América Central e Caribe. Verificar regras específicas de cada destino final — a Copa opera em países com políticas de importação de animais muito distintas."
+  "observacoesGerais": "⚠️ Sem opção de porão como bagagem — pet grande só via Copa Cargo (seg–qui). Conexões em PTY: verificar tempo total de viagem do animal."
 }

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "delta",
+  "nome": "Delta Air Lines",
+  "codigo": "DL",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.delta.com/us/en/pet-travel/overview",
+      "title": "Delta — Pet travel overview",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: embargo de cabine para itinerários ex-Brasil (desde 2021, vigente), porão suspenso, cargo restrito. Delta efetivamente indisponível para pets ex-BR."
+    }
+  ],
+  "cabine": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "⚠️ EMBARGO ATIVO: Delta NÃO aceita pet em cabine em itinerários ORIGINADOS no Brasil (e Colômbia) desde 07/06/2021 — segue vigente. Sentido EUA→Brasil com retorno: pet pode voltar aos EUA. Para o público iPet (origem Brasil): cabine indisponível."
+  },
+  "porao": {
+    "permitido": false,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Porão (AVIH) embargado desde a pandemia, sem previsão de retorno. Delta Cargo fechado ao público geral (só militares/Depto de Estado).",
+    "pesoMaxKg": 0
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Na prática a Delta está INDISPONÍVEL para pets saindo do Brasil (embargo de cabine ex-BR + porão fechado + cargo restrito). Exibir como 'não recomendada' no app para origem Brasil."
+}

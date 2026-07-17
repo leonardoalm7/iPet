@@ -3,9 +3,9 @@
   "id": "tap",
   "nome": "TAP Air Portugal",
   "codigo": "TP",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,11 @@
       "title": "TAP Air Portugal — Animais de Estimação",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.flytap.com/pt-pt/viajar-com-animais/animais-de-estimacao",
+      "title": "TAP — Voar com animais de estimação",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +25,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. TAP é a principal cia para Brasil-Portugal. Rota estratégica para o iPet."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17 via flytap oficial: cabine 8 kg confirmada (espaço 45×30×23); adicionada restrição de interline com GOL/Azul (pet não aceito em conexões domésticas operadas por elas); teto do porão não reconfirmado (75 kg herdado, flag interno)."
     }
   ],
   "cabine": {
@@ -31,19 +41,22 @@
       "altura": 22,
       "somaDimensoes": 97
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": false,
     "idadeMinimaSemanas": 15,
     "maxAnimaisPorVoo": null,
     "reservaAntecedenciaHoras": 24,
-    "observacoes": "Peso inclui animal + caixa transportadora. Máx 8kg. Idade mínima de 15 semanas. Animais devem caber em transportadora que vai sob o assento da frente. Reserva obrigatória com antecedência. Apenas 1 animal por passageiro."
+    "observacoes": "Cabine: cão/gato até 8 kg (animal + bolsa flexível), acomodada sob o assento dianteiro (espaço 45×30×23 cm). Acima de 8 kg: porão. Reserva antecipada obrigatória."
   },
   "porao": {
     "permitido": true,
     "pesoMaxKg": 75,
     "racasBraquisefálicasPermitidas": false,
-    "observacoes": "Para porão: caixa rígida IATA obrigatória. Raças braquicefálicas NÃO aceitas no porão. Limite de peso de 75kg (animal + caixa)."
+    "observacoes": "Porão (AVIH): caixa rígida IATA. Teto de peso do AVIH não publicado claramente pela TAP — o valor registrado (75 kg) é herdado e NÃO reconfirmado; confirmar na reserva. Braquicefálicos não aceitos no porão. ⚠️ INTERLINE: a TAP NÃO aceita pet (cabine ou porão) em itinerários com conexão doméstica no Brasil operada por GOL (G3) ou Azul (AD) — mesmo com número de voo TP (codeshare). Ex.: Recife→Lisboa via GRU com trecho GOL = pet recusado. Planejar itinerários 100% TAP."
   },
   "racasPerigosasBanidas": false,
-  "observacoesGerais": "⚠️ TAP é a principal conexão Brasil-Europa via Lisboa. Rota de alta demanda para responsáveis com pets. Confirmar disponibilidade de vagas para animais sempre que reservar — limite por voo."
+  "observacoesGerais": "⚠️ Restrição de interline com GOL/Azul é armadilha comum para quem sai de cidades sem voo direto TAP — o app deve alertar quando o itinerário tiver conexão doméstica."
 }

@@ -1,1 +1,61 @@
-{"schemaVersion":"1.0.0","destino":"GRECIA","herda":"uniao-europeia","nome":"Grécia","bandeira":"🇬🇷","lastVerified":"2026-04-24","verifiedBy":"iPet Pass (automação)","nextReviewDate":"2026-07-24","confidence":"MEDIA","sources":[{"url":"https://ec.europa.eu/food/animals/pet-movement/eu-rules_en","title":"European Commission — EU rules for pet movement","type":"OFICIAL","lastAccessed":"2026-04-24"},{"url":"http://www.minagric.gr/index.php/en/","title":"Ministério do Desenvolvimento Rural e Alimentar da Grécia","type":"OFICIAL","lastAccessed":"2026-04-24"}],"changeLog":[{"date":"2026-04-24","author":"iPet Pass (automação)","description":"Criação inicial. Grécia segue Regulamento (UE) 576/2013."}],"rules":{"exigeMicrochip":true,"microchipPadrao":"ISO 11784/11785 (15 dígitos). Implante ANTES da vacinação antirrábica.","exigeVacina":true,"diasCarenciaVacina":21,"validadeVacinaAnos":1,"exigeSorologia":true,"diasCarenciaSorologia":90,"valorMinimoSorologia":"≥0,5 UI/mL","laboratoriosCredenciados":"Laboratório aprovado pelo MAPA (lista em gov.br/agricultura)","exigeCVI":true,"diasAntesCVI":10,"emissoresCVI":"Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.","exigePermissaoImportacao":false,"racasRestritasOuProibidas":[],"observacoes":"Segue o Regulamento (UE) 576/2013 sem particularidades adicionais restritivas. Trâmite padrão em Atenas e nas ilhas principais com Pontos de Entrada de Viajantes.","observacoesInternas":"Padrão EU genérico."}}
+{
+  "schemaVersion": "1.0.0",
+  "destino": "GRECIA",
+  "herda": "uniao-europeia",
+  "nome": "Grécia",
+  "bandeira": "🇬🇷",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://ec.europa.eu/food/animals/pet-movement/eu-rules_en",
+      "title": "European Commission — EU rules for pet movement",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "http://www.minagric.gr/index.php/en/",
+      "title": "Ministério do Desenvolvimento Rural e Alimentar da Grécia",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets/bringing-pet-eu-non-eu-country_en",
+      "title": "European Commission — Bringing a pet into the EU from a non-EU country (Reg. 2026/131 + 2026/705)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Grécia segue Regulamento (UE) 576/2013."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão trimestral via pesquisa web em fonte oficial (Comissão Europeia). Base legal atualizada: Reg. (UE) 576/2013 foi substituído em 22/04/2026 pelo Reg. Delegado (UE) 2026/131 (complementa a Lei de Saúde Animal, Reg. 2016/429) + Reg. de Execução (UE) 2026/705 (novo modelo de AHC no Anexo III: validade 10 dias da emissão até a entrada, 6 meses para circulação na UE). Exigências substantivas MANTIDAS: microchip ISO (Reg. 2019/2035 art. 70a), vacina antirrábica (≥12 semanas de idade, validade a partir de 21 dias do protocolo primário), RNATT ≥0,5 UI/mL (coleta ≥30 dias pós-vacina e ≥90 dias antes da EMISSÃO do AHC), entrada por ponto de entrada de viajantes designado, máx. 5 animais + declaração escrita de movimento não-comercial (Anexo V Parte 1 do Reg. 2026/705). Regras-base UE confirmadas em fonte oficial; particularidades nacionais deste país (raças restritas, seguros etc.) ainda pendentes de confirmação individual."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos). Implante ANTES da vacinação antirrábica.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pelo MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Segue o Regulamento (UE) 576/2013 sem particularidades adicionais restritivas. Trâmite padrão em Atenas e nas ilhas principais com Pontos de Entrada de Viajantes. Base legal desde 22/04/2026: Reg. Delegado (UE) 2026/131 e Reg. de Execução (UE) 2026/705 (substituem o Reg. 576/2013; exigências substantivas mantidas).",
+    "observacoesInternas": "Padrão EU genérico."
+  }
+}

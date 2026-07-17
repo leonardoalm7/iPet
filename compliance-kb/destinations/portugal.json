@@ -4,22 +4,28 @@
   "herda": "uniao-europeia",
   "nome": "Portugal",
   "bandeira": "🇵🇹",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
       "url": "https://ec.europa.eu/food/animals/pet-movement/eu-rules_en",
       "title": "European Commission — EU rules for pet movement",
       "type": "OFICIAL",
-      "lastAccessed": "2026-04-16"
+      "lastAccessed": "2026-07-17"
     },
     {
       "url": "https://www.dgav.pt/animais/conteudo/animais-de-companhia/circulacao-de-animais-de-companhia/",
       "title": "DGAV Portugal — Circulação de Animais de Companhia",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets/bringing-pet-eu-non-eu-country_en",
+      "title": "European Commission — Bringing a pet into the EU from a non-EU country (Reg. 2026/131 + 2026/705)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -27,6 +33,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. Portugal segue o Regulamento (UE) n.º 576/2013 — mesmas regras da entrada UNIAO_EUROPEIA, destaque para preferências culturais dos brasileiros."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão trimestral via pesquisa web em fonte oficial (Comissão Europeia). Base legal atualizada: Reg. (UE) 576/2013 foi substituído em 22/04/2026 pelo Reg. Delegado (UE) 2026/131 (complementa a Lei de Saúde Animal, Reg. 2016/429) + Reg. de Execução (UE) 2026/705 (novo modelo de AHC no Anexo III: validade 10 dias da emissão até a entrada, 6 meses para circulação na UE). Exigências substantivas MANTIDAS: microchip ISO (Reg. 2019/2035 art. 70a), vacina antirrábica (≥12 semanas de idade, validade a partir de 21 dias do protocolo primário), RNATT ≥0,5 UI/mL (coleta ≥30 dias pós-vacina e ≥90 dias antes da EMISSÃO do AHC), entrada por ponto de entrada de viajantes designado, máx. 5 animais + declaração escrita de movimento não-comercial (Anexo V Parte 1 do Reg. 2026/705). Regras-base UE confirmadas em fonte oficial; particularidades nacionais deste país (raças restritas, seguros etc.) ainda pendentes de confirmação individual."
     }
   ],
   "rules": {
@@ -44,7 +55,7 @@
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório. CVI deve conter informações em inglês ou português europeu.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Portugal segue o Regulamento (UE) 576/2013. Sequência obrigatória: (1) Microchip → (2) Vacina antirrábica → (3) Sorologia em lab credenciado (≥90 dias antes do embarque) → (4) CVI (D-10 a D-2). A DGAV (Portugal) pode solicitar documentação adicional na entrada. Destino muito popular para brasileiros — alta frequência de viagens.",
+    "observacoes": "Portugal segue o Regulamento (UE) 576/2013. Sequência obrigatória: (1) Microchip → (2) Vacina antirrábica → (3) Sorologia em lab credenciado (≥90 dias antes do embarque) → (4) CVI (D-10 a D-2). A DGAV (Portugal) pode solicitar documentação adicional na entrada. Destino muito popular para brasileiros — alta frequência de viagens. Base legal desde 22/04/2026: Reg. Delegado (UE) 2026/131 e Reg. de Execução (UE) 2026/705 (substituem o Reg. 576/2013; exigências substantivas mantidas).",
     "observacoesInternas": "Portugal é destino prioritário para brasileiros — alta demanda esperada no app. Regras seguem a UE mas vale destacar a DGAV como autoridade local de entrada. Cão Chow Chow e outras raças consideradas 'perigosas' podem ter restrições específicas em municípios portugueses — verificar legislação municipal se necessário."
   }
 }

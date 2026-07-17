@@ -3,9 +3,9 @@
   "destino": "EUA",
   "nome": "Estados Unidos",
   "bandeira": "🇺🇸",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -25,6 +25,24 @@
       "title": "USDA APHIS — Pet Travel",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.cdc.gov/importation/dogs/high-risk-countries.html",
+      "title": "CDC — High-Risk Countries for Dog Rabies (Brasil INCLUÍDO)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.cdc.gov/importation/dogs/dog-import-form-instructions.html",
+      "title": "CDC — Dog Import Form and Instructions",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.avma.org/resources-tools/animal-health-and-welfare/animal-travel-and-transport/cdc-dog-importation-requirements-faqs-veterinarians",
+      "title": "AVMA — CDC dog importation requirements FAQ",
+      "type": "REFERENCIA",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -32,24 +50,29 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. Confiança MEDIA — regras do CDC mudaram em 2023 para cães. Verificar se o Brasil é considerado país de alto risco pelo CDC."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: REGRAS REESCRITAS para refletir o regime CDC vigente desde 01/08/2024 — Brasil é país de alto risco; cães: ≥6 meses, microchip obrigatório pré-vacina, CDC Dog Import Form, certificação de vacina estrangeira e titulação em lab CDC (sem ela: 28 dias de quarentena). Antes o registro não exigia microchip nem sorologia (defasado). Confiança MEDIA — CDC bloqueia fetch direto; validar manualmente."
     }
   ],
   "rules": {
-    "exigeMicrochip": false,
-    "microchipPadrao": "Recomendado, mas não obrigatório por lei federal. Alguns estados podem exigir.",
+    "exigeMicrochip": true,
+    "microchipPadrao": "OBRIGATÓRIO para cães (regra CDC desde 01/08/2024): microchip legível por scanner universal, implantado ANTES da vacina antirrábica (senão a vacina é inválida). Número do chip deve constar em todos os formulários.",
     "exigeVacina": true,
     "diasCarenciaVacina": 21,
     "validadeVacinaAnos": 1,
-    "exigeSorologia": false,
-    "diasCarenciaSorologia": 0,
-    "valorMinimoSorologia": null,
-    "laboratoriosCredenciados": null,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 30,
+    "valorMinimoSorologia": "≥0,5 UI/mL em laboratório aprovado pelo CDC (coleta ≥30 dias após a vacina). Sem titulação adequada: quarentena de 28 dias em instalação registrada no CDC, às custas do tutor.",
+    "laboratoriosCredenciados": "Apenas laboratórios da lista do CDC: https://www.cdc.gov/importation/dogs/approved-labs.html — conferir se o lab brasileiro credenciado pelo MAPA também está na lista do CDC.",
     "exigeCVI": true,
     "diasAntesCVI": 10,
     "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA + endosso SFA. Deve estar em inglês ou acompanhado de tradução juramentada.",
-    "exigePermissaoImportacao": false,
+    "exigePermissaoImportacao": true,
     "racasRestritasOuProibidas": [],
-    "observacoes": "CDC exige vacina antirrábica válida com certificado em inglês. CVI em até 10 dias antes. Regras para cães mudaram em 2023 — verificar classificação do Brasil como país de alto ou baixo risco para raiva no CDC. Gatos têm regras mais flexíveis. Regras estaduais (Havaí, etc.) podem adicionar requisitos.",
-    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Em 2023 o CDC atualizou as regras para importação de cães. Verificar se o Brasil está classificado como 'high-risk country' no sistema CDC — isso afeta o processo. Havaí tem quarentena obrigatória — considerar tratar como destino separado. Recomendar ao usuário checar regras estaduais específicas."
+    "observacoes": "O Brasil é classificado pelo CDC como PAÍS DE ALTO RISCO para raiva canina — regras rígidas para CÃES (vigentes desde 01/08/2024): (1) idade mínima 6 MESES na entrada; (2) microchip implantado antes da vacina; (3) vacina antirrábica válida; (4) CDC Dog Import Form preenchido online (recibo apresentado à cia aérea no embarque e ao CBP na chegada); (5) Certification of Foreign Rabies Vaccination and Microchip preenchida por veterinário; (6) titulação (RNATT) ≥0,5 UI/mL em lab aprovado pelo CDC para EVITAR quarentena de 28 dias; (7) entrada por porto com instalação de cuidado animal registrada no CDC quando aplicável. GATOS: sem exigências federais do CDC (vacina antirrábica recomendada; alguns estados exigem). CVI do MAPA continua necessário para SAIR do Brasil. Havaí tem quarentena própria — tratar à parte.",
+    "observacoesInternas": "⚠️ CORREÇÃO IMPORTANTE 2026-07-17: o registro anterior dizia exigeMicrochip=false e exigeSorologia=false — ERRADO desde 01/08/2024 (regra CDC pós-suspensão de 2021). Páginas do CDC retornam 403 para fetch automatizado; dados compilados de resultados de busca das páginas oficiais do CDC + FAQ da AVMA. REVISÃO HUMANA OBRIGATÓRIA antes de publicar: confirmar (a) prazo exato da coleta da titulação vs chegada; (b) lista de portos de entrada exigidos para cães vacinados no exterior com titulação OK (pode ser qualquer porto) vs sem titulação (6 portos com quarentena CDC); (c) se o formulário do CDC gera recibo com validade. Modelar no app o fluxo cão ≥6 meses (bloqueia filhotes!)."
   }
 }

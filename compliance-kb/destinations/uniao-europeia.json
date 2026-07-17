@@ -3,9 +3,9 @@
   "destino": "UNIAO_EUROPEIA",
   "nome": "União Europeia",
   "bandeira": "🇪🇺",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -25,6 +25,18 @@
       "title": "MAPA — Laboratórios Credenciados para Sorologia",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets/bringing-pet-eu-non-eu-country_en",
+      "title": "European Commission — Bringing a pet into the EU from a non-EU country",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets/travelling-pet-within-eu_en",
+      "title": "European Commission — Travelling with pets within the EU",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -32,6 +44,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial com base no Regulamento (UE) n.º 576/2013 e normas MAPA vigentes"
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17 via fonte oficial (Comissão Europeia, fetch direto). Base legal: Reg. 576/2013 substituído em 22/04/2026 por Reg. Delegado (UE) 2026/131 + Reg. de Execução (UE) 2026/705. Exigências substantivas mantidas; AHC agora com validade 10 dias até entrada e 6 meses para circulação; 90 dias da sorologia contam antes da emissão do AHC; máx. 5 animais + declaração não-comercial. Confiança mantida ALTA."
     }
   ],
   "rules": {
@@ -46,10 +63,10 @@
     "laboratoriosCredenciados": "Lista disponível em: https://www.gov.br/agricultura/pt-br/assuntos/sanidade-animal-e-vegetal/saude-animal/transito-animal/exportacao/laboratorios-credenciados",
     "exigeCVI": true,
     "diasAntesCVI": 10,
-    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. CVI deve ser emitido entre 10 e 2 dias antes do embarque e endossado pela Superintendência Federal de Agricultura (SFA) do estado de origem.",
+    "emissoresCVI": "AHC (Animal Health Certificate) conforme Anexo III do Reg. de Execução (UE) 2026/705, emitido por médico veterinário credenciado pelo MAPA e endossado pela SFA do estado de origem. Validade: 10 dias da emissão até os controles documentais/de identidade no ponto de entrada (+duração de viagem marítima, se aplicável); 6 meses para circulação subsequente dentro da UE.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Sequência obrigatória: (1) Implante de microchip → (2) Vacina antirrábica (≥21 dias antes da sorologia) → (3) Sorologia em lab credenciado (≥90 dias antes do embarque) → (4) CVI (emitir entre D-10 e D-2 antes do embarque). Países como Reino Unido, Irlanda, Malta, Finlândia e Noruega exigem tratamento adicional contra Echinococcus multilocularis (verificar regras específicas por país).",
-    "observacoesInternas": "⚠️ ATENÇÃO: Reino Unido saiu da UE (Brexit). Regras do UK são diferentes — tratar como destino separado. Irlanda, Malta, Finlândia e Noruega têm requisitos adicionais para echinococose (tratamento 1-5 dias antes da entrada). Criar entrada separada para esses países. Regulamento EU 576/2013 é a base legal — verificar atualizações anuais."
+    "observacoes": "Sequência obrigatória: (1) Microchip ISO 11784/11785 (antes da vacina) → (2) Vacina antirrábica (animal ≥12 semanas; validade a partir de 21 dias do protocolo primário) → (3) Sorologia RNATT ≥0,5 UI/mL em laboratório autorizado (coleta ≥30 dias após a vacina; resultado documentado ≥90 dias antes da EMISSÃO do AHC) → (4) AHC emitido até 10 dias antes da chegada. Entrada obrigatória por ponto de entrada de viajantes designado pelo país. Máximo 5 animais por responsável + declaração escrita de movimento não-comercial (Anexo V Parte 1, Reg. 2026/705). Cães com destino a Finlândia, Irlanda, Malta e Irlanda do Norte (e Noruega): tratamento contra Echinococcus multilocularis (praziquantel) entre 24h e 120h antes da entrada. Base legal desde 22/04/2026: Reg. Delegado (UE) 2026/131 + Reg. de Execução (UE) 2026/705, sob a Lei de Saúde Animal (Reg. 2016/429) — substituem o Reg. 576/2013 com exigências substantivas mantidas.",
+    "observacoesInternas": "Revisado 2026-07-17 contra páginas oficiais da Comissão Europeia (fetch direto). MUDANÇA DE BASE LEGAL em 22/04/2026 (576/2013 → 2026/131 + 2026/705): sem mudança substantiva de requisitos, mas TODA menção a 576/2013 no app/site deve ser atualizada. Nuance nova: os 90 dias da sorologia contam antes da EMISSÃO do AHC (antes: antes da viagem). Reino Unido fora (Brexit) — arquivo próprio. Novos: declaração não-comercial obrigatória + limite 5 animais reforçado. Verificar na próxima revisão se pontos de entrada designados por país-membro afetam aeroportos de conexão comuns (CDG, FRA, LIS, MAD)."
   }
 }

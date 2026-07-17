@@ -3,16 +3,16 @@
   "id": "american",
   "nome": "American Airlines",
   "codigo": "AA",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
       "url": "https://www.aa.com/i18n/travel-info/special-assistance/pets.jsp",
       "title": "American Airlines — Traveling with Pets",
       "type": "OFICIAL",
-      "lastAccessed": "2026-04-16"
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,11 +20,16 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. American Airlines é importante para rotas Brasil-EUA. Atenção: AA suspendeu transporte de pets no porão em 2021 — SOMENTE cabine."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: CORREÇÃO — cabine marcada como NÃO permitida (rotas de/para Brasil estão na lista de exclusão da AA); porão restrito a militares/diplomatas; público geral só via cargo PetEmbark. Registro anterior (cab 9 kg) valia apenas para rotas fora do Brasil."
     }
   ],
   "cabine": {
-    "permitido": true,
-    "pesoMaxKg": 9,
+    "permitido": false,
+    "pesoMaxKg": 0,
     "dimensoesMaxCm": {
       "comprimento": 45,
       "largura": 35,
@@ -39,14 +44,14 @@
     "idadeMinimaSemanas": 8,
     "maxAnimaisPorVoo": 5,
     "reservaAntecedenciaHoras": 24,
-    "observacoes": "Peso máximo 9kg (animal + transportadora). Reserva obrigatória — vagas limitadas por aeronave. ATENÇÃO: American Airlines aceita apenas cães e gatos domésticos. Proibido: pássaros, roedores, répteis, animais 'exóticos'. Confirmação obrigatória no check-in."
+    "observacoes": "⚠️ ROTAS BRASIL: pets em cabine NÃO são aceitos de/para Brasil (também Argentina, Bolívia, Chile, Colômbia, Uruguai, Venezuela, Havaí e países da UE). Em rotas domésticas EUA/Canadá/México/América Central o serviço existe, mas para o público iPet (origem Brasil) cabine = indisponível."
   },
   "porao": {
     "permitido": false,
     "pesoMaxKg": 0,
     "racasBraquisefálicasPermitidas": false,
-    "observacoes": "⛔ American Airlines SUSPENDEU o transporte de pets no porão em agosto de 2021. Apenas cabine disponível para pets de companhia."
+    "observacoes": "Pets despachados no porão (checked pets): APENAS militares dos EUA em serviço ativo e pessoal do Departamento de Estado com ordens oficiais. Público geral: somente via American Airlines Cargo (programa PetEmbark), processo de carga separado da passagem."
   },
   "racasPerigosasBanidas": false,
-  "observacoesGerais": "⚠️ IMPORTANTE: AA não aceita pets no porão desde 2021. Se o pet não cabe na cabine (>9kg com caixa), não é possível voar AA. Para rotas Brasil-EUA considerar LATAM ou outras cias que aceitam porão. Taxa de US$ 125 por trecho (confirmada no site — verificar atualização)."
+  "observacoesGerais": "⚠️ Para tutores saindo do Brasil, a única via na American é CARGA (PetEmbark) — não há pet em cabine nem despachado. Taxa de despacho (quando elegível) $150–200 por caixa. Avaliar exibir a American como 'não recomendada para pets ex-Brasil' no app."
 }

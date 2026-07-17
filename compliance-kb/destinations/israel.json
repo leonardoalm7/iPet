@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "ISRAEL",
+  "nome": "Israel",
+  "bandeira": "🇮🇱",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "BAIXA",
+  "sources": [
+    {
+      "url": "https://www.moag.gov.il/en",
+      "title": "Ministério da Agricultura de Israel — Serviços Veterinários",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: chip + vacina (30d–12m) + RNATT ≤12 meses + certificado ≤10 dias + notificação prévia; raças perigosas restritas. Confiança BAIXA — validar na fonte oficial."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos), implantado antes da vacina antirrábica",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": "≥0,5 UI/mL, coleta até 12 meses antes da chegada",
+    "laboratoriosCredenciados": "Laboratório autorizado UE/MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Certificado veterinário oficial endossado (MAPA/SFA), emitido até 10 dias antes",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [
+      "American Pit Bull Terrier",
+      "American Staffordshire Terrier",
+      "Tosa",
+      "Dogo Argentino",
+      "Fila Brasileiro",
+      "Rottweiler"
+    ],
+    "observacoes": "Israel (IVSAH — Serviços Veterinários): microchip ISO + vacina antirrábica (≥30 dias e ≤1 ano antes da chegada; animais ≥4 meses) + RNATT ≥0,5 UI/mL com coleta até 12 meses antes + certificado veterinário oficial endossado ≤10 dias + notificação prévia à estação de quarentena do aeroporto Ben Gurion (48h+). Máx. 2 pets por passageiro sem licença especial de importação. Sem quarentena com docs completos. Raças restritas em Israel (lista de cães perigosos): Pit Bull, Amstaff, Tosa, Dogo Argentino, Fila Brasileiro, Rottweiler — importação restrita/vedada.",
+    "observacoesInternas": "Criado 2026-07-17 com base em conhecimento consolidado + fontes secundárias — sem leitura oficial IVSAH nesta revisão. BAIXA confiança: confirmar em moag.gov.il janela da vacina (30d–12m), notificação prévia e lista de raças antes de publicar."
+  }
+}

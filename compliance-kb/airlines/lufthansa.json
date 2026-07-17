@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "lufthansa",
+  "nome": "Lufthansa",
+  "codigo": "LH",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.lufthansa.com/br/pt/viajar-com-animais",
+      "title": "Lufthansa — Viajar com animais",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: cabine 8 kg / bolsa 55×40×23 / registro 72h; porão até ~75 kg com sobretaxa de hub. Fontes secundárias consistentes; confirmar números no site LH antes de publicar."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 55,
+      "largura": 40,
+      "altura": 23,
+      "somaDimensoes": 118
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 12,
+    "maxAnimaisPorVoo": 2,
+    "reservaAntecedenciaHoras": 72,
+    "observacoes": "Cabine: até 8 kg (animal + bolsa flexível 55×40×23). Registro do pet ≥72h antes do voo. Rota GRU/GIG–FRA/MUC operada com wide-body — porão disponível."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Porão como bagagem despachada: caixa rígida IATA; sobretaxa de transferência (~€150) em conexões via FRA/MUC. Braquicefálicos não aceitos no porão. Embargos sazonais de temperatura possíveis."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Registro obrigatório do pet ≥72h antes. Exige passaporte UE ou certificado sanitário endossado conforme destino. Conexões em FRA/MUC têm sobretaxa e trâmite próprio de transferência de animais."
+}

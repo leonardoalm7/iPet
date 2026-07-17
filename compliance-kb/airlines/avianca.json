@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "avianca",
+  "nome": "Avianca",
+  "codigo": "AV",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.avianca.com/en/information-and-help/pet-transport/",
+      "title": "Avianca — Traveling with pets",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: cabine 10 kg / ≥4 meses / 48h antecedência; porão disponível conforme rota. Fontes oficiais Avianca listadas; detalhes por rota pendentes."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 40,
+      "largura": 30,
+      "altura": 22,
+      "somaDimensoes": 92
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 16,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": "Cabine: cão/gato ≥4 meses, pequenos portes; reservar ≥48h. Rotas atendidas incluem Brasil. Pet em cabine vetado para UK. Taxas US$110–200."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 45,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Pets médios/grandes via porão/carga conforme rota. Braquicefálicos não aceitos no porão. Verificar disponibilidade por aeronave (rotas BOG podem ser narrow-body)."
+  },
+  "racasPerigosasBanidas": true,
+  "observacoesGerais": "⚠️ Conexão em BOG: conferir tempo de trânsito do animal e regras da Colômbia. Números de dimensões/pesos variam por rota — confirmar na reserva."
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "SINGAPURA",
+  "nome": "Singapura",
+  "bandeira": "🇸🇬",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "BAIXA",
+  "sources": [
+    {
+      "url": "https://www.nparks.gov.sg/avs/pets/bringing-animals-into-singapore-and-exporting",
+      "title": "AVS — Bringing animals into Singapore",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: licença AVS + chip + vacina + RNATT + quarentena (~30 dias) + raças banidas. Confiança BAIXA — regras detalhadas por categoria de país pendentes de leitura oficial."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos), implantado antes da vacina antirrábica",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 30,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pela AVS de Singapura",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Certificado veterinário oficial conforme modelo AVS + endosso da autoridade (MAPA/SFA)",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": [
+      "Pit Bull Terrier e afins",
+      "Akita",
+      "Neapolitan Mastiff",
+      "Tosa",
+      "Dogo Argentino",
+      "Fila Brasileiro",
+      "Boerboel",
+      "Perro de Presa Canario"
+    ],
+    "observacoes": "Singapura (AVS) classifica países por risco de raiva; o Brasil NÃO está nas categorias de menor risco — importação exige: licença de importação AVS (dog licence prévia para cães), microchip ISO, vacina antirrábica, RNATT ≥0,5 UI/mL em lab aprovado, certificado veterinário oficial e QUARENTENA obrigatória na chegada (tipicamente 30 dias na estação de Sembawang — reservar vaga com meses de antecedência, capacidade limitada). Raças banidas em Singapura: Pit Bull (e afins), Akita, Neapolitan Mastiff, Tosa, Dogo Argentino, Fila Brasileiro, Boerboel, Perro de Presa Canario.",
+    "observacoesInternas": "Criado 2026-07-17 com base em conhecimento consolidado do esquema AVS + fontes secundárias — NENHUMA página oficial AVS foi lida nesta revisão. BAIXA confiança de propósito: categoria exata do Brasil (C ou D), duração da quarentena (30 dias?) e janela da titulação PRECISAM ser confirmadas em avs.gov.sg / pals.avs.gov.sg antes de qualquer exibição no app."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "SUICA",
+  "nome": "Suíça",
+  "bandeira": "🇨🇭",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.blv.admin.ch/blv/en/home/tiere/reisen-mit-heimtieren.html",
+      "title": "OSAV/BLV — Viajar com animais de companhia",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets/bringing-pet-eu-non-eu-country_en",
+      "title": "Comissão Europeia — regras que a Suíça adota",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: Suíça segue legislação UE para pets (protocolo idêntico ao bloco); atenção a listas cantonais de raças. Confiança MEDIA até validação humana da fonte OSAV."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos), implantado antes da vacina antirrábica",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório autorizado UE/MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Certificado sanitário equivalente ao AHC da UE, emitido por vet credenciado MAPA + endosso SFA",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "A Suíça não é UE mas ADOTA a legislação da UE para movimento de pets: mesmo protocolo do bloco — microchip ISO → vacina antirrábica (≥21 dias) → RNATT ≥0,5 UI/mL (coleta ≥30 dias pós-vacina, ≥90 dias antes do certificado) → certificado sanitário até 10 dias antes. Entrada por ponto designado (aeroportos de Zurique/Genebra). Sem quarentena com protocolo completo. Raças: alguns CANTÕES têm listas próprias de raças restritas (ex.: Genebra, Valais) — checar o cantão de destino.",
+    "observacoesInternas": "Criado 2026-07-17. Regra 'segue UE' confirmada em fontes UE/USDA; particularidades suíças (BLV/OSAV, listas cantonais de raças) NÃO verificadas individualmente — REVISÃO HUMANA: conferir blv.admin.ch antes de publicar. Listas cantonais de raças perigosas variam MUITO (Genebra proíbe várias)."
+  }
+}

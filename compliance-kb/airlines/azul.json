@@ -3,9 +3,9 @@
   "id": "azul",
   "nome": "Azul Linhas Aéreas",
   "codigo": "AD",
-  "lastVerified": "2026-04-25",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-25",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,11 @@
       "title": "Azul — Transporte de Animais",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.voeazul.com.br/br/informacoes/viaje-com-seu-pet",
+      "title": "Azul — Viaje com seu pet",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -25,6 +30,11 @@
       "date": "2026-04-25",
       "author": "Leonardo Braga de Almeida",
       "description": "Correção: Azul aceita braquicefálicos também no PORÃO (política mais permissiva do mercado, é o real diferencial — não a cabine, onde GOL/LATAM também aceitam). Observações reescritas."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: idade mínima corrigida para 4 meses (16 semanas); limite cabine 10 kg confirmado em imprensa; aceitação de braquicefálicos no porão NÃO reconfirmada em fonte oficial (site 403) — mantida com alerta interno forte. REVISÃO HUMANA: confirmar braq/porão com a Azul."
     }
   ],
   "cabine": {
@@ -36,19 +46,22 @@
       "altura": 23,
       "somaDimensoes": 96
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": true,
-    "idadeMinimaSemanas": 8,
+    "idadeMinimaSemanas": 16,
     "maxAnimaisPorVoo": 5,
     "reservaAntecedenciaHoras": 2,
-    "observacoes": "Aceita raças braquicefálicas (Bulldog Francês, Pug, Shih Tzu) na cabine respeitando limite de peso — política semelhante à GOL/LATAM. O verdadeiro diferencial da Azul é aceitar braquicefálicos também no porão (vide observações de porão). Reserva pode ser feita com menor antecedência comparado a outras cias. Dimensões da caixa são ligeiramente menores — atenção."
+    "observacoes": "Até 10 kg (animal + caixa) na cabine; idade mínima 4 meses; 1 pet por passageiro; até 3 pets por voo doméstico. Braquicefálicos aceitos em cabine. Caixa ligeiramente menor que GOL/LATAM (43×30×23) — atenção."
   },
   "porao": {
     "permitido": true,
     "pesoMaxKg": 45,
     "racasBraquisefálicasPermitidas": true,
-    "observacoes": "Diferencial estratégico da Azul: ÚNICA companhia brasileira que aceita raças braquicefálicas no porão (GOL/LATAM/VOEPASS banem por risco respiratório com pressurização). Confirmar lista de raças aceitas no momento da reserva pois pode mudar. Caixa rígida IATA obrigatória."
+    "observacoes": "Histórico: a Azul era a única cia brasileira a aceitar braquicefálicos também no PORÃO (verificado 2026-04-25). ⚠️ Verificação de 2026-07-17 NÃO conseguiu reconfirmar em fonte oficial (site 403) — manter a informação mas CONFIRMAR na reserva/site antes de exibir como certeza ao usuário. Caixa rígida IATA obrigatória."
   },
   "racasPerigosasBanidas": false,
-  "observacoesGerais": "⚠️ Permissão de braquicefálicos no PORÃO é o diferencial real da Azul (não a cabine — todas aceitam em cabine). Sempre confirmar lista de raças aceitas no momento da reserva pois pode variar."
+  "observacoesGerais": "⚠️ Diferencial histórico da Azul: braquicefálicos no porão (reconfirmar a cada revisão — política pode mudar sem aviso). Portaria ANAC 17.476/SAS/2025 (vigente desde 20/10/2025): cia deve divulgar na venda peso/dimensões/raças aceitas e documentação; cão-guia tem embarque obrigatório e gratuito em cabine; animal de suporte emocional segue política da cia."
 }

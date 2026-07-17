@@ -3,9 +3,9 @@
   "id": "iberia",
   "nome": "Iberia",
   "codigo": "IB",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,11 @@
       "title": "Iberia — Animais de Companhia",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.iberia.com/us/fly-with-iberia/pets/",
+      "title": "Iberia — Travelling with pets",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +25,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. Iberia opera via Madri — rota importante para Brasil-Espanha."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: cabine confirmada 8 kg / 45×35×25 / soma ≤105 cm (+espécies extras aceitas em cabine). Teto de peso do porão não publicado pela cia — valor 75 kg mantido com alerta de não-confirmação. REVISÃO HUMANA: validar AVIH."
     }
   ],
   "cabine": {
@@ -39,13 +49,13 @@
     "idadeMinimaSemanas": 15,
     "maxAnimaisPorVoo": null,
     "reservaAntecedenciaHoras": 48,
-    "observacoes": "Peso máximo 8kg (animal + transportadora). Reserva obrigatória com 48h de antecedência. Taxa cobrada por trecho. Apenas 1 animal por passageiro."
+    "observacoes": "Cabine: até 8 kg incluindo a caixa; caixa máx. 45×35×25 cm e SOMA das 3 dimensões ≤105 cm. Iberia aceita também peixes ornamentais, tartarugas e algumas aves (não rapinas/aves de capoeira) em cabine. Reserva antecipada obrigatória (vagas por voo)."
   },
   "porao": {
     "permitido": true,
     "pesoMaxKg": 75,
     "racasBraquisefálicasPermitidas": false,
-    "observacoes": "Porão climatizado. Caixa IATA obrigatória. Raças braquicefálicas proibidas. Confirmar disponibilidade."
+    "observacoes": "Porão (AVIH): caixa rígida homologada IATA, animal deve ficar em pé e girar. A Iberia não publica teto de peso único para AVIH — o valor registrado aqui (75 kg) é herdado e NÃO foi reconfirmado; na prática o limite é operacional por rota/aeronave. Confirmar com a Iberia na reserva. Braquicefálicos não aceitos no porão."
   },
   "racasPerigosasBanidas": false,
   "observacoesGerais": "⚠️ Iberia conecta Brasil com Madrid e demais destinos europeus via conexão. Verificar política para voos de conexão — regras podem variar entre trechos."

@@ -3,16 +3,28 @@
   "destino": "REINO_UNIDO",
   "nome": "Reino Unido",
   "bandeira": "🇬🇧",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
-  "confidence": "MEDIA",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "ALTA",
   "sources": [
     {
       "url": "https://www.gov.uk/bring-pet-to-great-britain",
       "title": "UK Government — Bring your pet to Great Britain",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.gov.uk/bring-pet-to-great-britain/rabies-blood-tests",
+      "title": "GOV.UK — Blood tests for rabies (unlisted countries)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.gov.uk/bring-pet-to-great-britain/tapeworm-treatment-dogs",
+      "title": "GOV.UK — Tapeworm treatment for dogs",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +32,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. Confiança MEDIA — pós-Brexit as regras do UK são distintas da UE. Verificar PETS Travel Scheme e listed/unlisted country status do Brasil."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17 via gov.uk (fetch direto): corrigido status do Brasil para NÃO-LISTADO; adicionados tratamento obrigatório contra tênia para cães (24–120h antes) e XL Bully à lista de raças proibidas; 3 meses de espera contam da coleta do sangue. Confiança ALTA."
     }
   ],
   "rules": {
@@ -36,8 +53,14 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA. Documento oficial de saúde animal (AHC — Animal Health Certificate) para o Reino Unido é necessário — diferente do CVI padrão UE.",
     "exigePermissaoImportacao": false,
-    "racasProibidas": ["Pit Bull Terrier", "Tosa Inu", "Dogo Argentino", "Fila Brasileiro"],
-    "observacoes": "Pós-Brexit (2021), o UK não faz mais parte do esquema EU Pet Travel. O Brasil é um 'Part 2 listed country' para o PETS Travel Scheme, o que significa regras similares à UE mas com documentação própria do UK (AHC em vez do CVI padrão). Processo: (1) Microchip → (2) Vacina antirrábica (≥21 dias) → (3) Sorologia (≥90 dias antes de entrar no UK) → (4) AHC emitido por vet credenciado. Pit Bull Terrier, Tosa Inu, Dogo Argentino e Fila Brasileiro são PROIBIDOS no UK.",
-    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: UK saiu da UE e tem sistema próprio (PETS). Brasil é 'Part 2 listed' — verificar se mudou para 'unlisted' (quarentena obrigatória). AHC é diferente do CVI usado para EU. Confirmar se vets brasileiros podem emitir AHC válido para UK. Raças proibidas: verificar a lista completa (Dangerous Dogs Act 1991)."
+    "racasProibidas": [
+      "Pit Bull Terrier",
+      "Tosa Inu (Japanese Tosa)",
+      "Dogo Argentino",
+      "Fila Brasileiro",
+      "XL Bully"
+    ],
+    "observacoes": "O Brasil é país NÃO-LISTADO ('unlisted') para o esquema de viagem pet da Grã-Bretanha — protocolo completo: (1) Microchip ISO antes da vacina → (2) Vacina antirrábica (≥21 dias) → (3) Exame de sangue (RNATT) coletado ≥30 dias após a vacina, resultado ≥0,5 UI/mL em lab aprovado UK/UE → (4) AGUARDAR 3 MESES da data da coleta antes de entrar na Grã-Bretanha → (5) GB Pet Health Certificate emitido até 10 dias antes da chegada (vet credenciado MAPA + endosso SFA) → (6) CÃES: tratamento contra tênia (praziquantel) administrado entre 24h e 120h (1–5 dias) antes da chegada, registrado no certificado. Entrada por rota autorizada. Raças proibidas pelo Dangerous Dogs Act 1991 (inclui XL Bully desde 2024): entrada vetada salvo Certificate of Exemption prévio. O teste de sangue permanece válido enquanto as vacinas de reforço estiverem em dia.",
+    "observacoesInternas": "Revisado 2026-07-17 contra gov.uk (fetch direto das páginas de blood test). CORREÇÕES: (a) registro anterior dizia 'Brasil é Part 2 listed' — na verdade Brasil é UNLISTED (por isso o RNATT + 3 meses); (b) faltava o tratamento contra tênia (praziquantel 24–120h) — OBRIGATÓRIO para cães; (c) XL Bully adicionado à lista de raças banidas (2024). O documento é o GB Pet Health Certificate (não confundir com AHC da UE). Exceção aos 3 meses: pet preparado na UE antes de ir a país não-listado. Confirmar rotas autorizadas de entrada (aéreo: Heathrow ARC)."
   }
 }

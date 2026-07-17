@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "qatar-airways",
+  "nome": "Qatar Airways",
+  "codigo": "QR",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.qatarairways.com/en-us/baggage/animals.html",
+      "title": "Qatar Airways — Travelling with pets",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: sem cabine (exceto falcões/serviço); porão/cargo para cães e gatos. Confirmar teto de peso e modalidades exatas (checked vs cargo) no site QR."
+    }
+  ],
+  "cabine": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "especiesPermitidas": [],
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Cães e gatos NÃO são aceitos em cabine (exceção: falcões — 1/passageiro em Economy, máx. 6/aeronave — e cães de serviço em rotas específicas)."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Todos os pets viajam no porão (checked/cargo via QR Cargo) independente de tamanho. Braquicefálicos: restrições adicionais/cargo. Trânsito em DOH: instalação de animais disponível."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Sem pets em cabine (política rígida). Para tutores ex-Brasil: pet vai de porão/carga com trâmite próprio. Comparar com Emirates (cargo-only) e Turkish (aceita cabine) ao sugerir rota Oriente Médio."
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "COREIA_DO_SUL",
+  "nome": "Coreia do Sul",
+  "bandeira": "🇰🇷",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.aphis.usda.gov/pet-travel/us-to-another-country-export/pet-travel-us-korea",
+      "title": "USDA APHIS — Pet travel to Korea (referência de requisitos APQA)",
+      "type": "GOVERNAMENTAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.qia.go.kr/english/",
+      "title": "APQA (Animal and Plant Quarantine Agency) — autoridade coreana",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: chip + vacina + RNATT ≥0,5 UI/mL (≥90 dias de idade, países não livres de raiva) + certificado; sem quarentena com docs OK. Confiança MEDIA — detalhes de validade/prazos pendentes de confirmação na APQA."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos), implantado antes da vacina antirrábica",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": "≥0,5 UI/mL (animais ≥90 dias de idade vindos de países não livres de raiva, como o Brasil)",
+    "laboratoriosCredenciados": "Laboratório reconhecido pela APQA coreana — verificar lista antes da coleta",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "CVI/certificado sanitário do MAPA com endosso SFA, informando microchip, vacina e resultado da titulação",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Coreia do Sul (APQA): microchip ISO + vacina antirrábica válida + RNATT ≥0,5 UI/mL para cães e gatos ≥90 dias vindos de países não livres de raiva (Brasil incluído) + certificado sanitário oficial. Com documentação completa e titulação OK: liberação normalmente no aeroporto (inspeção APQA), sem quarentena prolongada. Documentação incompleta ou titulação ausente/reprovada: quarentena e exames às custas do tutor. A coleta da titulação deve ser recente — não há prazo mínimo de espera pós-coleta como na UE/Japão, mas o resultado deve estar disponível e válido na chegada.",
+    "observacoesInternas": "Criado 2026-07-17 com base em APHIS/fontes secundárias. PENDENTE confirmar na APQA: (a) validade máxima aceita do resultado RNATT (24 meses?); (b) se exige prazo mínimo entre coleta e chegada (registrei 0); (c) formulário/idioma do certificado. Confiança MEDIA — validar antes de publicar no app."
+  }
+}

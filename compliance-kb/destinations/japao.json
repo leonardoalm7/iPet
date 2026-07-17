@@ -3,9 +3,9 @@
   "destino": "JAPAO",
   "nome": "Japão",
   "bandeira": "🇯🇵",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -19,6 +19,12 @@
       "title": "MAPA — Exportação de Cães e Gatos (inclui Japão)",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.maff.go.jp/aqs/animal/dog/attach/pdf/import-other-42.pdf",
+      "title": "MAFF AQS — Guide to importing dogs and cats into Japan from non-designated regions (PDF)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -26,6 +32,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial com base nas normas AQS (Animal Quarantine Service) do Japão"
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: regras confirmadas em guia oficial MAFF/AQS (PDF) + APHIS. Detalhes adicionados: validade de 2 anos do resultado da sorologia, exigência de 2 vacinas pós-microchip, quarentena AQS para completar os 180 dias se chegada antecipada, Advance Notification ≥40 dias. Sem mudança de regra. Confiança ALTA mantida."
     }
   ],
   "rules": {
@@ -36,14 +47,14 @@
     "validadeVacinaAnos": 1,
     "exigeSorologia": true,
     "diasCarenciaSorologia": 180,
-    "valorMinimoSorologia": "≥0,5 IU/mL (nota: o Japão usa IU/mL, mesmo que UI/mL europeu)",
+    "valorMinimoSorologia": "≥0,5 UI/mL em laboratório aprovado pelo MAFF/AQS. Resultado VÁLIDO POR 2 ANOS a partir da coleta.",
     "laboratoriosCredenciados": "Apenas laboratórios aprovados pelo AQS japonês. Lista: https://www.maff.go.jp/aqs/english/animal/dog/import-other.html#6 — verificar se o lab brasileiro está na lista aprovada pelo Japão.",
     "exigeCVI": true,
     "diasAntesCVI": 10,
     "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA + endosso pela SFA. Japão pode exigir formulários específicos — verificar com AQS.",
     "exigePermissaoImportacao": true,
     "racasRestritasOuProibidas": [],
-    "observacoes": "O processo mais rigoroso do mundo. Sequência: (1) Microchip → (2) Vacinação primária + reforço → (3) Sorologia em lab aprovado pelo AQS → (4) Aguardar 180 dias → (5) Solicitar Advance Notification ao AQS (40 dias antes do embarque) → (6) CVI + formulários específicos. Risco de quarentena no Japão se qualquer etapa estiver incorreta. RECOMENDAÇÃO: iniciar o processo com 12 meses de antecedência.",
+    "observacoes": "O processo mais rigoroso entre destinos comuns. Sequência: (1) Microchip ISO → (2) DUAS vacinas antirrábicas após o chip (a 2ª entre 21 dias e 1 ano da 1ª) → (3) Sorologia em lab aprovado pelo AQS (≥0,5 UI/mL; resultado vale 2 anos) → (4) AGUARDAR 180 DIAS da data da COLETA até a chegada ao Japão (se chegar antes, o pet cumpre os dias restantes em quarentena do AQS) → (5) Advance Notification ao AQS do aeroporto de chegada com ≥40 dias de antecedência → (6) Inspeção pré-embarque por veterinário + certificados (Form A/C) endossados pela autoridade (MAPA/SFA) → (7) Inspeção na chegada (≤12h se tudo correto). Recomendar início do processo com 8–12 meses de antecedência.",
     "observacoesInternas": "⚠️ CRÍTICO: O Brasil NÃO está na lista de países livres de raiva reconhecida pelo Japão. Por isso o processo é tão longo. Alguns cães podem ficar em quarentena governamental no Japão se algo estiver errado. Validar lista de labs aprovados pelo AQS — nem todos os labs credenciados pelo MAPA são aceitos pelo Japão. CRIAR FLUXO ESPECIAL no app para destino Japão com alertas mais agressivos e recomendação de 12 meses de antecedência."
   }
 }
