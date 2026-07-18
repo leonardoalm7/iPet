@@ -51,6 +51,18 @@
       "Czechoslovakian Wolfdog"
     ],
     "observacoes": "A Noruega não é UE mas segue o esquema da UE para pets: microchip ISO → vacina antirrábica (≥21 dias) → RNATT ≥0,5 UI/mL (≥30 dias pós-vacina, ≥90 dias antes do certificado) → certificado sanitário ≤10 dias. ADICIONAL OBRIGATÓRIO para cães: tratamento contra Echinococcus multilocularis (praziquantel) entre 24h e 120h antes da entrada, registrado por veterinário. Raças proibidas na Noruega: Pit Bull Terrier, Fila Brasileiro, Tosa Inu, Dogo Argentino, American Staffordshire Terrier, Czechoslovakian Wolfdog (e lobos/híbridos).",
-    "observacoesInternas": "Criado 2026-07-17. Regra 'segue UE' + echinococcus confirmadas em fonte UE; lista de raças banidas norueguesa (forskrift om farlige hunder) de conhecimento consolidado mas não reverificada nesta data — REVISÃO HUMANA: conferir mattilsynet.no antes de publicar."
+    "observacoesInternas": "Criado 2026-07-17. Regra 'segue UE' + echinococcus confirmadas em fonte UE; lista de raças banidas norueguesa (forskrift om farlige hunder) de conhecimento consolidado mas não reverificada nesta data — REVISÃO HUMANA: conferir mattilsynet.no antes de publicar.",
+    "tarefasAdicionais": [
+      {
+        "id": "praziquantel-noruega",
+        "titulo": "Tratamento contra tênia (praziquantel)",
+        "descricao": "Obrigatório para cães que entram em Noruega: praziquantel administrado por veterinário entre 24h e 120h (1–5 dias) antes da chegada, registrado no certificado.",
+        "prazoDiasAntesEmbarque": 1,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": true
+      }
+    ]
   }
 }

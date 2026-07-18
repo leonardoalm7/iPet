@@ -74,6 +74,40 @@ export function calcularRoadmap(
   const tarefas: TarefaRoadmap[] = [];
 
   // ----------------------------------------------------------------
+  // Tipo de acesso: destinos INDIRETOS ou RESTRITOS não têm viagem
+  // direta planejável a partir do Brasil — retornar imediatamente
+  // com a explicação do caminho real (sem gerar roadmap enganoso).
+  // ----------------------------------------------------------------
+  if (regras.tipoAcesso === "INDIRETO" || regras.tipoAcesso === "RESTRITO") {
+    const titulo =
+      regras.tipoAcesso === "INDIRETO"
+        ? `Sem rota direta do Brasil para ${regras.nome}`
+        : `Entrada em ${regras.nome} é restrita`;
+    return {
+      petId: pet.id,
+      planoViagemId,
+      destino,
+      dataEmbarque: dataEmbarqueStr,
+      statusGeral: "INAPTO" as const,
+      dataLiberacao: null,
+      tarefas: [{
+        id: "tipo-acesso",
+        titulo,
+        descricao: "",
+        nota: regras.tipoAcessoDetalhe ??
+          "Este destino não aceita entrada direta de pets vindos do Brasil. Fale com nossa equipe para planejar o caminho viável.",
+        status: "CRITICO" as const,
+        prazo: null,
+        diasParaPrazo: null,
+        concluida: false,
+        precisaClinica: false,
+        bloqueadaPor: [],
+      }],
+      geradoEm: new Date().toISOString(),
+    };
+  }
+
+  // ----------------------------------------------------------------
   // Verificar banimento por raça
   // ----------------------------------------------------------------
   const racaBanida = regras.racasProibidas?.some(
@@ -277,6 +311,57 @@ export function calcularRoadmap(
       precisaClinica: true,
       bloqueadaPor: srologiaPendente ? ["sorologia"] : [],
       concluida: false,
+    });
+  }
+
+  // ----------------------------------------------------------------
+  // TAREFAS 6+: Tarefas adicionais específicas do destino (KB v2)
+  // Ex.: leishmaniose (Uruguai), CDC Dog Import Form (EUA),
+  // praziquantel (UK/Irlanda/Finlândia/Malta/Noruega), SAG (Chile).
+  // ----------------------------------------------------------------
+  for (const extra of regras.tarefasAdicionais ?? []) {
+    if (extra.especies && !extra.especies.includes(pet.especie)) continue;
+
+    const prazoExtra = addDays(dataEmbarque, -extra.prazoDiasAntesEmbarque);
+    const diasParaPrazoExtra = differenceInDays(prazoExtra, hoje);
+
+    tarefas.push({
+      id: extra.id,
+      titulo: extra.titulo,
+      descricao: extra.descricao,
+      status:
+        diasParaPrazoExtra > 14 ? "PENDENTE" : statusPorPrazo(prazoExtra, hoje),
+      prazo: formatBR(prazoExtra),
+      diasParaPrazo: diasParaPrazoExtra,
+      nota:
+        diasParaPrazoExtra >= 0
+          ? `Concluir até ${formatBR(prazoExtra)}.`
+          : `Prazo passou para embarque em ${dataEmbarqueStr} — reavalie a data ou procure orientação.`,
+      precisaClinica: extra.precisaClinica,
+      bloqueadaPor: [],
+      concluida: false,
+    });
+  }
+
+  // ----------------------------------------------------------------
+  // Aviso de quarentena obrigatória na chegada
+  // ----------------------------------------------------------------
+  if (regras.tipoAcesso === "QUARENTENA_OBRIGATORIA") {
+    // Informativa: não é acionável pelo tutor antes do embarque, então não
+    // participa do cálculo de status (NAO_APLICAVEL + concluida) — mas fica
+    // visível no roadmap para o planejamento de custo/logística.
+    tarefas.unshift({
+      id: "quarentena-chegada",
+      titulo: `Quarentena obrigatória na chegada em ${regras.nome}`,
+      descricao: "",
+      nota: regras.tipoAcessoDetalhe ??
+        `${regras.nome} impõe quarentena governamental na chegada. Planeje custos e logística com antecedência.`,
+      status: "NAO_APLICAVEL" as const,
+      prazo: null,
+      diasParaPrazo: null,
+      concluida: true,
+      precisaClinica: false,
+      bloqueadaPor: [],
     });
   }
 

@@ -25,7 +25,8 @@ export type Destino =
   // América do Norte
   | "EUA"
   | "CANADA"
-  // Europa — países EU (herdam regras base do Reg. UE 576/2013)
+  // Europa — países EU (herdam regras base do Reg. Delegado (UE) 2026/131 +
+  // Reg. de Execução (UE) 2026/705, que substituíram o Reg. 576/2013 em 22/04/2026)
   | "PORTUGAL"
   | "ESPANHA"
   | "FRANCA"
@@ -55,6 +56,9 @@ export type Destino =
   | "SUECIA"
   // Europa — não-EU
   | "REINO_UNIDO"
+  | "SUICA"
+  | "NORUEGA"
+  | "TURQUIA"
   // Ásia
   | "JAPAO"
   | "CHINA"
@@ -65,11 +69,16 @@ export type Destino =
   | "MALASIA"
   | "FILIPINAS"
   | "INDIA"
+  | "COREIA_DO_SUL"
+  | "SINGAPURA"
   // Oriente Médio
   | "CATAR"
   | "ARABIA_SAUDITA"
+  | "EMIRADOS_ARABES"
+  | "ISRAEL"
   // Oceania
-  | "AUSTRALIA";
+  | "AUSTRALIA"
+  | "NOVA_ZELANDIA";
 
 export type StatusCompliance =
   | "APTO"
@@ -207,6 +216,38 @@ export interface RegrasCompanhiaAerea {
 
 // ---------- Regras por Destino ----------
 
+/**
+ * Como o pet chega ao destino a partir do Brasil:
+ * - DIRETO: viagem direta planejável (caso padrão)
+ * - QUARENTENA_OBRIGATORIA: viagem direta possível, mas com quarentena
+ *   governamental na chegada (China, Hong Kong, Singapura, Malásia)
+ * - INDIRETO: Brasil não é origem aprovada — o pet precisa residir antes
+ *   em país aprovado (Austrália, Nova Zelândia)
+ * - RESTRITO: entrada só em situações específicas, ex. mudança de
+ *   residência (Índia) — turismo com pet inviável
+ */
+export type TipoAcessoDestino =
+  | "DIRETO"
+  | "QUARENTENA_OBRIGATORIA"
+  | "INDIRETO"
+  | "RESTRITO";
+
+/**
+ * Tarefa específica de um destino que não deriva dos campos estruturados
+ * (ex.: teste de leishmaniose no Uruguai, CDC Dog Import Form nos EUA,
+ * praziquantel no Reino Unido). Vira TarefaRoadmap no motor.
+ */
+export interface TarefaAdicionalDestino {
+  id: string;
+  titulo: string;
+  descricao: string;
+  /** Prazo = dataEmbarque − N dias (0 = até o dia do embarque) */
+  prazoDiasAntesEmbarque: number;
+  /** Espécies às quais se aplica; ausente = todas */
+  especies?: Especie[];
+  precisaClinica: boolean;
+}
+
 export interface RegrasDestino {
   destino: Destino;
   nome: string;
@@ -223,6 +264,9 @@ export interface RegrasDestino {
   racasProibidas?: string[];              // entrada completamente negada
   racasRestritasFocinheira?: string[];    // permitido com focinheira + seguro
   exigeSeguroResponsabilidade?: boolean;
+  tipoAcesso?: TipoAcessoDestino;         // ausente = DIRETO
+  tipoAcessoDetalhe?: string;             // explicação exibida ao tutor
+  tarefasAdicionais?: TarefaAdicionalDestino[];
 }
 
 // ---------- Documentos Sanitários ----------

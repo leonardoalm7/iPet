@@ -35,6 +35,8 @@ export interface RegrasPublicas {
     racasProibidas?: string[];
     racasRestritasFocinheira?: string[];
     exigeSeguroResponsabilidade?: boolean;
+    tipoAcesso?: string;
+    tipoAcessoDetalhe?: string;
   };
 }
 
@@ -66,6 +68,8 @@ export function loadDestinationRules(slug: string): RegrasPublicas | null {
       racasProibidas: kb.racasProibidas,
       racasRestritasFocinheira: kb.racasRestritasFocinheira,
       exigeSeguroResponsabilidade: kb.exigeSeguroResponsabilidade,
+      tipoAcesso: (kb as { tipoAcesso?: string }).tipoAcesso,
+      tipoAcessoDetalhe: (kb as { tipoAcessoDetalhe?: string }).tipoAcessoDetalhe,
     },
   };
 }
@@ -73,6 +77,23 @@ export function loadDestinationRules(slug: string): RegrasPublicas | null {
 export function generateFAQs(regras: RegrasPublicas): { question: string; answer: string }[] {
   const faqs: { question: string; answer: string }[] = [];
   const nome = regras.nome;
+
+  // Destinos sem rota direta/restritos: essa é a PRIMEIRA informação que o
+  // tutor precisa ver — antes de qualquer checklist de documentos.
+  if (regras.rules.tipoAcesso && regras.rules.tipoAcesso !== "DIRETO") {
+    const question =
+      regras.rules.tipoAcesso === "INDIRETO"
+        ? `É possível levar meu pet do Brasil direto para ${nome}?`
+        : regras.rules.tipoAcesso === "RESTRITO"
+        ? `Posso levar meu pet a passeio para ${nome}?`
+        : `Meu pet passa por quarentena ao chegar em ${nome}?`;
+    faqs.push({
+      question,
+      answer:
+        regras.rules.tipoAcessoDetalhe ??
+        `${nome} tem condições especiais de entrada para pets vindos do Brasil — verifique os detalhes antes de planejar.`,
+    });
+  }
 
   faqs.push({
     question: `Quais documentos preciso para viajar com pet para ${nome}?`,

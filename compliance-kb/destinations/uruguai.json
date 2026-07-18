@@ -54,6 +54,25 @@
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
     "observacoes": "Obrigatório apresentar TESTE NEGATIVO PARA LEISHMANIOSE (kit rápido ou sorologia) realizado nos 60 dias anteriores ao embarque, ou atestar uso de coleira repelente com Deltametrina. O CVI deve atestar também tratamento contra tênia Echinococcus granulosus. EXCLUSIVO CÃES do Brasil: teste NEGATIVO de leishmaniose (IFAT, ELISA, aglutinação direta ou detecção molecular) realizado ≤60 dias antes da entrada — o Uruguai NÃO admite cão com diagnóstico prévio de leishmaniose. Desparasitação interna/externa ≤15 dias antes da emissão do CVI (produto e data no certificado). Microchip OBRIGATÓRIO para cães não-residentes (associado ao CVI). Estadia <30 dias: pode retornar com o mesmo certificado de entrada se dentro da validade.",
-    "observacoesInternas": "ATUALIZAÇÃO IMPORTANTE 17/07/2026: adicionado teste de LEISHMANIOSE obrigatório p/ cães do Brasil (fonte: página oficial da Azul citando exigência uruguaia + MGAP). O app deve gerar tarefa de exame de leishmaniose no roadmap Uruguai — hoje não existe campo estruturado pra isso (vai em observações). Confirmar no site do MGAP/SNIG na próxima revisão."
+    "observacoesInternas": "ATUALIZAÇÃO IMPORTANTE 17/07/2026: adicionado teste de LEISHMANIOSE obrigatório p/ cães do Brasil (fonte: página oficial da Azul citando exigência uruguaia + MGAP). O app deve gerar tarefa de exame de leishmaniose no roadmap Uruguai — hoje não existe campo estruturado pra isso (vai em observações). Confirmar no site do MGAP/SNIG na próxima revisão.",
+    "tarefasAdicionais": [
+      {
+        "id": "leishmaniose-uruguai",
+        "titulo": "Teste de leishmaniose (negativo)",
+        "descricao": "Obrigatório para cães vindos do Brasil: sorologia (IFAT, ELISA ou aglutinação direta) ou detecção molecular com resultado NEGATIVO, realizada até 60 dias antes da entrada no Uruguai. Cão com diagnóstico prévio de leishmaniose não entra.",
+        "prazoDiasAntesEmbarque": 10,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": true
+      },
+      {
+        "id": "desparasitacao-uruguai",
+        "titulo": "Desparasitação interna e externa",
+        "descricao": "Aplicada até 15 dias antes da EMISSÃO do CVI, com produto e data registrados no certificado.",
+        "prazoDiasAntesEmbarque": 10,
+        "precisaClinica": true
+      }
+    ]
   }
 }

@@ -61,6 +61,18 @@
       "XL Bully"
     ],
     "observacoes": "O Brasil é país NÃO-LISTADO ('unlisted') para o esquema de viagem pet da Grã-Bretanha — protocolo completo: (1) Microchip ISO antes da vacina → (2) Vacina antirrábica (≥21 dias) → (3) Exame de sangue (RNATT) coletado ≥30 dias após a vacina, resultado ≥0,5 UI/mL em lab aprovado UK/UE → (4) AGUARDAR 3 MESES da data da coleta antes de entrar na Grã-Bretanha → (5) GB Pet Health Certificate emitido até 10 dias antes da chegada (vet credenciado MAPA + endosso SFA) → (6) CÃES: tratamento contra tênia (praziquantel) administrado entre 24h e 120h (1–5 dias) antes da chegada, registrado no certificado. Entrada por rota autorizada. Raças proibidas pelo Dangerous Dogs Act 1991 (inclui XL Bully desde 2024): entrada vetada salvo Certificate of Exemption prévio. O teste de sangue permanece válido enquanto as vacinas de reforço estiverem em dia.",
-    "observacoesInternas": "Revisado 2026-07-17 contra gov.uk (fetch direto das páginas de blood test). CORREÇÕES: (a) registro anterior dizia 'Brasil é Part 2 listed' — na verdade Brasil é UNLISTED (por isso o RNATT + 3 meses); (b) faltava o tratamento contra tênia (praziquantel 24–120h) — OBRIGATÓRIO para cães; (c) XL Bully adicionado à lista de raças banidas (2024). O documento é o GB Pet Health Certificate (não confundir com AHC da UE). Exceção aos 3 meses: pet preparado na UE antes de ir a país não-listado. Confirmar rotas autorizadas de entrada (aéreo: Heathrow ARC)."
+    "observacoesInternas": "Revisado 2026-07-17 contra gov.uk (fetch direto das páginas de blood test). CORREÇÕES: (a) registro anterior dizia 'Brasil é Part 2 listed' — na verdade Brasil é UNLISTED (por isso o RNATT + 3 meses); (b) faltava o tratamento contra tênia (praziquantel 24–120h) — OBRIGATÓRIO para cães; (c) XL Bully adicionado à lista de raças banidas (2024). O documento é o GB Pet Health Certificate (não confundir com AHC da UE). Exceção aos 3 meses: pet preparado na UE antes de ir a país não-listado. Confirmar rotas autorizadas de entrada (aéreo: Heathrow ARC).",
+    "tarefasAdicionais": [
+      {
+        "id": "praziquantel-uk",
+        "titulo": "Tratamento contra tênia (praziquantel)",
+        "descricao": "Obrigatório para cães: administrado por veterinário entre 24h e 120h (1–5 dias) ANTES da chegada na Grã-Bretanha, registrado no certificado de saúde com data e hora.",
+        "prazoDiasAntesEmbarque": 1,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": true
+      }
+    ]
   }
 }

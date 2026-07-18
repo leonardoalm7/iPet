@@ -46,6 +46,12 @@ interface KBDestination {
     diasAntesCVI: number;
     exigePermissaoImportacao: boolean;
     observacoes: string;
+    racasProibidas?: string[];
+    racasRestritasFocinheira?: string[];
+    exigeSeguroResponsabilidade?: boolean;
+    tipoAcesso?: string;
+    tipoAcessoDetalhe?: string;
+    tarefasAdicionais?: unknown[];
   };
 }
 
@@ -141,6 +147,9 @@ function main() {
     "suecia",
     // Europa não-EU
     "reino-unido",
+    "suica",
+    "noruega",
+    "turquia",
     // Ásia
     "japao",
     "china",
@@ -151,11 +160,16 @@ function main() {
     "malasia",
     "filipinas",
     "india",
+    "coreia-do-sul",
+    "singapura",
     // Oriente Médio
     "catar",
     "arabia-saudita",
+    "emirados-arabes",
+    "israel",
     // Oceania
     "australia",
+    "nova-zelandia",
   ];
   const airlineFiles = [
     "latam",
@@ -201,7 +215,7 @@ function main() {
     exigeCVI: ${r.exigeCVI},
     diasAntesCVI: ${r.diasAntesCVI},
     exigePermissaoImportacao: ${r.exigePermissaoImportacao},
-    observacoes: ${JSON.stringify(r.observacoes)},
+    observacoes: ${JSON.stringify(r.observacoes)},${r.racasProibidas?.length ? `\n    racasProibidas: ${JSON.stringify(r.racasProibidas)},` : ""}${r.racasRestritasFocinheira?.length ? `\n    racasRestritasFocinheira: ${JSON.stringify(r.racasRestritasFocinheira)},` : ""}${r.exigeSeguroResponsabilidade !== undefined ? `\n    exigeSeguroResponsabilidade: ${r.exigeSeguroResponsabilidade},` : ""}${r.tipoAcesso ? `\n    tipoAcesso: ${JSON.stringify(r.tipoAcesso)} as const,` : ""}${r.tipoAcessoDetalhe ? `\n    tipoAcessoDetalhe: ${JSON.stringify(r.tipoAcessoDetalhe)},` : ""}${r.tarefasAdicionais?.length ? `\n    tarefasAdicionais: ${JSON.stringify(r.tarefasAdicionais)},` : ""}
     // KB metadata
     _kbConfidence: ${JSON.stringify(d.confidence)} as const,
     _kbLastVerified: ${JSON.stringify(d.lastVerified)},

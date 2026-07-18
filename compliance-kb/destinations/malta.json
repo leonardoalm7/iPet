@@ -56,6 +56,18 @@
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
     "observacoes": "Exige tratamento contra a tênia Echinococcus multilocularis administrado 24 a 120 horas antes da chegada. A chegada de pets exige um agendamento / notificação prévia (geralmente enviando os documentos online) para o posto de fronteira; falhas nisso acarretam em quarentena específica às custas do dono. Base legal desde 22/04/2026: Reg. Delegado (UE) 2026/131 e Reg. de Execução (UE) 2026/705 (substituem o Reg. 576/2013; exigências substantivas mantidas).",
-    "observacoesInternas": "Alerta crítico: Malta não perdoa erros documentais. Incluir notificação prévia online e desparasitação D-5 no roadmap."
+    "observacoesInternas": "Alerta crítico: Malta não perdoa erros documentais. Incluir notificação prévia online e desparasitação D-5 no roadmap.",
+    "tarefasAdicionais": [
+      {
+        "id": "praziquantel-malta",
+        "titulo": "Tratamento contra tênia (praziquantel)",
+        "descricao": "Obrigatório para cães que entram em Malta: praziquantel administrado por veterinário entre 24h e 120h (1–5 dias) antes da chegada, registrado no certificado.",
+        "prazoDiasAntesEmbarque": 1,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": true
+      }
+    ]
   }
 }

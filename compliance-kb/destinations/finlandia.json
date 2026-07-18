@@ -56,6 +56,18 @@
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
     "observacoes": "ATENÇÃO OBRIGATÓRIA: Cães devem receber tratamento contra a tênia Echinococcus multilocularis (praziquantel) ministrado por um veterinário entre 24 e 120 horas (1 a 5 dias) antes da entrada no país. Isso deve constar no CVI. Base legal desde 22/04/2026: Reg. Delegado (UE) 2026/131 e Reg. de Execução (UE) 2026/705 (substituem o Reg. 576/2013; exigências substantivas mantidas).",
-    "observacoesInternas": "Alerta crítico para o roadmap: adicionar task de desparasitação entre D-5 e D-1."
+    "observacoesInternas": "Alerta crítico para o roadmap: adicionar task de desparasitação entre D-5 e D-1.",
+    "tarefasAdicionais": [
+      {
+        "id": "praziquantel-finlandia",
+        "titulo": "Tratamento contra tênia (praziquantel)",
+        "descricao": "Obrigatório para cães que entram em Finlândia: praziquantel administrado por veterinário entre 24h e 120h (1–5 dias) antes da chegada, registrado no certificado.",
+        "prazoDiasAntesEmbarque": 1,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": true
+      }
+    ]
   }
 }

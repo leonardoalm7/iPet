@@ -1,6 +1,17 @@
 import { Pet, RegrasCompanhiaAerea } from "../domain/types";
 import { isBraquicefalico } from "../data/braquicefalicos";
 import { isRacaPerigosa } from "../data/racas-perigosas";
+import { differenceInWeeks, parse, isValid } from "date-fns";
+
+/**
+ * Idade do pet em semanas na data de referência (embarque, se conhecida;
+ * senão hoje). Retorna null se a data de nascimento for inválida.
+ */
+function idadeEmSemanas(pet: Pet, referencia: Date): number | null {
+  const nascimento = parse(pet.dataNascimento, "dd/MM/yyyy", new Date());
+  if (!isValid(nascimento)) return null;
+  return differenceInWeeks(referencia, nascimento);
+}
 
 export type VeredictoCia =
   | "PODE_CABINE"
@@ -20,7 +31,8 @@ export interface ResultadoVerificacao {
 
 export function verificarCompanhia(
   pet: Pet,
-  cia: RegrasCompanhiaAerea
+  cia: RegrasCompanhiaAerea,
+  dataEmbarqueStr?: string
 ): ResultadoVerificacao {
   const alertas: string[] = [];
   const motivos: string[] = [];
@@ -48,6 +60,32 @@ export function verificarCompanhia(
   const braqui = isBraquicefalico(pet.raca);
   const perigosa = isRacaPerigosa(pet.raca);
 
+  // Idade mínima da cia, avaliada NA DATA DO EMBARQUE (GOL exige 6 meses;
+  // LATAM 16 semanas; Azul 4 meses). Sem data de embarque, avalia hoje.
+  if (cia.idadeMinimaAnimal > 0) {
+    let referencia = new Date();
+    if (dataEmbarqueStr) {
+      const parsed = parse(dataEmbarqueStr, "dd/MM/yyyy", new Date());
+      if (isValid(parsed)) referencia = parsed;
+    }
+    const idadeSemanas = idadeEmSemanas(pet, referencia);
+    if (idadeSemanas !== null && idadeSemanas < cia.idadeMinimaAnimal) {
+      const quando = dataEmbarqueStr ? `na data do embarque (${dataEmbarqueStr})` : "hoje";
+      motivos.push(
+        `${pet.nome} terá ${idadeSemanas} semanas ${quando} — a ${cia.nome} exige idade mínima de ${cia.idadeMinimaAnimal} semanas`
+      );
+      return {
+        companhia: cia,
+        veredicto: "NAO_ACEITO",
+        cabine: false,
+        porao: false,
+        alertas,
+        motivos,
+        caoGuia,
+      };
+    }
+  }
+
   // Raça perigosa + cia bane completamente
   if (perigosa && cia.racasPerigosasBanidas) {
     motivos.push(
@@ -68,15 +106,34 @@ export function verificarCompanhia(
   }
 
   // Cabine
+  // Convenção do KB: pesoMaxCabine 0 = cabine indisponível; >=99 = sem limite
+  // de peso publicado (LATAM/United) — o critério real é o pet caber em pé na
+  // caixa sob o assento, então acima de um porte prático tratamos como porão.
+  const SEM_LIMITE_PESO = 99;
+  const PESO_PRATICO_CAIXA_CABINE = 12; // kg — acima disso não cabe na caixa sob o assento
   if (cia.pesoMaxCabine > 0) {
-    if (pet.peso <= cia.pesoMaxCabine) {
+    const dentroDoPeso =
+      cia.pesoMaxCabine >= SEM_LIMITE_PESO
+        ? pet.peso <= PESO_PRATICO_CAIXA_CABINE
+        : pet.peso <= cia.pesoMaxCabine;
+
+    if (dentroDoPeso) {
       if (!braqui || cia.braquicefalicoCabine) {
         cabine = true;
+        if (cia.pesoMaxCabine >= SEM_LIMITE_PESO) {
+          alertas.push(
+            `${cia.nome} não publica limite de peso em cabine — o critério é o pet caber em pé na caixa sob o assento (confira as dimensões na reserva)`
+          );
+        }
       } else {
         motivos.push(
           `${pet.raca} é braquicefálica e não é aceita na cabine pela ${cia.nome}`
         );
       }
+    } else if (cia.pesoMaxCabine >= SEM_LIMITE_PESO) {
+      motivos.push(
+        `${cia.nome} não publica limite de peso em cabine, mas com ${pet.peso}kg o pet dificilmente caberá em pé na caixa sob o assento — modalidade provável: porão`
+      );
     } else {
       motivos.push(
         `Peso do pet (${pet.peso}kg) excede o limite de cabine (${cia.pesoMaxCabine}kg)`
@@ -148,10 +205,11 @@ export function verificarCompanhia(
 
 export function verificarTodasCompanhias(
   pet: Pet,
-  companhias: RegrasCompanhiaAerea[]
+  companhias: RegrasCompanhiaAerea[],
+  dataEmbarqueStr?: string
 ): ResultadoVerificacao[] {
   return companhias
-    .map((cia) => verificarCompanhia(pet, cia))
+    .map((cia) => verificarCompanhia(pet, cia, dataEmbarqueStr))
     .sort((a, b) => {
       const ordem: Record<VeredictoCia, number> = {
         PODE_CABINE: 0,

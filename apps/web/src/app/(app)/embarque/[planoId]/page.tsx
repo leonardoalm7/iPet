@@ -294,7 +294,7 @@ export default function EmbarquePage({
       ? COMPANHIAS_AEREAS.find((c) => c.id === plano.companhiaAereaId)
       : null;
     if (!cia) return pet.peso <= 10;
-    return verificarCompanhia(pet, cia).cabine;
+    return verificarCompanhia(pet, cia, plano.dataEmbarque).cabine;
   }, [pet, plano]);
 
   const checklist = useMemo(

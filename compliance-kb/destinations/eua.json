@@ -84,6 +84,38 @@
     "exigePermissaoImportacao": true,
     "racasRestritasOuProibidas": [],
     "observacoes": "Brasil = ALTO RISCO para raiva canina (CDC, regras de 01/08/2024 — confirmadas na página oficial em 17/07/2026). CÃES (vacinados no exterior, caso padrão do público iPet): (1) idade mínima 6 MESES; (2) microchip legível por scanner universal ANTES da vacina (senão a vacina é inválida); (3) 1ª vacina antirrábica com ≥12 semanas de idade e ≥28 dias antes da entrada; (4) Certification of Foreign Rabies Vaccination and Microchip — preenchida por veterinário e ENDOSSADA por veterinário oficial do governo (MAPA/SFA), emitida ≤30 dias antes da viagem, uso único; (5) CDC Dog Import Form online (gratuito, 1 por cão; recibo válido só para a data/aeroporto declarados; foto do cão ≤15 dias se <1 ano); (6) RESERVA OBRIGATÓRIA em CDC-registered animal care facility — MESMO COM titulação válida (exame + revacinação com vacina dos EUA, custos do tutor); SEM titulação válida: +28 dias de quarentena na instalação; (7) chegada por VOO INTERNACIONAL DIRETO ao aeroporto da instalação reservada — sem conexões domésticas antes; (8) titulação: coleta ≥30 dias após a 1ª vacina E ≥28 dias antes da entrada, em lab aprovado pelo CDC; resultado aprovado vale por toda a vida do cão se não houver lapso vacinal. GATOS: sem exigências federais do CDC (vacina recomendada; alguns estados exigem). CVI do MAPA segue necessário para SAIR do Brasil. Cão de serviço (14 CFR 382.3) tem exceções; ESA não conta. Cias: Azul não embarca cães BR→EUA; American/Delta sem cabine ex-Brasil — checar cia antes.",
-    "observacoesInternas": "Revisado 17/07/2026 NAVEGANDO as páginas oficiais do CDC via Chrome (403 para fetch direto, OK no browser real). Nuance que derruba suposição anterior: a reserva em facility é obrigatória para TODO cão vacinado no exterior de país de alto risco — a titulação só evita os 28 dias de quarentena, não a facility. Lista de aeroportos com facility: conferir em cdc.gov (JFK, MIA, LAX, ATL, PHL, SEA, IAD — validar antes de publicar). PRODUTO: o roadmap do app precisa de tarefas específicas EUA (form CDC, certification endossada ≤30d, reserva facility, voo direto ao aeroporto da facility) — campos atuais do KB não geram essas tarefas automaticamente."
+    "observacoesInternas": "Revisado 17/07/2026 NAVEGANDO as páginas oficiais do CDC via Chrome (403 para fetch direto, OK no browser real). Nuance que derruba suposição anterior: a reserva em facility é obrigatória para TODO cão vacinado no exterior de país de alto risco — a titulação só evita os 28 dias de quarentena, não a facility. Lista de aeroportos com facility: conferir em cdc.gov (JFK, MIA, LAX, ATL, PHL, SEA, IAD — validar antes de publicar). PRODUTO: o roadmap do app precisa de tarefas específicas EUA (form CDC, certification endossada ≤30d, reserva facility, voo direto ao aeroporto da facility) — campos atuais do KB não geram essas tarefas automaticamente.",
+    "tarefasAdicionais": [
+      {
+        "id": "cdc-reserva-facility",
+        "titulo": "Reservar CDC animal care facility",
+        "descricao": "OBRIGATÓRIO para cães (mesmo com titulação válida): reservar vaga em instalação registrada no CDC no aeroporto de chegada — o voo internacional deve chegar DIRETO nesse aeroporto. A reserva inclui exame + revacinação (custos do tutor); sem titulação válida, inclui quarentena de 28 dias. Levar a confirmação impressa.",
+        "prazoDiasAntesEmbarque": 30,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": false
+      },
+      {
+        "id": "cdc-certification",
+        "titulo": "Certification of Foreign Rabies Vaccination and Microchip",
+        "descricao": "Preenchida pelo veterinário e ENDOSSADA por veterinário oficial (MAPA/SFA). Emitida no máximo 30 dias antes da viagem; uso único. Viajar com 2 cópias impressas.",
+        "prazoDiasAntesEmbarque": 7,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": true
+      },
+      {
+        "id": "cdc-import-form",
+        "titulo": "CDC Dog Import Form (online)",
+        "descricao": "Formulário online gratuito, 1 por cão. Recibo vale apenas para a data e aeroporto declarados — mostrar à cia aérea no embarque e ao CBP na chegada. Foto do cão tirada ≤15 dias antes se ele tiver menos de 1 ano.",
+        "prazoDiasAntesEmbarque": 1,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": false
+      }
+    ]
   }
 }

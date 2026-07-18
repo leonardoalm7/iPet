@@ -197,6 +197,62 @@
         "exigeSeguroResponsabilidade": {
           "type": "boolean",
           "description": "Se o destino exige seguro de responsabilidade civil para o animal."
+        },
+        "tipoAcesso": {
+          "type": "string",
+          "enum": [
+            "DIRETO",
+            "QUARENTENA_OBRIGATORIA",
+            "INDIRETO",
+            "RESTRITO"
+          ],
+          "description": "Como o pet chega ao destino a partir do Brasil. Ausente = DIRETO. INDIRETO = Brasil não-aprovado (Austrália/NZ); RESTRITO = só mudança de residência (Índia); QUARENTENA_OBRIGATORIA = direto mas com quarentena governamental na chegada."
+        },
+        "tipoAcessoDetalhe": {
+          "type": "string",
+          "description": "Explicação exibida ao tutor quando tipoAcesso ≠ DIRETO."
+        },
+        "tarefasAdicionais": {
+          "type": "array",
+          "description": "Tarefas específicas do destino que não derivam dos campos estruturados — viram tarefas no roadmap do app.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "titulo",
+              "descricao",
+              "prazoDiasAntesEmbarque",
+              "precisaClinica"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "titulo": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string"
+              },
+              "prazoDiasAntesEmbarque": {
+                "type": "integer",
+                "description": "Prazo = dataEmbarque − N dias (0 = até o embarque)"
+              },
+              "especies": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "CAO",
+                    "GATO"
+                  ]
+                }
+              },
+              "precisaClinica": {
+                "type": "boolean"
+              }
+            }
+          }
         }
       }
     }
