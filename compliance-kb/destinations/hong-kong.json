@@ -48,6 +48,8 @@
       "Fila Brasileiro"
     ],
     "observacoes": "O Brasil é classificado como país do Grupo 3. Animais vindos do Brasil estão sujeitos a uma quarentena OBRIGATÓRIA de no mínimo 120 dias nas instalações do AFCD. A reserva da quarentena e a Permissão de Importação devem ser feitas com meses de antecedência. O AFCD classifica origens em grupos (I, II, IIIA, IIIB); o BRASIL NÃO está nos grupos isentos: cão/gato ex-Brasil exige Special Permit prévio do AFCD e QUARENTENA em instalação governamental (mínimo 30 dias — podendo chegar a 120 dias conforme o grupo; confirmar enquadramento exato do Brasil antes de qualquer viagem). Transbordo/trânsito por HK também exige permit.",
-    "observacoesInternas": "Alerta CRÍTICO: Quarentena de 120 dias para pets do Brasil. Desencorajar viagens de turismo."
+    "observacoesInternas": "Alerta CRÍTICO: Quarentena de 120 dias para pets do Brasil. Desencorajar viagens de turismo.",
+    "tipoAcesso": "QUARENTENA_OBRIGATORIA",
+    "tipoAcessoDetalhe": "Brasil fora dos grupos isentos do AFCD: Special Permit prévio + quarentena governamental de 30 a 120 dias na chegada."
   }
 }

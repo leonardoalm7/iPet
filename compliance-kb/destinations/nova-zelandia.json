@@ -44,6 +44,8 @@
       "American XL Bully"
     ],
     "observacoes": "⚠️ O BRASIL NÃO É PAÍS APROVADO pelo MPI da Nova Zelândia: cães e gatos NÃO podem ser importados diretamente do Brasil. Caminho: o pet deve primeiro residir (tipicamente ≥6 meses) em um país aprovado pelo MPI (ex.: EUA, Canadá, Reino Unido, UE, Austrália) e então cumprir o protocolo de exportação desse país para a NZ: import permit, RNATT, tratamentos parasitários seriados e quarentena mínima (10 dias) em instalação aprovada. Raças proibidas na NZ: Pit Bull, Dogo Argentino, Fila Brasileiro, Tosa, American XL Bully.",
-    "observacoesInternas": "Criado 2026-07-17. Estrutura análoga à Austrália (Brasil não-aprovado — rota indireta obrigatória). Detalhes (tempo de residência exigido, lista de países aprovados, duração exata da quarentena) NÃO confirmados em fonte oficial nesta data — REVISÃO HUMANA: conferir mpi.govt.nz antes de publicar. App deve tratar como 'destino indireto' igual Austrália."
+    "observacoesInternas": "Criado 2026-07-17. Estrutura análoga à Austrália (Brasil não-aprovado — rota indireta obrigatória). Detalhes (tempo de residência exigido, lista de países aprovados, duração exata da quarentena) NÃO confirmados em fonte oficial nesta data — REVISÃO HUMANA: conferir mpi.govt.nz antes de publicar. App deve tratar como 'destino indireto' igual Austrália.",
+    "tipoAcesso": "INDIRETO",
+    "tipoAcessoDetalhe": "O Brasil não é origem aprovada pelo MPI: não existe rota direta. O pet precisa residir antes em país aprovado (tipicamente ≥6 meses) e ser exportado de lá, com import permit e quarentena mínima de 10 dias."
   }
 }

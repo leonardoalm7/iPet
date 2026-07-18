@@ -54,6 +54,14 @@ const SLUG_TO_DESTINO: Record<string, Destino> = {
   "catar": "CATAR",
   "arabia-saudita": "ARABIA_SAUDITA",
   "australia": "AUSTRALIA",
+  "suica": "SUICA",
+  "noruega": "NORUEGA",
+  "turquia": "TURQUIA",
+  "coreia-do-sul": "COREIA_DO_SUL",
+  "singapura": "SINGAPURA",
+  "emirados-arabes": "EMIRADOS_ARABES",
+  "israel": "ISRAEL",
+  "nova-zelandia": "NOVA_ZELANDIA",
 };
 
 const DESTINO_TO_SLUG: Record<string, string> = Object.fromEntries(

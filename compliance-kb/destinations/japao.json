@@ -55,6 +55,15 @@
     "exigePermissaoImportacao": true,
     "racasRestritasOuProibidas": [],
     "observacoes": "O processo mais rigoroso entre destinos comuns. Sequência: (1) Microchip ISO → (2) DUAS vacinas antirrábicas após o chip (a 2ª entre 21 dias e 1 ano da 1ª) → (3) Sorologia em lab aprovado pelo AQS (≥0,5 UI/mL; resultado vale 2 anos) → (4) AGUARDAR 180 DIAS da data da COLETA até a chegada ao Japão (se chegar antes, o pet cumpre os dias restantes em quarentena do AQS) → (5) Advance Notification ao AQS do aeroporto de chegada com ≥40 dias de antecedência → (6) Inspeção pré-embarque por veterinário + certificados (Form A/C) endossados pela autoridade (MAPA/SFA) → (7) Inspeção na chegada (≤12h se tudo correto). Recomendar início do processo com 8–12 meses de antecedência.",
-    "observacoesInternas": "⚠️ CRÍTICO: O Brasil NÃO está na lista de países livres de raiva reconhecida pelo Japão. Por isso o processo é tão longo. Alguns cães podem ficar em quarentena governamental no Japão se algo estiver errado. Validar lista de labs aprovados pelo AQS — nem todos os labs credenciados pelo MAPA são aceitos pelo Japão. CRIAR FLUXO ESPECIAL no app para destino Japão com alertas mais agressivos e recomendação de 12 meses de antecedência."
+    "observacoesInternas": "⚠️ CRÍTICO: O Brasil NÃO está na lista de países livres de raiva reconhecida pelo Japão. Por isso o processo é tão longo. Alguns cães podem ficar em quarentena governamental no Japão se algo estiver errado. Validar lista de labs aprovados pelo AQS — nem todos os labs credenciados pelo MAPA são aceitos pelo Japão. CRIAR FLUXO ESPECIAL no app para destino Japão com alertas mais agressivos e recomendação de 12 meses de antecedência.",
+    "tarefasAdicionais": [
+      {
+        "id": "advance-notification-japao",
+        "titulo": "Advance Notification ao AQS",
+        "descricao": "Notificação prévia obrigatória ao Animal Quarantine Service do aeroporto de chegada, com pelo menos 40 dias de antecedência. O AQS responde com o Approval of Inspection — necessário para embarcar.",
+        "prazoDiasAntesEmbarque": 40,
+        "precisaClinica": false
+      }
+    ]
   }
 }

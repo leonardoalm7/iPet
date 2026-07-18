@@ -60,6 +60,22 @@
     ],
     "exigeSeguroResponsabilidade": true,
     "observacoes": "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira, guia curta e seguro de responsabilidade civil. NOVO: o SAG exige AUTORIZAÇÃO SANITÁRIA PRÉVIA + declaração jurada digital preenchida ANTES do embarque (portal ingresoachile.cl). Desparasitação interna/externa ≤30 dias antes da entrada, registrada no certificado. Microchip ISO e vacinas múltiplas válidas.",
-    "observacoesInternas": "Alertar usuários com cães da lista PPP sobre a 'Ley Cholito' e as restrições de circulação pública."
+    "observacoesInternas": "Alertar usuários com cães da lista PPP sobre a 'Ley Cholito' e as restrições de circulação pública.",
+    "tarefasAdicionais": [
+      {
+        "id": "declaracao-sag",
+        "titulo": "Autorização sanitária + declaração digital (SAG)",
+        "descricao": "Preencher a declaração jurada digital no portal ingresoachile.cl ANTES do embarque e obter a autorização sanitária de ingresso do SAG.",
+        "prazoDiasAntesEmbarque": 2,
+        "precisaClinica": false
+      },
+      {
+        "id": "desparasitacao-chile",
+        "titulo": "Desparasitação interna e externa",
+        "descricao": "Aplicada até 30 dias antes da entrada no Chile, registrada no certificado sanitário.",
+        "prazoDiasAntesEmbarque": 10,
+        "precisaClinica": true
+      }
+    ]
   }
 }

@@ -47,6 +47,8 @@
       "Perro de Presa Canario"
     ],
     "observacoes": "Singapura (AVS) classifica países por risco de raiva; o Brasil NÃO está nas categorias de menor risco — importação exige: licença de importação AVS (dog licence prévia para cães), microchip ISO, vacina antirrábica, RNATT ≥0,5 UI/mL em lab aprovado, certificado veterinário oficial e QUARENTENA obrigatória na chegada (tipicamente 30 dias na estação de Sembawang — reservar vaga com meses de antecedência, capacidade limitada). Raças banidas em Singapura: Pit Bull (e afins), Akita, Neapolitan Mastiff, Tosa, Dogo Argentino, Fila Brasileiro, Boerboel, Perro de Presa Canario.",
-    "observacoesInternas": "Criado 2026-07-17 com base em conhecimento consolidado do esquema AVS + fontes secundárias — NENHUMA página oficial AVS foi lida nesta revisão. BAIXA confiança de propósito: categoria exata do Brasil (C ou D), duração da quarentena (30 dias?) e janela da titulação PRECISAM ser confirmadas em avs.gov.sg / pals.avs.gov.sg antes de qualquer exibição no app."
+    "observacoesInternas": "Criado 2026-07-17 com base em conhecimento consolidado do esquema AVS + fontes secundárias — NENHUMA página oficial AVS foi lida nesta revisão. BAIXA confiança de propósito: categoria exata do Brasil (C ou D), duração da quarentena (30 dias?) e janela da titulação PRECISAM ser confirmadas em avs.gov.sg / pals.avs.gov.sg antes de qualquer exibição no app.",
+    "tipoAcesso": "QUARENTENA_OBRIGATORIA",
+    "tipoAcessoDetalhe": "Brasil fora das categorias de menor risco da AVS: licença prévia + quarentena (~30 dias) na estação de Sembawang, com reserva de vaga meses antes."
   }
 }

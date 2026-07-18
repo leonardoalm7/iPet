@@ -49,6 +49,8 @@
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
     "observacoes": "Permitido apenas 1 pet por passaporte de viajante. Para evitar a quarentena obrigatória de 30 dias, o pet deve ter sorologia aprovada e entrar obrigatoriamente por portos designados com infraestrutura de quarentena (ex: Pequim, Xangai, Guangzhou). O Brasil NÃO está na lista de países/regiões designados pela China: cão/gato ex-Brasil cumpre QUARENTENA DE 30 DIAS em instalação governamental na chegada, e a entrada só é aceita em portos autorizados a receber quarentena (ex.: Beijing Capital, Shanghai Pudong — confirmar porto antes de emitir passagem). Microchip ISO + 2 vacinas antirrábicas + titulação + certificado sanitário reduzem risco de recusa mas NÃO isentam a quarentena para país não-designado. Limite: 1 pet por passageiro.",
-    "observacoesInternas": "Alertar o tutor sobre a lista estrita de aeroportos de entrada para isenção de quarentena."
+    "observacoesInternas": "Alertar o tutor sobre a lista estrita de aeroportos de entrada para isenção de quarentena.",
+    "tipoAcesso": "QUARENTENA_OBRIGATORIA",
+    "tipoAcessoDetalhe": "Brasil não é origem designada: quarentena governamental de 30 dias na chegada, e entrada apenas por portos autorizados (ex.: Beijing Capital, Shanghai Pudong)."
   }
 }

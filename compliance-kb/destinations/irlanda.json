@@ -68,6 +68,18 @@
       "Bandog"
     ],
     "observacoes": "1) Exige tratamento contra Echinococcus multilocularis administrado 24 a 120 horas antes da chegada. 2) A lista de raças citadas tem circulação estritamente controlada (focinheira e guia curta, a depender da legislação local e do Control of Dogs Act). Requer aviso prévio de chegada por e-mail. Base legal desde 22/04/2026: Reg. Delegado (UE) 2026/131 e Reg. de Execução (UE) 2026/705 (substituem o Reg. 576/2013; exigências substantivas mantidas).",
-    "observacoesInternas": "Alerta de compliance alto: a Irlanda exige Advance Notice (aviso prévio) portal online. Inserir desparasitação Echinococcus D-5 a D-1 no roadmap."
+    "observacoesInternas": "Alerta de compliance alto: a Irlanda exige Advance Notice (aviso prévio) portal online. Inserir desparasitação Echinococcus D-5 a D-1 no roadmap.",
+    "tarefasAdicionais": [
+      {
+        "id": "praziquantel-irlanda",
+        "titulo": "Tratamento contra tênia (praziquantel)",
+        "descricao": "Obrigatório para cães que entram em Irlanda: praziquantel administrado por veterinário entre 24h e 120h (1–5 dias) antes da chegada, registrado no certificado.",
+        "prazoDiasAntesEmbarque": 1,
+        "especies": [
+          "CAO"
+        ],
+        "precisaClinica": true
+      }
+    ]
   }
 }

@@ -59,6 +59,8 @@
       "Doberman"
     ],
     "observacoes": "Animais do Brasil estão sujeitos a uma quarentena obrigatória mínima de 7 dias (frequentemente estendida para 14 dias) nas instalações do governo. O Import Permit (Licença de Importação) deve ser emitido pelo DVS Malaysia antes do embarque. Import permit do DVS obrigatório + QUARENTENA na chegada (instalação de Sepang/KLIA; duração conforme origem — Brasil não isento; tipicamente ≥7 dias, confirmar). Raças banidas (Pit Bull, Amstaff, Akita etc.) e raças com aprovação prévia por escrito do diretor veterinário estadual (Rottweiler, Pastor Alemão, Doberman etc.).",
-    "observacoesInternas": "Notar que algumas raças (Rottweiler, Doberman, Pastor Alemão) não são totalmente banidas, mas classificadas como 'Restritas', exigindo permissão especial extra."
+    "observacoesInternas": "Notar que algumas raças (Rottweiler, Doberman, Pastor Alemão) não são totalmente banidas, mas classificadas como 'Restritas', exigindo permissão especial extra.",
+    "tipoAcesso": "QUARENTENA_OBRIGATORIA",
+    "tipoAcessoDetalhe": "Import permit do DVS + quarentena na chegada (estação de Sepang/KLIA; duração conforme origem)."
   }
 }
