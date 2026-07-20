@@ -121,7 +121,7 @@ export async function getPerfil(userId: string): Promise<PerfilUsuario | null> {
     email: data.email ?? "",
     telefone: data.telefone ?? undefined,
     dataNascimento: data.data_nascimento ?? undefined,
-    fotoPerfil: data.foto_url ?? undefined,
+    fotoPerfil: data.foto_perfil ?? undefined,
     cpfHash: data.cpf_hash ?? undefined,
     onboardingCompleto: data.onboarding_completo,
     provedorAuth: data.provedor_auth ?? "EMAIL",
@@ -144,18 +144,20 @@ export async function salvarPerfil(
   const supabase = getClient();
 
   const payload: Record<string, unknown> = {
-    id: userId,
     atualizado_em: new Date().toISOString(),
   };
 
   if (dados.nomeCompleto !== undefined) payload.nome_completo = dados.nomeCompleto;
   if (dados.telefone !== undefined) payload.telefone = dados.telefone;
   if (dados.dataNascimento !== undefined) payload.data_nascimento = dados.dataNascimento;
-  if (dados.fotoPerfil !== undefined) payload.foto_url = dados.fotoPerfil;
+  if (dados.fotoPerfil !== undefined) payload.foto_perfil = dados.fotoPerfil;
   if (dados.cpfHash !== undefined) payload.cpf_hash = dados.cpfHash;
   if (dados.onboardingCompleto !== undefined) payload.onboarding_completo = dados.onboardingCompleto;
 
-  return supabase.from("profiles").upsert(payload);
+  // O profile já existe (criado pelo trigger handle_new_user no signup),
+  // então isto é sempre um update — upsert falharia no NOT NULL de email
+  // porque o payload nunca inclui email.
+  return supabase.from("profiles").update(payload).eq("id", userId);
 }
 
 // ─── Hash utilitário ──────────────────────────────────────────────────────
