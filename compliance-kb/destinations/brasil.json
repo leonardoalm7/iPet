@@ -3,9 +3,9 @@
   "destino": "BRASIL",
   "nome": "Brasil",
   "bandeira": "🇧🇷",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -19,6 +19,18 @@
       "title": "MAPA — Legislação de Trânsito Animal",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.gov.br/agricultura/pt-br/assuntos/vigilancia-agropecuaria/animais-estimacao/sair-do-brasil",
+      "title": "MAPA/VIGIAGRO — Sair do Brasil com animais de estimação",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.gov.br/anac/pt-br/assuntos/passageiros/transporte-de-animais-1",
+      "title": "ANAC — Transporte de animais (Portaria 17.476/SAS/2025)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -26,6 +38,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial do registro com base nas regras vigentes do MAPA para voos domésticos"
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17 via gov.br/ANAC: adicionadas Portaria ANAC 17.476/2025 (vigente 20/10/2025, 3 categorias, obrigações de transparência das cias), e-CVI eletrônico gratuito (11 países) e regra de retorno (CVI 60 dias). Regras domésticas de vacina mantidas. Confiança ALTA."
     }
   ],
   "rules": {
@@ -43,7 +60,7 @@
     "emissoresCVI": null,
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Para voos domésticos: vacina antirrábica válida com mínimo 21 dias de carência. Recomenda-se atestado de saúde emitido por médico veterinário em até 10 dias antes do embarque (exigido por algumas companhias). Filhotes com menos de 8 semanas geralmente não são aceitos.",
-    "observacoesInternas": "⚠️ REVISAR: Algumas cias exigem o atestado de saúde formalmente. Validar com LATAM/GOL/Azul se exigem GTA ou apenas atestado. Microchip não é obrigatório por lei para voos domésticos, mas é bom recomendar."
+    "observacoes": "VOOS DOMÉSTICOS: vacina antirrábica válida (carência 21 dias) + atestado de saúde veterinário (≤10 dias) conforme exigência da companhia. Desde 20/10/2025 vigora a Portaria ANAC nº 17.476/SAS/2025: 3 categorias (estimação, suporte emocional, serviço/cão-guia); cão-guia tem embarque OBRIGATÓRIO e gratuito em cabine; suporte emocional segue política da cia (sem direito especial — STJ 2023); cias devem divulgar na venda peso/dimensões/raças aceitas, documentação e políticas. SAÍDA DO BRASIL: CVI obrigatório, emitido pelo MAPA/VIGIAGRO — e-CVI eletrônico e gratuito via Portal Gov.br para 11 países (Argentina, Bolívia, Canadá, Chile, Colômbia, EUA, Japão, México, Paraguai, Uruguai, Venezuela); validade típica 2–10 dias conforme destino. RETORNO AO BRASIL: CVI brasileiro vale 60 dias para reingresso; exigidos vacina antirrábica válida (animais >90 dias) e certificado sanitário.",
+    "observacoesInternas": "Revisado 2026-07-17 (gov.br + ANAC oficiais). Novidades incorporadas: Portaria ANAC 17.476/2025 em vigor desde 20/10/2025 (modelar tipoPet: ESTIMACAO | CAO_GUIA no app; ESA = estimação), e-CVI para 11 países, CVI 60 dias para retorno. Falta modelar no app o fluxo de RETORNO (hoje só ida). GTA não se aplica a cães/gatos de estimação."
   }
 }

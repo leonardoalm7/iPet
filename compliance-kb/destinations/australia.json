@@ -3,16 +3,22 @@
   "destino": "AUSTRALIA",
   "nome": "Austrália",
   "bandeira": "🇦🇺",
-  "lastVerified": "2026-04-16",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-16",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
       "url": "https://www.agriculture.gov.au/biosecurity-trade/cats-dogs",
       "title": "Australian Government — Cats and dogs",
       "type": "OFICIAL",
-      "lastAccessed": "2026-04-16"
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.agriculture.gov.au/biosecurity-trade/cats-dogs/rabies-neutralising-antibody",
+      "title": "DAFF — RNATT requirements",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-16",
       "author": "Leonardo Braga de Almeida",
       "description": "Criação inicial. Austrália é rabies-free — processo mais rigoroso do hemisfério sul. Quarentena obrigatória. Iniciar processo com mínimo 6 meses de antecedência."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: CORREÇÃO CRÍTICA — Brasil é país não-aprovado pela DAFF; importação direta impossível. Documentado caminho indireto (≥180 dias de residência em país aprovado + protocolo desse país + quarentena Mickleham). Confiança MEDIA (fontes DAFF + secundárias; validar na ferramenta oficial)."
     }
   ],
   "rules": {
@@ -36,8 +47,14 @@
     "diasAntesCVI": 10,
     "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Documentação específica exigida pelo DAWE (formulários australianos). Tradução para inglês obrigatória.",
     "exigePermissaoImportacao": true,
-    "racasRestritasOuProibidas": ["PIT_BULL", "DOGO_ARGENTINO", "FILA_BRASILEIRO", "TOSA_INU", "WOLF_HYBRID"],
-    "observacoes": "Austrália é país rabies-free com um dos controles mais rigorosos do mundo. Quarentena obrigatória de 10 dias no Post Entry Quarantine (PEQ) em Melbourne. O processo completo leva MÍNIMO 6 meses: (1) Microchip → (2) Vacinação antirrábica primária + reforço → (3) Sorologia (≥180 dias antes de entrar) → (4) Tratamentos contra parasitas → (5) Importação aprovada pelo DAWE → (6) Reserva no PEQ (quarentena) → (7) CVI → (8) Chegada. Custo total estimado: R$ 15.000 a R$ 30.000.",
-    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Processo extremamente complexo. Verificar se laboratórios brasileiros credenciados pelo MAPA são aceitos pelo DAWE. Quarentena obrigatória no PEQ em Melbourne (SOMENTE local de quarentena aprovado). Recomendar fortemente o usuário contratar um despachante especializado em viagem com pets para Austrália. Custo alto pode ser um fator limitante."
+    "racasRestritasOuProibidas": [
+      "PIT_BULL",
+      "DOGO_ARGENTINO",
+      "FILA_BRASILEIRO",
+      "TOSA_INU",
+      "WOLF_HYBRID"
+    ],
+    "observacoes": "⚠️ O BRASIL É PAÍS NÃO-APROVADO pela DAFF: NÃO é possível importar cão/gato diretamente do Brasil para a Austrália. Caminho obrigatório: o pet deve primeiro RESIDIR POR PELO MENOS 180 DIAS em um país aprovado (Grupo 2 ou 3 — ex.: EUA continental, Canadá, Reino Unido, maior parte da Europa, Japão, Singapura) e então cumprir integralmente o protocolo de exportação DESSE país para a Austrália: RNATT ≥0,5 UI/mL feito no país aprovado por vet credenciado (coleta entre 180 dias e 12 meses antes da exportação), import permit da DAFF, e quarentena mínima de 10–30 dias em Mickleham (Melbourne) conforme o grupo do país e verificação de identidade. Grupo 1 (NZ, Norfolk, Cocos): sem quarentena — não acessível a partir do Brasil.",
+    "observacoesInternas": "⚠️ CORREÇÃO CRÍTICA 2026-07-17: o registro anterior apresentava a Austrália como destino direto com sorologia 180d + permit — INCOMPLETO e PERIGOSO: Brasil (e toda a América Latina) é NÃO-APROVADO; rota direta é impossível. O app deve exibir fluxo especial 'destino indireto' (residência ≥180 dias em país aprovado antes). Números de quarentena (10 vs 30 dias) e grupos confirmados em fontes secundárias; páginas da DAFF listadas como fonte — REVISÃO HUMANA: confirmar na calculadora oficial da DAFF (step-by-step guides) antes de publicar."
   }
 }

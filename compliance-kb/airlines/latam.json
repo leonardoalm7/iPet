@@ -3,16 +3,26 @@
   "id": "latam",
   "nome": "LATAM Airlines",
   "codigo": "LA",
-  "lastVerified": "2026-04-25",
-  "verifiedBy": "Leonardo Braga de Almeida",
-  "nextReviewDate": "2026-07-25",
-  "confidence": "MEDIA",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude via Chrome (fonte oficial navegada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "ALTA",
   "sources": [
     {
       "url": "https://www.latamairlines.com/br/pt/central-de-ajuda/informacoes-de-voo/passageiros/viagem-com-animais",
       "title": "LATAM — Viagem com Animais de Estimação",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.latamairlines.com/br/pt/experiencia/prepare-sua-viagem/transporte-de-animais-de-estimacao/cabine",
+      "title": "LATAM — Pets na cabine",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://www.latamairlines.com/br/pt/experiencia/prepare-sua-viagem/transporte-de-animais-de-estimacao/bagageiro",
+      "title": "LATAM — Animais no bagageiro",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -25,30 +35,43 @@
       "date": "2026-04-25",
       "author": "Leonardo Braga de Almeida",
       "description": "Correção: braquicefálicos SÃO permitidos em cabine (até 7kg). Banimento aplica-se apenas ao porão. Observações reescritas para refletir política real."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Revisão 2026-07-17: MUDANÇA GRANDE — cabine sem limite de peso (critério = caixa 36×33×19 rígida / 40×28×25 flexível; pesoMaxKg=0 convencionado como 'sem limite'); porão escalonado 32/23/45 kg por duração/aeronave. Fonte oficial retorna 403 ao fetch; dados de resultados de busca das páginas LATAM + imprensa especializada. REVISÃO HUMANA: confirmar no site antes de publicar."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Confirmação via página oficial LATAM (Chrome): cabine sem limite de peso, caixa 36×33×19 rígida / 40×28×25 flexível, 16 semanas mínimo (EUA 6 meses), assento corredor, Economy 5/voo + Premium Economy 1/voo, sem sedação, pedido até 4h antes. Confiança elevada para ALTA."
     }
   ],
   "cabine": {
     "permitido": true,
-    "pesoMaxKg": 10,
+    "pesoMaxKg": 99,
     "dimensoesMaxCm": {
-      "comprimento": 45,
-      "largura": 35,
-      "altura": 25,
-      "somaDimensoes": 115
+      "comprimento": 36,
+      "largura": 33,
+      "altura": 19,
+      "somaDimensoes": 88
     },
-    "especiesPermitidas": ["CAO", "GATO"],
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
     "racasBraquisefálicasPermitidas": true,
-    "idadeMinimaSemanas": 8,
+    "idadeMinimaSemanas": 16,
     "maxAnimaisPorVoo": 5,
     "reservaAntecedenciaHoras": 24,
-    "observacoes": "Animal + caixa transportadora = máx 10kg. A caixa deve caber sob o assento da frente. Apenas 1 animal por passageiro. Raças braquicefálicas (Bulldog, Pug, Shih Tzu, etc.) SÃO aceitas na cabine respeitando o limite de peso — o banimento da LATAM se aplica apenas ao porão. Reserva obrigatória pelo SAC ou site."
+    "observacoes": "CONFIRMADO na página oficial (17/07/2026): SEM limite de peso na cabine — critério é o pet caber em pé na caixa sem tocar o teto e girar naturalmente (pesoMaxKg=99 é sentinela de 'sem limite'). Caixa rígida máx. 36×33×19 cm (porta metálica com trava dupla) OU bolsa flexível máx. 40×28×25 cm, sob o assento dianteiro, sem rodinhas. Idade mínima 16 SEMANAS (desmame ≥5 dias antes); EUA: 6 meses. 1 pet/passageiro; Economy até 5/voo, Premium Economy 1/voo; Premium Business NÃO aceita. Assento de CORREDOR obrigatório (não 1ª fileira nem emergência). Pet não pode estar sedado; fêmea não pode estar prenha nem ter parido nas últimas 48h. Solicitação da compra até 4h antes do voo (Central/WhatsApp/lojas); cartão de embarque só no aeroporto. Só voos operados LATAM (sem codeshare/interline)."
   },
   "porao": {
     "permitido": true,
     "pesoMaxKg": 45,
     "racasBraquisefálicasPermitidas": false,
-    "observacoes": "Raças braquicefálicas (Bulldog, Pug, Shih Tzu, etc.) NÃO são aceitas no porão por risco respiratório com a pressurização — restrição categórica, sem exceção médica. Caixa rígida homologada IATA obrigatória para porão."
+    "observacoes": "Limites por duração do voo e aeronave (pet + caixa): até 32 kg em voos ≤4h; até 23 kg em voos de 4–5h em narrow-body (A319/A320/A321); até 45 kg em wide-body (B767/B777/B787). Braquicefálicos PROIBIDOS no porão (Pug, Bulldog Francês, Bulldog Inglês, Boston Terrier etc.) — restrição categórica. Caixa rígida IATA obrigatória."
   },
   "racasPerigosasBanidas": true,
-  "observacoesGerais": "⚠️ Regras variam por rota (doméstica/internacional) e aeronave. Raças perigosas (Pit Bull, Rottweiler, Fila, etc.) banidas completamente. Sempre confirmar com a LATAM na reserva. Taxa cobrada por trecho."
+  "observacoesGerais": "⚠️ Regras variam por rota e aeronave — o teto de peso do porão depende da duração do voo. Raças perigosas (Pit Bull, Rottweiler, Fila etc.) banidas em qualquer modalidade. Taxa por trecho. Portaria ANAC 17.476/SAS/2025 (vigente desde 20/10/2025): cia deve divulgar na venda peso/dimensões/raças aceitas e documentação; cão-guia tem embarque obrigatório e gratuito em cabine; animal de suporte emocional segue política da cia."
 }

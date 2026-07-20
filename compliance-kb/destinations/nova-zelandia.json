@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "NOVA_ZELANDIA",
+  "nome": "Nova Zelândia",
+  "bandeira": "🇳🇿",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "BAIXA",
+  "sources": [
+    {
+      "url": "https://www.mpi.govt.nz/bring-send-to-nz/pets-travelling-to-nz/",
+      "title": "MPI — Bringing pets to New Zealand",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: Brasil não-aprovado — importação direta impossível; rota indireta via país aprovado + permit + quarentena. Confiança BAIXA até leitura oficial do MPI."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos), implantado antes da vacina antirrábica",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório autorizado UE/MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Certificado sanitário equivalente ao AHC da UE, emitido por vet credenciado MAPA + endosso SFA",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": [
+      "American Pit Bull Terrier",
+      "Dogo Argentino",
+      "Fila Brasileiro",
+      "Japanese Tosa",
+      "American XL Bully"
+    ],
+    "observacoes": "⚠️ O BRASIL NÃO É PAÍS APROVADO pelo MPI da Nova Zelândia: cães e gatos NÃO podem ser importados diretamente do Brasil. Caminho: o pet deve primeiro residir (tipicamente ≥6 meses) em um país aprovado pelo MPI (ex.: EUA, Canadá, Reino Unido, UE, Austrália) e então cumprir o protocolo de exportação desse país para a NZ: import permit, RNATT, tratamentos parasitários seriados e quarentena mínima (10 dias) em instalação aprovada. Raças proibidas na NZ: Pit Bull, Dogo Argentino, Fila Brasileiro, Tosa, American XL Bully.",
+    "observacoesInternas": "Criado 2026-07-17. Estrutura análoga à Austrália (Brasil não-aprovado — rota indireta obrigatória). Detalhes (tempo de residência exigido, lista de países aprovados, duração exata da quarentena) NÃO confirmados em fonte oficial nesta data — REVISÃO HUMANA: conferir mpi.govt.nz antes de publicar. App deve tratar como 'destino indireto' igual Austrália."
+  }
+}

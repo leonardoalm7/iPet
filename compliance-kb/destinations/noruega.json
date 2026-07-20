@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "NORUEGA",
+  "nome": "Noruega",
+  "bandeira": "🇳🇴",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.mattilsynet.no/en/animals/travelling-with-pets",
+      "title": "Mattilsynet — Travelling with pets to Norway",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    },
+    {
+      "url": "https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets/bringing-pet-eu-non-eu-country_en",
+      "title": "Comissão Europeia — esquema que a Noruega segue",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: Noruega segue esquema UE + praziquantel obrigatório (24–120h) + lista nacional de raças banidas. Confiança MEDIA até validação humana."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos), implantado antes da vacina antirrábica",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório autorizado UE/MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Certificado sanitário equivalente ao AHC da UE, emitido por vet credenciado MAPA + endosso SFA",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [
+      "Pit Bull Terrier",
+      "Fila Brasileiro",
+      "Tosa Inu",
+      "Dogo Argentino",
+      "American Staffordshire Terrier",
+      "Czechoslovakian Wolfdog"
+    ],
+    "observacoes": "A Noruega não é UE mas segue o esquema da UE para pets: microchip ISO → vacina antirrábica (≥21 dias) → RNATT ≥0,5 UI/mL (≥30 dias pós-vacina, ≥90 dias antes do certificado) → certificado sanitário ≤10 dias. ADICIONAL OBRIGATÓRIO para cães: tratamento contra Echinococcus multilocularis (praziquantel) entre 24h e 120h antes da entrada, registrado por veterinário. Raças proibidas na Noruega: Pit Bull Terrier, Fila Brasileiro, Tosa Inu, Dogo Argentino, American Staffordshire Terrier, Czechoslovakian Wolfdog (e lobos/híbridos).",
+    "observacoesInternas": "Criado 2026-07-17. Regra 'segue UE' + echinococcus confirmadas em fonte UE; lista de raças banidas norueguesa (forskrift om farlige hunder) de conhecimento consolidado mas não reverificada nesta data — REVISÃO HUMANA: conferir mattilsynet.no antes de publicar."
+  }
+}

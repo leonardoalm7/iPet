@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "klm",
+  "nome": "KLM",
+  "codigo": "KL",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.klm.com.br/information/travelling-pets",
+      "title": "KLM — Travelling with pets",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: cabine 8 kg / 46×28×24 / 48h antecedência; porão 75 kg; sobretaxa de conexão em AMS. Fontes secundárias; confirmar no site KLM."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 46,
+      "largura": 28,
+      "altura": 24,
+      "somaDimensoes": 98
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 12,
+    "maxAnimaisPorVoo": 2,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": "Cabine: até 8 kg (animal + bolsa 46×28×24). Reservar ≥48h antes; capacidade por voo reduzida em 2026."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Porão: até 75 kg (animal + caixa). Conexões >3h em AMS: transferência para hub climatizado com sobretaxa (~€150–300). Braquicefálicos não aceitos no porão."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ GRU–AMS direto disponível. Em conexões longas em Schiphol o pet vai para instalação climatizada (sobretaxa). Políticas alinhadas com Air France (grupo AF-KLM)."
+}

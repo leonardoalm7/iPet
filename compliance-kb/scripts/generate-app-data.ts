@@ -19,10 +19,11 @@ import * as path from "path";
 // Ex: npx ts-node compliance-kb/scripts/generate-app-data.ts
 const REPO_ROOT = process.cwd();
 const KB_DIR = path.join(REPO_ROOT, "compliance-kb");
-const OUTPUT_FILE = path.join(
-  REPO_ROOT,
-  "prototipos/responsavel-app/src/data/kb-generated.ts"
-);
+// Saídas: packages/core é o consumidor do app vivo (apps/web); prototipos é legado.
+const OUTPUTS = [
+  { file: "packages/core/src/data/kb-generated.ts", importPath: "../domain/types" },
+  { file: "prototipos/responsavel-app/src/data/kb-generated.ts", importPath: "@/domain/types" },
+];
 
 function loadJson<T>(filePath: string): T {
   return JSON.parse(fs.readFileSync(filePath, "utf-8")) as T;
@@ -57,13 +58,13 @@ interface KBAirline {
   nextReviewDate: string;
   cabine: {
     pesoMaxKg: number;
-    dimensoesMaxCm: { comprimento: number; largura: number; altura: number };
-    idadeMinimaSemanas: number;
+    dimensoesMaxCm?: { comprimento: number; largura: number; altura: number };
+    idadeMinimaSemanas?: number;
     racasBraquisefálicasPermitidas: boolean;
     observacoes: string;
   };
   porao: {
-    pesoMaxKg: number;
+    pesoMaxKg?: number;
     racasBraquisefálicasPermitidas?: boolean;
   };
   racasPerigosasBanidas?: boolean;
@@ -166,6 +167,15 @@ function main() {
     "copa",
     "american",
     "emirates",
+    "lufthansa",
+    "klm",
+    "turkish",
+    "qatar-airways",
+    "united",
+    "delta",
+    "avianca",
+    "aerolineas-argentinas",
+    "british-airways",
   ];
 
   const destinations = destinationFiles.map((f) =>
@@ -207,9 +217,9 @@ function main() {
     nome: ${JSON.stringify(a.nome)},
     codigo: ${JSON.stringify(a.codigo)},
     pesoMaxCabine: ${a.cabine.pesoMaxKg},
-    pesoMaxPorао: ${a.porao.pesoMaxKg},
-    dimensoesMaxCabine: { comprimento: ${a.cabine.dimensoesMaxCm.comprimento}, largura: ${a.cabine.dimensoesMaxCm.largura}, altura: ${a.cabine.dimensoesMaxCm.altura} },
-    idadeMinimaAnimal: ${a.cabine.idadeMinimaSemanas},
+    pesoMaxPorao: ${a.porao.pesoMaxKg ?? 0},
+    dimensoesMaxCabine: { comprimento: ${a.cabine.dimensoesMaxCm?.comprimento ?? 0}, largura: ${a.cabine.dimensoesMaxCm?.largura ?? 0}, altura: ${a.cabine.dimensoesMaxCm?.altura ?? 0} },
+    idadeMinimaAnimal: ${a.cabine.idadeMinimaSemanas ?? 0},
     braquicefalicoCabine: ${a.cabine.racasBraquisefálicasPermitidas},
     braquicefalicoPorao: ${a.porao.racasBraquisefálicasPermitidas ?? false},
     racasPerigosasBanidas: ${a.racasPerigosasBanidas ?? false},
@@ -224,6 +234,7 @@ function main() {
 
   const now = new Date().toISOString().split("T")[0];
 
+  for (const out of OUTPUTS) {
   const output = `// ============================================================
 // ARQUIVO GERADO AUTOMATICAMENTE — NÃO EDITAR DIRETAMENTE
 // Fonte: /compliance-kb/destinations/ e /compliance-kb/airlines/
@@ -232,7 +243,7 @@ function main() {
 //   npx ts-node compliance-kb/scripts/generate-app-data.ts
 // ============================================================
 
-import type { RegrasDestino, RegrasCompanhiaAerea, Destino } from "@/domain/types";
+import type { RegrasDestino, RegrasCompanhiaAerea, Destino } from "${out.importPath}";
 
 // Extensão interna: campos _kb* são metadados de curadoria, não expostos pelo tipo público
 type RegrasDestinoComMeta = RegrasDestino & {
@@ -256,10 +267,12 @@ ${airlineEntries}
 ];
 `;
 
-  fs.writeFileSync(OUTPUT_FILE, output, "utf-8");
-  console.log(`✅ Gerado: ${OUTPUT_FILE}`);
+  const outPath = path.join(REPO_ROOT, out.file);
+  fs.writeFileSync(outPath, output, "utf-8");
+  console.log(`✅ Gerado: ${outPath}`);
   console.log(`   Destinos: ${destinations.length}`);
   console.log(`   Companhias: ${airlines.length}`);
+  }
 }
 
 main();

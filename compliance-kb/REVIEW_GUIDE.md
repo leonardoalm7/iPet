@@ -23,9 +23,12 @@ Para cada arquivo em `destinations/`:
 - [ ] Acessar todas as URLs listadas em `sources[]` e verificar se ainda carregam
 - [ ] Comparar as regras atuais do site com o que está no JSON
 - [ ] Verificar se houve mudança de legislação (buscar por "atualização" ou changelog no site)
-- [ ] Para UE: verificar Regulamento 576/2013 e atualizações no EUR-Lex
+- [ ] Para UE: verificar Reg. Delegado (UE) 2026/131 + Reg. de Execução (UE) 2026/705 (substituíram o 576/2013 em 22/04/2026) e atualizações no EUR-Lex
 - [ ] Para Japão: verificar site do AQS se houve mudança de países aceitos
-- [ ] Para EUA: verificar CDC Importation se houve mudança na classificação de risco do Brasil
+- [ ] Para EUA: verificar CDC Importation se houve mudança na classificação de risco do Brasil (alto risco desde 08/2024: cão ≥6 meses + chip + Dog Import Form + titulação CDC)
+- [ ] Para UK: verificar lista de países listed/unlisted (Brasil = unlisted) e lista do Dangerous Dogs Act (XL Bully desde 2024)
+- [ ] Para Austrália/Nova Zelândia: verificar lista de países aprovados (Brasil = NÃO-aprovado; rota indireta obrigatória)
+- [ ] Para cias brasileiras: verificar conformidade com a Portaria ANAC 17.476/SAS/2025 (vigente desde 20/10/2025)
 - [ ] Atualizar `lastVerified`, `verifiedBy` e `nextReviewDate` (+90 dias)
 - [ ] Se houve mudança de regra: adicionar entrada no `changeLog` com data, autor e descrição
 - [ ] Se a confiança era MEDIA/BAIXA e foi confirmada em fonte oficial: upgrade para ALTA
@@ -98,10 +101,19 @@ Se você ou um usuário identificar que uma regra está desatualizada:
 
 | País/Região | Fonte principal |
 |-------------|----------------|
-| Brasil (exportação) | https://www.gov.br/agricultura — MAPA/VIGIAGRO |
-| União Europeia | https://ec.europa.eu/food/animals/pet-movement |
+| Brasil (exportação) | https://www.gov.br/agricultura — MAPA/VIGIAGRO (e-CVI: 11 países) |
+| Brasil (voo doméstico) | https://www.gov.br/anac — Portaria 17.476/SAS/2025 |
+| União Europeia | https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets — Reg. 2026/131 + 2026/705 |
+| Reino Unido | https://www.gov.uk/bring-pet-to-great-britain (Brasil = unlisted) |
 | Japão | https://www.maff.go.jp/aqs/english/animal/dog |
-| EUA | https://www.cdc.gov/importation + https://www.aphis.usda.gov |
-| LATAM | https://www.latamairlines.com/br/pt/central-de-ajuda |
+| EUA | https://www.cdc.gov/importation/dogs (Brasil = alto risco) + https://www.aphis.usda.gov |
+| Canadá | https://inspection.canada.ca/en/importing-food-plants-animals/pets |
+| México | https://www.gob.mx/senasica — Si viajas con tu mascota |
+| Austrália | https://www.agriculture.gov.au/biosecurity-trade/cats-dogs (Brasil = não-aprovado) |
+| Nova Zelândia | https://www.mpi.govt.nz/bring-send-to-nz/pets-travelling-to-nz (Brasil = não-aprovado) |
+| LATAM | https://www.latamairlines.com/br/pt/experiencia/prepare-sua-viagem/transporte-de-animais-de-estimacao/cabine |
 | GOL | https://www.voegol.com.br/informacoes/animais-de-estimacao |
-| Azul | https://www.voeazul.com.br/informacoes/animais |
+| Azul | https://www.voeazul.com.br/br/informacoes/viaje-com-seu-pet |
+
+> ⚠️ Nota operacional (2026-07-17): os sites de LATAM, GOL, Azul e CDC bloqueiam fetch automatizado (403).
+> Revisões dessas fontes exigem navegação manual ou browser automatizado com sessão real.

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "united",
+  "nome": "United Airlines",
+  "codigo": "UA",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.united.com/en/us/fly/travel/traveling-with-pets.html",
+      "title": "United — Traveling with pets",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: cabine sem limite de peso (critério bolsa), 2/passageiro, US$150; porão fechado ao público (PetSafe encerrado). Confirmar dimensões oficiais atuais."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 99,
+    "dimensoesMaxCm": {
+      "comprimento": 46,
+      "largura": 28,
+      "altura": 28,
+      "somaDimensoes": 102
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 16,
+    "maxAnimaisPorVoo": 4,
+    "observacoes": "Cabine: sem limite de peso publicado (pesoMaxKg=99 é sentinela de 'sem limite'; 0 no app = indisponível) — critério é caber na bolsa sob o assento (rígida 44×30×19 / flexível 46×28×28). 2 pets por passageiro (2 assentos). Taxa US$150/trecho. Idade mínima 4 meses em voos internacionais. ⚠️ Destinos que vetam pet em cabine (UK, Austrália etc.): embarque negado."
+  },
+  "porao": {
+    "permitido": false,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "United encerrou o despacho de pets no porão para o público geral (fim do PetSafe). Cargo apenas para militares/Departamento de Estado com ordens oficiais.",
+    "pesoMaxKg": 0
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Pet grande NÃO viaja pela United (sem porão civil). Só cabine (pet pequeno). Rotas GRU/GIG–EUA: cabine permitida — mas conferir regras CDC de entrada nos EUA (cão ≥6 meses, Dog Import Form)."
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "turkish",
+  "nome": "Turkish Airlines",
+  "codigo": "TK",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.turkishairlines.com/en-us/any-questions/traveling-with-pets/",
+      "title": "Turkish Airlines — Traveling with pets",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: cabine 8 kg / 40×30×23 (+aves pequenas); porão com caixa até 125×75×75; raças perigosas banidas. Página oficial TK listada; números de peso do porão não publicados com precisão — flag."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 40,
+      "largura": 30,
+      "altura": 23,
+      "somaDimensoes": 93
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO",
+      "AVE_PEQUENA"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 10,
+    "maxAnimaisPorVoo": 5,
+    "reservaAntecedenciaHoras": 6,
+    "observacoes": "Cabine: até 8 kg (animal + caixa 40×30×23). Aceita cães, gatos e pássaros pequenos (canário/periquito). Confirmação da cia exigida antes do embarque."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Porão: caixas até 125×75×75 cm. Braquicefálicos e raças de briga não aceitos no porão. GRU–IST wide-body."
+  },
+  "racasPerigosasBanidas": true,
+  "observacoesGerais": "⚠️ Raças perigosas (lista TK: Pit Bull, Amstaff, Tosa, Dogo etc.) não transportadas. Braquicefálicos só em cabine dentro de 8 kg. Rota via IST comum para Ásia/Oriente Médio — verificar regras do destino final e trânsito."
+}

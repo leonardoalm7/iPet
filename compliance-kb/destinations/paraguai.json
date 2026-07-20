@@ -3,9 +3,9 @@
   "destino": "PARAGUAI",
   "nome": "Paraguai",
   "bandeira": "🇵🇾",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "SENACSA — Servicio Nacional de Calidad y Salud Animal",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://senacsa.gov.py/servicios/sanidad-animal-identidad-y-trazabilidad/cuarentena/viajar-con-mascotas/",
+      "title": "SENACSA — Viajar con mascotas",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para o Paraguai."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: confirmado padrão SENACSA (≥3 meses, atestado ≤10 dias, CVI, vacina 21d). Fonte oficial adicionada."
     }
   ],
   "rules": {
@@ -37,7 +48,7 @@
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": false,
     "racasRestritasOuProibidas": [],
-    "observacoes": "Assim como o Uruguai, exige teste diagnóstico negativo para Leishmaniose (cães) coletado nos 60 dias anteriores ao embarque e certificado de tratamento parasitário.",
+    "observacoes": "Assim como o Uruguai, exige teste diagnóstico negativo para Leishmaniose (cães) coletado nos 60 dias anteriores ao embarque e certificado de tratamento parasitário. Idade mínima 3 meses. Atestado de saúde ≤10 dias + CVI + vacina antirrábica (1ª dose ≥21 dias antes; reforços sem carência).",
     "observacoesInternas": "Inserir tarefa de teste de Leishmaniose obrigatoriamente."
   }
 }

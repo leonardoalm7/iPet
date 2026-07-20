@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "aerolineas-argentinas",
+  "nome": "Aerolíneas Argentinas",
+  "codigo": "AR",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.aerolineas.com.ar/pt-br/informacoes-de-viagem/viajar-com-animais",
+      "title": "Aerolíneas Argentinas — Viajar com animais",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: cabine 9 kg, reserva 72h via WhatsApp; porão disponível. Fontes com precisão limitada — MEDIA."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 9,
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": true,
+    "reservaAntecedenciaHoras": 72,
+    "observacoes": "Cabine: até 9 kg (animal + caixa). Reserva via WhatsApp oficial ≥72h antes. Rotas GRU/GIG–EZE/AEP."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 45,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Porão (AVIH) disponível; caixa rígida IATA. Braquicefálicos não aceitos no porão."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Destino Argentina: e-CVI eletrônico Brasil→Argentina disponível (MAPA/SENASA) — processo mais simples do Mercosul. Confirmar limites exatos na reserva (política publicada com pouca precisão)."
+}

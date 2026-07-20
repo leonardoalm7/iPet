@@ -3,9 +3,9 @@
   "destino": "MALASIA",
   "nome": "Malásia",
   "bandeira": "🇲🇾",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "MEDIA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "MAQIS — Malaysian Quarantine and Inspection Services",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.aphis.usda.gov/pet-travel/us-to-another-country-export/pet-travel-us-malaysia",
+      "title": "USDA APHIS — Pet travel to Malaysia (referência DVS)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +26,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para Malásia. Nota: bandeira corrigida (encoding quebrado no paste original)."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: quarentena em Sepang e mecânica de raças (banidas vs aprovação prévia) explicitadas; duração exata da quarentena p/ Brasil a confirmar no DVS."
     }
   ],
   "rules": {
@@ -36,8 +47,18 @@
     "diasAntesCVI": 7,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": true,
-    "racasRestritasOuProibidas": ["Pit Bull Terrier", "American Bulldog", "Neapolitan Mastiff", "Japanese Tosa", "Akita", "Dogo Argentino", "Fila Brasileiro", "Rottweiler", "Doberman"],
-    "observacoes": "Animais do Brasil estão sujeitos a uma quarentena obrigatória mínima de 7 dias (frequentemente estendida para 14 dias) nas instalações do governo. O Import Permit (Licença de Importação) deve ser emitido pelo DVS Malaysia antes do embarque.",
+    "racasRestritasOuProibidas": [
+      "Pit Bull Terrier",
+      "American Bulldog",
+      "Neapolitan Mastiff",
+      "Japanese Tosa",
+      "Akita",
+      "Dogo Argentino",
+      "Fila Brasileiro",
+      "Rottweiler",
+      "Doberman"
+    ],
+    "observacoes": "Animais do Brasil estão sujeitos a uma quarentena obrigatória mínima de 7 dias (frequentemente estendida para 14 dias) nas instalações do governo. O Import Permit (Licença de Importação) deve ser emitido pelo DVS Malaysia antes do embarque. Import permit do DVS obrigatório + QUARENTENA na chegada (instalação de Sepang/KLIA; duração conforme origem — Brasil não isento; tipicamente ≥7 dias, confirmar). Raças banidas (Pit Bull, Amstaff, Akita etc.) e raças com aprovação prévia por escrito do diretor veterinário estadual (Rottweiler, Pastor Alemão, Doberman etc.).",
     "observacoesInternas": "Notar que algumas raças (Rottweiler, Doberman, Pastor Alemão) não são totalmente banidas, mas classificadas como 'Restritas', exigindo permissão especial extra."
   }
 }

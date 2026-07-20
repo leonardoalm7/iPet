@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "british-airways",
+  "nome": "British Airways",
+  "codigo": "BA",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "BAIXA",
+  "sources": [
+    {
+      "url": "https://www.britishairways.com/en-gb/information/travelling-with-pets",
+      "title": "British Airways — Travelling with pets",
+      "lastAccessed": "2026-07-17"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-17",
+      "author": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+      "description": "Criação 2026-07-17: sem cabine, sem AVIH — carga IAG Cargo apenas. BAIXA: página oficial não lida nesta revisão; validar."
+    }
+  ],
+  "cabine": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "especiesPermitidas": [],
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "BA NÃO aceita pets em cabine (apenas cães de assistência reconhecidos). Regra estável há décadas, alinhada à entrada no UK (pets entram na GB apenas como carga/rota aprovada)."
+  },
+  "porao": {
+    "permitido": false,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Sem AVIH como bagagem: pets viajam como CARGA via IAG Cargo (com agente especializado, ex.: PetAir UK), chegando pelo Heathrow Animal Reception Centre.",
+    "pesoMaxKg": 0
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ GRU–LHR com pet = somente carga IAG + trâmite GB (país não-listado p/ Brasil: RNATT + 3 meses + praziquantel + GB pet health certificate). Custo alto. Confirmar tudo com agente antes de sugerir a rota."
+}

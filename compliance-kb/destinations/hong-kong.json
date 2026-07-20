@@ -3,16 +3,16 @@
   "destino": "HONG_KONG",
   "nome": "Hong Kong",
   "bandeira": "🇭🇰",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
-  "confidence": "ALTA",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
+  "confidence": "MEDIA",
   "sources": [
     {
       "url": "https://www.afcd.gov.hk/english/quarantine/qua_ie/qua_ie_ipab/qua_ie_ipab_idc/qua_ie_ipab_idc.html",
       "title": "AFCD — Agriculture, Fisheries and Conservation Department",
       "type": "OFICIAL",
-      "lastAccessed": "2026-04-24"
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -20,6 +20,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Criação inicial. Mapeamento de regras sanitárias para Hong Kong. Nota técnica: diasCarenciaSorologia normalizado para 0 (schema exige integer, sorologia não aplicável)."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: explicitado sistema de grupos do AFCD — Brasil fora dos grupos isentos, permit prévio + quarentena (30–120 dias, enquadramento a confirmar). Trânsito também exige permit."
     }
   ],
   "rules": {
@@ -36,8 +41,13 @@
     "diasAntesCVI": 14,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
     "exigePermissaoImportacao": true,
-    "racasRestritasOuProibidas": ["Pit Bull Terrier", "Japanese Tosa", "Dogo Argentino", "Fila Brasileiro"],
-    "observacoes": "O Brasil é classificado como país do Grupo 3. Animais vindos do Brasil estão sujeitos a uma quarentena OBRIGATÓRIA de no mínimo 120 dias nas instalações do AFCD. A reserva da quarentena e a Permissão de Importação devem ser feitas com meses de antecedência.",
+    "racasRestritasOuProibidas": [
+      "Pit Bull Terrier",
+      "Japanese Tosa",
+      "Dogo Argentino",
+      "Fila Brasileiro"
+    ],
+    "observacoes": "O Brasil é classificado como país do Grupo 3. Animais vindos do Brasil estão sujeitos a uma quarentena OBRIGATÓRIA de no mínimo 120 dias nas instalações do AFCD. A reserva da quarentena e a Permissão de Importação devem ser feitas com meses de antecedência. O AFCD classifica origens em grupos (I, II, IIIA, IIIB); o BRASIL NÃO está nos grupos isentos: cão/gato ex-Brasil exige Special Permit prévio do AFCD e QUARENTENA em instalação governamental (mínimo 30 dias — podendo chegar a 120 dias conforme o grupo; confirmar enquadramento exato do Brasil antes de qualquer viagem). Transbordo/trânsito por HK também exige permit.",
     "observacoesInternas": "Alerta CRÍTICO: Quarentena de 120 dias para pets do Brasil. Desencorajar viagens de turismo."
   }
 }

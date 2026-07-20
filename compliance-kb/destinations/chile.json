@@ -3,9 +3,9 @@
   "destino": "CHILE",
   "nome": "Chile",
   "bandeira": "🇨🇱",
-  "lastVerified": "2026-04-24",
-  "verifiedBy": "iPet Pass (automação)",
-  "nextReviewDate": "2026-07-24",
+  "lastVerified": "2026-07-17",
+  "verifiedBy": "Claude (pesquisa web automatizada) — revisão humana pendente: Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-10-15",
   "confidence": "ALTA",
   "sources": [
     {
@@ -13,6 +13,12 @@
       "title": "SAG — Servicio Agrícola y Ganadero",
       "type": "OFICIAL",
       "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.sag.gob.cl/tramites/solicitud-de-autorizacion-sanitaria-para-ingresar-chile-con-perros-y-gatos-mascotas",
+      "title": "SAG — Autorização sanitária de ingresso com cães e gatos",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-07-17"
     }
   ],
   "changeLog": [
@@ -25,6 +31,11 @@
       "date": "2026-04-24",
       "author": "iPet Pass (automação)",
       "description": "Atualização completa via pesquisa delegada. Microchip agora obrigatório (ISO). Adicionadas 8 raças PPP da Ley Cholito (Rottweiler, Doberman, Pitbull, Dogo Argentino, Bullmastiff, Fila Brasileiro, Presa Canario, Tosa Inu) com exigência de focinheira/guia curta. Confidence elevada de MEDIA para ALTA."
+    },
+    {
+      "date": "2026-07-17",
+      "author": "Claude — revisão 2026-07-17",
+      "description": "Revisão 17/07/2026: adicionadas a autorização sanitária prévia/declaração digital do SAG (ingresoachile.cl) e desparasitação ≤30 dias. exigePermissaoImportacao=true (autorização prévia)."
     }
   ],
   "rules": {
@@ -40,10 +51,15 @@
     "exigeCVI": true,
     "diasAntesCVI": 10,
     "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
-    "exigePermissaoImportacao": false,
-    "racasRestritasFocinheira": ["Pit Bull", "Rottweiler", "Dogo Argentino", "Fila Brasileiro"],
+    "exigePermissaoImportacao": true,
+    "racasRestritasFocinheira": [
+      "Pit Bull",
+      "Rottweiler",
+      "Dogo Argentino",
+      "Fila Brasileiro"
+    ],
     "exigeSeguroResponsabilidade": true,
-    "observacoes": "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira, guia curta e seguro de responsabilidade civil.",
+    "observacoes": "A sorologia não é exigida. O Chile possui a 'Ley Cholito', que classifica certas raças como Potencialmente Perigosas (PPP). Cães dessas raças devem circular obrigatoriamente com focinheira, guia curta e seguro de responsabilidade civil. NOVO: o SAG exige AUTORIZAÇÃO SANITÁRIA PRÉVIA + declaração jurada digital preenchida ANTES do embarque (portal ingresoachile.cl). Desparasitação interna/externa ≤30 dias antes da entrada, registrada no certificado. Microchip ISO e vacinas múltiplas válidas.",
     "observacoesInternas": "Alertar usuários com cães da lista PPP sobre a 'Ley Cholito' e as restrições de circulação pública."
   }
 }
