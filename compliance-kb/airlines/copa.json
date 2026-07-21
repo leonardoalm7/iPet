@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "copa",
+  "nome": "Copa Airlines",
+  "codigo": "CM",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.copaair.com/pt-br/informacoes-de-viagem/passageiros-com-necessidades-especiais/viajando-com-animais-de-estimacao/",
+      "title": "Copa Airlines — Viajando com Animais de Estimação",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Copa Airlines é hub em Panamá — importante para rotas Brasil → América Central → América do Norte."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 43,
+      "largura": 36,
+      "altura": 26,
+      "somaDimensoes": 105
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 8,
+    "maxAnimaisPorVoo": 2,
+    "reservaAntecedenciaHoras": 24,
+    "observacoes": "Máximo 2 animais por voo na cabine. Peso máximo 10kg (animal + caixa). Copa é hub de conexão em Panamá — verificar regras de trânsito para animais na escala."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 45,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Caixa IATA obrigatória para porão. Verificar restrições por rota e tipo de aeronave."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Copa é o principal hub para América Central e Caribe. Verificar regras específicas de cada destino final — a Copa opera em países com políticas de importação de animais muito distintas."
+}

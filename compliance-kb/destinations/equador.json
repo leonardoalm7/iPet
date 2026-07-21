@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "EQUADOR",
+  "nome": "Equador",
+  "bandeira": "🇪🇨",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://www.agrocalidad.gob.ec/viajes-con-mascotas/",
+      "title": "Agrocalidad — Agencia de Regulación y Control Fito y Zoosanitario",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para o Equador."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "O CVI emitido pelo VIGIAGRO deve certificar imunização contra Raiva e vacinas múltiplas (cinomose, hepatite, leptospirose, parvovirose). Tratamento antiparasitário deve ter sido aplicado nos 21 dias prévios à viagem.",
+    "observacoesInternas": "Confirmar se o laudo V10 do cachorro está em dia no app."
+  }
+}

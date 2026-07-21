@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "azul",
+  "nome": "Azul Linhas Aéreas",
+  "codigo": "AD",
+  "lastVerified": "2026-04-25",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-25",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.voeazul.com.br/informacoes/animais",
+      "title": "Azul — Transporte de Animais",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Azul é a única das três que permite algumas raças braquicefálicas — confirmar regras vigentes."
+    },
+    {
+      "date": "2026-04-25",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Correção: Azul aceita braquicefálicos também no PORÃO (política mais permissiva do mercado, é o real diferencial — não a cabine, onde GOL/LATAM também aceitam). Observações reescritas."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 43,
+      "largura": 30,
+      "altura": 23,
+      "somaDimensoes": 96
+    },
+    "especiesPermitidas": ["CAO", "GATO"],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 8,
+    "maxAnimaisPorVoo": 5,
+    "reservaAntecedenciaHoras": 2,
+    "observacoes": "Aceita raças braquicefálicas (Bulldog Francês, Pug, Shih Tzu) na cabine respeitando limite de peso — política semelhante à GOL/LATAM. O verdadeiro diferencial da Azul é aceitar braquicefálicos também no porão (vide observações de porão). Reserva pode ser feita com menor antecedência comparado a outras cias. Dimensões da caixa são ligeiramente menores — atenção."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 45,
+    "racasBraquisefálicasPermitidas": true,
+    "observacoes": "Diferencial estratégico da Azul: ÚNICA companhia brasileira que aceita raças braquicefálicas no porão (GOL/LATAM/VOEPASS banem por risco respiratório com pressurização). Confirmar lista de raças aceitas no momento da reserva pois pode mudar. Caixa rígida IATA obrigatória."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Permissão de braquicefálicos no PORÃO é o diferencial real da Azul (não a cabine — todas aceitam em cabine). Sempre confirmar lista de raças aceitas no momento da reserva pois pode variar."
+}

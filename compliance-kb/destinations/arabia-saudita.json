@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "ARABIA_SAUDITA",
+  "nome": "Arábia Saudita",
+  "bandeira": "🇸🇦",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.mewa.gov.sa/en/",
+      "title": "MEWA — Ministry of Environment, Water and Agriculture",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para a Arábia Saudita."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 30,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pela OIE",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": ["Pit Bull", "Rottweiler", "Staffordshire Bull Terrier", "Mastiff", "Bullmastiff", "Dogo Argentino"],
+    "observacoes": "Oficialmente, a Arábia Saudita só permite a entrada de cães classificados como 'cães de guarda, cães de caça ou cães de assistência/trabalho'. O tutor precisa declarar a função do cão ao solicitar o Import Permit no portal Naama. Cães e gatos só podem entrar via carga manifestada.",
+    "observacoesInternas": "Alerta sobre a declaração de cães como 'cães de guarda' para contornar a regra islâmica de pets. Sugerir consultoria especializada."
+  }
+}

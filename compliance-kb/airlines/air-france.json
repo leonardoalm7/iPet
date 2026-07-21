@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "air-france",
+  "nome": "Air France",
+  "codigo": "AF",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.airfrance.com.br/BR/pt/common/page_flottante/info/transportAnimaux-airline.htm",
+      "title": "Air France — Transporte de Animais",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Air France opera rota Brasil-Paris. Importante para destinos europeus."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 46,
+      "largura": 28,
+      "altura": 24,
+      "somaDimensoes": 98
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 15,
+    "maxAnimaisPorVoo": null,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": "Peso inclui animal + transportadora. Máx 8kg. Apenas 1 animal por passageiro. Reserva com mínimo 48h de antecedência pelo SAC Air France. Raças braquicefálicas proibidas em todos os segmentos."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Porão climatizado. Caixa rígida IATA obrigatória. Peso máximo 75kg (animal + caixa). Confirmar disponibilidade no momento da reserva."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Air France proíbe absolutamente raças braquicefálicas em todos os voos. Taxas cobradas por trecho. Confirmar disponibilidade com antecedência — número limitado de animais por voo."
+}

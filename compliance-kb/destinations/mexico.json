@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "MEXICO",
+  "nome": "México",
+  "bandeira": "🇲🇽",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.gob.mx/senasica/acciones-y-programas/importacion-de-animales-de-compania",
+      "title": "SENASICA México — Importación de Animales de Compañía",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. SENASICA (SADER) é o órgão regulador mexicano. México é destino crescente para brasileiros — Cancún, Cidade do México, Los Cabos."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": false,
+    "microchipPadrao": "Recomendado mas não obrigatório para entrada no México",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Endosso SFA. Tradução para espanhol recomendada mas não obrigatória. Algumas companhias aéreas que operam para o México exigem o certificado em inglês.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "México tem processo relativamente simples para entrada de cães e gatos de companhia. Exige vacina antirrábica válida + CVI. O SENASICA pode inspecionar o animal na chegada. Cancún, Cidade do México, Guadalajara e Los Cabos são destinos populares. Atenção: hotéis de luxo em Cancún/Riviera Maya variam muito na política pet.",
+    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Verificar site do SENASICA pois regras podem variar por porto de entrada. Tradução juramentada para espanhol pode ser solicitada por agentes de fronteira."
+  }
+}

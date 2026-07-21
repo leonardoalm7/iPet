@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "latam",
+  "nome": "LATAM Airlines",
+  "codigo": "LA",
+  "lastVerified": "2026-04-25",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-25",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.latamairlines.com/br/pt/central-de-ajuda/informacoes-de-voo/passageiros/viagem-com-animais",
+      "title": "LATAM — Viagem com Animais de Estimação",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. MEDIA — página da LATAM deve ser verificada diretamente pois regras variam por rota."
+    },
+    {
+      "date": "2026-04-25",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Correção: braquicefálicos SÃO permitidos em cabine (até 7kg). Banimento aplica-se apenas ao porão. Observações reescritas para refletir política real."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 10,
+    "dimensoesMaxCm": {
+      "comprimento": 45,
+      "largura": 35,
+      "altura": 25,
+      "somaDimensoes": 115
+    },
+    "especiesPermitidas": ["CAO", "GATO"],
+    "racasBraquisefálicasPermitidas": true,
+    "idadeMinimaSemanas": 8,
+    "maxAnimaisPorVoo": 5,
+    "reservaAntecedenciaHoras": 24,
+    "observacoes": "Animal + caixa transportadora = máx 10kg. A caixa deve caber sob o assento da frente. Apenas 1 animal por passageiro. Raças braquicefálicas (Bulldog, Pug, Shih Tzu, etc.) SÃO aceitas na cabine respeitando o limite de peso — o banimento da LATAM se aplica apenas ao porão. Reserva obrigatória pelo SAC ou site."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 45,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Raças braquicefálicas (Bulldog, Pug, Shih Tzu, etc.) NÃO são aceitas no porão por risco respiratório com a pressurização — restrição categórica, sem exceção médica. Caixa rígida homologada IATA obrigatória para porão."
+  },
+  "racasPerigosasBanidas": true,
+  "observacoesGerais": "⚠️ Regras variam por rota (doméstica/internacional) e aeronave. Raças perigosas (Pit Bull, Rottweiler, Fila, etc.) banidas completamente. Sempre confirmar com a LATAM na reserva. Taxa cobrada por trecho."
+}

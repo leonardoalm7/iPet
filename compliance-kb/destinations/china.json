@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "CHINA",
+  "nome": "China",
+  "bandeira": "🇨🇳",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "http://english.customs.gov.cn/",
+      "title": "GACC — General Administration of Customs of the People's Republic of China",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para a China."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos). Implante ANTES da vacinação antirrábica.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 30,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pela Alfândega Chinesa (GACC) ou OIE",
+    "exigeCVI": true,
+    "diasAntesCVI": 14,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Permitido apenas 1 pet por passaporte de viajante. Para evitar a quarentena obrigatória de 30 dias, o pet deve ter sorologia aprovada e entrar obrigatoriamente por portos designados com infraestrutura de quarentena (ex: Pequim, Xangai, Guangzhou).",
+    "observacoesInternas": "Alertar o tutor sobre a lista estrita de aeroportos de entrada para isenção de quarentena."
+  }
+}

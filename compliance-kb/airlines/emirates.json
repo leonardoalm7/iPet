@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "emirates",
+  "nome": "Emirates",
+  "codigo": "EK",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.emirates.com/br/portuguese/before-you-fly/pets/",
+      "title": "Emirates — Viajar com Animais de Estimação",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Emirates opera São Paulo-Dubai. Importante para destinos no Oriente Médio, Ásia e África via Dubai. ATENÇÃO: Emirates NÃO aceita pets na cabine — somente no porão ou como carga."
+    }
+  ],
+  "cabine": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "dimensoesMaxCm": {
+      "comprimento": 0,
+      "largura": 0,
+      "altura": 0,
+      "somaDimensoes": 0
+    },
+    "especiesPermitidas": [],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 0,
+    "maxAnimaisPorVoo": 0,
+    "reservaAntecedenciaHoras": 0,
+    "observacoes": "⛔ Emirates NÃO aceita animais de estimação na cabine de passageiros. Apenas animais-guia (cego/surdo) são aceitos na cabine."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 45,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Animais viajam no porão como bagagem registrada ou carga supervisionada (SkyCargo). Caixa IATA obrigatória e bem ventilada. Raças braquicefálicas NÃO aceitas no porão. Processo deve ser iniciado com antecedência junto à Emirates Cargo. Verificar regras específicas do país de destino (Dubai tem regras específicas para entrada de animais)."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Emirates aceita pets SOMENTE no porão ou como carga SkyCargo. Processo de reserva para animais no porão deve ser feito via Emirates Cargo com antecedência mínima de 72h. Verificar requisitos sanitários específicos dos Emirados Árabes Unidos (Dubai): vacina antirrábica, microchip e teste de titulação são exigidos."
+}

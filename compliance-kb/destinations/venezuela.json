@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "VENEZUELA",
+  "nome": "Venezuela",
+  "bandeira": "🇻🇪",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "http://www.insai.gob.ve/",
+      "title": "INSAI — Instituto Nacional de Salud Agrícola Integral",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para a Venezuela."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 30,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Exige solicitação de Licença Sanitária de Importação via sistema eletrônico do INSAI (RUNSAI) antes da viagem. Exames coproparasitológico e atestado de desparasitação carimbado são rigorosamente exigidos.",
+    "observacoesInternas": "Incluir notificação de necessidade de conta RUNSAI para o despachante/tutor."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "BRASIL",
+  "nome": "Brasil",
+  "bandeira": "🇧🇷",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://www.gov.br/agricultura/pt-br/assuntos/sanidade-animal-e-vegetal/saude-animal/transito-animal/transito-de-animais-de-estimacao",
+      "title": "MAPA — Trânsito de Animais de Estimação (Doméstico)",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    },
+    {
+      "url": "https://www.gov.br/agricultura/pt-br/assuntos/sanidade-animal-e-vegetal/saude-animal/transito-animal/legislacao",
+      "title": "MAPA — Legislação de Trânsito Animal",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial do registro com base nas regras vigentes do MAPA para voos domésticos"
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": false,
+    "microchipPadrao": "Recomendado ISO 11784/11785 para futura identificação internacional",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": false,
+    "diasAntesCVI": 0,
+    "emissoresCVI": null,
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Para voos domésticos: vacina antirrábica válida com mínimo 21 dias de carência. Recomenda-se atestado de saúde emitido por médico veterinário em até 10 dias antes do embarque (exigido por algumas companhias). Filhotes com menos de 8 semanas geralmente não são aceitos.",
+    "observacoesInternas": "⚠️ REVISAR: Algumas cias exigem o atestado de saúde formalmente. Validar com LATAM/GOL/Azul se exigem GTA ou apenas atestado. Microchip não é obrigatório por lei para voos domésticos, mas é bom recomendar."
+  }
+}

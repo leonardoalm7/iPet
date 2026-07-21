@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "american",
+  "nome": "American Airlines",
+  "codigo": "AA",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.aa.com/i18n/travel-info/special-assistance/pets.jsp",
+      "title": "American Airlines — Traveling with Pets",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. American Airlines é importante para rotas Brasil-EUA. Atenção: AA suspendeu transporte de pets no porão em 2021 — SOMENTE cabine."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 9,
+    "dimensoesMaxCm": {
+      "comprimento": 45,
+      "largura": 35,
+      "altura": 25,
+      "somaDimensoes": 105
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 8,
+    "maxAnimaisPorVoo": 5,
+    "reservaAntecedenciaHoras": 24,
+    "observacoes": "Peso máximo 9kg (animal + transportadora). Reserva obrigatória — vagas limitadas por aeronave. ATENÇÃO: American Airlines aceita apenas cães e gatos domésticos. Proibido: pássaros, roedores, répteis, animais 'exóticos'. Confirmação obrigatória no check-in."
+  },
+  "porao": {
+    "permitido": false,
+    "pesoMaxKg": 0,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "⛔ American Airlines SUSPENDEU o transporte de pets no porão em agosto de 2021. Apenas cabine disponível para pets de companhia."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ IMPORTANTE: AA não aceita pets no porão desde 2021. Se o pet não cabe na cabine (>9kg com caixa), não é possível voar AA. Para rotas Brasil-EUA considerar LATAM ou outras cias que aceitam porão. Taxa de US$ 125 por trecho (confirmada no site — verificar atualização)."
+}

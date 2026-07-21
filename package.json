@@ -1,0 +1,17 @@
+{
+  "name": "ipet",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "dev:web": "turbo dev --filter=@ipet/web",
+    "dev:app": "turbo dev --filter=@ipet/app",
+    "build:web": "turbo build --filter=@ipet/web",
+    "build:app": "turbo build --filter=@ipet/app"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.4",
+    "typescript": "^5"
+  }
+}

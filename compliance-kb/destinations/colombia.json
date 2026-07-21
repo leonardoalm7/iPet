@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "COLOMBIA",
+  "nome": "Colômbia",
+  "bandeira": "🇨🇴",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://www.ica.gov.co/importacion-y-exportacion/mascotas",
+      "title": "ICA — Instituto Colombiano Agropecuario",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para a Colômbia."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasProibidas": ["Pit Bull", "Dogo Argentino", "Rottweiler", "Dobermann"],
+    "observacoes": "Cães das raças proibidas não podem ser importados para a Colômbia. Se o animal for dessas raças, a entrada será negada. O tutor deve realizar inspeção presencial no escritório do ICA no porto de chegada para liberação.",
+    "observacoesInternas": "Alerta vermelho no cadastro de Pit Bulls/Staffords: entrada proibida na Colômbia."
+  }
+}

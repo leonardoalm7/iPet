@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "FRANCA",
+  "herda": "uniao-europeia",
+  "nome": "França",
+  "bandeira": "🇫🇷",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://ec.europa.eu/food/animals/pet-movement/eu-rules_en",
+      "title": "European Commission — EU rules for pet movement",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    },
+    {
+      "url": "https://www.service-public.fr/particuliers/vosdroits/F21374",
+      "title": "Service Public France — Voyager avec un animal de compagnie",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. França segue Regulamento (UE) 576/2013. Herda regras base da UE."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos). Implante ANTES da vacinação antirrábica.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pelo MAPA (lista em gov.br/agricultura)",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório. CVI preferencialmente em francês ou inglês.",
+    "exigePermissaoImportacao": false,
+    "racasProibidas": ["Pit Bull", "Tosa Inu"],
+    "racasRestritasFocinheira": ["Rottweiler", "Staffordshire Bull Terrier", "American Staffordshire Terrier"],
+    "exigeSeguroResponsabilidade": true,
+    "observacoes": "França segue o Regulamento (UE) 576/2013. Sequência: microchip → vacina → sorologia (≥90 dias) → CVI (D-10 a D-2). França classifica cães em 2 categorias de periculosidade — cães de 1ª categoria são proibidos de entrar no território. Cães de 2ª categoria exigem focinheira, guia curta e seguro de responsabilidade civil. Consulte a lista atualizada antes de viajar.",
+    "observacoesInternas": "⚠️ França tem legislação rigorosa sobre cães perigosos (Loi 99-5). Cães de 1ª categoria (ataque) são PROIBIDOS. Cães de 2ª categoria (guarda/defesa) exigem declaração na mairie."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "MALASIA",
+  "nome": "Malásia",
+  "bandeira": "🇲🇾",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "http://www.maqis.gov.my/",
+      "title": "MAQIS — Malaysian Quarantine and Inspection Services",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para Malásia. Nota: bandeira corrigida (encoding quebrado no paste original)."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 30,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 7,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": ["Pit Bull Terrier", "American Bulldog", "Neapolitan Mastiff", "Japanese Tosa", "Akita", "Dogo Argentino", "Fila Brasileiro", "Rottweiler", "Doberman"],
+    "observacoes": "Animais do Brasil estão sujeitos a uma quarentena obrigatória mínima de 7 dias (frequentemente estendida para 14 dias) nas instalações do governo. O Import Permit (Licença de Importação) deve ser emitido pelo DVS Malaysia antes do embarque.",
+    "observacoesInternas": "Notar que algumas raças (Rottweiler, Doberman, Pastor Alemão) não são totalmente banidas, mas classificadas como 'Restritas', exigindo permissão especial extra."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "BOLIVIA",
+  "nome": "Bolívia",
+  "bandeira": "🇧🇴",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.senasag.gob.bo/requisitos-de-importacion",
+      "title": "SENASAG — Servicio Nacional de Sanidad Agropecuaria e Inocuidad Alimentaria",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para a Bolívia."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Não exige sorologia da raiva. O CVI deve estar perfeitamente legível, carimbado e validado. Recomenda-se vacinação polivalente atualizada.",
+    "observacoesInternas": "Destino de baixo atrito regulatório."
+  }
+}

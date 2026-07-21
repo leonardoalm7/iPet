@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "iberia",
+  "nome": "Iberia",
+  "codigo": "IB",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://www.iberia.com/br/informacoes/animais-de-companhia/",
+      "title": "Iberia — Animais de Companhia",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. Iberia opera via Madri — rota importante para Brasil-Espanha."
+    }
+  ],
+  "cabine": {
+    "permitido": true,
+    "pesoMaxKg": 8,
+    "dimensoesMaxCm": {
+      "comprimento": 45,
+      "largura": 35,
+      "altura": 25,
+      "somaDimensoes": 105
+    },
+    "especiesPermitidas": [
+      "CAO",
+      "GATO"
+    ],
+    "racasBraquisefálicasPermitidas": false,
+    "idadeMinimaSemanas": 15,
+    "maxAnimaisPorVoo": null,
+    "reservaAntecedenciaHoras": 48,
+    "observacoes": "Peso máximo 8kg (animal + transportadora). Reserva obrigatória com 48h de antecedência. Taxa cobrada por trecho. Apenas 1 animal por passageiro."
+  },
+  "porao": {
+    "permitido": true,
+    "pesoMaxKg": 75,
+    "racasBraquisefálicasPermitidas": false,
+    "observacoes": "Porão climatizado. Caixa IATA obrigatória. Raças braquicefálicas proibidas. Confirmar disponibilidade."
+  },
+  "racasPerigosasBanidas": false,
+  "observacoesGerais": "⚠️ Iberia conecta Brasil com Madrid e demais destinos europeus via conexão. Verificar política para voos de conexão — regras podem variar entre trechos."
+}

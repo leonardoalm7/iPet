@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "URUGUAI",
+  "nome": "Uruguai",
+  "bandeira": "🇺🇾",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://www.gub.uy/ministerio-ganaderia-agricultura-pesca/tramites-y-servicios/tramites/ingreso-perros-gatos-uruguay",
+      "title": "MGAP — Ministerio de Ganadería, Agricultura y Pesca",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. MGAP é o órgão regulador uruguaio. Uruguai é destino fácil para brasileiros com pets."
+    },
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Atualização completa via pesquisa delegada. Microchip agora obrigatório (ISO). Adicionado requisito crítico de teste negativo para Leishmaniose (D-60) OU coleira repelente com Deltametrina + tratamento contra Echinococcus granulosus. Confidence elevada de MEDIA para ALTA."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Obrigatório apresentar TESTE NEGATIVO PARA LEISHMANIOSE (kit rápido ou sorologia) realizado nos 60 dias anteriores ao embarque, ou atestar uso de coleira repelente com Deltametrina. O CVI deve atestar também tratamento contra tênia Echinococcus granulosus.",
+    "observacoesInternas": "Inserir tarefa OBRIGATÓRIA no roadmap para cães: exame de Leishmaniose e aplicação de coleira repelente/praziquantel."
+  }
+}

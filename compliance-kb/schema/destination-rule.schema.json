@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DestinationRule",
+  "description": "Regras sanitárias para entrada de pets em um país ou região",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "destino",
+    "nome",
+    "bandeira",
+    "lastVerified",
+    "verifiedBy",
+    "nextReviewDate",
+    "confidence",
+    "sources",
+    "rules"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "description": "Versão deste schema. Bump ao adicionar campos obrigatórios." },
+    "destino": { "type": "string", "description": "ID interno (ex: UNIAO_EUROPEIA)" },
+    "nome": { "type": "string" },
+    "bandeira": { "type": "string" },
+    "lastVerified": { "type": "string", "format": "date", "description": "Data da última verificação manual (YYYY-MM-DD)" },
+    "verifiedBy": { "type": "string", "description": "Nome ou email de quem verificou" },
+    "nextReviewDate": { "type": "string", "format": "date", "description": "Data máxima para próxima revisão" },
+    "confidence": {
+      "type": "string",
+      "enum": ["ALTA", "MEDIA", "BAIXA"],
+      "description": "ALTA = fonte oficial confirmada. MEDIA = fonte secundária confiável. BAIXA = inferida ou desatualizada."
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["url", "title", "type"],
+        "properties": {
+          "url": { "type": "string" },
+          "title": { "type": "string" },
+          "type": { "type": "string", "enum": ["OFICIAL", "GOVERNAMENTAL", "REFERENCIA"] },
+          "lastAccessed": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "changeLog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "author", "description"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "author": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "rules": {
+      "type": "object",
+      "required": [
+        "exigeMicrochip",
+        "exigeVacina",
+        "diasCarenciaVacina",
+        "exigeSorologia",
+        "diasCarenciaSorologia",
+        "exigeCVI",
+        "diasAntesCVI",
+        "exigePermissaoImportacao"
+      ],
+      "properties": {
+        "exigeMicrochip": { "type": "boolean" },
+        "microchipPadrao": { "type": "string", "description": "ex: ISO 11784/11785 (15 dígitos)" },
+        "exigeVacina": { "type": "boolean" },
+        "diasCarenciaVacina": { "type": "integer", "description": "Dias mínimos entre vacina e embarque" },
+        "validadeVacinaAnos": { "type": "integer", "description": "Validade da vacina em anos (0 = não especificado)" },
+        "exigeSorologia": { "type": "boolean" },
+        "diasCarenciaSorologia": { "type": "integer", "description": "Dias mínimos entre coleta da sorologia e embarque" },
+        "valorMinimoSorologia": { "type": "string", "description": "ex: ≥0,5 UI/mL" },
+        "laboratoriosCredenciados": { "type": "string", "description": "Referência para lista de labs aceitos" },
+        "exigeCVI": { "type": "boolean" },
+        "diasAntesCVI": { "type": "integer", "description": "Janela máxima para emissão do CVI antes do embarque" },
+        "emissoresCVI": { "type": "string" },
+        "exigePermissaoImportacao": { "type": "boolean" },
+        "racasRestritasOuProibidas": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "observacoes": { "type": "string" },
+        "observacoesInternas": { "type": "string", "description": "Notas para a equipe iPet, não exibidas ao usuário" }
+      }
+    }
+  }
+}

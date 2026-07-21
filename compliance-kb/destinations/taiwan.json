@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "TAIWAN",
+  "nome": "Taiwan",
+  "bandeira": "🇹🇼",
+  "lastVerified": "2026-04-24",
+  "verifiedBy": "iPet Pass (automação)",
+  "nextReviewDate": "2026-07-24",
+  "confidence": "ALTA",
+  "sources": [
+    {
+      "url": "https://www.baphiq.gov.tw/en/",
+      "title": "BAPHIQ — Bureau of Animal and Plant Health Inspection and Quarantine",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-24"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-24",
+      "author": "iPet Pass (automação)",
+      "description": "Criação inicial. Mapeamento de regras sanitárias para Taiwan."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": true,
+    "microchipPadrao": "ISO 11784/11785 (15 dígitos).",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 30,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": true,
+    "diasCarenciaSorologia": 90,
+    "valorMinimoSorologia": "≥0,5 UI/mL",
+    "laboratoriosCredenciados": "Laboratório aprovado pela OIE",
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "Médico veterinário credenciado pelo MAPA. Endosso SFA obrigatório.",
+    "exigePermissaoImportacao": true,
+    "racasRestritasOuProibidas": ["Pit Bull Terrier", "Japanese Tosa", "Neapolitan Mastiff", "Dogo Argentino", "Fila Brasileiro", "Mastiff"],
+    "observacoes": "O sangue para sorologia deve ser coletado pelo menos 90 dias antes da viagem. É obrigatório solicitar a Permissão de Importação online pelo menos 20 dias antes. Quarentena obrigatória de 7 dias na chegada.",
+    "observacoesInternas": "Garantir que o cálculo retroativo do roadmap considere 90 dias de espera da sorologia + tempo de processamento do Import Permit."
+  }
+}

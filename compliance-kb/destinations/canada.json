@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "destino": "CANADA",
+  "nome": "Canadá",
+  "bandeira": "🇨🇦",
+  "lastVerified": "2026-04-16",
+  "verifiedBy": "Leonardo Braga de Almeida",
+  "nextReviewDate": "2026-07-16",
+  "confidence": "MEDIA",
+  "sources": [
+    {
+      "url": "https://inspection.canada.ca/animal-health/terrestrial-animals/imports/import-policies/live-animals/pet-imports/eng/1326600389775/1326600500578",
+      "title": "CFIA Canada — Importing Pet Dogs and Cats",
+      "type": "OFICIAL",
+      "lastAccessed": "2026-04-16"
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-04-16",
+      "author": "Leonardo Braga de Almeida",
+      "description": "Criação inicial. CFIA (Canadian Food Inspection Agency) é o órgão regulador. Canadá é destino crescente para brasileiros."
+    }
+  ],
+  "rules": {
+    "exigeMicrochip": false,
+    "microchipPadrao": "Recomendado ISO 11784/11785 para identificação. Não obrigatório por lei federal para entrada de pets de companhia.",
+    "exigeVacina": true,
+    "diasCarenciaVacina": 21,
+    "validadeVacinaAnos": 1,
+    "exigeSorologia": false,
+    "diasCarenciaSorologia": 0,
+    "valorMinimoSorologia": null,
+    "laboratoriosCredenciados": null,
+    "exigeCVI": true,
+    "diasAntesCVI": 10,
+    "emissoresCVI": "CVI emitido por veterinário credenciado pelo MAPA. Documento deve estar em inglês ou francês (ou acompanhado de tradução juramentada). Endosso SFA recomendado.",
+    "exigePermissaoImportacao": false,
+    "racasRestritasOuProibidas": [],
+    "observacoes": "Canadá (CFIA) exige vacina antirrábica válida para cães oriundos do Brasil. CVI em inglês ou francês é obrigatório. Gatos têm requisitos menos restritivos — vacina antirrábica não é federalmente obrigatória para gatos, mas alguns estados (províncias) podem exigir. Toronto, Vancouver e Montreal são destinos populares e pet-friendly.",
+    "observacoesInternas": "⚠️ CONFIANÇA MEDIA: Regras do Canadá são relativamente simples mas CFIA pode atualizar exigências. Verificar se Brasil continua como país de baixo risco para raiva canina. Províncias como Ontario têm restrições próprias para certas raças (ex: Pit Bull proibido em Ontario). Tradução juramentada do CVI é importante verificar."
+  }
+}
