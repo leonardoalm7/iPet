@@ -72,6 +72,11 @@ export async function POST(req: NextRequest) {
   const mp = new MercadoPagoConfig({ accessToken });
   const preference = new Preference(mp);
 
+  // O Mercado Pago rejeita auto_return quando back_urls.success não é https
+  // (erro "auto_return invalid. back_url.success must be defined") — em dev
+  // local (http://localhost) isso derrubaria toda criação de preferência.
+  const appUrlEhHttps = appUrl.startsWith("https://");
+
   try {
     const result = await preference.create({
       body: {
@@ -95,7 +100,7 @@ export async function POST(req: NextRequest) {
           failure: `${appUrl}/checkout/${plano.id}?status=failure`,
           pending: `${appUrl}/checkout/sucesso?planoId=${plano.id}&status=pending`,
         },
-        auto_return: "approved",
+        ...(appUrlEhHttps ? { auto_return: "approved" as const } : {}),
         notification_url: `${appUrl}/api/checkout/webhook`,
       },
     });
